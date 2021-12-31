@@ -1,16 +1,19 @@
 package com.bitcamp.sc.member.service;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bitcamp.sc.member.repository.MemberDao;
 
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class EmailCheckService {
 	
-	@Autowired
-	private SqlSessionTemplate template;
+	private final SqlSessionTemplate template;
 	
 	//이메일이 중복이면  "Y", 중복되지 않았으면 "N"를 반환
 	public String emailCheck(String email) {

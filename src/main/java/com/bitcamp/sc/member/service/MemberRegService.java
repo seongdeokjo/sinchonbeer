@@ -1,5 +1,7 @@
  package com.bitcamp.sc.member.service;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,14 +15,13 @@ import com.bitcamp.sc.member.domain.MemberAddress;
 import com.bitcamp.sc.member.domain.RegRequest;
 import com.bitcamp.sc.member.repository.MemberDao;
 
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class MemberRegService {
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	@Autowired
-	private SqlSessionTemplate template;
+	private final SqlSessionTemplate template;
 	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+	private final PasswordEncoder passwordEncoder;
 
 	private MemberDao memberDao;
 
@@ -34,9 +35,9 @@ public class MemberRegService {
 
 			//암호화
 			String securityPw = passwordEncoder.encode(member.getPw());
-			logger.info("암호화 테스트 : "+securityPw);
+			log.info("암호화 테스트 : "+securityPw);
 			member.setPw(securityPw);
-			logger.info("암호화 결과 : "+passwordEncoder.matches(member.getPw(), securityPw));	
+			log.info("암호화 결과 : "+passwordEncoder.matches(member.getPw(), securityPw));
 		
 			resultCnt = memberDao.insertMember(member); // 1또는 0 반환.
 

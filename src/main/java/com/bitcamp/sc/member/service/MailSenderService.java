@@ -8,21 +8,23 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
 
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.bitcamp.sc.member.repository.MemberDao;
 
+@Slf4j
 @Service
+@AllArgsConstructor
 public class MailSenderService {
 
-	@Autowired
-	private JavaMailSender sender;
+	private  JavaMailSender sender;
 
-	@Autowired
-	private SqlSessionTemplate template;
+	private  SqlSessionTemplate template;
 
 	// 메일 전송 여부 반환
 	public Boolean emailSender(String userEmail) {

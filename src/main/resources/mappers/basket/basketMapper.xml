@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="BasketMapper">
 	<resultMap type="com.bitcamp.sc.basket.domain.BasketVo" id="BasketDomain">
-		<result property="bidx" column="bidx"/>
+		<result property="bidx" column="id"/>
 		<result property="midx" column="midx"/>
 		<result property="gidx" column="gidx"/>
-		<result property="gname" column="gname"/>
-		<result property="gphoto" column="gphoto"/>
-		<result property="bcount" column="bcount"/>
-		<result property="gprice" column="gprice"/>
+		<result property="gname" column="name"/>
+		<result property="gphoto" column="photo"/>
+		<result property="bcount" column="count"/>
+		<result property="gprice" column="price"/>
 	</resultMap>
 	<!--  00. 장바구니 gidx 존재여부 -->
 	<select id="checkBasket" resultType="Integer">
@@ -16,27 +16,27 @@
 	</select>
 	<!-- 01.장바구니 추가 -->
 	<insert id="insertBasket" parameterType="com.bitcamp.sc.basket.domain.BasketDto">
-		INSERT INTO basket(bcount, midx, gidx) VALUES( #{amount}, #{midx}, #{gidx})
+		INSERT INTO basket(count, midx, gidx) VALUES( #{amount}, #{midx}, #{gidx})
 	</insert>
 	<!-- 장바구니 페이지에서 버튼을 통한 수량 변경  -->
 	<update id="changeAmount">
-		update basket set bcount = #{amount} where gidx = #{gidx} and midx = #{midx}
+		update basket set count = #{amount} where gidx = #{gidx} and midx = #{midx}
 	</update>
 	
 	<!-- 상품 목록에서 장바구니 담기 클릭시 이미 존재할 경우 수량만 추가 -->
 	<update id="updateBasket">
-		update basket set bcount =bcount+ #{amount} where gidx = #{gidx} and midx = #{midx}
+		update basket set count =count+ #{amount} where gidx = #{gidx} and midx = #{midx}
 	</update>
 	<!-- 02.장바구니 리스트 -->
 	<select id="getBasketList" resultMap="BasketDomain" parameterType="int">
-		select bidx,midx,gidx,bcount,gname,(bcount*gprice) as gprice,gphoto 
-		from basket natural join goods 
+		select id,midx,gidx,count,name,(count*price) as gprice,photo
+		from basket natural join goods
 		where midx = #{midx}  
 		order by gidx
 	</select>
 	<!-- 각 고객의 장바구니에 담긴 총 금액 -->
 	<select id="getTotal" resultType="int">
-		select sum(bcount * gprice) as total from basket natural join goods where midx= #{midx}
+		select sum(count * price) as total from basket natural join goods where midx= #{midx}
 	</select>
 	
 	<!-- 03. 장바구니 삭제 -->
@@ -53,7 +53,7 @@
 	
 	<!-- 04. 장바구니 수정 -->
 	<update id="modifyCart" >
-		UPDATE basket SET bcount = #{count}
+		UPDATE basket SET count = #{count}
 		where midx= #{memberIdx} AND gidx= #{goodsIdx}
 	</update>
 	
@@ -65,11 +65,11 @@
 	<!-- 다시 한번 확인!!!!!!!!! -->
 	<!-- 05. 장바구니 금액 합계 -->
 	<select id="sumMoney"  resultType="int">
-		SELECT IFNULL(SUM(gprice * count), 0) money
+		SELECT IFNULL(SUM(price * count), 0) money
 		FROM
 		 basket b, goods g
 		WHERE
-		 b.gidx = g.gidx AND midx = #{memberIdx}
+		 b.id = g.id AND midx = #{memberIdx}
 	</select>
 	
 	<!-- 06.장바구니 상품확인 -->

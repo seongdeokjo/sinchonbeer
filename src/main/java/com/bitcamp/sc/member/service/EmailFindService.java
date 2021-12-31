@@ -1,5 +1,7 @@
 package com.bitcamp.sc.member.service;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,11 +9,12 @@ import org.springframework.stereotype.Service;
 import com.bitcamp.sc.member.domain.Member;
 import com.bitcamp.sc.member.repository.MemberDao;
 
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class EmailFindService {
 
-	@Autowired
-	private SqlSessionTemplate template;
+	private final SqlSessionTemplate template;
 	
 	public String emailSearch(String name, String phone) {
 		String resultEmail = null;

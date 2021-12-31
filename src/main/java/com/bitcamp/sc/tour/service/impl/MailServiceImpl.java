@@ -3,8 +3,9 @@ package com.bitcamp.sc.tour.service.impl;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -17,17 +18,16 @@ import com.bitcamp.sc.pay.domain.PayInfo;
 import com.bitcamp.sc.tour.domain.ChangeTourDto;
 import com.bitcamp.sc.tour.service.MailService;
 
-import lombok.AllArgsConstructor;
 
+@Slf4j
 @Component
 @AllArgsConstructor
 public class MailServiceImpl implements MailService {
 	
-	private JavaMailSender mailSender;
+	private  JavaMailSender mailSender;
 	
-	private SpringTemplateEngine templateEngine;
+	private  SpringTemplateEngine templateEngine;
 	
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	// 보내는 사람 이메일
 	private static final String FROM_EMAIL ="watersun326@gmail.com";
 	
@@ -37,7 +37,7 @@ public class MailServiceImpl implements MailService {
 		
 			// 메일 서비스로 보내기
 	
-			logger.info("변경 메일 서비스 진입");
+			log.info("변경 메일 서비스 진입");
 			MimeMessage message = mailSender.createMimeMessage();
 			// 파일 첨부 가능 
 			MimeMessageHelper helper;
@@ -69,13 +69,13 @@ public class MailServiceImpl implements MailService {
 		
 			// 메일 전송
 	        mailSender.send(message);
-	        logger.info("변경 메일 전송 완료");
+	        log.info("변경 메일 전송 완료");
 	}
 
 	// 환불 
 	@Override
 	public void refundMail(PayInfo payInfo,LoginInfo loginInfo) {
-		logger.info("취소 메일 서비스 진입");
+		log.info("취소 메일 서비스 진입");
 		
 		MimeMessage message = mailSender.createMimeMessage();
 		// 파일 첨부 가능 
@@ -107,7 +107,7 @@ public class MailServiceImpl implements MailService {
 	
 		// 메일 전송
         mailSender.send(message);
-        logger.info("취소 메일 전송 완료");
+        log.info("취소 메일 전송 완료");
 	}
 
 
@@ -115,7 +115,7 @@ public class MailServiceImpl implements MailService {
 	@Override
 	@Async("mailExecutor")
 	public void completeMail(PayInfo payInfo,LoginInfo member) {
-		logger.info("결제 완료 메일 서비스 진입");
+		log.info("결제 완료 메일 서비스 진입");
 		
 		MimeMessage message = mailSender.createMimeMessage();
 		// 파일 첨부 가능 
@@ -149,7 +149,6 @@ public class MailServiceImpl implements MailService {
 	
 		// 메일 전송
         mailSender.send(message);
-        logger.info("결제  메일 전송 완료");
+        log.info("결제  메일 전송 완료");
 	}
-
 }
