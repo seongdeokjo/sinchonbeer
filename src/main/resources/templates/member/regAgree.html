@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>신촌 맥주 : 회원가입 약관</title>
+<!-- metaheader 영역 -->
+<th:block th:replace="frame/metaheader"></th:block>
+<link rel="stylesheet" th:href="@{/css/member/regAgree.css}">
+</head>
+<body>
+
+	<!-- header 영역 -->
+	<th:block th:replace="frame/header"></th:block>
+
+	<!-- nav 영역 -->
+	<th:block th:replace="frame/nav"></th:block>
+
+	<!-- content 영역 ----->
+	<script>
+		$(document).ready(function() {
+			
+			// 전체 동의 체크박스 누르면 모든 체크박스에 체크 되도록 하기.
+			$('#checkAll').change(function() {
+				if (this.checked) {
+					$('#checkItem input[type=checkbox]').prop('checked', true);
+				} else {
+					$('#checkItem input[type=checkbox]').prop('checked', false);
+				}
+			});
+			
+			//필수 항목에 체크 되어야만 다음 페이지로 넘어갈 수 있게 하기.
+			var required1 = $('#requiredChk1');
+            var required2 = $('#requiredChk2');
+            $('#accept_agree').on('click',function(){
+               if((required1.is(':checked')  && required2.is(':checked'))==false){
+                   alert('필수 항목에 동의를 해주세요.');
+                   return false;
+                }
+            });
+		});
+	</script>
+	<div id="main_wrap">
+		<h1 class="font_set">JOIN</h1>
+		<div class="small_text">
+			<P>안녕하세요 제주맥주입니다.</P>
+		</div>
+		<div>
+			<!-- 모두 동의(모두 체크하기) -->
+			<input type="checkbox" id="checkAll">
+			<label for="checkAll">이용약관, 개인정보 수집 및 이용에 모두 동의합니다.</label>
+		</div>
+		<div id="checkItem">
+
+			<div>
+				<input type="checkbox" id="requiredChk1">
+				<label for="requiredChk2">이용약관 동의 <em class="text_red">(필수)</em> </label>
+			</div>
+			<!-- 첫 번째 약관 -->
+			<div class="text_box">
+				<p class="inner_text">
+					제1조 (목적) <br>
+					<br> 이 약관은 제주패밀리 주식회사(전자상거래 사업자)가 운영하는 브랜드 사이트 및 온라인 몰(이하
+					“몰”이라 한다)에서 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)를 이용함에 있어 <br>사이버 몰과
+					이용자의 권리․의무 및 책임사항을 규정함을 목적으로 합니다. <br>
+					<br> 제2조 (정의) <br>
+					<br> ① “몰”이란 제주패밀리 회사가 재화 또는 용역(이하 “재화 등”이라 함)을 이용자에게 제공하기 위하여
+					컴퓨터 등 정보통신설비를 이용하여 재화 등을 거래할 수 있도록 설정한 가상의 영업장을 말하며, 아울러 사이버몰을 운영하는
+					사업자의 의미로도 사용합니다. <br> ② “이용자”란 “몰”에 접속하여 이 약관에 따라 “몰”이 제공하는
+					서비스를 받는 회원 및 비회원을 말합니다. <br> ③ ‘회원’이라 함은 “몰”에 회원등록을 한 자로서,
+					계속적으로 “몰”이 제공하는 서비스를 이용할 수 있는 자를 말합니다. <br> ④ ‘비회원’이라 함은 회원에
+					가입하지 않고 “몰”이 제공하는 서비스를 이용하는 자를 말합니다.
+
+				</p>
+			</div>
+
+			<div>
+				<input type="checkbox" id="requiredChk2"> <label for="requiredChk2">개인정보
+					수집 및 이용 <em class="text_red">(필수)</em>
+				</label>
+			</div>
+
+
+			<!-- 두 번째 약관 -->
+			<div class="text_box">
+				<p class="inner_text">
+					1. 개인정보 수집목적 및 이용목적 <br>
+					<br> (1) 홈페이지 회원 가입 및 관리 <br>회원 가입의사 확인, 회원제 서비스 제공에 따른
+					본인 식별․인증, 회원자격 유지․관리, 제한적 본인확인제 시행에 따른 본인확인, 서비스 부정이용 방지, 만 14세 미만
+					아동의 개인정보 처리시 법정대리인의 동의여부 확인, 각종 고지․통지, 고충처리 등의 목적 <br>
+					<br> (2) 재화 또는 서비스 제공 <br>물품배송, 서비스 제공, 계약서․청구서 발송, 콘텐츠
+					제공, 맞춤서비스 제공, 본인인증, 연령인증, 요금결제 및 정산, 채권추심 등의 목적 <br>
+					<br> (3) 고충처리 <br>민원인의 신원 확인, 민원사항 확인, 사실조사를 위한 연락․통지,
+					처리결과 통보 등 <br>
+					<br> 2. 수집하는 개인정보 항목 <br>ID, 성명, 비밀번호, 주소, 휴대폰번호, 이메일,
+					14세 미만 가입자의 경우 법정대리인 정보 <br>
+					<br> 3. 개인정보 보유 및 이용기간 <br>회원탈퇴 시까지 (단, 관계 법령에 보존 근거가 있는
+					경우 해당 기간 시까지 보유, 개인정보처리방침에서 확인 가능)
+				</p>
+			</div>
+			<div>
+				<p>마케팅 활용 동의 및 광고 수신 동의</p>
+				<p class="small_text2">서비스와 관련된 신상품 소식, 이벤트 안내, 고객 혜택 등 다양한 정보를
+					제공합니다.</p>
+			</div>
+			<div>
+				<input type="checkbox" id="chkbox3"> <label for="chkbox3">SMS
+					수신 동의 <em class="text_grey">(선택)</em> </label>
+			</div>
+			<div>
+				<input type="checkbox" id="chkbox4"> <label for="chkbox4">E-Mail
+					수신 동의 <em class="text_grey">(선택)</em>
+				</label>
+			</div>
+		</div>
+
+		<div class="agree_buttons">
+			<a th:href="@{/main}" id="cancel" class="agree_btn">취소</a> 
+			<a th:href="@{/join}" id="accept_agree" class="agree_btn">가입하기</a>
+		</div>
+	</div>
+
+	<!-- footer 영역 -->
+	<th:block th:replace="frame/footer"></th:block>
+
+</body>
+</html>

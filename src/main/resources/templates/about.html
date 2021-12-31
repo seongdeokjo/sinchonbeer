@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>기업 소개</title>
+
+<link rel="stylesheet" th:href="@{/css/about.css}">
+<link rel="stylesheet" th:href="@{/css/default.css}">
+<th:block th:replace="frame/metaheader"></th:block>
+
+</head>
+<body>
+	<th:block th:replace="frame/header"></th:block>
+	<th:block th:replace="frame/nav"></th:block>
+
+    <div id="content" class="text-center">
+        <div class="video-box mb-5">
+            <video src="media/about_video.mp4" muted autoplay loop style="width: 100%"></video>
+        </div>
+        
+        <div id="lnb" class="sticky-top">
+            <ul>
+                <li><a th:href="@{#aboutUs}">ABOUT US</a></li>
+                <li><a th:href="@{#ourBeers}">OUR BEERS</a></li>
+                <li><a th:href="@{#ourShop}">OUR SHOP</a></li>
+            </ul>
+        </div>
+        
+        <div id="aboutUs" class="doz-row"></div>
+        <p class="scrollto text-48 text-sinchon text-bolder mt-10 mb-5">ABOUT US</p>
+        <p class="text-32 text-bolder">WE ARE</p>
+        <p class="text-16 mb-10" style="line-height: 1.8;">
+            왜 한국인들의 인생 맥주는 수입맥주일까?<br>
+            왜 소맥 문화가 아닌 맥주만의 문화가 없을까?<br>
+            왜 맥주가 탄생하는 과정을 보여주고 알려줄 수 없을까?<br>
+            왜 우리나라에는 꼭 가보고 싶은 양조장이 없을까?<br><br>
+            신촌맥주가 태어난 이유인 이 질문들에 대한 답이<br>
+            우리가 하는 모든 일입니다.<br><br>
+            크래프트 맥주계의 리더로,<br>
+            공장이 아닌 양조장을<br>
+            제조 회사를 넘어 문화 기업을 만들며<br>
+            한국 맥주 시장을 새롭게 선도합니다.<br>
+        </p>
+
+        <img class="mb-10" style="width: 80%; height: 500px; object-fit: cover;"
+            src="https://cdn.imweb.me/thumbnail/20200718/f611da629a4ba.png">
+        <p class="text-38 text-bolder mb-5">ACCOMPLISHMENTS</p>
+        <div class="mb-10" style="line-height: 1.8;">
+            <p class="text-16 mb-0"><strong>국내최초 글로벌 크래프트 맥주사</strong></p>
+            <p class="text-13">미국 뉴욕 판매 1위 크래프트맥주사 브루클린 브루어리와의 아시아 첫 파트너십</p>
+            <p class="text-16"><strong>맥주업계 최초 중소벤처기업부 '예비 유니콘' 선정</strong></p>
+            <p class="text-16"><strong>누적 투자액 600억 돌파</strong></p>
+            <p class="text-16"><strong>런칭 후 매년 200% 이상 매출 성장</strong></p>
+            <p class="text-16 mb-0"><strong>신촌 양조장 방문객 누적 약 10만 명</strong></p>
+            <p class="text-13">서울의 새로운 관광 명소로 자리매김</p>
+            <p class="text-16"><strong>현대카드, 배틀그라운드, 이니스프리, 하이랜드파크 등과의 콜라보레이션</strong></p>
+        </div>
+
+        <div class="row justify-content-center mb-10" style="width: 100%">
+            <div class="col-md-4">
+                <img style="width: 150px;" src="https://cdn.imweb.me/upload/S20200702f03eaee38b16e/8fce51364ce95.png">
+                <div class="d-inline-block align-middle pl-4 pt-3">
+                    <p class="text-24 text-sinchon text-bolder">SINCHON WIT ALE</p>
+                    <p class="text-16 text-left">
+                        세계 3대 맥주 품평회 2018 AIBA<br>
+                        국내 최초 ‘벨기에식 밀맥주’ 부분<br>
+                        <strong>은상 수상</strong>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <img style="width: 140px;" src="https://cdn.imweb.me/upload/S20200702f03eaee38b16e/8637f19ac9b95.png">
+                <div class="d-inline-block align-middle pl-4 pt-3">
+                    <p class="text-24 text-sinchon text-bolder">SINCHON WIT ALE</p>
+                    <p class="text-16 text-left">
+                        2019 대한민국 주류대상<br>
+                        크래프트 맥주 에일 부분 <br>
+                        <strong>대상 수상</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-10 mx-auto"
+            style="width: 80%; height: 500px; display: table; background: url(https://cdn.imweb.me/thumbnail/20200718/54ed506c80f55.png);">
+            <div style="display: table-cell; vertical-align: middle; color: white; ">
+                <p class="text-38 text-bolder">MISSION</p>
+                <p class="text-16" style="line-height: 1.8;">
+                    한국 크래프트 맥주의 선구자로 좋은 맥주를 통해<br>
+                    맥주 미식문화를 창조합니다.</p>
+            </div>
+        </div>
+
+        <p class="text-38 text-bolder mb-5">SPECIALTY</p>
+        <div class="row justify-content-center mb-10" style="width: 100%">
+            <div class="col-md-3">
+                <img style="width: 140px;" src="https://cdn.imweb.me/upload/S20200702f03eaee38b16e/69a87464e7eef.png">
+                <p class="text-24 text-sinchon text-bolder m-4">레시피</p>
+                <p class="text-15" style="line-height: 1.8;">
+                    맥주 업계 최초로 전 세계 세프들의<br>
+                    오스카상인 제임스비어드상 수상자<br>
+                    브루마스터 개릿 올리버의 <strong>제주 위트 에일 레시피</strong></p>
+                <p class="text-15">뉴욕 NO.1 브루클린 브루어리 30년 양조 노하우</p>
+                <p class="text-15" style="line-height: 1.8;">15년 이상의 양조 경력을 보유한<br>
+                    세계 반열의 브루어 다수 참여</p>
+            </div>
+            <div class="col-md-2">
+                <img style="width: 140px;" src="https://cdn.imweb.me/upload/S20200702f03eaee38b16e/035adc7b8f534.png">
+                <p class="text-24 text-sinchon text-bolder m-4">원료</p>
+                <p class="text-15">
+                    독일, 미국 등 현지 청정지역에서 재배한 <strong>홉</strong></p>
+                <p class="text-15">프리미엄 유럽산 <strong>맥아</strong></p>
+                <p class="text-15">제주도에서 직접 배양 및 관리하는 <strong>효모</strong>
+                </p>
+            </div>
+            <div class="col-md-3">
+                <img style="width: 140px;" src="https://cdn.imweb.me/upload/S20200702f03eaee38b16e/9ffd5465c015f.png">
+                <p class="text-24 text-sinchon text-bolder m-4">기술과 과학</p>
+                <p class="text-15" style="line-height: 1.8;">
+                    브루클린 브루어리의 축적된 기술과<br>
+                    과학의 노하우 전수</p>
+                <p class="text-15">유럽 최고의 양조설비로 고품질 맥주 생산</p>
+                <p class="text-15" style="line-height: 1.8;">세계 각지에서 공수한 맥주<br>
+                    연구 측정 장비로 엄격한 품질 관리
+                </p>
+            </div>
+        </div>
+        
+        <div id="ourBeers" class="doz-row border-top"></div>
+        <p id="ourBeers" class="scrollto text-48 text-sinchon text-bolder mt-10">OUR BEERS</p>
+        <p class="text-16 mb-5" style="line-height: 1.8;">신촌맥주는 어떤 맥주를 만들고 있나요?</p>
+
+		<!-- Bootstrap Carousel -->
+        <div id="carouselExampleControls" class="carousel slide mx-auto" style="width: 60%;" data-ride="carousel">
+            <div class="carousel-inner text-center">
+                <div class="carousel-item active">
+                    <img class="d-block w-60 h-50 mx-auto" style="width: 80%" src="https://cdn.imweb.me/thumbnail/20200720/610ea478fd20e.jpg" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-60 h-50 mx-auto" style="width: 80%" src="https://cdn.imweb.me/thumbnail/20201103/0b98c34e395c8.jpg" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-60 h-50 mx-auto" style="width: 100%" src="https://api.cdn.visitjeju.net/photomng/imgpath/201807/10/607ebb03-e6a0-4942-846d-f7a735809a72.jpg" alt="Third slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-60 h-50 mx-auto" style="width: 80%" src="https://cdn.imweb.me/thumbnail/20210630/b7d23057b089d.jpg" alt="Fourth slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-60 h-50 mx-auto" style="width: 80%" src="https://cdn.imweb.me/thumbnail/20201211/ea617b301816c.jpg" alt="Fifth slide">
+                </div>
+            </div>
+            <a class="carousel-control-prev" th:href="@{#carouselExampleControls}" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" th:href="@{#carouselExampleControls}" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        
+        <div id="carouselExampleIndicators" class="carousel slide mb-10" data-ride="carousel">
+			<ol class="carousel-indicators">
+				<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+				<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+				<li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+			</ol>
+			<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			    <span class="sr-only">Previous</span>
+			</a>
+			<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+			    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+			    <span class="sr-only">Next</span>
+			</a>
+		</div>
+		
+        <div id="ourShop" class="doz-row border-top"></div>
+        <p id="ourBeers" class="scrollto text-48 text-sinchon text-bolder mt-10">OUR SHOP</p>
+        <p class="text-16 mb-5" style="line-height: 1.8;">신촌맥주 온라인에서는 어떤 제품을 판매하고 있나요?</p>
+
+		<!-- Bootstrap Carousel -->
+        <div id="carouselExampleControls" class="carousel slide mx-auto" style="width: 60%;" data-ride="carousel">
+            <div class="carousel-inner text-center">
+                <div class="carousel-item active">
+                    <img class="d-block w-60 h-50 mx-auto" style="width: 80%" src="/images/shop/gimbugag.png" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-60 h-50 mx-auto" style="width: 80%" src="/images/shop/citrus.png" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-60 h-50 mx-auto" style="width: 80%" src="/images/shop/glass.png" alt="Third slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-60 h-50 mx-auto" style="width: 80%" src="/images/shop/playingCard.png" alt="Fourth slide">
+                </div>
+            </div>
+            <a class="carousel-control-prev" th:href="@{#carouselExampleControls}" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" th:href="@{#carouselExampleControls}" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+			<ol class="carousel-indicators">
+				<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+				<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+			</ol>
+			<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			    <span class="sr-only">Previous</span>
+			</a>
+			<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+			    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+			    <span class="sr-only">Next</span>
+			</a>
+		</div>
+	</div>
+    
+    <th:block th:replace="frame/footer"></th:block>
+    
+    <script>
+        $('.carousel').carousel({
+            interval: 2000
+        })
+    </script>
+</body>
+</html>

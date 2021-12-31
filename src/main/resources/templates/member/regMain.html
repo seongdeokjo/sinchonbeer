@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>신촌 맥주 : 회원가입</title>
+<!-- metaheader 영역 -->
+<link rel="stylesheet" th:href="@{/css/member/regMain.css}">
+<th:block th:replace="frame/metaheader"></th:block>
+</head>
+<body>
+
+	<!-- header 영역 -->
+	<th:block th:replace="frame/header"></th:block>
+
+	<!-- nav 영역 -->
+	<th:block th:replace="frame/nav"></th:block>
+
+	<!-- content 영역 --->
+     <div id="main_wrap">
+        <h1 class="font_set">JOIN</h1>
+        <div class="small_text"><P>안녕하세요 제주맥주입니다.</P></div>
+        <p class="button regBut "><a th:href="@{/join/agree}">Email / PW 회원가입</a></p>
+    </div>
+
+
+	<!-- footer 영역 -->
+	<th:block th:replace="frame/footer"></th:block>
+
+</body>
+</html>

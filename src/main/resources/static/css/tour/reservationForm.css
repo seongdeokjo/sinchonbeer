@@ -1,0 +1,133 @@
+body {
+    font-size: 20px;
+    color:#55585b;
+    /* padding: 20px; */
+}
+a{
+	color:black;
+}
+a:visited{
+	color:black;
+}
+/* nav_submenu 영역 */
+.submenu_wrap{
+    background-color: #f4f4f4;
+    height: 50px;
+    line-height: 50px;
+   overflow: hidden;
+   text-align: center;
+}
+
+.submenu_wrap ul li{
+   
+    display: inline-block; 
+}
+.submenu_wrap ul a{
+    display: block;
+    padding: 0 50px;
+    color:black;
+}
+
+.submenu_wrap a:hover{
+    background-color: #1ecad3;
+    color: white;
+}
+#currentPage{
+    background-color: #1ecad3;
+    color: white;
+}
+#selectPage{
+    color: #1ecad3;
+}
+
+/* submenu의 세부 메뉴 영역 */
+.detail_menu{
+    height: 50px;
+    line-height: 50px;
+   overflow: hidden;
+   text-align: center;
+}
+
+.detail_menu ul li{
+    display: inline-block; 
+}
+.detail_menu ul a{
+    display: block;
+    padding: 0 50px;
+    font-size: 14px;
+    color:black;
+}
+
+.detail_menu a:hover{
+    color: #1ecad3;
+}
+
+
+.btn-sinchon, .btn-sinchon:hover {
+    color: white;
+    background-color: #05cdd5;
+    border-color: #05cdd5;
+}
+
+.required.control-label:after { 
+    content:"*";
+    color:red;
+ }
+
+.dt-left {
+    font-weight: 400;
+    width: 35%;
+}
+
+.dd-right {
+    margin-left: 35%;
+}
+
+dt {
+    font-weight: 400;
+}
+
+.width-50 {
+    width: 50%;
+}
+
+.mg-left-50 {
+    margin-left: 50%;
+}
+
+input[type=radio] {
+    width: 15px;
+    height: 15px;
+}
+
+.text-15 {
+    font-size: 15px;
+}
+
+.text-18 {
+    font-size: 18px;
+}
+
+.text-22 {
+    font-size: 22px;
+}
+
+.hyphen {
+    display: block;
+    padding-left: 10px;
+    position: relative;
+}
+
+.hyphen:before {
+    display: block;
+    content: '-';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.link-unstyle, .link-unstyle:link, .link-unstyle:hover {
+    color: inherit;
+    text-decoration: inherit;
+}

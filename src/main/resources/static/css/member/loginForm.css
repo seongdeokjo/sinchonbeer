@@ -1,0 +1,142 @@
+/* 로그인 타이틀에 적용할 폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@800&family=Roboto:wght@900&display=swap');
+
+/* 전체 영역 */
+*{
+    margin:0;
+    padding:0;
+}
+*::selection{
+    background-color: #1ecad3;
+    color:white;
+}
+#middle>a, .kakao_start{
+    text-decoration: none;
+    color: black;
+}
+.margin_top{
+    margin-top:17px;
+}
+/* login 전체 영역 */
+#loginMain_wrap{
+    width:500px;
+    margin:0 auto;
+}
+/* login 제목 */
+.loginTitle{
+	font-family: 'Kanit', sans-serif;
+    font-size: 48px;
+    margin-top:40px;
+    text-align:center;
+    color:#1ecad3;
+}
+/* login 제목 아래 모든 부분 */
+#loginSection{
+    padding:30px 70px;
+}
+/* 박스로된 모든 부분(입력, 버튼) */
+.loginLongBox{
+    width:340px;
+    height:40px;
+    margin:13px auto;
+}
+.loginLongBox::placeholder{
+    font-size:12px;
+    line-height:40px;
+    color:#aaa;
+}
+.height40px{
+    height:40px;
+}
+/* 입력양식 부분 */
+
+.form_box{
+    width:340px;
+    border:1px solid #ddd;
+}
+.form_box input:focus{
+    outline: none;
+}
+#loginSection input[type=email], #loginSection input[type=password]{
+    width:338px;
+    border:none;
+    padding-left:10px;
+    margin:0;
+}
+#loginSection input[type=email]{
+    border-bottom:1px solid #ddd;
+    width:338px;;
+}
+#loginSection input[type=submit]{
+    background-color:#1ecad3;
+    border:none;
+    color:white;
+}
+/* 로그인 버튼에 커서 놓았을 때 변화주기 */
+#loginSection input[type=submit]:hover{
+    border:1px solid #1ecad3;
+    background-color: white;
+    color:#1ecad3;
+    cursor: pointer;
+}
+/*로그인 쿠키 체크박스 */
+#emailChk{
+    width:15px;
+    height:15px;
+}
+label{
+    height:15px;
+    font-size:12.5px;
+}
+
+/* 카카오버튼 부분 */
+.kakao_start{
+    background-color: gold;
+    border:none;
+    margin: 25px 0;
+    cursor: pointer;
+    line-height: 40px;
+    text-align: center;
+    display:block;
+    font-size: 13.5px;
+    text-decoration:none !important;
+}
+.kakao_start:hover{
+    color: black;
+}
+
+/* '회원가입'과 '아이디/비밀번호 찾기' 부분 */
+#middle{
+    height:30px;
+    /* border-bottom:1px solid  #ddd; */
+    margin-right:15px;
+    margin-bottom:30px;
+    padding-bottom:50px;
+    overflow:hidden;
+}
+#middle a{
+    font-size: 13.5px ;
+    display: inline;
+}
+.float_right{
+    float:right;
+}
+
+
+/* 로그인 입력 잘못 되었을 때 메시지 띄우기 */
+.display_none{
+	display:none;
+}
+#loginForm div.msg{
+	color:red;
+}
+.msg{
+	font-size:13.5px;
+}
+.msg_space{
+	height:40px;
+	padding:13px;
+}
+
+
+

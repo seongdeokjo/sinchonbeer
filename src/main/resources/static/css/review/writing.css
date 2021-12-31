@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+.btn_write {
+	color: white !important;
+	background-color: #1ecad3 !important;
+	border-color: white !important;
+}
+
+.btn_write:hover {
+	color: #1ecad3 !important;
+	background-color: white !important;
+	border-color: #1ecad3 !important;
+}
+
+.modal-backdrop {
+	position: relative !important;
+
+}

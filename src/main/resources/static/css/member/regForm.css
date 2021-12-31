@@ -1,0 +1,124 @@
+/* JOIN 타이틀에 적용시킬 폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@800&family=Roboto:wght@900&display=swap');
+
+/* 전체 영역 */
+*{
+    margin:0;
+    padding:0;
+}
+*::selection{
+    background-color: #1ecad3;
+    color:white;
+}
+.margin_bottom{
+    margin-bottom:15px;
+}
+#main_wrap{
+    width:400px;
+    margin:0 auto;
+    display:block;
+}
+/* 회원가입 타이틀 공통 ----------------------------------------------*/
+.join_title{
+	font-family: 'Kanit', sans-serif;
+    font-size: 48px;
+    margin-top:40px;
+    text-align:center;
+    color:#1ecad3;
+}
+/* 제목 아래 작은 문구 부분 */
+.small_text{
+    font-size:14px;
+    text-align: center;
+    height:40px;
+    margin:5px 0 20px 0;
+}
+/* ----------------------------------------------------------------- */
+
+/* 입력양식 */
+
+#regInputForm input{
+    margin:-1px auto;
+    border:1px solid #ccc;
+}
+
+label{
+    display: block;
+    font-size: 13.5px;
+    margin:10px 0;
+}
+/* 가입하기 버튼 제외한 input박스 */
+.every_box input{
+    width:398px;
+    height:40px;
+    padding-left:10px;
+}
+/* 가입하기 버튼을 제외한 input박스의 placeholder 글자 속성 */
+    .every_box input::placeholder{
+    font-size:12px;
+    line-height:40px;
+    color:#aaa;
+}
+
+/* input 박스 눌렀을 때 테두리 효과 없애기 */
+#regInputForm input:focus:not(.submit_btn){
+    outline:none;
+}
+
+/* 붙어있는 박스-아이디/비번, 주소 */
+.couple_box input{
+    width:400px;
+}
+/* 이름, 연락처 */
+#username, #phone{
+    border:1px solid #ccc;
+
+}
+/* 가입하기 버튼 */
+.submit_btn{
+    width:400px;
+    height:40px;
+    background-color: #1ecad3;
+    color:white;
+    font-size: 12.5px;
+    cursor: pointer;
+    border:none !important;
+    margin:15px 0;
+}
+
+/* 라벨의 아이콘 */
+.icon_orange{
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    background: #f25656;
+    border-radius: 50%;
+    margin-left: 5px;
+    vertical-align: 4px;
+}
+
+/* 메시지 나올 때  */
+.red_round{
+    display:block;
+}
+.email_input{
+    margin:15px auto;
+}
+
+/* 입력이 제대로 되지 않았을 경우 생기는 메시지 글자색 */
+div.msg{
+    color:#f25656;
+    font-size:12px; 
+    margin :5px 0 5px 10px ;
+}
+
+/* 자바스크립트로 넣을 메시지 효과 */
+/* 잘못 입력된 input 박스 테두리 색 빨간색으로 */
+.red_outline{
+    border:1px solid #f25656 !important;
+}
+/* 두개로 붙은 박스 하단의 테두리 색 빨간색으로 */
+.red_under_outline{
+    border:1px solid #f25656 !important;
+    border-top: 1px solid #ccc !important;
+}

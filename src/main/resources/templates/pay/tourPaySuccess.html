@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>투어 결제 완료 화면</title>
+
+<th:block th:include="frame/metaheader"></th:block>
+</head>
+<body>
+	<th:block th:include="frame/header"></th:block>
+	<th:block th:include="frame/nav"></th:block>
+
+	<!-- Content 영역 -->
+	<div class="container bg-white mt-5 py-5 rounded">
+		<div class="row justify-content-center mx-3 px-3">
+			<div class="text-center text-22 font-weight-bold">결제가 완료됐습니다.</div>
+		</div>
+		<div class="row justify-content-center mb-5 mx-3 px-3">
+            <div class="text-center text-22 font-weight-bold">예약확인은 마이페이지에서 조회 가능합니다.</div>
+		</div>
+        
+        <div class="row justify-content-center">
+            <div class="col-5">
+                <a class="btn btn-sinchon btn-block" th:href="@{/mypage/rezList}">마이페이지</a>
+            </div>
+        </div>
+	</div>
+	<!-- content 끝  -->
+	<th:block th:include="frame/footer"></th:block>
+</body>
+</html>

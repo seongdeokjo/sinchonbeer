@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <th:block th:include="frame/metaheader"></th:block>
+    <link rel="stylesheet" href="/css/cart.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+ 
+ 	<script>
+			
+ 	
+ 	
+ 	
+ 		// 전체 선택
+ 		function checkAll(){
+ 			if($("#th_checkAll").is(':checked')){
+ 				$("input[name=checkRow]").prop("checked", true);
+ 			} else{
+ 				$("input[name=checkRow]").prop("checked", false);
+ 			}
+ 			
+ 		}
+ 		
+ 		/* 삭제(체크박스된 것 전부) */
+		$(document).ready(function(){
+			
+		})
+ 		
+ 	</script>
+ 	
+    
+</head>
+<body>
+   <!-- 	<th:block th:include="frame/header로 바꿧"></th:block> -->
+
+	<th:block th:include="frame/header"></th:block>
+	<th:block th:include="frame/nav"></th:block>
+
+    <!-- 장바구니 영역 START -->
+    <div class="container">
+        <div  class="row text-center m-5"> <!--class="carthead"-->
+            <div class="col">
+                <p class="p_f" style="color: #5ae5ec; font-size: 55px; font-weight:900 ;" >CART</p>
+            <p class="howsinchon" style="font-size: 14px;">당신의 신촌은 어떤가요?</p>
+            </div>
+            
+        </div>
+        
+        
+        <!-- 장바구니 헤더 -->
+        <h4 class="m-3">장바구니</h4>
+        <!-- <div class="row">  -->
+            <table id="table" class="table ">
+                <colgroup>
+                    <col style="width: 40px;">
+                    <col>
+                    <col style="width: 100px;">
+                    <col style="width: 80px;">
+                    <col style="width: 120px;">
+                    <col style="width:  130px;">
+                    <col style="width: 130px;">
+                    <col style="width: 150px;">
+                </colgroup>
+                <thead class="thead_main">
+                    <tr >
+                        <th style="width: 3%;"> 
+                            <label>
+                                <div class="checkbox">
+                                    <input type="checkbox" class="check" id="th_checkAll" value="selectall" onclick="checkAll()" >
+                                </div>
+                            </label>
+                        </th>
+                        <th  >item</th> <!--class="text-left" style="width: 30%;"-->
+                        <th >수량</th> 
+                        <th></th>
+                        <th></th> 
+                        <th >배송수단</th> 
+                        <th >가격</th> 
+                        <th >삭제</th> 
+                </thead>
+                
+                <!-- 장바구니 상품 목록 -->
+                <tbody id="GoodsTable">
+                    <tr>
+                    <span th:each="list: ${list}" >
+                        <td>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="checkRow"  class="_cartItemCheckbox"  checked="checked">
+                                </label>
+                            </div>
+                        </td>
+                        <td class="text-left">
+                            <!-- 이미지 클릭시 경로이동 -->
+                            <a href="">
+								<div>
+									<img th:src="@{${'/images/shop/' + gphotoname + '.png'}}" width="60" height="60">
+								</div>
+                                 	 	
+	
+
+                                <!-- </div> -->
+                                <!-- 상품 이름 --> 
+                                
+                                <!-- <input type="text" th:value="${list.idx}"> -->
+                                <!-- <p  >신촌에서&nbsp;만난&nbsp;김부각</p> -->
+                            </a>
+                        </td>
+                        <td class="amount">
+                            <div class="textsize ">
+                                <sapn class="hidden-lg">상품개수</sapn>
+                                <em class="hidden-lg">총</em>
+                                <!-- 상품 수량 -->
+                                <input type="text" th:value="${amount + '개'}"> 
+                                <em class="hidden-lg"></em>
+                            </div>
+                            <div class="text-center">
+                                <span class="cart-btn">
+
+                                    <!-- <a href="javascript:;" class="cart-btn" onclick="" id="change">변경</a> -->
+                                </span>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td >
+                                <div >택배</div>
+                        </td>
+                        <td class="price" >
+                        <!--총 가격 -->
+                        <span  th:text="${amount * gprice}"></span>
+                        <!-- <input type="text" th:value="${list.amount * list.price}"> -->
+                        </td>
+                       
+                        <td class="cart-btn">
+                        	<input type="button" value="삭제" id="deleteRow" onclick="DeleteRowFunction(this)">
+                            <!-- <a href="javascript:;" id="delete" class="del-btn" onclick="deleteRow()">삭제</a> -->
+                        </td>
+                    </tr>
+                    <tr class="payment-info">
+                        <td colspan="5"></td>
+                        <td class="pay-txt">
+                            <p>상품 가격</p>
+                        </td>
+                        <td class="pay-number">
+                            <p class="cart-price">
+
+                                 <span th:text="${amount * gprice + '원' }">  
+                                 <!-- <span class="fake-area">36,300원</span> -->
+                            </p>
+                        </td>
+                        <td></td>
+                        <span>
+                    </tr>
+                </tbody>
+                
+                <tfoot>
+                    <tr>
+                        <td class="cart-btn" colspan="5">
+                            <!-- 자바스크립트 -->
+                            <a href="javascript:;" class="btn" onclick="deleteGoods">선택상품 삭제</a>
+                        </td>
+                        <td class="amout-txt">
+                            <span>결제금액</span>
+                        </td>
+                        <td class="amount-text-brand">
+							<span style="font-size:  20px; font-weight: 600; color: #5ae5ec;" th:text="${amount * gprice + '원'}"></span>
+                            <!-- <span style="font-size:  20px; font-weight: 600; color: #5ae5ec;" id="cart_total price">36,300원</span> -->
+                        </td> 
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+            <script type="text/javascript'">
+                // 수량변경 버튼 클릭시 body에 클래스 토글
+            </script>
+        </div>
+        <div class="shoporbuy" >
+            <div class="row " >
+
+                <!-- 주문하는 페이지로, onclcick="자바 스크립"  -->
+                <a href="javascript:;" class="btn " onclick="" style="margin-left: 650px; background-color: #5ae5ec; color: #fff;">주문하기</a> 
+            </div>
+        </div>
+    </div>
+    <!-- END -->
+
+	<th:block th:include="frame/footer"></th:block>
+        
+        
+    
+    
+
+
+    
+</body>
+</html>

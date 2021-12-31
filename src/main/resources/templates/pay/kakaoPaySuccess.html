@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 리다이렉트용 페이지 -->
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+		document.location.replace("/kakaoPayComplete?payIdx=[[${payIdx}]]");
+	/*]]>*/
+	</script>
+</body>
+</html>

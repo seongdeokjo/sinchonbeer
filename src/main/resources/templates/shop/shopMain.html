@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shop</title>
+    <link rel="stylesheet" href="/css/shop/shoptest.css">
+    <th:block th:include="frame/metaheader"></th:block>
+</head>
+<body>
+
+	<th:block th:include="frame/header"></th:block>
+
+	<th:block th:include="frame/nav"></th:block>
+
+    <!-- 상품 목록  a href="이동할 경로" -->
+    <div class="container">
+        <div id="thumbnail">
+            <div class="row">
+                <div class="col-lg p-0">
+                    <a href="shop/1">
+                        <img class="gim_thumbnail" src="/images/shop/gimbugag.png" alt="김부각" >
+                    </a>
+                </div>
+                <div class="col-lg p-0">
+                    <a href="shop/2">
+                        <img class="garnish_thumbnail" src="/images/shop/citrus.png" alt="감귤칩" >
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg p-0">
+                    <a href="shop/3">
+                        <img class="card_thumbnail" src="/images/shop/playingCard.png" alt="화투" >
+                    </a>
+                </div>
+                <div class="col-lg p-0">
+                    <a href="shop/4">
+                        <img class="glass_thumbnail" src="/images/shop/glass.png" alt="맥주잔" >
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- footer -->
+	<th:block th:include="frame/footer"></th:block>
+    
+</body>
+</html>

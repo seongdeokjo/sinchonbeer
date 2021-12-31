@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="TourMapper">
+
+	<!-- 가능인원 체크 -->
+	<select id="selectCount" resultType="int">
+		select (ttotal-tcurrent) from tour where tdate = date_format(#{tdate},'%Y-%m-%d')
+	</select>
+	
+	<!-- 투어 날짜로 tidx 값 가져오기 -->
+	<select id="getTidxByTdate" resultType="int">
+		select tidx from tour where tdate= date_format(#{tdate},'%Y-%m-%d')
+	</select>
+	
+	<!-- 투어 번호로 투어 날짜 값 가져오기 -->
+	<select id="getTourDateByTidx" resultType="String" >
+		select date_format(tdate,'%Y-%m-%d') as tdate from tour where tidx=#{tidx}
+	</select>
+	
+	<!-- 예약 완료, 예약 변경 시  : 현재인원 추가 -->
+	<update id="addTourPeople">
+			update tour set tcurrent = tcurrent + #{tourPeople} where tdate = date_format(#{tdate},'%Y-%m-%d')
+	</update >
+	<!--예약 취소 , 예약 변경 시  : 현재인원 감소   -->
+	<update id="subTourPeople">
+		update tour set tcurrent = tcurrent - #{tourPeople} where tdate = date_format(#{tdate},'%Y-%m-%d')
+	</update>
+	
+	<!-- 에약 변경시 tour 인원처리 -->
+	<update id="changeTour">
+			UPDATE tour SET tcurrent = CASE tdate
+                          WHEN #{newDate} THEN tcurrent+#{tourPeople} 
+                          WHEN #{resDate} THEN tcurrent-#{tourPeople}          
+                        END
+             WHERE tdate IN ( #{newDate}, #{resDate} );
+	</update>
+			
+	<!-- 주문테이블의 예약날짜 변경 : test code  -->
+	<update id="changeDateByMidx">
+		update orders set tidx = (select tidx from tour where tdate = date_format(#{tdate},'%Y-%m-%d')) where oidx=#{oidx};
+	</update>
+	
+</mapper>	

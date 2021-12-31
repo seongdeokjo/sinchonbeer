@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>카카오페이 결제 성공</title>
+<th:block th:include="frame/metaheader"></th:block>
+</head>
+<body class="bg-gray p-4">
+
+	<div class="container bg-white mt-5 py-5 rounded">
+		<div class="row justify-content-center mb-5 mx-3 px-3">
+			<h4 class="text-center">카카오페이</h4>
+			<h4 class="text-center">결제가 실패했습니다.</h4>
+		</div>
+        
+        <div class="row justify-content-center my-5">
+            <p>다시 시도해주세요.</p>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <button class="btn btn-lg btn-sinchon btn-block" onclick="sucSubmit();">확인</button>
+            </div>
+        </div>
+		
+	</div>
+	
+	
+	<script>
+		function sucSubmit() {
+			window.close();
+		}
+	</script>
+
+</body>
+</html>

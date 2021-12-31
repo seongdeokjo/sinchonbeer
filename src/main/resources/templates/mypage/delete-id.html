@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>마이페이지 회원 탈퇴</title>
+
+<link rel="stylesheet" th:href="@{/css/mypage/delete-id.css}">
+<th:block th:replace="frame/metaheader"></th:block>
+
+</head>
+<body>
+	<th:block th:replace="frame/header"></th:block>
+	<th:block th:replace="frame/nav"></th:block>
+
+	<div class="mt-5 text-center pb-5">
+		<p class="text-center text-48 text-sinchon mb-0">MY PAGE</p>
+		<p class="text-center text-14">안녕하세요 신촌맥주입니다.</p>
+	</div>
+
+	<div id="scrollableNavBar">
+		<div class="row justify-content-between mb-5 pb-3">
+			<div class="col text-center text-14">
+				<a th:href="@{orderList}" class="link-unstyle">주문 내역</a>
+			</div>
+			<div class="col text-center text-14">
+				<a th:href="@{rezList}" class="link-unstyle">예약 내역</a>
+			</div>
+			<div class="col text-center text-14">
+				<a th:href="@{edit-info}" class="link-unstyle">
+					<span class="pb-1 border-bottom border-sinchon text-sinchon">정보 수정</span>
+				</a>
+			</div>
+			<div class="col text-center text-14">
+				<a th:href="@{delete-id}" class="link-unstyle"> <span
+					class="pb-1 border-bottom border-sinchon text-sinchon"
+				>회원 탈퇴</span>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<input type="hidden" th:value="${session.loginInfo.idx}" name="idx">
+		<p class="text-center text-32 mb-5">회원 탈퇴</p>
+		<div class="row">
+			<div class="col-lg-2" id="sideBar">
+				<ul class="text-14 list-unstyled">
+					<li class="mb-4"><a th:href="@{orderList}" class="link-unstyle">주문 내역</a></li>
+					<li class="mb-4"><a th:href="@{rezList}" class="link-unstyle">예약 내역</a></li>
+					<li class="mb-4"><a th:href="@{edit-info}" class="link-unstyle">정보 수정</a></li>
+					<li class="mb-4"><a th:href="@{delete-id}" class="link-unstyle"> <span
+							class="pb-1 border-bottom border-sinchon text-sinchon"
+						>회원 탈퇴</span></a></li>
+				</ul>
+			</div>
+			<form id="withdrawContent" name="withdrawContent" class="col-lg-8">
+				<div class="row justify-content-center mt-2 p-5 border border-sinchon">
+					<div class="col-10">
+						<div class="text-16">
+							<p class="mt-2 mb-5">
+								탈퇴 시 회원정보가 모두 삭제되며, 삭제된 데이터는 복구되지 않습니다.<br> 탈퇴 후에도 작성하신 게시물은 그대로 남아 있습니다.<br> 추후
+								같은 계정으로 재가입시 기존의 적립금과 쿠폰은 복원되지 않습니다.<br> 회원 탈퇴를 진행하시겠습니까?
+							</p>
+							<div class="row justify-content-center mx-auto" style="width: 300px;">
+								<label for="mpw">비밀번호<i class="icon_orange"></i></label> <input type="password" id="mpw"
+									placeholder="기존 비밀번호 입력"> 
+								<a href="javascript:void(0);" onclick="frmSubmit();" id="submitBtn" class="btn btn-sinchon btn-block mt-2">탈퇴하기</a>
+								<!-- <input type="submit" id="submitBtn" class="btn btn-sinchon btn-block mt-2" value="탈퇴하기"> -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<th:block th:replace="frame/footer"></th:block>
+
+	<script>
+    var pw = $('#mpw');
+    
+    $('#mpw').focusout(function() {
+		console.log($(this).val());
+		if($(this).val() == null == undefined){
+			return false;
+		}
+    });
+		
+    function frmSubmit() {
+    	
+    	if (pw.val().trim().length < 1) {
+			alert('필수 항목입니다.');           
+            return false;
+        }
+	    $.ajax({
+			url : '/pwCheckDelete',
+			type : 'post',
+			contentType: 'application/json; charset=UTF-8;',
+			data : pw.val(),
+			success : function(data) {
+				console.log(data);
+				// data : Y / N
+				console.log('data success 접근 성공');
+				if (data == 'N') {
+					alert('비밀번호가 일치하지 않습니다. ');
+		            return false;
+				} else {
+				    $.ajax({
+						url : '/pwCheckDelete',
+						type : 'post',
+						contentType: 'application/json; charset=UTF-8;',
+						data : pw.val(),
+						success : function(data) {
+							console.log(data);
+							// data : Y / N
+							console.log('data success 접근 성공');
+							if (data == 'N') {
+								alert('비밀번호가 일치하지 않습니다. ');
+					            return false;
+							}else{
+							    var myForm = document.withdrawContent;
+							    myForm.method = "post";
+							    myForm.action = "/mypage/delete-id";
+							    myForm.submit();
+							}
+						},
+						error : function(request, status, error) {
+							alert('서버 통신에 문제가 발생했습니다. 다시 실행해주세요.');
+						}
+					});
+				}
+			},
+			error : function(request, status, error) {
+				alert('서버 통신에 문제가 발생했습니다. 다시 실행해주세요.');
+			}
+		});
+    }
+    </script>
+</body>
+</html>

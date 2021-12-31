@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet" th:href="@{/css/tour/change-info.css}">
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<th:block th:include="frame/metaheader"></th:block>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<body>
+	<!-- 투어의 예약 정보가 존재하지 않을 경우 -->
+ 	<div th:if="${#lists.isEmpty(tourOrderList)}">
+		<script>
+			alert('예약 정보가 존재하지 않습니다.\n예약 화면으로 이동합니다.');
+			location.href='/tour/pick-date';
+		</script>
+	</div> 
+
+	<th:block th:include="frame/header"></th:block>
+	<th:block th:include="frame/nav"></th:block>
+	<!-- submenu 영역 -->
+	<div class="submenu_wrap">
+		<ul>
+			<li><a href="/tour/info">투어 안내</a></li>
+			<li><a href="/tour/pick-date" id="currentPage">예약</a></li>
+			<li><a href="/tour/notice">투어 공지</a></li>
+		</ul>
+	</div>
+	<div class="detail_menu">
+		<ul>
+			<li><a href="/tour/pick-date">프로그램 예약</a></li>
+			<li><a href="/tour/change-info" id="selectPage">예약 확인/취소</a></li>
+		</ul>
+	</div>
+	
+
+	<!-- content 영역 -->
+	<div th:unless="${#lists.isEmpty(tourOrderList)}">
+		<div class="container text-center p-2">
+			<div th:each="list,index : ${tourOrderList} ">
+						
+				<div class="row  mt-5 ">
+					<div class="col">
+						<h1>투어 확인/변경/취소</h1>
+					</div>
+				</div>
+				<div class="inline-row"></div>
+				
+				<div class="row m-3">
+					<div class="col-4">
+						<p>신청자명</p>
+					</div>
+					<div class="col-4 text-left outline_del">
+						<input type="text" th:value="${session.loginInfo.name}" id="name" readonly class="border-0">
+						<input type="hidden" id="oidx" th:value="${list.idx}">	
+					</div>
+					<div class="col-4 "></div>
+				</div>
+				<div class="row m-3">
+				
+					<div class="col-4">
+						<p>프로그램 명</p>
+					</div>
+					<div class="col-4 text-left">
+						<p>양조장 투어</p>
+					</div>
+				</div>
+				<div class="row m-3">
+				
+					<div class="col-4">
+						<p>일시</p>
+					</div>
+					<div class="col-4 text-left outline_del">
+						<input type="text" th:id="newDate+${list.idx}" th:value="${tourDate[index.index]}"	name="newDate" class="border-0" readonly> 
+						<input type="hidden" th:id="resDate+${list.idx}" th:value="${tourDate[index.index]}"name="resDate">
+					</div>
+					<div class="col-4">
+						<button data-toggle="modal"  data-target="#myModal" th:attrappend="data-target=${list.idx}"  
+								class="chDate_input color_input" th:onclick="|button(${list.idx})|">예약 일시 변경
+						</button>
+	                </div>
+						<!-- modal control -->
+					<div class="modal" tabindex="-1" role="dialog" th:id="myModal+${list.idx}" aria-labelledby="myModalLabel" aria-hidden="true" >
+						<div class="modal-dialog modal-lg">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title" id="myModalLabel">날짜 변경</h4>
+								</div>
+								<div class="modal-body">
+									<div class="row text-center">
+										<div class=" col-12 col-lg-6 border">
+											<div th:id="datepicker+${list.idx}"></div>
+										</div>
+										<div class="col-12 col-lg-6 border ">
+											<input th:id="check+${list.idx}" type="text" class="mt-5 text-center">
+											<br> <span th:id="count+${list.idx}"></span> <br>
+											<p>
+												*예약을 변경하시려면 변경을 원하시는 <br> 날짜를 선택하여 주시고,<br> 변경버튼 클릭 뒤
+												<span class="color_text">예약일시 변경 확정</span> 버튼을<br> 클릭하셔야
+												변경이 완료됩니다.
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary"  th:onclick="|change(${list.idx})|">변경</button>
+									<button type="button" class="btn btn-warning" th:id="cancle+${list.idx}" th:onclick="|cancle(${list.idx})|">변경취소</button>
+								</div>
+							</div>
+						</div>
+					</div>
+						
+				</div>
+			
+				<div class="row m-3">
+					<div class="col-4">
+						<p>인원</p>
+					</div>
+					<div class="col-4 text-left outline_del">
+						<input type="text" th:id="tourPeople+${list.idx}" th:value="${list.tourPeople}" class="border-0" readonly>
+					</div>
+				</div>
+				
+				<div class="row m-3">
+					<div class="col-4">
+						<p>휴대폰 번호</p>
+					</div>
+					<div class="col-4 text-left outline_del">
+						<input type="text" th:value="${session.loginInfo.phone}" class="border-0" readonly>
+					</div>
+				</div>
+				<div class="inline-row2"></div>
+				
+				<div class="row ">
+					<div class="col-12 col-sm-6 p-3">
+						<input type="submit" value="예약일시 변경 확정" id="confirmedDateBtn" class="set_input color_input" th:onclick="|modify(${list.idx})|">
+					</div>
+					<div class="col-12 col-sm-6 p-3">
+						<button id="cancleBtn" class="set_input color_cancle" th:onclick="| reservationCancle(${list.idx})|">예약 취소</button>
+					</div>
+				</div>
+			</div>
+			
+		</div>		
+	</div> <!-- content 영역 끝 -->
+	<!-- footer  -->
+	<th:block th:include="frame/footer"></th:block>
+	<!-- script  -->
+	<script th:src="@{/js/tour/change-info.js}"></script>
+
+</body>
+</html>

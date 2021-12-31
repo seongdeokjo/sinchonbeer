@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gim</title>
+    
+    <th:block th:include="frame/metaheader"></th:block>
+    <link rel="stylesheet" href="/css/shop/product.css" >
+</head>
+<body>
+	<th:block th:include="frame/header"></th:block>
+	<th:block th:include="frame/nav"></th:block>
+	<!-- 세션 정보가 없을 때 -> modal 창 -->
+	<th:block th:if="${session.loginInfo == null}">
+		<input type="hidden" th:value="Y" id="check">
+	</th:block>
+ 
+    <div class="container">    			
+            <img class="gim_thumbnail" src="/images/shop/gimbugag.png " alt="김부각가가가가" >
+            <div class="product_1">
+                <h1 class="product_name">CRISPY LAVAR SNACK</h1>
+                <h3 style="color: rgb(83, 81, 81);">신촌에서 만난 찹쌀 김부각(20ea)</h3>
+                <h1 class="price" >12,100원</h1>
+                <h2 style="color:#5ae5ec" >회원가입하면 언제 어디서나 무료 배송</h2>            
+                    <div class="edge_color">
+                        <td>수량</td>
+                        <hr>
+                        <form id="form1"  name='form1' action="/shop/shop_payment"  method='get'>  <!-- get -->
+                        <th:block th:unless="${session.loginInfo == null}">
+                        	<input type="hidden" th:value="${session.loginInfo.idx}" name="midx"> 
+                        </th:block>	
+							<input name="gphotoname" type="hidden" value="gimbugag">	
+                        	<input name="gname" type="hidden" value="신촌에서 만난 김부각">                        
+                            <input name="gprice" type="hidden" id="price" value="12100">
+                            <input name="gidx" type="hidden" id="idx" value="1">
+                            <input  type="button"  class="count_btn1" value="+" id="plus"  >    
+                            <input name="amount" type="text"  class="amount_number"     value="1" id ="amount" >   
+                            <input type="button"  class="count_btn2" value="-" id="minus" > 
+                            <div class="opt_block">
+                                <p style="padding-top: 10px;">
+                                    <span  class="totalcount" style="text-align: left;"  >총 상품금액</span>
+                                    <span  id="sum_p_num" class="total_price" style="text-align: right; padding-left: 110px;" >12100</span>
+                                </p>
+                            </div>
+		                    <div class="row">
+		                            <input type="submit" id="BuyNow" value="BuyNow"   class="button_form1" style="color: #fff; background-color: #5ae5ec;">	<!-- formation="/shop/shop_payment" -->
+		                            <input type="submit" id="basket" value="Basket" formaction="/basket/basket" class="button_form2"  style="color: #5ae5ec; background-color: #fff;">			
+		                    </div>	                
+                        </form>                        
+                    </div>
+            </div>    
+        <div id="description">           
+            <h4 class="goods_detail">상세 정보</h4>
+            <hr   class="goods_down" >
+            <img class="gim_thumbnail2" src="/images/shop/gimbugag.png">
+            <div class="detail_comment">
+                <p style="color: gray;">신촌맥주와</p>
+                <p style="color: gray;">환상적인 찰떡 궁합</p>
+                <p >신촌에서 만난</p>
+                <p>찹쌀 김부각</p>
+                <div class="short_comment"> 
+                    <p>전국 산지에서 찾은 상급의 김 원물을 받아</p>
+                    <p>한 장씩 사람의 손으로 직접 튀긴 찹쌀 김부각입니다.</p>
+                    <p>짭짤하면서 고소한,감칠맛이 매력적이며</p>
+                    <p>신촌 맥주와 잘 어울려요!!!</p>
+                </div>
+                <table color="goods_description">
+                    <thead >
+                        <tr>
+                            <th  style="color: #5ae5ec; font-size: 30px;">상품 정보</th>
+                        </tr>
+                    </thead>
+                    <tbody style="font-size: 18px;">
+                        <tr>
+                            <td>제품명</td>
+                            <td>신촌에서 만난 찹쌀 김부각</td>
+                        </tr>
+                        <tr>
+                            <td>식품 유형</td>
+                            <td>기타 수산물 가공품</td>
+                        </tr>
+                        <tr>
+                            <td>포장재질</td>
+                            <td>외포장:지함,내포장:폴리프로필렌</td>
+                        </tr>
+                        <tr>
+                            <td>내용량</td>
+                            <td>160g(40g * 4)</td>
+                        </tr>
+                        <tr>
+                            <td>영양성분</td>
+                            <td>영양 정보 참조</td>
+                        </tr>
+                        <tr>
+                            <td>유통기한</td>
+                            <td>제품 정보 표시면 표기일까지</td>
+                        </tr>
+                        <tr>
+                            <td>성분명 및 함량</td>
+                            <td>제품 정보 참조</td>
+                        </tr>
+                        <tr>
+                            <td>업소명</td>
+                            <td>라이스영농조합법인</td>
+                        </tr>
+                        <tr>
+                            <td>소비자 상담 전화번호</td>
+                            <td>부정,불량 식품 신고는 국번없음 13399</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="kcal">
+                    <thead>
+                        <tr>
+                            <th colspan="2" style="color: #5ae5ec;">영양정보</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>총 내용량</td>
+                            <td>160g</td>
+                        </tr>
+                        <tr>
+                            <td>열량</td>
+                            <td>601.6kcal(10g당 37kcal)</td>
+                        </tr>
+                        <tr>
+                            <td>나트륨</td>
+                            <td>17.5mg         0.9%</td>
+                        </tr>
+                        <tr>
+                            <td>당류</td>
+                            <td>0g             0%</td>
+                        </tr>
+                        <tr>
+                            <td>탄수화물</td>
+                            <td>34.7g          10.7%%</td>
+                        </tr>
+                        <tr>
+                            <td>지방</td>
+                            <td>4.0g           7.4%</td>
+                        </tr>
+                        <tr>
+                            <td>트랜스지방</td>
+                            <td>0g             0%</td>
+                        </tr>
+                        <tr>
+                            <td>콜레스테롤</td>
+                            <td>0ㅡg            0%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="exchange">
+                <div>
+                    <h3 style="color: #5ae5ec;">교환 및 환불 안내</h3>
+                    <ul>
+                        <li>제주맥주에서 구매하신 제품은 받으셨을 때와 동일한 상태로, 구매후 7일 이내에 교환/환불 가능</li>
+                        <li>단순 변심으로 인한 교환 시 왕복 배송비 6천원, 환불시 3천원을 청구합니다.</li>
+                        <li>오배송, 불량으로 인한 교환/환불 시 배송비 무료입니다.</li>
+                        <li>제품 배송 이후 환불 요청 시에는 제품 회수 후에 환불이 완료됩니다.</li>
+                        <li>자세한 사항은 고객센터 혹은 문의 게시판에 문의해주세요.</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/js/shop/proudct.js}"></script>
+     <!-- footer -->
+    <th:block th:include="frame/footer"></th:block>
+</body>
+</html>

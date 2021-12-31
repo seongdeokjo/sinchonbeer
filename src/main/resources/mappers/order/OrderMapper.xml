@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="OrderMapper">
+
+	<resultMap type="com.bitcamp.sc.order.domain.OrderInfo" id="OrderDomain">
+		<result property="idx" column="oidx"/>
+		<result property="date" column="odate"/>
+		<result property="category" column="ocategory"/>
+		<result property="tourIdx" column="tidx"/>
+		<result property="memberIdx" column="midx"/>
+		<result property="addressIdx" column="aidx"/>
+		<result property="price" column="oprice"/>
+		<result property="tourPeople" column="tpeople"/>
+		<result property="goodsIdx" column="gidx"/>
+		<result property="amount" column="amount"/>
+	</resultMap>
+
+	<insert id="save" parameterType="com.bitcamp.sc.order.domain.OrderInfo" useGeneratedKeys="true" keyProperty="idx">
+		INSERT INTO orders(ocategory, oprice, tidx, tpeople, midx, aidx, gidx, amount) VALUES(#{category}, #{price}, #{tourIdx}, #{tourPeople}, #{memberIdx}, #{addressIdx}, #{goodsIdx}, #{amount})
+	</insert>
+	
+	<select id="findByIdx" resultType="com.bitcamp.sc.order.domain.OrderInfo" resultMap="OrderDomain">
+		SELECT * FROM orders WHERE oidx=#{idx}
+	</select>
+	
+	<select id="findByMemberIdx" resultType="com.bitcamp.sc.order.domain.OrderInfo" resultMap="OrderDomain">
+		SELECT * FROM orders WHERE midx=#{memberIdx}
+	</select>
+
+	<select id="findByCategoryAndMemberIdx" resultType="com.bitcamp.sc.order.domain.OrderInfo" resultMap="OrderDomain">
+		SELECT * FROM orders WHERE ocategory=#{category} and midx=#{memberIdx} and ostatus='confirmed'order by tidx
+	</select>
+	
+	<delete id="deleteByIdx">
+		DELETE FROM orders WHERE oidx=#{idx}
+	</delete>
+	
+	<update id="updateStatus">
+		UPDATE orders SET ostatus=#{status} WHERE oidx=#{idx}
+	</update>
+
+</mapper>

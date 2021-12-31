@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bitcamp.sc.member.repository.MemberDao">
+
+	<resultMap type="com.bitcamp.sc.member.domain.Member" id="MemberDomain">
+		<result property="idx" column="midx"/>
+		<result property="email" column="memail"/>
+		<result property="pw" column="mpw"/>
+		<result property="name" column="mname"/>
+		<result property="phone" column="mphone"/>
+		<result property="code" column="mcode"/>
+		<result property="address1" column="address1"/>
+		<result property="address2" column="address2"/>
+	</resultMap> 
+	
+	
+	<!-- 로그인할 때 사용 - 이메일로 멤버객체 조회하기 -->
+	<select id="selectByEmailPw"
+		resultType="com.bitcamp.sc.member.domain.Member"
+		resultMap="MemberDomain"
+		>
+		select * from member where memail=#{email} and mpw=#{pw}
+	</select>
+	
+	<!-- 이메일로 멤버객체 조회 -->
+	<select id="selectByEmail"
+		resultType="com.bitcamp.sc.member.domain.Member"
+		resultMap="MemberDomain"
+		>
+		select * from member where memail=#{param1}
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="insertMember"
+		parameterType="com.bitcamp.sc.member.domain.Member"
+		useGeneratedKeys="true"
+		keyProperty="idx"
+	>
+		insert into member (memail, mpw, mname, mphone) 
+		values(#{email}, #{pw}, #{name}, #{phone})
+	</insert>
+	
+	<!-- 아이디 중복체크 -->
+	<select id="selectByEmail2"
+		resultType="int"
+		>
+		select count(*) from member where memail=#{email}
+	</select>
+	<!-- 이메일 찾기 -->
+	<select id="emailSearch"
+		resultType="com.bitcamp.sc.member.domain.Member"
+		resultMap="MemberDomain"
+		>
+		select memail from member where mname=#{param1} and mphone=#{param2}	
+	</select>
+
+	<!-- 비밀번호 찾기 -->
+	<select id="pwSearch"
+		resultType="com.bitcamp.sc.member.domain.Member"
+		resultMap="MemberDomain"
+		>
+		select memail from member where mname=#{param1} and memail=#{param2}	
+	</select>
+	
+	<!-- 비밀번호 찾기 중 인증번호 저장하기 -->
+	<update id="updateCode"
+		parameterType="String"
+		>
+		update member set mcode=#{code} where memail=#{email}
+	</update>
+	
+	<!-- 비밀번호 찾기 중 인증번호 일치하는지 체크-->
+	<select id="selectCode"
+		resultType="com.bitcamp.sc.member.domain.Member"
+		resultMap="MemberDomain"
+		>
+		select mcode from member where memail=#{memail}
+	</select>
+	
+	<!-- 비밀번호 찾기 중 새로운 비밀번호 생성 -->
+	<update id="updatePw"
+		parameterType="com.bitcamp.sc.member.domain.Member"
+		>
+		update member set mpw = #{pw} where memail=#{email}
+	</update>
+	
+	<select id="selectByMidx"
+		parameterType="int"
+		resultType="com.bitcamp.sc.member.domain.Member"
+		resultMap="MemberDomain"
+		>
+		select * from member where midx=#{midx}
+	</select>
+	<select id="selectAddressByMidx"
+		parameterType="int"
+		resultType="com.bitcamp.sc.member.domain.MemberAddress"
+		>
+		select * from address where midx=#{midx}
+	</select>
+	
+	<!-- 회원 수정 에서 기존 비밀번호 확인하기 -->
+	<select id="selectPw"
+		parameterType="int"
+		resultType="String"
+		>
+		select mpw from member where midx=#{midx}	
+	</select>	
+</mapper>

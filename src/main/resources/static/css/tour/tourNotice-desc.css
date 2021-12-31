@@ -1,0 +1,124 @@
+a:visited{
+	color:black;
+}
+div{
+    display: block;
+}
+
+/* 추후 jquery로 코드 수정할 것 */
+#currentPage{
+    background-color: #1ecad3;
+    color: white;
+}
+#selectPage{
+    color: #1ecad3 !important;
+}
+
+/* nav_submenu 영역 */
+.submenu_wrap{
+    background-color: #f4f4f4;
+    height: 50px;
+    line-height: 50px;
+   overflow: hidden;
+   text-align: center;
+}
+
+.submenu_wrap ul li{
+   
+    display: inline-block; 
+}
+.submenu_wrap ul a{
+    padding: 0 50px;
+    color:black;
+}
+
+.submenu_wrap a:hover{
+    background-color: #1ecad3;
+    color: white;
+}
+
+/* submenu의 세부 메뉴 영역 */
+.detail_menu{
+    height: 50px;
+    line-height: 50px;
+   overflow: hidden;
+   text-align: center;
+}
+
+.detail_menu ul li{
+    display: inline-block; 
+}
+
+/* submenu -> detailmenu의 a 태그는 inline-block 설정 할 것 */
+.detail_menu ul a{
+    display: inline-block;
+    margin: 0 15px;
+    font-size: 14px;
+    color:black;
+}
+.detail_menu .active{
+    border-width: 0 0 1px 0;
+    border-style: solid;
+}
+
+.detail_menu a:hover{
+    color: #1ecad3;
+}
+
+.inline-row{
+    width: 100%;
+    height: 80px;
+    border-top: 2px solid #f4f4f4;
+    
+}
+.inline-row1{
+    width: 100%;
+    height: 50px;
+    
+}
+
+.text_br{
+    text-align: center;
+    color: rgb(30, 202, 211);
+    font-size: 48px;
+    font-weight: 900;
+}
+.pt{
+    margin-top: -20px;
+}
+.inline{
+    display: inline;
+}
+.c-img{
+    max-width: 300px;
+}
+.list a{
+    line-height: 50px;
+    padding: 0 30px;
+    margin-top: 10px;
+}
+
+.bt{
+    background-color: #1ecad3;
+    color: white;
+    border: 0;
+    padding: 5px 10px;
+}
+
+.h3-font{
+    font-size: 20px;
+    font-weight: 700;
+}
+.link{
+    display: inline;
+}
+.lh{
+    line-height: 30px;
+}
+.span_color{
+    background-color: #1ecad3;
+    color: white;
+}
+.b-b{
+    border-bottom: 1px solid #ddd;
+}

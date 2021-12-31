@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+ 
+<h1> kakaoPay api 이용하기 </h1>
+ 
+<form id="myForm" name="myForm">
+
+	<a href="javascript:void(0);" onclick="frmSubmit();">카카오 페이 결제</a>
+</form>
+ 
+
+<script>
+	function frmSubmit() {
+		window.name = "opner_win";
+		var myForm = document.myForm;
+		var myWin = window.open("about:blank", "kakaoPayWin", "status=yes, scrollbars=yes, width=420, height=500, left=300, top=100, , resizable=yes");
+		myForm.method = "post";
+		myForm.target = "kakaoPayWin";
+		myForm.action = "/kakaoPay";
+		myForm.submit();
+	}
+</script>
+</body>
+</html>

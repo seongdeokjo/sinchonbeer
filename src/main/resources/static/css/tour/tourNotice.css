@@ -1,0 +1,161 @@
+a:visited{
+	color:black;
+}
+div{
+    display: block;
+}
+/* 추후 jquery로 코드 수정할 것 */
+#currentPage{
+    background-color: #1ecad3;
+    color: white;
+}
+#selectPage{
+    color: #1ecad3 !important;
+}
+
+/* nav_submenu 영역 */
+.submenu_wrap{
+    background-color: #f4f4f4;
+    height: 50px;
+    line-height: 50px;
+   overflow: hidden;
+   text-align: center;
+}
+
+.submenu_wrap ul li{
+   
+    display: inline-block; 
+}
+.submenu_wrap ul a{
+    padding: 0 50px;
+    color:black;
+}
+
+.submenu_wrap a:hover{
+    background-color: #1ecad3;
+    color: white;
+}
+
+/* submenu의 세부 메뉴 영역 */
+.detail_menu{
+    height: 50px;
+    line-height: 50px;
+   overflow: hidden;
+   text-align: center;
+}
+
+.detail_menu ul li{
+    display: inline-block; 
+}
+
+/* submenu -> detailmenu의 a 태그는 inline-block 설정 할 것 */
+.detail_menu ul a{
+    display: inline-block;
+    margin: 0 15px;
+    font-size: 14px;
+    color:black;
+}
+.detail_menu .active{
+    border-width: 0 0 1px 0;
+    border-style: solid;
+}
+
+.detail_menu a:hover{
+    color: #1ecad3;
+}
+
+
+
+
+.inline-row{
+    width: 100%;
+    height: 80px;
+    border-top: 2px solid #f4f4f4;
+    
+}
+
+.text_br{
+    text-align: center;
+    color: rgb(30, 202, 211);
+    font-size: 48px;
+    font-weight: 900;
+}
+.pt{
+    margin-top: -20px;
+}
+
+/* image hover 설정 */
+.content {
+    position: relative;
+     width: 100%;
+    max-width: 400px; 
+    margin: auto;
+    overflow: hidden
+}
+
+.content .content-overlay {
+    background: rgba(0, 0, 0, 0.7);
+    position: absolute;
+     height: 99%;
+    width: 100%; 
+     left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0; 
+    opacity: 0;
+    /*   -webkit-transition: all 0.4s ease-in-out 0s;
+    -moz-transition: all 0.4s ease-in-out 0s;
+    transition: all 0.4s ease-in-out 0s */
+}
+.content:hover .content-overlay {
+    opacity: 1
+}
+.content-image {
+    width: 100%;
+    
+}
+.content-details {
+    position: absolute;
+    text-align: center;
+    padding-left: 1em;
+    padding-right: 1em;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); 
+ /*    -webkit-transition: all 0.3s ease-in-out 0s;
+    -moz-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s  */
+}
+ .content-details-date {
+    position: absolute;
+    text-align: center;
+    padding-left: 1em;
+    padding-right: 1em;
+    width: 100%;
+    top: 10%;
+    left: 20%;
+    opacity: 0;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); 
+
+}
+.content:hover .content-details {
+    top: 50%;
+    left: 50%;
+    opacity: 1;
+}
+.content:hover .content-details-date {
+    top: 10%;
+    left: 20%;
+    opacity: 1;
+}
+ 
+.content p {
+    color: #fff;
+    font-size: 0.8em
+}

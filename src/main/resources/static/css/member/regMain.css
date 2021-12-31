@@ -1,0 +1,64 @@
+/* JOIN 타이틀에 적용시킬 폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@800&family=Roboto:wght@900&display=swap');
+/* 전체 영역 */
+*{
+    margin:0;
+    padding:0;
+}
+*::selection{
+    background-color: #1ecad3;
+    color:white;
+}
+#main_wrap a{
+    text-decoration: none;
+    color:black;
+    display:block; 
+
+}
+
+/* 회원가입 메인 전체 영역 */
+#main_wrap{
+    width:400px;
+    height:500px;
+    margin:50px auto;
+}
+
+.font_set{
+	font-family: 'Kanit', sans-serif;
+    font-size: 48px;
+    margin-top:40px;
+    text-align:center;
+    color:#1ecad3;
+}
+/* 제목 아래 작은 문구 부분 */
+.small_text{
+    font-size:14px;
+    text-align: center;
+    height:40px;
+    margin:5px 0 20px 0;
+}
+/* 버튼에 공통적으로 적용되는 부분 */
+.button{
+    width:400px;
+    height:40px;
+    margin:30px auto;
+    cursor: pointer;
+    line-height: 40px;
+    text-align: center;
+    font-size:12px;
+}
+/* 일반 회원가입 버튼 부분 */
+.regBut{
+    background-color: white;
+    border:1px solid #ccc;
+   
+}
+/* 버튼 위로 커서 올렸을 때 효과 */
+.regBut:hover{
+    border:1px solid #000;
+}
+/* 카카오로 회원가입 버튼 부분 */
+.regKa{
+    background-color:gold;
+    border:none;
+}

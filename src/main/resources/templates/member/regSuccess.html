@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>신촌 맥주 : 회원가입 완료</title>
+<!-- metaheader 영역 -->
+<th:block th:replace="frame/metaheader"></th:block>
+<link rel="stylesheet" th:href="@{/css/member/regSuccess.css}">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<meta name="referrer" content="no-referrer" />
+</head>
+<body>
+
+	<!-- header 영역 -->
+	<th:block th:replace="frame/header"></th:block>
+
+	<!-- nav 영역 -->
+	<th:block th:replace="frame/nav"></th:block>
+
+	<!-- content 영역 ---------------------------------------------------------->
+	<div id="regConfirmArea">
+		<div>
+			<img th:src="@{/images/member/complete.png}"/>
+			<!-- <img src="images/member/complete.png"> -->
+		</div>
+		<div id="message">
+			<h2>
+				신촌맥주 회원가입이<br>완료되었습니다.
+			</h2>
+			<br>
+			<p>지금 신촌맥주를 탐험해 보세요!</p>
+		</div>
+		<a th:href="@{/login}"><button>로그인</button></a>
+	</div>
+
+	<!-- // 회원가입 폼 영역 --------------------------------------------------------------->
+
+	<!-- footer 영역 -->
+	<th:block th:replace="frame/footer"></th:block>
+
+</body>
+</html>
+

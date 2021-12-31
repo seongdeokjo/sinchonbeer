@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>투어 안내</title>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- 카카오 api 사용하기위한 script -->
+<script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=e45a7e47516f7b29dedfc296a83102cc">	</script>
+
+<th:block th:include="frame/metaheader"></th:block>
+
+<link rel="stylesheet" th:href="@{/css/tour/tourInfo.css}">
+
+</head>
+<body>
+	<th:block th:include="frame/header"></th:block>
+	<th:block th:include="frame/nav"></th:block>
+	<!-- submenu 영역 -->
+	<div class="submenu_wrap">
+		<ul>
+			<li><a th:href="@{/tour/info}" id="currentPage">투어 안내</a></li>
+			<li><a th:href="@{/tour/pick-date}">예약</a></li>
+			<li><a th:href="@{/tour/notice}">투어 공지</a></li>
+		</ul>
+	</div>
+	<div class="detail_menu">
+		<ul>
+			<li>
+				<a th:href="@{/tour/info}" id="selectPage" class="active">FAQ
+					<hr>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div class="inline-row"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<p>FAQ</p>
+			</div>
+		</div>
+		<div class="inline-row80"></div>
+		<div class="card border-0 mt-5">
+			<div class="card-header">
+				<a class="card-link" data-toggle="collapse" href="#Q1"
+					aria-expanded="true"> Q.투어 프로그램은 언제부터 예약 가능한가요? 
+					<span class="r-p icon"> 
+						<i class="fa fa-angle-down float-right"></i>
+					</span>
+				</a>
+			</div>
+			<div id="Q1" class="collapse">
+				<div class="card-body mt-3 mb-3">
+					<p class="p_font">
+						매 월 첫째 주 목요일에 다음 달 투어 프로그램이 오픈됩니다.<br> 예를 들어, 10월 투어 프로그램 예약을
+						원하시면 9월 첫째 주 목요일부터 예약 하실 수 있습니다.
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="card border-0">
+			<div class="card-header">
+				<a class="collapsed card-link" data-toggle="collapse" href="#Q2">
+					Q.프로그램 참여 제한이 있나요? 
+					<span class="r-p icon"> <i class="fa fa-angle-down float-right"></i></span>
+				</a>
+			</div>
+			<div id="Q2" class="collapse">
+				<div class="card-body mt-3 mb-3">
+					<p class="p_font">
+						1. 양조장 입장: 모든 연령 입장 가능<br> (미성년자는 부모 동반 없이 입장 불가합니다.)<br>
+						2. 양조장 투어 : 만 7세 이상 참여 가능<br> (0세부터 만 6세의 경우, 보호자 동반이라해도 참여
+						불가)<br> 3. 애완동물: 출입금지<br> (맥주를 생산하는 공간이기에 입장 불가합니다.)<br>
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="card border-0">
+			<div class="card-header">
+				<a class="collapsed card-link" data-toggle="collapse" href="#Q3">
+					Q.프로그램 취소 및 환불규정은 어떻게 되나요? 
+					<span class="r-p icon"> <i class="fa fa-angle-down float-right"></i></span>
+				</a>
+			</div>
+			<div id="Q3" class="collapse">
+				<div class="card-body mt-3 mb-3">
+					<p class="p_font">
+						*이용 당일<br> :취소/환불/날짜 변경 모두 불가합니다.<br> <br> *이용
+						1일~3일전<br> -환불: 결제금액의 50% 차감<br> <br> -날짜 변경: 가능<br>
+						*이용 1일전까지<br> :결제금액에 대한 취소 수수료 없습니다.<br> <br> ※취소 및
+						날짜 변경 방법<br> -홈페이지 > 예약 및 문의 > '예약확인/취소' 페이지에서 직접 취소/날짜변경
+						가능합니다.<br>
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="card border-0">
+			<div class="card-header">
+				<a class="collapsed card-link" data-toggle="collapse" href="#Q4">
+					Q.맥주 외에 마실 음료나 먹을거리가 있나요? 
+					<span class="r-p icon"> <i class="fa fa-angle-down float-right"></i></span>
+				</a>
+			</div>
+			<div id="Q4" class="collapse">
+				<div class="card-body mt-3 mb-3">
+					<p class="p_font">
+						1. 맥주 외 음료: 어린이, 임산부, 차량 운전자 분들을 위해<br> 맥주 대신 스파클링 음료가 제공됩니다.<br>
+						<br> 2. 스낵: 페어링 키트, 감귤칩, 육포, 소세지 등의<br> 간단한 먹거리 구매
+						가능합니다.<br> <br> 3. 외부 음식: 반입 가능<br> <br> 4. 맥주
+						테이크 아웃(포장): 불가능<br> (제주맥주 양조장 법적 규제에 따라 맥주 포장 불가합니다.)<br>
+					</p>
+				</div>
+			</div>
+			<div class="card border-0">
+				<div class="card-header">
+					<a class="collapsed card-link" data-toggle="collapse" href="#Q5">
+						Q.양조장 오시는길 
+						<span class="r-p icon"> <i class="fa fa-angle-down float-right"></i></span>
+					</a>
+				</div>
+				<div id="Q5" class="collapse">
+					<div class="card-body mt-3 mb-3 border_b">
+						<p class="p_font">서울특별시 마포구 백범로 23 3층</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="inline-row80"></div>
+		<div class="road">
+			<p class="roadInfo">오시는 길</p>
+		</div>
+		<div class="inline-row80"></div>
+		<!-- 카카오 지도 api -->
+		<div id="map" class="img mx-auto"></div>
+		<div class="inline-row40"></div>
+		<div class="ml-5">
+			<a class=" text-left btn btn-primary" href="http://kko.to/6mRNkR4f0">카카오맵</a>
+		</div>
+	</div>
+	<th:block th:include="frame/footer"></th:block>
+
+	<script th:src="@{/js/tour/info.js}"></script>
+
+</body>
+</html>

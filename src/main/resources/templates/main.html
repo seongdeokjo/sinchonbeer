@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>메인 화면</title>
+
+<link rel="stylesheet" th:href="@{/css/main.css}">
+<link rel="stylesheet" th:href="@{/css/default.css}">
+<th:block th:replace="frame/metaheader"></th:block>
+
+</head>
+<body>
+	<th:block th:replace="frame/header"></th:block>
+	<th:block th:replace="frame/nav"></th:block>
+
+	<div id="content">
+		<div class="video_box">
+			<video src="media/sinchonbeer_video.mp4" muted autoplay loop></video>
+		</div>
+		<div class="doz-row"></div>
+		<div class="dive-img-area">
+			<img class="dive-img" src="https://cdn.imweb.me/thumbnail/20210730/63a641ce3513b.png">
+		</div>
+		<div>
+			<img class="section-bg-img" src="https://cdn.imweb.me/thumbnail/20210802/c7a9ed105871a.png">
+		</div>
+		<div class="youtube">
+			<iframe width="640" height="360"
+				src="https://www.youtube.com/embed/gWXdzlIQ-YE?autoplay=1&mute=1" title="YouTube video player"
+				frameborder="0"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+				allowfullscreen>
+			</iframe>
+		</div>
+	</div>
+
+	<th:block th:replace="frame/footer"></th:block>
+
+	<script>
+		$(".top").hide();
+
+		$(function() {
+			$(window).scroll(function() {
+				if ($(this).scrollTop() > 150) {
+					$('.top').show();
+				} else {
+					$('.top').hide();
+				}
+			});
+		});
+	</script>
+</body>
+</html>

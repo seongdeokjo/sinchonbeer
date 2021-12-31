@@ -1,0 +1,114 @@
+/* JOIN 타이틀에 적용시킬 폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@800&family=Roboto:wght@900&display=swap');
+
+/* 전체 영역 */
+*{
+    margin:0;
+    padding:0;
+}
+*::selection{
+    background-color: #1ecad3;
+    color:white;
+}
+a{
+    text-decoration: none;
+    color:black;
+    display:block; 
+
+}
+div{
+    margin-bottom:10px;
+}
+.space{
+    height:10px;
+}
+/* 동의와 약관 전체 영역 */
+#main_wrap{
+    width:400px;
+    height:1000px;
+    margin:50px auto;
+}
+.font_set{
+	font-family: 'Kanit', sans-serif;
+    font-size: 48px;
+    margin-top:40px;
+    text-align:center;
+    color:#1ecad3;
+}
+/* 제목 아래 작은 문구 부분 */
+.small_text{
+    font-size:14px;
+    text-align: center;
+    height:40px;
+    margin:5px 0 20px 0;
+}
+
+/* 체크박스의 라벨 */
+label{
+    display:inline;
+    font-size:14px;
+    padding-left:5px;
+}
+/* 약관과 동의 체크박스를 포함하는 div */
+.text_box{
+    width:400px;
+    height:200px;
+    border:1px solid #ccc;
+    overflow:auto;
+    margin-bottom:20px;
+    padding:10px;
+}
+/* 약관 내용이 담긴 텍스트 박스 */
+.inner_text{
+    margin:10px;
+    font-size:14px;
+}
+/* 수신 동의에 관한 작은 문구 */
+.small_text2{
+    font-size:12.5px;
+    margin:5px 0;
+    color:rgb(155, 155, 155);
+}
+/* '필수' 글자의 스타일 */
+.text_red{
+    display: inline-block;
+    color: #F84A71;
+    font-style: normal;
+    font-weight:bold;
+}
+/* '선택' 글자의 스타일 */
+.text_grey{
+    display: inline-block;
+    color:rgb(134, 134, 134);
+    font-style: normal;
+    font-weight:bold;
+
+}
+/* 취소, 가입하기 버튼*/
+.agree_buttons{
+    width:220px;
+    margin:20px auto;
+}
+.agree_btn{
+    height:40px;
+    line-height: 40px;
+    text-align: center;
+    display:inline-block;
+    font-size:14px;
+}
+/* 취소 버튼 */
+#cancel{
+    width:70px;
+    border:1px solid #ddd;
+    color:black;
+}
+/* 가입하기 버튼 */
+#accept_agree {
+    width:130px;
+    color:white;
+    background-color:  #1ecad3;
+    
+}
+.agree_buttons>a:hover{
+	text-decoration:none;
+}

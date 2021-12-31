@@ -1,0 +1,45 @@
+@charset "UTF-8";
+/* regConfirmArea */
+#regConfirmArea {
+	margin: 100px auto 0 auto;
+	height: 600px;
+	width: 400px;
+	padding: 20px;
+	background-color: white;
+}
+
+img {
+	height: auto;
+	width: 100%;
+	display: inline-block;
+	background-size: 100%;
+}
+
+#message {
+	width: 300px;
+	margin: 0 auto 30px auto;
+	text-align: center;
+}
+
+#message h2 {
+	font-weight: lighter;
+}
+
+#message p {
+	font-size: 13.5px;
+}
+
+#regConfirmArea button {
+	width: 200px;
+	height: 50px;
+	background-color: #1ecad3;
+	color: white;
+	cursor: pointer;
+	border: none;
+	display: block;
+	margin: 0 auto;
+}
+
+#message+a {
+	text-decoration: none;
+}

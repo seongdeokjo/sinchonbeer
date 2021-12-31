@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>투어 결제 완료 화면</title>
+
+<th:block th:include="frame/metaheader"></th:block>
+
+<style>
+    body {
+        background-color: #f3f3f3;
+    }
+
+    #header, #gnb, #footer {
+        background-color: white;
+    }
+
+    .text-gray {
+        color: #757575 !important;
+    }
+
+    .text-sinchon {
+        color: #05cdd5 !important;
+    }
+
+    .text-28 {
+        font-size: 28px !important;
+    }
+
+    .text-26 {
+        font-size: 26px !important;
+    }
+
+    .text-24 {
+        font-size: 24px !important;
+    }
+
+    .text-22 {
+        font-size: 22px !important;
+    }
+
+    .text-18 {
+        font-size: 18px !important;
+    }
+
+    .text-16 {
+        font-size: 16px !important;
+    }
+
+    .text-15 {
+        font-size: 15px !important;
+    }
+
+    .text-14 {
+        font-size: 14px !important;
+    }
+
+    .text-13 {
+        font-size: 13px !important;
+    }
+
+    .btn-sinchon{
+        color: white !important;
+        background-color: #05cdd5;
+        border-color: #05cdd5;
+    }
+
+    .btn-sinchon:hover {
+        color: #05cdd5 !important;
+        background-color: white;
+        border-color: #05cdd5;
+    }
+
+    .btn-pay {
+        color: white !important;
+        background-color: #05cdd5;
+        border-color: #05cdd5;
+        border-radius: 0 !important;
+    }
+
+    .btn-pay:hover {
+        color: white !important;
+        background-color: #189fa6;
+        border-color: #189fa6;
+    }
+
+    .mb-3px {
+        margin-bottom: 2px;
+    }
+
+    @media (max-width: 576px) {
+        .container {
+            width: 80%;
+        }
+    }
+
+    @media (min-width: 576px) {
+        .container {
+            width: 550px;
+        }
+    }
+</style>
+</head>
+<body>
+	<th:block th:include="frame/header"></th:block>
+	<th:block th:include="frame/nav"></th:block>
+
+	<!-- Content 영역 -->
+    <div class="container my-5 mw-25">
+
+        <h1 class="text-22 font-weight-bold text-center">결제가 완료됐습니다</h1>
+        <h1 class="text-22 font-weight-bold text-center">주문배송은 마이페이지에서 조회 가능합니다</h1>
+
+        <div class="my-5">
+            <div class="row mb-3px bg-white">
+                <div class="col-sm-4 text-gray p-4">
+					배송지
+                </div>
+
+                <div class="col-sm-8 p-4">
+                    <div id="userName" th:text="${memberInfo.name}"></div>
+                    <div id="userPhone" th:text="${memberInfo.phone}"></div>
+                    <div id="userAddress" th:text="${addressInfo.address1}"></div>
+                    <div id="userDetailAddress" th:text="${addressInfo.address2}"></div>
+                    <div id="userZipcode" th:text="${addressInfo.postcode}"></div>
+                </div>
+            </div>
+
+            <div class="row mb-3px bg-white">
+                <div class="col-sm-4 text-gray p-4">
+					배송 방법
+                </div>
+
+                <div class="col-sm-8 p-4">
+                    <div id="delvType">
+						택배
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3px bg-white">
+                <div class="col-sm-4 text-gray p-4">
+					주문번호
+                </div>
+
+                <div class="col-sm-8 p-4">
+                    <div id="orderNumber" th:text="${orderInfo.idx}"></div>
+                </div>
+            </div>
+
+            <div class="row mb-3px bg-white">
+                <div class="col-sm-4 text-gray p-4">
+					결제정보
+                </div>
+
+                <div class="col-sm-8 p-4">
+                    <div id="payType">
+						카카오페이
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-0 bg-white">
+                <div class="col-sm-4 text-gray p-4">
+					결제금액
+                </div>
+
+                <div class="col-sm-8 text-sinchon p-4">
+                    <div id="amountOfPayment" th:text="${payInfo.price}" class="font-weight-bold"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 p-0">
+                    <a th:href="@{/main}" class="btn btn-secondary btn-block btn-lg text-18 rounded-0">홈화면</a>
+                </div>
+                <div class="col-sm-6 p-0">
+                    <a th:href="@{/mypage/orderList}" class="btn btn-pay btn-block btn-lg text-white text-18 rounded-0">마이페이지</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+	<!-- content 끝  -->
+	<th:block th:include="frame/footer"></th:block>
+</body>
+</html>

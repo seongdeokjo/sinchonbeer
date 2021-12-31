@@ -1,0 +1,63 @@
+body {
+	font-size: 20px;
+	color: #55585b;
+	/* padding: 20px; */
+	background-color: #fff;
+	min-height: 100vh;
+	font: normal 16px sans-serif;
+}
+
+.table .table-striped {
+	text-align: center;
+	border: 1px solid #dddddd;
+}
+
+.listTag {
+	background-color: #1ecad3;
+	width: 15%;
+	color: #FFF;
+}
+
+.listContents {
+	text-align: left;
+	background-color: #FFF;
+	border-left: 1px solid #dee2e6;
+	border-right: 1px solid #1ecad3;
+	border-top: 1px solid #1ecad3;
+	border-bottom: 1px solid #1ecad3;
+}
+
+.contents_writing {
+	min-height: 200px;
+	text-align: Left;
+	border: 1px solid #1ecad3;
+}
+
+.btn_div {
+	width: 100%;
+}
+
+.btn{
+	color: white !important;
+	background-color: #1ecad3 !important;
+	border-color: white !important;
+}
+
+.btn:hover {
+	color: #1ecad3 !important;
+	background-color: white !important;
+	border-color: #1ecad3 !important;
+}
+
+.btn_list {
+	float: left;
+}
+
+.btn_del {
+	float: right !important;
+}
+
+.btn_modf {
+	float: right !important;
+	margin-right: 4px !important;
+}

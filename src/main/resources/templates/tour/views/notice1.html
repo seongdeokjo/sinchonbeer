@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>투어 명절 휴무 안내</title>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<th:block th:include="frame/metaheader"></th:block>
+<link rel="stylesheet" th:href="@{/css/tour/tourNotice-desc.css}">
+
+</head>
+<body>
+	<th:block th:include="frame/header"></th:block>
+	<th:block th:include="frame/nav"></th:block>
+	<!-- submenu 영역 -->
+	<div class="submenu_wrap">
+		<ul>
+			<li><a th:href="@{/tour/info}">투어 안내</a></li>
+			<li><a th:href="@{/tour/pick-date}">예약</a></li>
+			<li><a th:href="@{/tour/notice}" id="currentPage">투어 공지</a></li>
+		</ul>
+	</div>
+	<div class="detail_menu">
+		<ul>
+			<li>
+				<a th:href="@{/tour/notice}" id="selectPage" class="active">양조장소식</a>
+			</li>
+		</ul>
+	</div>
+	<div class="inline-row"></div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<p class="text_br">BREWERY NEWS</p>
+				<p class="text-center pt">신촌 맥주 양조장 소식을 알려드립니다.</p>
+			</div>
+		</div>
+		<div class="row mt-5 ml-5 text-left">
+			<div class="col col-12">
+				<h3>공지 명절 휴무 안내</h3>
+				<div>
+					<a class="inline" href="/tour/notice">brewery news</a> &nbsp;<span>2021-08-06</span>
+					<hr>
+				</div>
+				<div class="mt-5 mb-5">
+					<img class="c-img" src="https://cdn.imweb.me/upload/S20200702f03eaee38b16e/f95f5ccd1ae7c.png">
+				</div>
+				<div>
+					<p>
+						신촌맥주 양조장은<br> <span
+							style="background-color: rgb(29, 202, 211); color: white;">설날
+							전날과 당일, 추석 전날과 당일</span>에 쉬어갑니다.<br> 양조장 예약 및 방문 시, 참고 부탁드립니다.<br>
+						<br> 모두 즐겁고 행복한 명절 되시기를 바랍니다.
+					</p>
+				</div>
+				<div class="inline-row1"></div>
+				<div class="com-section mt-5">
+					<div class="list">
+						<a href="/tour/notice/2" class="b-b"> 
+							<span class="mr-3">
+								<i class="fa fa-angle-down"></i>
+							</span> 미취학 아동 입장 안내
+						</a>
+					</div>
+
+					<a class="mb-5" href="/tour/notice"><button class="bt">목록</button></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- footer  -->
+	<th:block th:include="frame/footer"></th:block>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>신촌 맥주 : 로그인</title>
+<!-- metaheader 영역 -->
+
+<th:block th:replace="frame/metaheader"></th:block>
+<link rel="stylesheet" th:href="@{/css/member/loginForm.css}">
+
+<script>
+	$(document).ready(function() {
+
+		$('#loginForm').submit(function(event) {
+			if ($('#memail').val() == '') {
+				$('#loginForm div.msg').removeClass('display_none');
+				$('#loginForm div.msg').html('이메일을 입력해 주세요');
+				$('.form_box').css('border-color', 'red');
+			}else if ($('#mpw').val() == '') {
+				$('#loginForm div.msg').removeClass('display_none');
+				$('#loginForm div.msg').html('비밀번호를 입력해 주세요');
+				$('.form_box').css('border-color', 'red');
+			}
+			console.log($('#memail').val() + ':' + $('#mpw').val());
+			event.preventDefault();
+
+			ajax_login();
+
+		});
+	
+
+		//이메일/pw의 input을 누르면 메시지 효과 사라지게 하기.(메시지, border 빨간색)
+		$('#memail, #mpw').focus(function() {
+			$('#loginForm div.msg').addClass('display_none');
+			$('.form_box').css('border-color', '#ddd');
+		});
+	});
+	
+	
+	function ajax_login() {
+
+		var allData = {
+			"memail" : $('#memail').val(),
+			"mpw" : $('#mpw').val(),
+			"redirectUri" : $('#referer').val(),
+			"reEmail" : ($("input:checkbox[id='emailChk']").is(":checked")) ? 'on': ''
+			};
+
+		$.ajax({
+			url : '/login',
+			type : 'post',
+			contentType : "application/json",
+			data : JSON.stringify(allData),
+			success : function(data) {
+				console.log(data);
+				if (data.result == true) {
+					//로그인 성공했지만 이전페이지가 없거나 회원가입 성공한 페이지가 이전 페이지라면  메인페이지로 이동하기.
+					if (allData.redirectUri == ""
+							|| allData.redirectUri == null
+							|| allData.redirectUri == undefined) {
+						console.log('redirect uri가 없어');
+						location.href = '/';
+					} else {
+						location.href = data.refererUri;
+					}
+				} else if($('#memail').val() != ''&& $('#mpw').val() != ''){
+					$('#loginForm div.msg').removeClass('display_none');
+					$('#loginForm div.msg').html( '아이디 또는 비밀번호가 잘못 입력 되었습니다.');
+					$('.form_box').css('border-color', 'red');
+					allData.redirectUri = data.refererUri;
+					return false;
+				}
+
+			},
+			error : function(request, status, error) {
+				console.log("code:" + request.status + "\n" + "error:"
+						+ error);
+			},
+		});
+	}
+</script>
+
+</head>
+<body>
+
+	<!-- header 영역 -->
+	<th:block th:replace="frame/header"></th:block>
+
+	<!-- nav 영역 -->
+	<th:block th:replace="frame/nav"></th:block>
+
+	<!-- content 영역 -->
+	<!-- login 메인 전체 영역 -->
+	<div id="loginMain_wrap">
+		<div class="loginTitle">LOGIN</div>
+		<div id="loginSection">
+			<form id="loginForm">
+				<div class="form_box margin_top">
+					<input type="email" placeholder="이메일" id="memail"
+						class="loginLongBox" th:value="${reEmail}"> <input
+						type="password" placeholder="비밀번호" id="mpw" class="loginLongBox">
+				</div>
+				<div class="msg_space">
+					<div class="msg display_none"></div>
+				</div>
+				<div class="cookie_chk margin_top">
+					<input type="checkbox" id="emailChk" value="on" th:checked="${reEmail != null}">
+					<label for="emailChk">이메일
+						기억하기</label> <input type="hidden" th:value="${redirectUri}" id="referer">
+				</div>
+
+				<div class="margin_top">
+					<input type="submit" value="로그인" class="loginLongBox">
+				</div>
+			</form>
+			<!-- login 이 외의 링크 -->
+			<div id="middle" class="margin_top">
+				<a th:href="@{/join/type}">회원가입</a> <a th:href="@{/inquiry}"
+					class="float_right">이메일/비밀번호찾기</a>
+			</div>
+		</div>
+	</div>
+	
+	<!-- footer 영역 -->
+	<th:block th:replace="frame/footer"></th:block>
+
+</body>
+</html>

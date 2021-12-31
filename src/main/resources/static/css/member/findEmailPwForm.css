@@ -1,0 +1,171 @@
+/* 타이틀 폰트 적용 */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500&display=swap');
+
+/* 전체를 감싼 영역 */
+.wrap_main {
+    width: 490px;
+    margin: 60px auto 0 auto;
+}
+/* '아이디/비밀번호 찾기' 제목 문구 */
+.wrap_main h1{
+	font-family: 'IBM Plex Sans KR', sans-serif;
+    font-size:28px;
+    text-align: center;
+    margin-bottom:20px;
+    
+}
+/* 제목 아래의 작은 글씨. */
+.wrap_main p{
+    margin:30px auto;
+    color:rgb(129, 129, 129);
+    font-size: 14.5px;
+    text-align: center;
+}
+
+/* 탭 선택할 때 a태그 효과 */
+li.nav-item>a:hover{
+    color:gray;
+}
+/* 탭 안에 있는 내용 */
+.inner-tab{
+    height:200px;
+}
+/* 탭 안에 있는 input */
+.inner-tab input{
+    width:350px;
+    height:44px;
+    border:none;
+    border-bottom:1px solid darkgray;
+    display:block;
+    margin:0 auto 10px auto ;
+}
+/* 탭 안에 있는 input을 눌렀을 때 테두리 효과 */
+.inner-tab input:focus{
+    outline:none;
+}
+
+/* input 박스를 클릭해야만 비로소 보이는 태그 */
+.label_space{
+    height:20px;
+    margin:40px 0 8px  ; 
+    
+}
+.inner-tab label{
+    font-size:14px;
+    margin-left:70px;
+    color:white; 
+}
+
+/* submit input박스들 모두에게 적용 */
+#id input[type=submit], #pw input[type=submit], .chkok, .result_box input[type=button], .result_box input[type=submit]{
+    width:200px;
+    height:44px;
+    border: none;
+    background-color: #1ecad3;
+    color:white;
+    display:block;
+    cursor: pointer;
+    margin: 40px auto;
+}
+/* 사용자가 입력하는 input 의 placeholder 글자 효과 */
+#myTabContent input[type=text]::placeholder, #myTabContent input[type=email]::placeholder{
+	color:#bbb;
+	font-size:14.5px;
+}
+/* 주요 내용을 포함하는 박스 */
+.result_box{
+    width:370px;
+    margin: 0 auto;
+    border:1px solid rgb(212, 212, 212);
+    border-radius: 6.5%;
+    padding:10px 25px;
+
+}
+/* 박스안의 a태그에 마우스를 갖다 댔을 때 효과 */
+.result_box a:hover{
+    text-decoration: none;  
+}
+
+/* 전송 중일 때 버튼 디자인 */
+/* .sending{
+	background-color:white !important;
+	border:1px solid #1ecad3 !important;
+	cursor:progress !important;
+    color:#1ecad3 !important;
+    font-weight:bold;
+} */
+
+/* fintPwAuth.html해당 */
+.border-1{
+    border:1px solid rgb(212, 212, 212);
+    font-size: 14.5px;
+    padding:10px;
+    font-size:14px;
+}
+.border-1>label{
+    margin:0 !important;
+}
+/* 인증번호 입력하는 input의 border 효과 없애기 */
+.border_none{
+    border:none;
+}
+/* 인증번호 입력하는 input의 테두리 효과 없애기 */
+.border-1 input:focus{
+    outline:none;
+}
+
+/* findPwSetting 해당 */
+.width_400px{
+	width:300px;
+	height:23px;
+	marthin:0 auto;
+}
+.width_400px::placeholder{
+	color:#ccc;
+	font-size:13.5px;
+}
+
+
+/* submit 버튼의 효과 */
+.chkok:focus{
+	outline:none;
+}
+
+.mx-6 {
+    margin: 0 63px;
+}
+
+.display_none {
+    display: none;
+}
+.display_block{
+    display:block;
+}
+
+.font-mint {
+    color: #1ecad3 !important;
+}
+
+.nav-link {
+    color: gray
+}
+
+.nav-link.active {
+    color: #1ecad3 !important;
+    font-weight: bold;
+}
+
+/* 비번/이메일 찾기에서 사용자가 입력한 이메일 주소 */
+#inquiryPw, #inquiryEmail{
+	font-weight:bold;
+	font-size:17px;
+}
+
+/* 비밀번호 재설정에서 입력 박스 효과 */
+.newPwMsg{
+	color:red;
+	font-size:13px;
+	margin:10px;
+	height:20px;
+}
+
