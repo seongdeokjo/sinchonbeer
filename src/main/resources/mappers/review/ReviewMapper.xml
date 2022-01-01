@@ -3,16 +3,16 @@
 <mapper namespace="ReviewMapper">
 
 <resultMap type="com.bitcamp.sc.review.domain.ReviewVO" id="ReviewDomain">
-	<result property="idx" column="ridx"/>
-	<result property="title" column="rtitle"/>
-	<result property="name" column="rname"/>
-	<result property="contents" column="rcontents"/>
-	<result property="rate" column="rrate"/>
-	<result property="date" column="rdate"/>
+	<result property="idx" column="id"/>
+	<result property="title" column="title"/>
+	<result property="name" column="name"/>
+	<result property="contents" column="contents"/>
+	<result property="rate" column="rate"/>
+	<result property="date" column="date"/>
 	<result property="likes" column="rlikes"/>
-	<result property="viewcnt" column="rviewcnt"/>
-	<result property="gphoto" column="gphoto"/>
-	<result property="oidx" column="oidx"/>
+	<result property="viewcnt" column="viewcnt"/>
+	<result property="gphoto" column="photo"/>
+	<result property="pidx" column="pidx"/>
 </resultMap>
 
 
@@ -24,10 +24,10 @@
 	>
         INSERT INTO review 
         (
-	         rtitle
-	        , rcontents
-	        , rname
-	        , oidx
+	         title
+	        , contents
+	        , name
+	        , pidx
         ) 
         VALUES 
         (
@@ -41,18 +41,18 @@
 	<!--02. 게시글 상세보기 조회 -->
 	<select id="readReview"  resultMap="ReviewDomain" parameterType="Integer" >
 		SELECT
-			ridx
-        	, rtitle
-        	, rname
-        	, rcontents
-        	, rrate
-        	, date_format(rdate,'%Y-%m-%d') as rdate
+			id
+        	, title
+        	, name
+        	, contents
+        	, rate
+        	, date_format(date,'%Y-%m-%d') as rdate
             , rlikes
-            , oidx
+            , pidx
 		FROM
 			review
 		WHERE
-			ridx = #{idx}
+			id = #{idx}
 	</select>
 	
 	<!-- 03. 게시글 수정처리 -->
@@ -60,10 +60,10 @@
 		UPDATE 
 			review 
 		SET 
-			rtitle = #{title}
-			, rcontents = #{contents} 
+			title = #{title}
+			, contents = #{contents}
 		WHERE 
-			ridx = #{idx}
+			id = #{idx}
 	</update>
     
 	<!-- 04. 게시글 삭제처리 -->
@@ -72,26 +72,25 @@
 		FROM 
 			review 
 		WHERE 
-			ridx = #{idx}
+			id = #{idx}
 	</delete>
 	
 
     <!-- 05. 게시글 전체 목록 조회 -->
     <select id="listAllReview"  resultMap="ReviewDomain" >
         SELECT 
-			ridx
-			, rtitle
-			, rname
-			, rcontents
-			, rrate
-			, DATE_FORMAT(rdate,'%Y-%m-%d') AS rdate
+			id
+			, title
+			, name
+			, contents
+			, rate
+			, DATE_FORMAT(date,'%Y-%m-%d') AS rdate
 			, rlikes
-			, A.oidx
-			, IFNULL((SELECT gphoto FROM goods WHERE gidx = (SELECT gidx FROM orders WHERE A.oidx = oidx)), '') AS gphoto
+			, A.pidx
 		FROM
 			review A
 		ORDER BY
-			ridx DESC, rdate DESC
+			id DESC, rdate DESC
     </select>
     
     

@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 주문 내역 조회 -->
 	<select id="getOrderList" resultType="com.bitcamp.sc.mypage.domain.OrderList" resultMap="OrderListDomain">
 		SELECT p.id, p.price, date_format(p.date,'%Y-%m-%d') as pdate, p.status, o.id, g.title, g.name, g.photo, o.status, o.amount
-		FROM payment p, orders o, goods g 
+		FROM payment p, orders o, goods g
 		WHERE p.oidx=o.id AND o.gidx=g.id AND o.midx=#{idx} ORDER BY p.date desc;
 	</select>
 	
@@ -51,19 +51,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 회원 정보 조회 -->
 	<select id="getMemberInfo" resultType="com.bitcamp.sc.mypage.domain.UpdateMember">
-		SELECT m.midx,m.memail, m.mname, m.mphone, a.postcode, a.address1, a.address2 FROM member m, address a
-		WHERE m.midx=a.midx AND m.midx=#{idx}; 
+		SELECT m.id,m.email, m.name, m.phone, a.postcode, a.address1, a.address2 FROM member m, address a
+		WHERE m.id=a.midx AND m.id=#{idx};
 	</select>
 
 	<!-- 회원 정보 수정 -->
 	<update id="updateMember" parameterType="com.bitcamp.sc.mypage.domain.UpdateMember">
 		UPDATE member m, address a
-        SET m.mname=#{mname}, m.mpw=#{mnewPw}, m.mphone=#{mphone}, a.postcode=#{postcode}, a.address1=#{address1}, a.address2=#{address2}
-        WHERE m.midx=a.midx AND m.midx=#{midx};
+        SET m.name=#{mname}, m.pw=#{mnewPw}, m.phone=#{mphone}, a.postcode=#{postcode}, a.address1=#{address1}, a.address2=#{address2}
+        WHERE m.id=a.midx AND m.id=#{midx};
 	</update>
 
 	<!-- 회원 탈퇴 -->
 	<delete id="deleteMember">
-		DELETE FROM member WHERE midx=#{idx};
+		DELETE FROM member WHERE id=#{idx};
 	</delete>
 </mapper>

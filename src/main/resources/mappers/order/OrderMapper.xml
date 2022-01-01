@@ -4,24 +4,24 @@
 <mapper namespace="OrderMapper">
 
 	<resultMap type="com.bitcamp.sc.order.domain.OrderInfo" id="OrderDomain">
-		<result property="idx" column="oidx"/>
-		<result property="date" column="odate"/>
-		<result property="category" column="ocategory"/>
+		<result property="idx" column="id"/>
+		<result property="date" column="date"/>
+		<result property="category" column="category"/>
 		<result property="tourIdx" column="tidx"/>
 		<result property="memberIdx" column="midx"/>
 		<result property="addressIdx" column="aidx"/>
-		<result property="price" column="oprice"/>
-		<result property="tourPeople" column="tpeople"/>
+		<result property="price" column="price"/>
+		<result property="tourPeople" column="people"/>
 		<result property="goodsIdx" column="gidx"/>
 		<result property="amount" column="amount"/>
 	</resultMap>
 
 	<insert id="save" parameterType="com.bitcamp.sc.order.domain.OrderInfo" useGeneratedKeys="true" keyProperty="idx">
-		INSERT INTO orders(ocategory, oprice, tidx, tpeople, midx, aidx, gidx, amount) VALUES(#{category}, #{price}, #{tourIdx}, #{tourPeople}, #{memberIdx}, #{addressIdx}, #{goodsIdx}, #{amount})
+		INSERT INTO orders(category, price, tidx, people, midx, aidx, gidx, amount) VALUES(#{category}, #{price}, #{tourIdx}, #{tourPeople}, #{memberIdx}, #{addressIdx}, #{goodsIdx}, #{amount})
 	</insert>
 	
 	<select id="findByIdx" resultType="com.bitcamp.sc.order.domain.OrderInfo" resultMap="OrderDomain">
-		SELECT * FROM orders WHERE oidx=#{idx}
+		SELECT * FROM orders WHERE id=#{idx}
 	</select>
 	
 	<select id="findByMemberIdx" resultType="com.bitcamp.sc.order.domain.OrderInfo" resultMap="OrderDomain">
@@ -29,15 +29,15 @@
 	</select>
 
 	<select id="findByCategoryAndMemberIdx" resultType="com.bitcamp.sc.order.domain.OrderInfo" resultMap="OrderDomain">
-		SELECT * FROM orders WHERE ocategory=#{category} and midx=#{memberIdx} and ostatus='confirmed'order by tidx
+		SELECT * FROM orders WHERE category=#{category} and midx=#{memberIdx} and status='confirmed'order by tidx
 	</select>
 	
 	<delete id="deleteByIdx">
-		DELETE FROM orders WHERE oidx=#{idx}
+		DELETE FROM orders WHERE id=#{idx}
 	</delete>
 	
 	<update id="updateStatus">
-		UPDATE orders SET ostatus=#{status} WHERE oidx=#{idx}
+		UPDATE orders SET status=#{status} WHERE id=#{idx}
 	</update>
 
 </mapper>

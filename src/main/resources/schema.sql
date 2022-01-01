@@ -109,6 +109,8 @@ create table review
     foreign key (pidx) references payment (id)
 );
 
+alter table review add name varchar(20);
+
 -- 댓글 테이블(comment)
 create table comment
 (
@@ -121,4 +123,5 @@ create table comment
     foreign key (midx) references member (id)
 );
 
+commit;
 

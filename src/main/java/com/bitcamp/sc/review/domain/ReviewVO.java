@@ -22,7 +22,7 @@ public class ReviewVO {
 	 * private String category; // 리뷰 카테고리 (상품구매 or 투어)
 	 */
     private Integer likes;		// 게시글 좋아요
-    private Integer oidx;		// 주문번호
+    private Integer pidx;		// 결제번호
     private String gphoto;		// 썸네일
 	/*
 	 * private Integer viewcnt; // 게시글 조회수

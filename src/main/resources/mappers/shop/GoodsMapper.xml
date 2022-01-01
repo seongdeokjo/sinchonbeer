@@ -3,22 +3,22 @@
 <mapper namespace="GoodsMapper">
 	
 	<resultMap type="com.bitcamp.sc.shop.domain.GoodsVO" id="GoodsDomain">
-		<result property="idx" column="gidx"/>
-		<result property="gname" column="gname"/>
-		<result property="price" column="gprice"/>
-		<result property="photo" column="gphoto"/>
-		<result property="text" column="gtext"/>
+		<result property="idx" column="id"/>
+		<result property="gname" column="name"/>
+		<result property="price" column="price"/>
+		<result property="photo" column="photo"/>
+		<result property="text" column="text"/>
 	
 	</resultMap>
 	
 	<!-- 01.상품추가 -->
 	<insert id="insertGoods" parameterType="com.bitcamp.sc.shop.domain.GoodsVO" useGeneratedKeys="true" keyProperty="idx">
-		INSERT INTO goods(gname, gprice, gphoto, gtext) VALUES(#{gname}, #{price}, #{photo}, #{text})	
+		INSERT INTO goods(name, price, photo, text) VALUES(#{gname}, #{price}, #{photo}, #{text})
 	</insert>
 
 	<!-- 상품 삭제 -->
 	<delete id="deleteGoods" parameterType="com.bitcamp.sc.shop.domain.GoodsVO">
-		DELETE FROM goods WHERE gidx= #{idx}
+		DELETE FROM goods WHERE id= #{idx}
 	</delete>
 	
 	<!-- 상품 찾기 -->

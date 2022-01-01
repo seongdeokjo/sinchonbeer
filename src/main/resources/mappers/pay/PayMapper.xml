@@ -4,20 +4,20 @@
 <mapper namespace="PayMapper">
 
 	<resultMap type="com.bitcamp.sc.pay.domain.PayInfo" id="PayDomain">
-		<result property="idx" column="pidx"/>
-		<result property="price" column="pprice"/>
-		<result property="date" column="pdate"/>
-		<result property="way" column="pway"/>
-		<result property="status" column="pstatus"/>
+		<result property="idx" column="id"/>
+		<result property="price" column="price"/>
+		<result property="date" column="date"/>
+		<result property="way" column="way"/>
+		<result property="status" column="status"/>
 		<result property="orderIdx" column="oidx"/>
 	</resultMap>
 
 	<insert id="save" parameterType="com.bitcamp.sc.pay.domain.PayInfo" useGeneratedKeys="true" keyProperty="idx">
-		INSERT INTO payment(pprice, pdate, pway, pstatus, oidx) VALUES(#{price}, #{date}, #{way}, #{status}, #{orderIdx})
+		INSERT INTO payment(price, date, way, status, oidx) VALUES(#{price}, #{date}, #{way}, #{status}, #{orderIdx})
 	</insert>
 	
 	<select id="findByIdx" resultType="com.bitcamp.sc.pay.domain.PayInfo" resultMap="PayDomain">
-		SELECT * FROM payment WHERE pidx=#{idx}
+		SELECT * FROM payment WHERE id=#{idx}
 	</select>
 	
 	<select id="findByOrderIdx" resultType="com.bitcamp.sc.pay.domain.PayInfo" resultMap="PayDomain">
@@ -25,13 +25,13 @@
 	</select>
 	
 	<select id="findByMemberIdx" resultType="com.bitcamp.sc.pay.domain.PayInfo" resultMap="PayDomain">
-		SELECT pidx, pprice, pdate, pway, pstatus, p.oidx FROM payment p, orders o WHERE p.oidx=o.oidx AND o.midx=#{memberIdx}
+		SELECT id, price,date, way, status, p.oidx FROM payment p, orders o WHERE p.oidx=o.id AND o.midx=#{memberIdx}
 	</select>
 
 	<select id="findByCategoryAndMemberIdx" resultType="com.bitcamp.sc.pay.domain.PayInfo" resultMap="PayDomain">
-		SELECT pidx, pprice, pdate, pway, pstatus, p.oidx
+		SELECT id, price, date, way, status, p.oidx
 		FROM payment p, orders o
-		WHERE p.oidx=o.oidx AND o.ocategory=#{category} AND o.midx=#{memberIdx}
+		WHERE p.oidx=o.id AND o.category=#{category} AND o.midx=#{memberIdx}
 	</select>
 
 </mapper>
