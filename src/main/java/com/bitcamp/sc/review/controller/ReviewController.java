@@ -75,7 +75,7 @@ public class ReviewController {
 		vo.setTitle(request.getParameter("title"));
 		vo.setName(request.getParameter("author"));
 		vo.setContents(request.getParameter("content"));
-		vo.setOidx(Integer.parseInt(request.getParameter("order_idx")));
+		vo.setPidx(Integer.parseInt(request.getParameter("pay_idx")));
 		
 		try {
 			check = reviewService.insertReview(vo);

@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-@Configuration
+//@Configuration
 @EnableAsync // 비동기 처리 사용가는 어노테이션
 public class AsyncConfiguration implements AsyncConfigurer {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -31,11 +31,7 @@ public class AsyncConfiguration implements AsyncConfigurer {
 	@Override
 	public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
 		return (ex, method, params) ->
-		logger.error("Exception hnadler for async method '"+ method.toGenericString()+ "'throw unexpected excpetion itself",ex);
+		logger.error("Exception handler for async method '"+ method.toGenericString()+ "'throw unexpected excpetion itself",ex);
 	}
-	
-	
-	
-	
-	
+
 }

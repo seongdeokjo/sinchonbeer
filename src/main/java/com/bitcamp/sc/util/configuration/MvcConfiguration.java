@@ -8,13 +8,9 @@ import com.bitcamp.sc.util.interceptor.LoggerInterceptor;
 
 @Configuration
 public class MvcConfiguration implements WebMvcConfigurer {
-	
-	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 	LoggerInterceptor loggerInterceptor = new LoggerInterceptor();
-		registry.addInterceptor(loggerInterceptor).addPathPatterns(loggerInterceptor.loginEssential).excludePathPatterns(loggerInterceptor.loginInessential);
-		
+		registry.addInterceptor(loggerInterceptor).addPathPatterns(loggerInterceptor.loginEssential);
 	}
-	
 }

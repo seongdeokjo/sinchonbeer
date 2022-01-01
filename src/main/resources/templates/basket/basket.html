@@ -8,28 +8,17 @@
     <th:block th:include="frame/metaheader"></th:block>
     <link rel="stylesheet" th:href="@{/css/cart/cart.css}">
     <style>
-    #amountVal{
-    	width:50px;
-    }
     .modal-dialog{
     	   vertical-align: middle;
     }
     .high{
     	height: 20px;
     }
-    #amountModal {
-		 top: 30%;
-		margin-top: -30px;	
-	 }
 	.size{
 		width:50px;
 		text-align: center;
-	}  
- 
+	}
     </style>
-
- 
-
  	<script th:inline="javascript">
 
  		// 전체 선택
@@ -359,9 +348,7 @@
 										<input type="hidden" th:value="${list.gprice}" id="gprice" name="gprice">
 										<input type="hidden" th:value="${list.gname}" id="gname" name= "gname">
 										<input type="hidden" th:value="${list.bcount}" id="count" name="count">
-										 	
-										
-	                                    
+
 	                                </label>
 	                            </div>
 	                        </td>

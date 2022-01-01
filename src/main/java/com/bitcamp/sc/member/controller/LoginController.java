@@ -6,39 +6,38 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.bitcamp.sc.member.domain.LoginInfo;
 import com.bitcamp.sc.member.service.LoginService;
 
 
+@Slf4j
 @Controller
 @RequestMapping("/login")
+@RequiredArgsConstructor
 public class LoginController {
 
-	@Autowired
-	LoginService loginService;
+	private final LoginService loginService;
 
 	//로그인 처리 get방식
-	@RequestMapping( method = RequestMethod.GET)
+	@GetMapping
 	public String loginForm(
 			//로그인 성공시 되돌아 갈 이전 페이지
 			@RequestHeader(value = "referer", required = false) String redirectUri,
-			@CookieValue(value="reEmail", required = false) String reEmail,
+			@CookieValue(value = "reEmail", required = false) String reEmail,
 			HttpSession session,
 			Model model
-			) {
+	) {
+
 		String view = "member/loginForm";
-		LoginInfo login = (LoginInfo)session.getAttribute("loginInfo");
-		if(login != null) {
+		LoginInfo login = (LoginInfo) session.getAttribute("loginInfo");
+		if (login != null) {
 			view = "main";
 		}
 		model.addAttribute("redirectUri", redirectUri);
@@ -47,7 +46,7 @@ public class LoginController {
 	}
 	
 	//로그인 처리 POST 방식 - ajax로 처리 (redirectUri와  로그인 결과를 data로 하여 전송하기)
-	@RequestMapping(method = RequestMethod.POST)
+	@PostMapping
 	@ResponseBody
 	public Map<String,Object> login(
 			@RequestBody Map<String,Object> params,
@@ -69,9 +68,4 @@ public class LoginController {
 		
 		return map;
 	}
-	
-	
-	
-	
-	
 }
