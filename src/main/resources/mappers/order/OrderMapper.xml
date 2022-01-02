@@ -3,7 +3,7 @@
 
 <mapper namespace="OrderMapper">
 
-	<resultMap type="com.bitcamp.sc.order.domain.OrderInfo" id="OrderDomain">
+	<resultMap type="com.bitcamp.sc.domain.order.domain.OrderInfo" id="OrderDomain">
 		<result property="idx" column="id"/>
 		<result property="date" column="date"/>
 		<result property="category" column="category"/>
@@ -16,19 +16,19 @@
 		<result property="amount" column="amount"/>
 	</resultMap>
 
-	<insert id="save" parameterType="com.bitcamp.sc.order.domain.OrderInfo" useGeneratedKeys="true" keyProperty="idx">
+	<insert id="save" parameterType="com.bitcamp.sc.domain.order.domain.OrderInfo" useGeneratedKeys="true" keyProperty="idx">
 		INSERT INTO orders(category, price, tidx, people, midx, aidx, gidx, amount) VALUES(#{category}, #{price}, #{tourIdx}, #{tourPeople}, #{memberIdx}, #{addressIdx}, #{goodsIdx}, #{amount})
 	</insert>
 	
-	<select id="findByIdx" resultType="com.bitcamp.sc.order.domain.OrderInfo" resultMap="OrderDomain">
+	<select id="findByIdx" resultType="com.bitcamp.sc.domain.order.domain.OrderInfo" resultMap="OrderDomain">
 		SELECT * FROM orders WHERE id=#{idx}
 	</select>
 	
-	<select id="findByMemberIdx" resultType="com.bitcamp.sc.order.domain.OrderInfo" resultMap="OrderDomain">
+	<select id="findByMemberIdx" resultType="com.bitcamp.sc.domain.order.domain.OrderInfo" resultMap="OrderDomain">
 		SELECT * FROM orders WHERE midx=#{memberIdx}
 	</select>
 
-	<select id="findByCategoryAndMemberIdx" resultType="com.bitcamp.sc.order.domain.OrderInfo" resultMap="OrderDomain">
+	<select id="findByCategoryAndMemberIdx" resultType="com.bitcamp.sc.domain.order.domain.OrderInfo" resultMap="OrderDomain">
 		SELECT * FROM orders WHERE category=#{category} and midx=#{memberIdx} and status='confirmed'order by tidx
 	</select>
 	

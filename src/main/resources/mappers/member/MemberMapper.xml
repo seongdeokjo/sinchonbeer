@@ -4,9 +4,9 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.bitcamp.sc.member.repository.MemberDao">
+<mapper namespace="com.bitcamp.sc.domain.member.repository.MemberDao">
 
-	<resultMap type="com.bitcamp.sc.member.domain.Member" id="MemberDomain">
+	<resultMap type="com.bitcamp.sc.domain.member.domain.Member" id="MemberDomain">
 		<result property="idx" column="id"/>
 		<result property="email" column="email"/>
 		<result property="pw" column="pw"/>
@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 로그인할 때 사용 - 이메일로 멤버객체 조회하기 -->
 	<select id="selectByEmailPw"
-		resultType="com.bitcamp.sc.member.domain.Member"
+		resultType="com.bitcamp.sc.domain.member.domain.Member"
 		resultMap="MemberDomain"
 		>
 		select * from member where email=#{email} and pw=#{pw}
@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 이메일로 멤버객체 조회 -->
 	<select id="selectByEmail"
-		resultType="com.bitcamp.sc.member.domain.Member"
+		resultType="com.bitcamp.sc.domain.member.domain.Member"
 		resultMap="MemberDomain"
 		>
 		select * from member where email=#{param1}
@@ -36,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 회원가입 -->
 	<insert id="insertMember"
-		parameterType="com.bitcamp.sc.member.domain.Member"
+		parameterType="com.bitcamp.sc.domain.member.domain.Member"
 		useGeneratedKeys="true"
 		keyProperty="idx"
 	>
@@ -52,7 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!-- 이메일 찾기 -->
 	<select id="emailSearch"
-		resultType="com.bitcamp.sc.member.domain.Member"
+		resultType="com.bitcamp.sc.domain.member.domain.Member"
 		resultMap="MemberDomain"
 		>
 		select email from member where name=#{param1} and phone=#{param2}
@@ -60,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 비밀번호 찾기 -->
 	<select id="pwSearch"
-		resultType="com.bitcamp.sc.member.domain.Member"
+		resultType="com.bitcamp.sc.domain.member.domain.Member"
 		resultMap="MemberDomain"
 		>
 		select email from member where name=#{param1} and email=#{param2}
@@ -75,7 +75,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 비밀번호 찾기 중 인증번호 일치하는지 체크-->
 	<select id="selectCode"
-		resultType="com.bitcamp.sc.member.domain.Member"
+		resultType="com.bitcamp.sc.domain.member.domain.Member"
 		resultMap="MemberDomain"
 		>
 		select code from member where email=#{memail}
@@ -83,21 +83,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 비밀번호 찾기 중 새로운 비밀번호 생성 -->
 	<update id="updatePw"
-		parameterType="com.bitcamp.sc.member.domain.Member"
+		parameterType="com.bitcamp.sc.domain.member.domain.Member"
 		>
 		update member set pw = #{pw} where email=#{email}
 	</update>
 	
 	<select id="selectByMidx"
 		parameterType="int"
-		resultType="com.bitcamp.sc.member.domain.Member"
+		resultType="com.bitcamp.sc.domain.member.domain.Member"
 		resultMap="MemberDomain"
 		>
 		select * from member where id=#{midx}
 	</select>
 	<select id="selectAddressByMidx"
 		parameterType="int"
-		resultType="com.bitcamp.sc.member.domain.MemberAddress"
+		resultType="com.bitcamp.sc.domain.member.domain.MemberAddress"
 		>
 		select * from address where midx=#{midx}
 	</select>

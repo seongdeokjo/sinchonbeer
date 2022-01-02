@@ -10,7 +10,6 @@
 <body>
 	<!-- header 영역 -->
 	<th:block th:replace="frame/header"></th:block>
-
 	<!-- nav 영역 -->
 	<th:block th:replace="frame/nav"></th:block>
 
@@ -78,7 +77,6 @@
 				</label>
 			</div>
 
-
 			<!-- 두 번째 약관 -->
 			<div class="text_box">
 				<p class="inner_text">
@@ -113,13 +111,11 @@
 		</div>
 
 		<div class="agree_buttons">
-			<a th:href="@{/main}" id="cancel" class="agree_btn">취소</a> 
-			<a th:href="@{/join}" id="accept_agree" class="agree_btn">가입하기</a>
+			<a th:href="@{/main}" id="cancel" th:text="#{button.cancel}" class="agree_btn">취소</a>
+			<a th:href="@{/members/add}" id="accept_agree" class="agree_btn">가입하기</a>
 		</div>
 	</div>
-
 	<!-- footer 영역 -->
 	<th:block th:replace="frame/footer"></th:block>
-
 </body>
 </html>

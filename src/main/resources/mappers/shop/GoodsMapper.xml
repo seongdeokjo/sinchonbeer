@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="GoodsMapper">
 	
-	<resultMap type="com.bitcamp.sc.shop.domain.GoodsVO" id="GoodsDomain">
+	<resultMap type="com.bitcamp.sc.domain.shop.domain.GoodsVO" id="GoodsDomain">
 		<result property="idx" column="id"/>
 		<result property="gname" column="name"/>
 		<result property="price" column="price"/>
@@ -12,17 +12,17 @@
 	</resultMap>
 	
 	<!-- 01.상품추가 -->
-	<insert id="insertGoods" parameterType="com.bitcamp.sc.shop.domain.GoodsVO" useGeneratedKeys="true" keyProperty="idx">
+	<insert id="insertGoods" parameterType="com.bitcamp.sc.domain.shop.domain.GoodsVO" useGeneratedKeys="true" keyProperty="idx">
 		INSERT INTO goods(name, price, photo, text) VALUES(#{gname}, #{price}, #{photo}, #{text})
 	</insert>
 
 	<!-- 상품 삭제 -->
-	<delete id="deleteGoods" parameterType="com.bitcamp.sc.shop.domain.GoodsVO">
+	<delete id="deleteGoods" parameterType="com.bitcamp.sc.domain.shop.domain.GoodsVO">
 		DELETE FROM goods WHERE id= #{idx}
 	</delete>
 	
 	<!-- 상품 찾기 -->
-	<select id="findIdx" resultType="com.bitcamp.sc.shop.domain.GoodsVO" resultMap="GoodsDomain">
+	<select id="findIdx" resultType="com.bitcamp.sc.domain.shop.domain.GoodsVO" resultMap="GoodsDomain">
 		SELECT * FROM goods where gidx= #{idx}
 	</select>
 

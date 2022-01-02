@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bitcamp.sc.member.domain.LoginInfo;
+import com.bitcamp.sc.domain.member.domain.LoginInfo;
 
 @Slf4j
 public class LoggerInterceptor implements HandlerInterceptor {

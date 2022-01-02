@@ -10,18 +10,14 @@
 <meta name="referrer" content="no-referrer" />
 </head>
 <body>
-
 	<!-- header 영역 -->
 	<th:block th:replace="frame/header"></th:block>
-
 	<!-- nav 영역 -->
 	<th:block th:replace="frame/nav"></th:block>
-
 	<!-- content 영역 ---------------------------------------------------------->
 	<div id="regConfirmArea">
 		<div>
 			<img th:src="@{/images/member/complete.png}"/>
-			<!-- <img src="images/member/complete.png"> -->
 		</div>
 		<div id="message">
 			<h2>
@@ -32,12 +28,7 @@
 		</div>
 		<a th:href="@{/login}"><button>로그인</button></a>
 	</div>
-
-	<!-- // 회원가입 폼 영역 --------------------------------------------------------------->
-
 	<!-- footer 영역 -->
 	<th:block th:replace="frame/footer"></th:block>
-
 </body>
 </html>
-

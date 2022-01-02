@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="BasketMapper">
-	<resultMap type="com.bitcamp.sc.basket.domain.BasketVo" id="BasketDomain">
+	<resultMap type="com.bitcamp.sc.domain.basket.domain.BasketVo" id="BasketDomain">
 		<result property="bidx" column="id"/>
 		<result property="midx" column="midx"/>
 		<result property="gidx" column="gidx"/>
@@ -15,7 +15,7 @@
 		select gidx from basket where gidx = #{gidx} and midx = #{midx}
 	</select>
 	<!-- 01.장바구니 추가 -->
-	<insert id="insertBasket" parameterType="com.bitcamp.sc.basket.domain.BasketDto">
+	<insert id="insertBasket" parameterType="com.bitcamp.sc.domain.basket.domain.BasketDto">
 		INSERT INTO basket(count, midx, gidx) VALUES( #{amount}, #{midx}, #{gidx})
 	</insert>
 	<!-- 장바구니 페이지에서 버튼을 통한 수량 변경  -->

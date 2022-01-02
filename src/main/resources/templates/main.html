@@ -36,18 +36,5 @@
 
 	<th:block th:replace="frame/footer"></th:block>
 
-	<script>
-		$(".top").hide();
-
-		$(function() {
-			$(window).scroll(function() {
-				if ($(this).scrollTop() > 150) {
-					$('.top').show();
-				} else {
-					$('.top').hide();
-				}
-			});
-		});
-	</script>
 </body>
 </html>

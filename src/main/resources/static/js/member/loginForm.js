@@ -9,7 +9,6 @@ $(function () {
             $('#loginForm div.msg').html('비밀번호를 입력해 주세요');
             $('.form_box').css('border-color', 'red');
         }
-        console.log($('#memail').val() + ':' + $('#mpw').val());
         event.preventDefault();
         ajax_login();
     });

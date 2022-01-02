@@ -5,11 +5,12 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.bitcamp.sc.domain.order.repository.impl.MemoryOrderDao;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.bitcamp.sc.order.domain.OrderInfo;
+import com.bitcamp.sc.domain.order.domain.OrderInfo;
 
 class MemoryOrderDaoTest {
 

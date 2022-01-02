@@ -11,7 +11,7 @@
 				<!-- 로그인 세션 없을 때 보이는 메뉴 -->
 				<th:block th:if="${session.loginInfo == null}">
 					<li><a th:href="@{/login}">LOGIN</a></li>
-					<li><a th:href="@{/join/type}">JOIN</a></li>
+					<li><a th:href="@{/members/join-type}">JOIN</a></li>
 					<!-- <li><a th:href="@{/cart}">CART</a></li> -->
 				</th:block>
 				<!-- 로그인 세션 있을 때 보이는 메뉴 -->
@@ -44,7 +44,7 @@
 		<!-- 로그인 세션 없을 때 보이는 메뉴 -->
 		<th:block th:if="${session.loginInfo == null}">
 		<li><a th:href="@{/login}">LOGIN</a></li>
-		<li><a th:href="@{/join/type}">JOIN</a></li>
+		<li><a th:href="@{/members/join-type}">JOIN</a></li>
 		<!-- <li><a th:href="@{/cart}">CART</a></li> -->
 		</th:block>
 		<!-- 로그인 세션 있을 때 보이는 메뉴 -->
