@@ -2,6 +2,8 @@ package com.bitcamp.sc.web.login;
 
 import com.bitcamp.sc.domain.login.Login;
 import com.bitcamp.sc.domain.login.service.LoginServiceV2;
+import com.bitcamp.sc.domain.login.service.LoginServiceV3;
+import com.bitcamp.sc.domain.member.domain.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -15,11 +17,11 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Slf4j
-//@Controller
+@Controller
 @RequiredArgsConstructor
-public class LoginControllerV2 {
+public class LoginControllerV3 {
 
-    private final LoginServiceV2 serviceV2;
+    private final LoginServiceV3 serviceV3;
 
 
     @GetMapping("/test")
@@ -29,12 +31,12 @@ public class LoginControllerV2 {
                             @CookieValue(value = "cookie",required = false) String cookie) {
         model.addAttribute("redirectUri", redirectUri);
         model.addAttribute("cookie",cookie);
-        log.info("uri1 ={}", redirectUri);
         return "member/loginForm2";
     }
 
     @PostMapping("/test")
     public String login(@Valid @ModelAttribute Login login,
+                        BindingResult bindingResult,
                         Model model,
                         HttpSession session,
                         HttpServletResponse response,
@@ -42,15 +44,20 @@ public class LoginControllerV2 {
         log.info("request={}",request.getRequestURL().toString());
         log.info("login.getRedirectUri() == request => {}",login.getRedirectUri().equals(request.getRequestURL().toString()) );
         log.info("login ={}", login);
+        if (bindingResult.hasErrors()) {
+            return "member/loginForm2";
+        }
 
-//        boolean check = serviceV2.login(login, session, response);
-//
-//        if(check &&  login.getRedirectUri().equals(request.getRequestURL().toString())){
-//            return "redirect:/";
-//        }
-//        if(check){
-//            return "redirect:" + login.getRedirectUri();
-//        }
+        Member member  = serviceV3.login(login);
+        if(member == null){
+            bindingResult.reject("loginFail","아이디 또는 비밀번호가 맞지 않습니다.");
+            return "member/loginForm2";
+        }
+        // 세션 저장 및 성공 처리 로직 추가하기
+
+        if(member != null){
+            return "redirect:" + login.getRedirectUri();
+        }
 
         return "redirect:test";
     }

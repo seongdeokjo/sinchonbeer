@@ -14,7 +14,7 @@ import com.bitcamp.sc.domain.member.domain.Member;
 import com.bitcamp.sc.domain.member.repository.MemberDao;
 
 @Slf4j
-@Service
+//@Service
 @RequiredArgsConstructor
 public class LoginService {
 	private final SqlSessionTemplate template;
@@ -22,27 +22,27 @@ public class LoginService {
 
 	private MemberDao memberDao;
 
-	public boolean login(String email, String pw, String reEmail, HttpSession session, HttpServletResponse response) {
-		// 로그인체크 기본 값은 false
-		boolean loginChk = false;
-		// MemberDao를 클래스로 만들어 구현
-		memberDao = template.getMapper(MemberDao.class);
-		try {
-			Member member = memberDao.selectByEmail(email);
-			log.info("암호화 결과 : {}",passwordEncoder.matches(pw, member.getPw()));
-
-			// 회원이 로그인 했다면 session 유지 시작, 로그인체크는 true로.
-			log.info("member={}",member);
-			if (member != null && passwordEncoder.matches(pw, member.getPw())) {
-				session.setAttribute("loginInfo", member.toLoginInfo());
-				loginChk = true;
-			}
-		} catch (NullPointerException e) {
-			log.info("[LoginService] NullPointerException 예외 발생. - 일치하는 이메일과 비밀번호 계정이 없음.");
-		}
-		extractedCookie(email, reEmail, response);
-		return loginChk;
-	}
+//	public boolean login(String email, String pw, String reEmail, HttpSession session, HttpServletResponse response) {
+//		// 로그인체크 기본 값은 false
+//		boolean loginChk = false;
+//		// MemberDao를 클래스로 만들어 구현
+//		memberDao = template.getMapper(MemberDao.class);
+//		try {
+//			Member member = memberDao.selectByEmail(email);
+//			log.info("암호화 결과 : {}",passwordEncoder.matches(pw, member.getPw()));
+//
+//			// 회원이 로그인 했다면 session 유지 시작, 로그인체크는 true로.
+//			log.info("member={}",member);
+//			if (member != null && passwordEncoder.matches(pw, member.getPw())) {
+//				session.setAttribute("loginInfo", member.toLoginInfo());
+//				loginChk = true;
+//			}
+//		} catch (NullPointerException e) {
+//			log.info("[LoginService] NullPointerException 예외 발생. - 일치하는 이메일과 비밀번호 계정이 없음.");
+//		}
+//		extractedCookie(email, reEmail, response);
+//		return loginChk;
+//	}
 
 	private void extractedCookie(String email, String reEmail, HttpServletResponse response) {
 		// 이메일 기억하기 쿠키

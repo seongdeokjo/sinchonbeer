@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import com.bitcamp.sc.domain.member.domain.LoginInfo;
 
 @Slf4j
-@Controller
+//@Controller
 @RequestMapping("/login")
 @RequiredArgsConstructor
 public class LoginController {
@@ -52,12 +52,12 @@ public class LoginController {
 		map.put("refererUri", (String)params.get("redirectUri"));
 
 		//사용자가 입력한 정보를 서비스에서 처리하고 결과 받아오기
-		Boolean loginChk = loginService.login(
-				(String)params.get("memail"),
-				(String)params.get("mpw"),
-				(String)params.get("reEmail"),
-				session, response);
-		map.put("result", loginChk);
+//		Boolean loginChk = loginService.login(
+//				(String)params.get("memail"),
+//				(String)params.get("mpw"),
+//				(String)params.get("reEmail"),
+//				session, response);
+//		map.put("result", loginChk);
 		return map;
 	}
 

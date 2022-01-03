@@ -5,12 +5,15 @@ import org.apache.ibatis.annotations.Insert;
 import com.bitcamp.sc.domain.member.domain.Member;
 import com.bitcamp.sc.domain.member.domain.MemberAddress;
 
+import java.util.Optional;
+
 public interface MemberDao {
 
 	//로그인 하기
 	Member selectByEmailPw(String email, String pw);
 	//이메일로 회원정보 불러오기
-	Member selectByEmail(String email);
+//	Member selectByEmail(String email);
+	Optional<Member> selectByEmail(String email);
 	//회원가입
 	int insertMember(Member member);
 	//이메일(아이디) 중복 체크

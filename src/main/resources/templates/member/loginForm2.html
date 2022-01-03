@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <title>신촌 맥주 : 로그인</title>
 <!-- metaheader 영역 -->
+	<style>
+		.field-error {
+			border-color: #dc3545;
+			color: #dc3545;
+		}
+	</style>
 
 <th:block th:replace="frame/metaheader"></th:block>
 <link rel="stylesheet" th:href="@{/css/member/loginForm.css}">
@@ -20,9 +26,14 @@
 		<div class="loginTitle">LOGIN</div>
 		<div id="loginSection">
 			<form id="loginForm" th:object="${login}" method="post" th:action >
+				<div th:if="${#fields.hasGlobalErrors()}">
+					<p class="field-error" th:each="err : ${#fields.globalErrors()}"
+					   th:text="${err}">전체 오류 메시지</p>
+				</div>
 				<div class="form_box margin_top">
-					<input type="email" placeholder="이메일"  name="email"
-						class="loginLongBox" th:value="${cookie}">
+					<input type="email" placeholder="이메일"  th:field="*{email}"
+						class="loginLongBox" th:value="${cookie}" th:errorclass="field-error">
+					<div class="field-error" th:errors="*{email}"></div>
 					<input type="password" placeholder="비밀번호"  th:field="*{pw}" class="loginLongBox">
 				</div>
 				<div class="msg_space">
