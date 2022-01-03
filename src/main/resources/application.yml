@@ -1,3 +1,5 @@
+
+
 server:
   port: 8092
 
@@ -42,4 +44,10 @@ mybatis:
 #  configuration:
 #    lazy-loading-enabled: true
 #    aggressive-lazy-loading: false
+#logging:
+#  level:
+#    org:
+#      apache:
+#        coyote:
+#          http11: debug
 #    map-underscore-to-camel-case: true

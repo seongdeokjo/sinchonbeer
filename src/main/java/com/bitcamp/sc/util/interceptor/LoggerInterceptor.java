@@ -28,8 +28,10 @@ public class LoggerInterceptor implements HandlerInterceptor {
 		if(info !=null) {
 			return true;
 		}else {
-            response.sendRedirect("/login");
-            return false;
+//            response.sendRedirect("/login");
+			response.sendRedirect("/test");
+
+			return false;
 		}
 	}
 

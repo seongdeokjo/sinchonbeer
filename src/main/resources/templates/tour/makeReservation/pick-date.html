@@ -1,188 +1,190 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>예약 날짜+인원 선택</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>예약 날짜+인원 선택</title>
 
-<link rel="stylesheet" th:href="@{/css/tour/pick-date.css}">
-<th:block th:include="frame/metaheader"></th:block>
-<link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" th:href="@{/css/tour/pick-date.css}">
+    <th:block th:include="frame/metaheader"></th:block>
+    <link rel="stylesheet"
+          href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 </head>
 <body>
-	<th:block th:include="frame/header"></th:block>
-	<th:block th:include="frame/nav"></th:block>
-	<!-- submenu 영역 -->
-	<div class="submenu_wrap">
-		<ul>
-			<li><a href="/tour/info">투어 안내</a></li>
-			<li><a href="/tour/pick-date" id="currentPage">예약</a></li>
-			<li><a href="/tour/notice">투어 공지</a></li>
-		</ul>
-	</div>
-	<div class="detail_menu">
-		<ul>
-			<li><a href="/tour/pick-date" id="selectPage">프로그램 예약</a></li>
-			<li><a href="/tour/change-info">예약 확인/취소</a></li>
-		</ul>
-	</div>
-	<!-- submenu 끝  -->
-	<!-- content 영역 -->
-	<div id="content_wrap" class="container-fulid totalPage">
-		<div class="keyVisualBox full">
-			<div class="select_box">
-				<div class="keyTd po">
-					<!-- 날짜,인원,1인 가격, 카테고리 객체 바인딩 하기 -->
-					<form th:action="@{/tour/reserve/form}" method="get" id="submit">
-						<ul>
-							<li>
-								<input type="text" id="datepicker" class="jejuInputBox">
-								<input type="hidden" id="select" name="selectDate"> 
-								<input type="text" id="msg" readonly class="text-center border-0" value="잔여석: "> 
-								<input type="hidden" th:name="price" value="22000"> 
-								<input type="hidden" th:name="category" value="tour">
-					
-							</li>
-							<li>
-								<select id="count" class="out" th:name="tourPeople">
-									<option value="0" selected>인원선택</option>
-									<option value="1">1명</option>
-									<option value="2">2명</option>
-									<option value="3">3명</option>
-									<option value="4">4명</option>
-								</select>
-							</li>
-							<li>
-								<input type="submit" value="예약" class="out" id="btn">
-							</li>
-						</ul>
-					</form>
-					<!-- 로그인 체크여부를 위한 hidden 옵션 -->
-					<input type="hidden" th:value="${session.loginInfo == null ? 'Y' : 'N'}" id="login">
-				</div>
-			</div>
-		</div>
-		<div class="img_wrap">
-			<img src="https://dsfyc8ahox9m2.cloudfront.net/static/images/reservationRenew/beerwalk/img_hero_beerwalk_2.jpg">
-		</div>
-		<div class="content_text">
-			<h3>국내 최초 체험형 투어공간</h3>
-			<h1>신촌맥주 양조장 투어</h1>
-		</div>
-		<div class="inline-row"></div>
-		<div class="alignBox mAuto mt90 ">
-			<div class="pageLine"></div>
-			<div class="plr">
-				<ul class="columnUl col6">
-					<li class="columnLi">
-						<dl class="columnDl mt90 typeInfo">
-							<dt class="columnDt">금액</dt>
-							<dd class="columnDd">22000원</dd>
-							<dt class="columnDt">체험시간</dt>
-							<dd class="columnDd">40분</dd>
-							<dt class="columnDt">
-								포함사항<sub>(택1)</sub>
-							</dt>
-							<dd class="columnDd">
-								신촌맥주 4종 샘플러<sub>(250ml*4)</sub><br> 또는 스파클링 음료와 신촌맥주 굿즈세트
-							</dd>
-						</dl>
-					</li>
-					<li class="columnLi mt100">
-						<ul class="tableUl">
-							<li class="tableLi col80 verticalMiddle">
-								<img src="https://dsfyc8ahox9m2.cloudfront.net/static/images/reservationRenew/img_icon_calendar_2.png" alt="key visual">
-							</li>
-							<li class="tableLi verticalMiddle">
-								<div class="cyanText">
-									<strong>사전 예약 필수</strong>
-								</div>
-							</li>
-						</ul>
-						<ul class="tableUl mt40">
-							<li class="tableLi col80 verticalMiddle">
-								<img src="https://dsfyc8ahox9m2.cloudfront.net/static/images/reservationRenew/img_icon_age.png">
-							</li>
-							<li class="tableLi verticalMiddle">
-								<div class="cyanText">
-									<strong>만 7세 이상 참여가능</strong>
-								</div>
-							</li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<div class="description_text">
-			<strong class="colorcyan">신촌맥주 양조장 투어란?</strong> <br> <br>신촌맥주
-			양조장에서는<br> 신촌맥주의 양조가들이 전세계에서 공수한<br> 최첨단 장비로 맥주를 양조하는 모습을<br>
-			직접 관람하실 수 있습니다.<br> <br> 맥주에 관련된 다양한 교육과 체험 활동을<br>
-			경험하실 수 있습니다.
-		</div>
-		<div class="bgc_gray mt120">
-			<div class="alignBox mAuto plr img1">
-				<img src="https://dsfyc8ahox9m2.cloudfront.net/static/images/reservationRenew/beerwalk/img_info_beerwalk_01.jpg" 
-					 alt="key visual" class="contentImage">
-			</div>
-		</div>
-		<div class="alignBox mAuto textAlignLeft mt80">
-			<div class="plr">
-				<div class="description_text2">
-					신촌맥주 양조장 투어는 맥주가 만들어지는 과정을<br> 경의선숲길을 걷듯, 오감으로 체험해보는<br>
-					맥주 양조 여행입니다.
-				</div>
-			</div>
-		</div>
-		<div class="alignBox mAuto mt130">
-			<div class="innerBox plr">
-				<img src="https://dsfyc8ahox9m2.cloudfront.net/static/images/reservationRenew/beerwalk/img_info_beerwalk_02.jpg"
-					 alt="key visual" class="contentImage">
-			</div>
-		</div>
-		<div class="alignBox mAuto mt30">
-			<div class="innerBox plr">
-				<img src="https://dsfyc8ahox9m2.cloudfront.net/static/images/reservationRenew/beerwalk/img_info_beerwalk_03.jpg"
-					 alt="key visual" class="contentImage">
-			</div>
-		</div>
-		<div class="bgc_gray mt120 ">
-			<div class="alignBox mAuto">
-				<div class="innerBox plr">
-					<img src="https://dsfyc8ahox9m2.cloudfront.net/static/images/reservationRenew/beerwalk/img_info_beerwalk_04.jpg"
-						 alt="key visual" class="contentImage">
-				</div>
-			</div>
-		</div>
-		<div class="alignBox mAuto textAlignLeft mt80">
-			<div class="plr">
-				<div class="description_text2">
-					맥주의 다양한 원료들을<br> 직접 맛보고 향을 맡아 보세요.
-				</div>
-			</div>
-		</div>
-		<div class="alignBox mAuto textAlignLeft mt130 pb60">
-			<div class="pl100">
-				<ul class="tableUl">
-					<li class="tableLi verticalBottom">
-						<div class="pageDesc">
-							비어 도슨트의 친절한 설명과 함께<br> 맥주를 알아가는 재미에 푹 빠져보세요!
-						</div>
-					</li>
+<th:block th:include="frame/header"></th:block>
+<th:block th:include="frame/nav"></th:block>
+<!-- submenu 영역 -->
+<div class="submenu_wrap">
+    <ul>
+        <li><a th:href="@{/tour/info}">투어 안내</a></li>
+        <li><a th:href="@{/tour/pick-date}" id="currentPage">예약</a></li>
+        <li><a th:href="@{/tour/notice}">투어 공지</a></li>
+    </ul>
+</div>
+<div class="detail_menu">
+    <ul>
+        <li><a th:href="@{/tour/pick-date}" id="selectPage">프로그램 예약</a></li>
+        <li><a th:href="@{/tour/change-info}">예약 확인/취소</a></li>
+    </ul>
+</div>
 
-					<li class="tableLi textAlignRight">
-						<img src="https://dsfyc8ahox9m2.cloudfront.net/static/images/reservationRenew/beerwalk/img_info_beerwalk_05.jpg"
-							 alt="key visual" class="contentImage"></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<!-- content 영역 끝 -->
-	<th:block th:include="frame/footer"></th:block>
-	
-	<script th:src="@{/js/tour/pick-date.js}"></script>
+<!-- submenu 끝  -->
+<!-- content 영역 -->
+<div id="content_wrap" class="container-fulid totalPage">
+    <div class="keyVisualBox full">
+        <div class="select_box">
+            <div class="keyTd po">
+                <!-- 날짜,인원,1인 가격, 카테고리 객체 바인딩 하기 -->
+                <form th:action="@{/tour/reserve/form}" method="get" id="submit">
+                    <ul>
+                        <li>
+                            <input type="text" id="datepicker" class="jejuInputBox">
+                            <input type="hidden" id="select" name="selectDate">
+                            <input type="text" id="msg" readonly class="text-center border-0" value="잔여석: ">
+                            <input type="hidden" th:name="price" value="22000">
+                            <input type="hidden" th:name="category" value="tour">
+
+                        </li>
+                        <li>
+                            <select id="count" class="out" th:name="tourPeople">
+                                <option value="0" selected>인원선택</option>
+                                <option value="1">1명</option>
+                                <option value="2">2명</option>
+                                <option value="3">3명</option>
+                                <option value="4">4명</option>
+                            </select>
+                        </li>
+                        <li>
+                            <input type="submit" value="예약" class="out" id="btn">
+                        </li>
+                    </ul>
+                </form>
+                <!-- 로그인 체크여부를 위한 hidden 옵션 -->
+                <input type="hidden" th:value="${session.loginInfo == null ? 'Y' : 'N'}" id="login">
+            </div>
+        </div>
+    </div>
+    <div class="img_wrap">
+        <img src="https://dsfyc8ahox9m2.cloudfront.net/static/images/reservationRenew/beerwalk/img_hero_beerwalk_2.jpg">
+    </div>
+    <div class="content_text">
+        <h3>국내 최초 체험형 투어공간</h3>
+        <h1>신촌맥주 양조장 투어</h1>
+    </div>
+    <div class="inline-row"></div>
+    <div class="alignBox mAuto mt90 ">
+        <div class="pageLine"></div>
+        <div class="plr">
+            <ul class="columnUl col6">
+                <li class="columnLi">
+                    <dl class="columnDl mt90 typeInfo">
+                        <dt class="columnDt">금액</dt>
+                        <dd class="columnDd">22000원</dd>
+                        <dt class="columnDt">체험시간</dt>
+                        <dd class="columnDd">40분</dd>
+                        <dt class="columnDt">
+                            포함사항<sub>(택1)</sub>
+                        </dt>
+                        <dd class="columnDd">
+                            신촌맥주 4종 샘플러<sub>(250ml*4)</sub><br> 또는 스파클링 음료와 신촌맥주 굿즈세트
+                        </dd>
+                    </dl>
+                </li>
+                <li class="columnLi mt100">
+                    <ul class="tableUl">
+                        <li class="tableLi col80 verticalMiddle">
+                            <img src="https://dsfyc8ahox9m2.cloudfront.net/static/images/reservationRenew/img_icon_calendar_2.png"
+                                 alt="key visual">
+                        </li>
+                        <li class="tableLi verticalMiddle">
+                            <div class="cyanText">
+                                <strong>사전 예약 필수</strong>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="tableUl mt40">
+                        <li class="tableLi col80 verticalMiddle">
+                            <img src="https://dsfyc8ahox9m2.cloudfront.net/static/images/reservationRenew/img_icon_age.png">
+                        </li>
+                        <li class="tableLi verticalMiddle">
+                            <div class="cyanText">
+                                <strong>만 7세 이상 참여가능</strong>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="description_text">
+        <strong class="colorcyan">신촌맥주 양조장 투어란?</strong> <br> <br>신촌맥주
+        양조장에서는<br> 신촌맥주의 양조가들이 전세계에서 공수한<br> 최첨단 장비로 맥주를 양조하는 모습을<br>
+        직접 관람하실 수 있습니다.<br> <br> 맥주에 관련된 다양한 교육과 체험 활동을<br>
+        경험하실 수 있습니다.
+    </div>
+    <div class="bgc_gray mt120">
+        <div class="alignBox mAuto plr img1">
+            <img src="https://dsfyc8ahox9m2.cloudfront.net/static/images/reservationRenew/beerwalk/img_info_beerwalk_01.jpg"
+                 alt="key visual" class="contentImage">
+        </div>
+    </div>
+    <div class="alignBox mAuto textAlignLeft mt80">
+        <div class="plr">
+            <div class="description_text2">
+                신촌맥주 양조장 투어는 맥주가 만들어지는 과정을<br> 경의선숲길을 걷듯, 오감으로 체험해보는<br>
+                맥주 양조 여행입니다.
+            </div>
+        </div>
+    </div>
+    <div class="alignBox mAuto mt130">
+        <div class="innerBox plr">
+            <img src="https://dsfyc8ahox9m2.cloudfront.net/static/images/reservationRenew/beerwalk/img_info_beerwalk_02.jpg"
+                 alt="key visual" class="contentImage">
+        </div>
+    </div>
+    <div class="alignBox mAuto mt30">
+        <div class="innerBox plr">
+            <img src="https://dsfyc8ahox9m2.cloudfront.net/static/images/reservationRenew/beerwalk/img_info_beerwalk_03.jpg"
+                 alt="key visual" class="contentImage">
+        </div>
+    </div>
+    <div class="bgc_gray mt120 ">
+        <div class="alignBox mAuto">
+            <div class="innerBox plr">
+                <img src="https://dsfyc8ahox9m2.cloudfront.net/static/images/reservationRenew/beerwalk/img_info_beerwalk_04.jpg"
+                     alt="key visual" class="contentImage">
+            </div>
+        </div>
+    </div>
+    <div class="alignBox mAuto textAlignLeft mt80">
+        <div class="plr">
+            <div class="description_text2">
+                맥주의 다양한 원료들을<br> 직접 맛보고 향을 맡아 보세요.
+            </div>
+        </div>
+    </div>
+    <div class="alignBox mAuto textAlignLeft mt130 pb60">
+        <div class="pl100">
+            <ul class="tableUl">
+                <li class="tableLi verticalBottom">
+                    <div class="pageDesc">
+                        비어 도슨트의 친절한 설명과 함께<br> 맥주를 알아가는 재미에 푹 빠져보세요!
+                    </div>
+                </li>
+
+                <li class="tableLi textAlignRight">
+                    <img src="https://dsfyc8ahox9m2.cloudfront.net/static/images/reservationRenew/beerwalk/img_info_beerwalk_05.jpg"
+                         alt="key visual" class="contentImage"></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- content 영역 끝 -->
+<th:block th:include="frame/footer"></th:block>
+
+<script th:src="@{/js/tour/pick-date.js}"></script>
 </body>
 </html>

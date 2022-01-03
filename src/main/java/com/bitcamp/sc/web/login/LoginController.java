@@ -65,6 +65,6 @@ public class LoginController {
     public String logout(HttpSession session) {
         session.invalidate();
         //로그인 세션이 있다면 세션을 끊고 메인페이지로 보내주기
-        return "redirect:main";
+        return "redirect:/";
     }
 }

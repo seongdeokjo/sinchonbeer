@@ -22,11 +22,11 @@
 	<th:block th:include="frame/header"></th:block>
 	<th:block th:include="frame/nav"></th:block>
 	<!-- submenu 영역 -->
-	<div class="submenu_wrap">
+	<div class="submenu_wrap" >
 		<ul>
-			<li><a href="/tour/info">투어 안내</a></li>
-			<li><a href="/tour/pick-date" id="currentPage">예약</a></li>
-			<li><a href="/tour/notice">투어 공지</a></li>
+			<li><a th:href="@{/tour/info}">투어 안내</a></li>
+			<li><a th:href="@{/tour/pick-date}" id="currentPage">예약</a></li>
+			<li><a th:href="@{/tour/notice}">투어 공지</a></li>
 		</ul>
 	</div>
 	<div class="detail_menu">
