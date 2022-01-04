@@ -1,6 +1,6 @@
 package com.bitcamp.sc.web.pay;
 
-import com.bitcamp.sc.domain.member.domain.LoginInfo;
+import com.bitcamp.sc.domain.login.LoginInfo;
 import com.bitcamp.sc.domain.member.domain.MemberAddress;
 import com.bitcamp.sc.domain.member.service.MemberService;
 import com.bitcamp.sc.domain.order.domain.OrderInfo;

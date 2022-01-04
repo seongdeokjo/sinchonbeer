@@ -1,6 +1,6 @@
 package com.bitcamp.sc.domain.member.service;
 
-import com.bitcamp.sc.domain.member.domain.LoginInfo;
+import com.bitcamp.sc.domain.login.LoginInfo;
 import com.bitcamp.sc.domain.member.domain.MemberAddress;
 
 public interface MemberService {

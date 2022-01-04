@@ -57,13 +57,13 @@
 .form_box input:focus{
     outline: none;
 }
-#loginSection input[type=email], #loginSection input[type=password]{
+#loginSection input[type=text], #loginSection input[type=password]{
     width:338px;
     border:none;
     padding-left:10px;
     margin:0;
 }
-#loginSection input[type=email]{
+#loginSection input[type=text]{
     border-bottom:1px solid #ddd;
     width:338px;;
 }
@@ -127,9 +127,9 @@ label{
 .display_none{
 	display:none;
 }
-#loginForm div.msg{
+/*#loginForm div.msg{
 	color:red;
-}
+}*/
 .msg{
 	font-size:13.5px;
 }

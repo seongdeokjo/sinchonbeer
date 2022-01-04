@@ -21,4 +21,3 @@ public class MemberRegRequest {
 		return new Member(0,this.email, this.pw, this.name, this.phone, null);
 	}
 }
-

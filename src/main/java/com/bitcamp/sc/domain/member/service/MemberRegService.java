@@ -17,7 +17,6 @@ import com.bitcamp.sc.domain.member.repository.MemberDao;
 @RequiredArgsConstructor
 public class MemberRegService {
 	private final SqlSessionTemplate template;
-	
 	private final PasswordEncoder passwordEncoder;
 
 	private MemberDao memberDao;

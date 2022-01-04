@@ -3,7 +3,7 @@ package com.bitcamp.sc.domain.tour.service.impl;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-import com.bitcamp.sc.domain.member.domain.LoginInfo;
+import com.bitcamp.sc.domain.login.LoginInfo;
 import com.bitcamp.sc.domain.tour.domain.ChangeTourDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

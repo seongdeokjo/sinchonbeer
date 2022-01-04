@@ -1,12 +1,14 @@
-package com.bitcamp.sc.domain.member.domain;
+package com.bitcamp.sc.domain.login;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Getter
 @ToString
 @AllArgsConstructor
+@NoArgsConstructor
 public class LoginInfo {
 
 	private int idx;

@@ -5,7 +5,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bitcamp.sc.domain.member.domain.LoginInfo;
+import com.bitcamp.sc.domain.login.LoginInfo;
 import com.bitcamp.sc.domain.member.domain.MemberAddress;
 import com.bitcamp.sc.domain.member.repository.MemberDao;
 

@@ -5,7 +5,7 @@ import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.bitcamp.sc.domain.member.domain.LoginInfo;
+import com.bitcamp.sc.domain.login.LoginInfo;
 import com.bitcamp.sc.domain.tour.service.TourAuthPhoneNumberService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

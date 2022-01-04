@@ -3,7 +3,7 @@ package com.bitcamp.sc.web.basket;
 import com.bitcamp.sc.domain.basket.domain.BasketDto;
 import com.bitcamp.sc.domain.basket.domain.BasketVo;
 import com.bitcamp.sc.domain.basket.service.BasketService;
-import com.bitcamp.sc.domain.member.domain.LoginInfo;
+import com.bitcamp.sc.domain.login.LoginInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

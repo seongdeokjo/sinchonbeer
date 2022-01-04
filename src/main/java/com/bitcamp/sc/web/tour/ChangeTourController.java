@@ -5,7 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.bitcamp.sc.domain.member.domain.LoginInfo;
+import com.bitcamp.sc.domain.login.LoginInfo;
 import com.bitcamp.sc.domain.order.domain.OrderInfo;
 import com.bitcamp.sc.domain.order.service.OrderService;
 import com.bitcamp.sc.domain.tour.service.ChangeReservationService;
