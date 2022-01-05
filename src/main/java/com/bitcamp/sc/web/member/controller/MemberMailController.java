@@ -24,10 +24,7 @@ public class MemberMailController {
     @RequestMapping(value = "/inquiry/pw/auth", method = RequestMethod.POST)
     @ResponseBody
     public String sendMail(@RequestBody Map<String, Object> param) {
-        String result = "N";
-        if (service.sendMail((String) param.get("userEmail"))) {
-            result = "Y";
-        }
-        return result;
+        service.sendMail((String) param.get("userEmail"));
+        return "ok";
     }
 }

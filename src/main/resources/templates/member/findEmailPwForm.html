@@ -27,8 +27,8 @@
     <ul class=" nav nav-tabs nav-fill mx-6" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
             <a class="nav-link active " id="home-tab" data-toggle="tab"
-                href="#home" role="tab" aria-controls="home" aria-selected="true">이메일
-            찾기</a>
+               href="#home" role="tab" aria-controls="home" aria-selected="true">이메일
+                찾기</a>
         </li>
         <li class="nav-item" role="presentation">
             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
@@ -329,20 +329,14 @@
             data: JSON.stringify({
                 "userEmail": inquiryEmail,
             }),
-            success: function (data) {
-                console.log(data);
+            success: function () {
                 //인증번호를 입력하는 다음창이 나오게 하기.
-                if (data == 'Y') {
-                    alert('인증번호가 전송되었습니다. 메일을 확인해 주세요.');
-                    //현재 페이지가 들어가고
-                    $('#pwContinueContent').addClass('display_none');
-                    //pwInputCodeContent 영역이 나옴
-                    $('#pwInputCodeContent').removeClass('display_none');
+                alert('인증번호가 전송되었습니다. 메일을 확인해 주세요.');
+                //현재 페이지가 들어가고
+                $('#pwContinueContent').addClass('display_none');
+                //pwInputCodeContent 영역이 나옴
+                $('#pwInputCodeContent').removeClass('display_none');
 
-                } else {
-                    alert('인증번호 전송에 실패하였습니다. 다시 진행해 주세요.');
-                    return false;
-                }
             }
         });
     });

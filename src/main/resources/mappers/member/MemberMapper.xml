@@ -33,6 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 이메일 찾기 -->
 	<select id="findByNameAndPhone"
 		resultType="com.bitcamp.sc.domain.member.domain.Member"
+		parameterType="string"
 		>
 		select email from member where name=#{name} and phone=#{phone}
 	</select>
@@ -40,6 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 비밀번호 찾기 -->
 	<select id="findByNameAndEmail"
 		resultType="com.bitcamp.sc.domain.member.domain.Member"
+		parameterMap="string"
 		>
 		select email from member where name=#{name} and email=#{email}
 	</select>

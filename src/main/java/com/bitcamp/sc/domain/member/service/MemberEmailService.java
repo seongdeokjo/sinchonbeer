@@ -12,9 +12,11 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.bitcamp.sc.domain.member.repository.MemberDao;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
@@ -24,13 +26,16 @@ public class MemberEmailService {
 	private  JavaMailSender sender;
 	private  SqlSessionTemplate template;
 
-	// 메일 전송 여부 반환
-	public Boolean sendMail(String userEmail) {
-
-		Boolean result = true;
-
+	// 메일 전송
+	@Async
+	@Transactional
+	public void sendMail(String userEmail) {
 		String authNum = randomNum();
 		log.info("번호 = {}",authNum);
+
+		// 인증번호를 db에 저장하기.
+		template.getMapper(MemberDao.class).updateCode(authNum, userEmail);
+
 		MimeMessage message = sender.createMimeMessage();
 		// MimeMessage에는 메일 내용이 들어가게 됨. 제목, 내용, 발신, 수신, 첨부
 		try {
@@ -53,17 +58,11 @@ public class MemberEmailService {
 			// 메일 발송
 			sender.send(message);
 
-			// 인증번호를 db에 저장하기.
-			template.getMapper(MemberDao.class).updateCode(authNum, userEmail);
-
 		} catch (MessagingException e) {
-			result = false;
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
-			result = false;
 			e.printStackTrace();
 		}
-		return result;
 	}
 
 	//랜덤 숫자로 된 인증번호 만들기
