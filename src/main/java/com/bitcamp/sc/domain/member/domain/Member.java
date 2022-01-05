@@ -22,6 +22,14 @@ public class Member {
 	private String code;
 //	private MemberType role;
 
+
+	public Member(String email, String pw, String name, String phone) {
+		this.email = email;
+		this.pw = pw;
+		this.name = name;
+		this.phone = phone;
+	}
+
 	public LoginInfo toLoginInfo() {
 		return new LoginInfo(this.idx, this.email, this.name,this.phone);
 	}

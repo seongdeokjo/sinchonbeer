@@ -1,4 +1,4 @@
- package com.bitcamp.sc.domain.member.service;
+package com.bitcamp.sc.domain.member.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,41 +11,50 @@ import com.bitcamp.sc.domain.member.domain.Member;
 import com.bitcamp.sc.domain.member.domain.MemberAddress;
 import com.bitcamp.sc.domain.member.domain.RegRequest;
 import com.bitcamp.sc.domain.member.repository.MemberDao;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class MemberRegService {
-	private final SqlSessionTemplate template;
-	private final PasswordEncoder passwordEncoder;
+    private final SqlSessionTemplate template;
+    private final PasswordEncoder passwordEncoder;
 
-	private MemberDao memberDao;
+    private MemberDao memberDao;
 
-	public int regMember(RegRequest regRequest) {
+    public int regMember(RegRequest regRequest) {
 
-		int resultCnt = 0;
-		// 주소를 제외한 회원가입 - toMember(): midx, email, pw, name, phone
-		memberDao = template.getMapper(MemberDao.class);
-		
-			Member member = regRequest.getMemberRegRequest().toMember();
+        // 주소를 제외한 회원가입 - toMember(): midx, email, pw, name, phone
+        memberDao = template.getMapper(MemberDao.class);
+        Member member = regRequest.getMemberRegRequest().toMember();
+        //암호화
+        encryptionPw(member);
 
-			//암호화
-			String securityPw = passwordEncoder.encode(member.getPw());
-			log.info("암호화 테스트 : "+securityPw);
-			member.setPw(securityPw);
-			log.info("암호화 결과 : "+passwordEncoder.matches(member.getPw(), securityPw));
-		
-			resultCnt = memberDao.insertMember(member); // 1또는 0 반환.
+        int resultCnt = memberDao.insertMember(member); // 1또는 0 반환.
+        if (resultCnt == 1) {
+            log.info("member = {}", member);
+            int idx = member.getIdx();
+            // 사용자가 입력한 주소를 주소테이블에 넣기
+            int result = regAddress(regRequest, idx);
+            return result;
+        }
+        return 0;
+    }
 
-			// 사용자가 입력한 주소를 주소테이블에 넣기
-			MemberAddress memberAddress = regRequest.getMemberAddressRequest().toMemberAddress();
-			if (memberAddress.formValidate()) {
-				// 주소를 모두 입력하였다면
-				memberAddress.setMidx(member.getIdx());
-				resultCnt = memberDao.insertAddress(memberAddress);
-			}
-			System.out.println("주소까지 회원가입에 입력 resultCnt :" + resultCnt);
+    private int regAddress(RegRequest regRequest, int idx) {
+        int result = 0;
+        MemberAddress memberAddress = regRequest.getMemberAddressRequest().toMemberAddress();
+        if (memberAddress.formValidate()) {
+            memberAddress.setMidx(idx);
+            result = memberDao.insertAddress(memberAddress);
+        }
+        return result;
+    }
 
-		return resultCnt;
-	}
+    private void encryptionPw(Member member) {
+        String securityPw = passwordEncoder.encode(member.getPw());
+        log.info("암호화 테스트 : " + securityPw);
+        member.setPw(securityPw);
+        log.info("암호화 결과 : " + passwordEncoder.matches(member.getPw(), securityPw));
+    }
 }

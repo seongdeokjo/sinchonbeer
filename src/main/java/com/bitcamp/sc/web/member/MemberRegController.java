@@ -1,10 +1,12 @@
 package com.bitcamp.sc.web.member;
 
+import com.bitcamp.sc.domain.member.domain.MemberAddressRequest;
 import com.bitcamp.sc.domain.member.service.MemberRegService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
@@ -30,16 +32,15 @@ public class MemberRegController {
 	}
 	//회원가입 폼
 	@GetMapping("/add")
-	public String regForm() {
-		System.out.println("get 방식 진입 성공");
-		return "member/regForm";
+	public String regForm(@ModelAttribute(name = "regRequest") RegRequest regRequest) {
+		return "member/regFormV2";
 	}
-	
-	//회원가입 폼 - ajax로 처리(회원가입 여부 결과)
+
 	@PostMapping("/add")
-	public RedirectView reg(RegRequest regRequest) {
+	public String reg(RegRequest regRequest) {
+		log.info("regRequest ={}",regRequest.toString());
 		regService.regMember(regRequest);
-		return new RedirectView("/join/success");
+		return "redirect:/members/add-success";
 	}
 	//회원가입 성공
 	@GetMapping("/add-success")

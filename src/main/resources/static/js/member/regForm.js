@@ -1,16 +1,16 @@
 
-var element_wrap;
+let element_wrap;
 
 $(document).ready(function () {
 
     //script(1) submit : 주소를 제외하고 빈칸 없이 입력해야만 회원가입이 넘어감. 
-    var email = $('#email');
-    var pw = $('#pw');
-    var repw = $('#repw');
-    var name = $('#username');
-    var phone = $('#phone');
-    var address1 = $('#address');
-    var address2 = $('#detailAddress');
+    let email = $('#email');
+    let pw = $('#pw');
+    let repw = $('#repw');
+    let name = $('#username');
+    let phone = $('#phone');
+    let address1 = $('#address');
+    let address2 = $('#detailAddress');
 
     $('#submitBtn').on('click',function () {
 
@@ -22,7 +22,7 @@ $(document).ready(function () {
             return false;
         }
         else {
-            var emailEx = /\w+@\w+\.\w+/;
+             let emailEx = /\w+@\w+\.\w+/;
             //이메일 입력양식 제한
             if (!emailEx.test($(email).val().trim())) {
                 $('#email + div.msg').html('<p>이메일 형식에 맞게 입력해 주세요</p>');
@@ -43,7 +43,7 @@ $(document).ready(function () {
             return false;
         }
         else {  //비밀번호의 입력양식 제한
-            var pwExp = /^(?=.*[a-zA-Z])((?=.*\d)(?=.*\W)).{8,20}$/;
+            let pwExp = /^(?=.*[a-zA-Z])((?=.*\d)(?=.*\W)).{8,20}$/;
             if (!pwExp.test($(pw).val().trim())) {
                 $('#repw+div.msg').html('<p>영어, 숫자, 특수기호 모두를 포함해서 8~30자리 입력해 주세요.</p>')
                 $('#repw+div.msg').css('display', 'block');
@@ -71,7 +71,7 @@ $(document).ready(function () {
             name.addClass('red_outline');
             return false;
         } else { //이름의 한글입력 제한
-            var nameExp = /^[가-힣a-zA-Z]+$/;
+            let nameExp = /^[가-힣a-zA-Z]+$/;
             if (!nameExp.test($(name).val().trim())) {
                 $('#username+div.msg').html('<p>이름을 올바르게 입력해주세요.</p>');
                 $('#username+div.msg').css('display', 'block');
@@ -88,7 +88,7 @@ $(document).ready(function () {
             return false;
         } else {
             //전화번호 : - 없이 숫자만 6자 이상
-            var phoneExp = /^[0-9]{5,12}$/;
+            let phoneExp = /^[0-9]{5,12}$/;
             if (!phoneExp.test($(phone).val().trim())) {
                 $('#phone+div.msg').html('<p>연락처를 올바르게 입력해 주세요.</p>');
                 $('#phone+div.msg').css('display', 'block');
@@ -167,23 +167,18 @@ $(document).ready(function () {
 		            return false;
 				}else{
 					console.log('중복되지 않았음');
-					
 				}
 			},
 			error : function(request, status, error) {
 				alert('서버 통신에 문제가 발생했습니다. 다시 실행해주세요.');
 			}
 		});
-
 	});
-
-
 
     // script (3) 카카오 주소 api --
 
     // 우편번호 찾기 찾기 화면을 넣을 element
     element_wrap = document.getElementById('wrap');
-
     //(수정) iframe을 넣은 element 영역 외 클릭 시 element를 안보이게 한다.
     $('body').click(function (e) {
         if (!$(e.target).hasClass('foldTarget')) {
@@ -193,26 +188,22 @@ $(document).ready(function () {
             document.getElementById('address').style.display = 'block';
         }
     });
-
     //주소 api 끝
-
 });
-
 
 function execDaumPostcode() {
     // (수정) 주소 필드를 안보이게 한다.
     document.getElementById('address').style.display = 'none';
 
     // 현재 scroll 위치를 저장해놓는다.
-    var currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
+    let currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
     new daum.Postcode({
         oncomplete: function (data) {
             // 검색결과 항목을 클릭했을 때 실행할 코드를 작성하는 부분.
-
             // 각 주소의 노출 규칙에 따라 주소를 조합한다.
             // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-            var addr = ''; // 주소 변수
-            var extraAddr = ''; // 참고항목 변수
+            let addr = ''; // 주소 변수
+            let extraAddr = ''; // 참고항목 변수
 
             //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
             if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
@@ -268,8 +259,6 @@ function execDaumPostcode() {
         width: '100%',
         height: '100%'
     }).embed(element_wrap);
-
     // iframe을 넣은 element를 보이게 한다.
     element_wrap.style.display = 'block';
 }
-

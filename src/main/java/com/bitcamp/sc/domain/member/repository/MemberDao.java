@@ -12,6 +12,8 @@ public interface MemberDao {
 	//이메일로 회원정보 불러오기
 	Member selectByEmail(String email);
 //	Optional<Member> selectByEmail(String email);
+
+
 	//회원가입
 	int insertMember(Member member);
 	//이메일(아이디) 중복 체크
