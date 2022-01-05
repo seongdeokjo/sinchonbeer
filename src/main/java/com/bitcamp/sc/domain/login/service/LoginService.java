@@ -25,7 +25,7 @@ public class LoginService {
     public LoginInfo login(LoginForm form) {
         LoginInfo info = new LoginInfo();
         memberDao = template.getMapper(MemberDao.class);
-        Member member = memberDao.selectByEmail(form.getEmail());
+        Member member = memberDao.findByEmailAndPw(form.getEmail(), form.getPw());
         log.info("member={}", member);
         if (member != null && passwordEncoder.matches(form.getPw(), member.getPw())) {
             info = member.toLoginInfo();

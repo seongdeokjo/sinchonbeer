@@ -1,6 +1,6 @@
 package com.bitcamp.sc.web.member.dto;
 
-import com.bitcamp.sc.domain.member.domain.Address;
+import com.bitcamp.sc.domain.address.domain.Address;
 import com.bitcamp.sc.domain.member.domain.Member;
 import lombok.*;
 
@@ -25,7 +25,7 @@ public class RegRequest {
         return new Member(this.email, this.pw, this.name, this.phone);
     }
 
-    public Address toMemberAddress() {
+    public Address toAddress() {
         return new Address(0, postcode, address1, address2);
     }
 }

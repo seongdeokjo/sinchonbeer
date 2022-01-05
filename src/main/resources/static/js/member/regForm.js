@@ -151,7 +151,7 @@ $(document).ready(function () {
 		}
 		
 		$.ajax({ 
-			url : '/emailCheck',
+			url : '/members/check/email',
 			type : 'post',
 			contentType: 'application/json; charset=UTF-8;',
 			data : $(this).val(),

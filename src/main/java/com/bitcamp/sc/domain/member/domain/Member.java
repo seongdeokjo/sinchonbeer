@@ -1,7 +1,6 @@
 package com.bitcamp.sc.domain.member.domain;
 
 import com.bitcamp.sc.web.login.dto.LoginInfo;
-import com.bitcamp.sc.web.member.dto.RegResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +22,6 @@ public class Member {
 	private String code;
 //	private MemberType role;
 
-
 	public Member(String email, String pw, String name, String phone) {
 		this.email = email;
 		this.pw = pw;
@@ -32,7 +30,6 @@ public class Member {
 	}
 
 	public LoginInfo toLoginInfo() {
-		return new LoginInfo(this.idx, this.email, this.name,this.phone);
+		return new LoginInfo(this.idx, this.email, this.name, this.phone);
 	}
-
 }

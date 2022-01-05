@@ -27,8 +27,8 @@
 			});
 			
 			//필수 항목에 체크 되어야만 다음 페이지로 넘어갈 수 있게 하기.
-			var required1 = $('#requiredChk1');
-            var required2 = $('#requiredChk2');
+			let required1 = $('#requiredChk1');
+            let required2 = $('#requiredChk2');
             $('#accept_agree').on('click',function(){
                if((required1.is(':checked')  && required2.is(':checked'))==false){
                    alert('필수 항목에 동의를 해주세요.');

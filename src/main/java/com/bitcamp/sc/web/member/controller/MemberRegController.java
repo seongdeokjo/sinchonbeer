@@ -37,7 +37,7 @@ public class MemberRegController {
 	@PostMapping("/add")
 	public String reg(RegRequest regRequest) {
 		log.info("regRequest ={}",regRequest.toString());
-		if(regService.regMember(regRequest)){
+		if(regService.saveMember(regRequest)){
 			return "redirect:/members/add-success";
 		}
 		return "member/add/regForm";

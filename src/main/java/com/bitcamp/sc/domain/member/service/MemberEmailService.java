@@ -19,19 +19,18 @@ import com.bitcamp.sc.domain.member.repository.MemberDao;
 @Slf4j
 @Service
 @AllArgsConstructor
-public class MailSenderService {
+public class MemberEmailService {
 
 	private  JavaMailSender sender;
-
 	private  SqlSessionTemplate template;
 
 	// 메일 전송 여부 반환
-	public Boolean emailSender(String userEmail) {
+	public Boolean sendMail(String userEmail) {
 
 		Boolean result = true;
 
 		String authNum = randomNum();
-		System.out.println("[메일service] 만들어진 인증번호 : " + authNum);
+		log.info("번호 = {}",authNum);
 		MimeMessage message = sender.createMimeMessage();
 		// MimeMessage에는 메일 내용이 들어가게 됨. 제목, 내용, 발신, 수신, 첨부
 		try {
@@ -46,7 +45,7 @@ public class MailSenderService {
 			message.setText(html, "utf-8", "html");
 
 			// from 설정 (보내는 사람 설정. 구글에서는 이 설정을 막아 놓았음)
-			message.setFrom(new InternetAddress("watersun326@gmail.com"));
+			message.setFrom(new InternetAddress("seongdeok217@gmail.com"));
 
 			// to 설정 (받는 사람 설정.)
 			message.addRecipient(RecipientType.TO, new InternetAddress(userEmail, userEmail + " 님", "UTF-8"));

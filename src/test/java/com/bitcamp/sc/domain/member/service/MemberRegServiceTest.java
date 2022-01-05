@@ -1,5 +1,7 @@
 package com.bitcamp.sc.domain.member.service;
 
+import com.bitcamp.sc.domain.address.domain.Address;
+import com.bitcamp.sc.domain.address.repository.AddressDao;
 import com.bitcamp.sc.domain.member.domain.*;
 import com.bitcamp.sc.domain.member.repository.MemberDao;
 import com.bitcamp.sc.web.member.dto.RegRequest;
@@ -21,7 +23,8 @@ class MemberRegServiceTest {
     @Autowired
     MemberRegService service;
 
-    MemberDao dao;
+    MemberDao mdao;
+    AddressDao adao;
 
     @Test
     void regMember() {
@@ -33,17 +36,19 @@ class MemberRegServiceTest {
         regRequest.setName("테스트1");
         regRequest.setPhone("01011111111");
 
-        dao = template.getMapper(MemberDao.class);
+        mdao = template.getMapper(MemberDao.class);
         Member member = regRequest.toMember();
-        int result = dao.saveMember(member);
+        mdao.save(member);
 
-        assertThat(result).isEqualTo(1);
+        assertThat(member.getEmail()).isEqualTo(regRequest.getEmail());
         log.info("member ={}",member);
     }
 
     @Test
-    void regAddress() {
+    void 회원과주소_저장() {
         //given
+        mdao = template.getMapper(MemberDao.class);
+        adao = template.getMapper(AddressDao.class);
         RegRequest regRequest = new RegRequest();
 
         regRequest.setEmail("test1234@naver.com");
@@ -55,28 +60,31 @@ class MemberRegServiceTest {
         regRequest.setAddress2("1동");
         regRequest.setPostcode("2222");
 
-        Address address = regRequest.toMemberAddress();
+        Address address = regRequest.toAddress();
         boolean resultA = address.formValidate();
 
 
         // then
-        dao = template.getMapper(MemberDao.class);
+
         Member member = regRequest.toMember();
-        int result = dao.saveMember(member);
+        mdao.save(member);
         log.info("memberId ={}", member.getIdx());
 
-        int resultAddress = 0;
-        if (resultA) {
-            address.setMidx(member.getIdx());
-            resultAddress = dao.saveAddress(address);
-        }
+
+        saveAddress(address, member);
 
         // when
-        assertThat(result).isEqualTo(1);
+        assertThat(member.getEmail()).isEqualTo(regRequest.getEmail());
         log.info("member ={}", member);
-        assertThat(resultAddress).isEqualTo(1);
+        assertThat(address.getPostcode()).isEqualTo(regRequest.getPostcode());
         log.info("address = {}", address);
     }
 
+    private void saveAddress(Address address, Member member) {
+        if (member != null) {
+            address.setMidx(member.getIdx());
+            adao.save(address);
+        }
+    }
 
 }

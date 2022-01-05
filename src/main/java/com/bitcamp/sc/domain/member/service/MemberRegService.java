@@ -1,5 +1,6 @@
 package com.bitcamp.sc.domain.member.service;
 
+import com.bitcamp.sc.domain.address.repository.AddressDao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 //import com.bitcamp.sc.member.config.WebSecurityConfig;
 import com.bitcamp.sc.domain.member.domain.Member;
-import com.bitcamp.sc.domain.member.domain.Address;
+import com.bitcamp.sc.domain.address.domain.Address;
 import com.bitcamp.sc.web.member.dto.RegRequest;
 import com.bitcamp.sc.domain.member.repository.MemberDao;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,36 +23,37 @@ public class MemberRegService {
     private final PasswordEncoder passwordEncoder;
 
     private MemberDao memberDao;
+    private AddressDao addressDao;
 
-    public boolean regMember(RegRequest regRequest) {
+    public boolean saveMember(RegRequest regRequest) {
         boolean result = false;
         // 회원등록 - toMember(): midx, email, pw, name, phone
         memberDao = template.getMapper(MemberDao.class);
-        Member member = regRequest.toMember();
+        addressDao = template.getMapper(AddressDao.class);
+        Member saveMember = regRequest.toMember();
         //암호화
-        encryptionPw(member);
+        encryptionPw(saveMember);
 
-        int resultCnt = memberDao.saveMember(member); // 1또는 0 반환.
-        if (resultCnt == 1) {
-            log.info("member = {}", member);
-            int idx = member.getIdx();
+        memberDao.save(saveMember);// 1또는 0 반환.
+        if (saveMember != null) {
+            log.info("member = {}", saveMember);
+            int idx = saveMember.getIdx();
             // 사용자가 입력한 주소등록
-            result = regAddress(regRequest, idx);
-
+            result = saveAddress(regRequest, idx);
         }
         return result;
     }
-    
+
     // 주소 등록
-    private boolean regAddress(RegRequest regRequest, int idx) {
+    private boolean saveAddress(RegRequest regRequest, int idx) {
         boolean result = false;
-        Address memberAddress = regRequest.toMemberAddress();
-        if (memberAddress.formValidate()) {
-            memberAddress.setMidx(idx);
-           int resultCnt = memberDao.saveAddress(memberAddress);
-           if(resultCnt == 1){
-               result = true;
-           }
+        Address address = regRequest.toAddress();
+        if (address.formValidate()) {
+            address.setMidx(idx);
+            addressDao.save(address);
+            if (address != null) {
+                result = true;
+            }
         }
         return result;
     }

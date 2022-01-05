@@ -1,7 +1,7 @@
 package com.bitcamp.sc.web.shop;
 
 import com.bitcamp.sc.web.login.dto.LoginInfo;
-import com.bitcamp.sc.domain.member.domain.Address;
+import com.bitcamp.sc.domain.address.domain.Address;
 import com.bitcamp.sc.domain.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import javax.servlet.http.HttpSession;

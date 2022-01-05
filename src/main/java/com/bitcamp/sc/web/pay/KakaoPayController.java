@@ -1,7 +1,7 @@
 package com.bitcamp.sc.web.pay;
 
 import com.bitcamp.sc.web.login.dto.LoginInfo;
-import com.bitcamp.sc.domain.member.domain.Address;
+import com.bitcamp.sc.domain.address.domain.Address;
 import com.bitcamp.sc.domain.member.service.MemberService;
 import com.bitcamp.sc.domain.order.domain.OrderInfo;
 import com.bitcamp.sc.domain.order.service.OrderService;
@@ -75,7 +75,7 @@ public class KakaoPayController {
 									   .category("shop")
 									   .price(shop.getPrice())
 									   .goodsIdx(shop.getGidx())
-									   .addressIdx(memberAddress.getAidx())
+									   .addressIdx(memberAddress.getIdx())
 									   .memberIdx(shop.getMidx())
 									   .amount(shop.getAmount())
 									   .build();

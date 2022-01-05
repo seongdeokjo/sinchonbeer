@@ -1,4 +1,4 @@
-package com.bitcamp.sc.domain.member.domain;
+package com.bitcamp.sc.domain.address.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @ToString
 public class Address {
 
-    private int aidx;
+    private int idx;
     private int midx;
     private String postcode;
     private String address1;
