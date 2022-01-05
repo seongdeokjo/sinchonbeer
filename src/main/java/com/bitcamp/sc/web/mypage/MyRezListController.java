@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.bitcamp.sc.domain.login.LoginInfo;
+import com.bitcamp.sc.web.login.dto.LoginInfo;
 import com.bitcamp.sc.domain.mypage.domain.RezList;
 
 @Controller

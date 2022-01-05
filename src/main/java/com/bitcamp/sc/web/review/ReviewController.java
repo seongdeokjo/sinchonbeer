@@ -3,7 +3,7 @@ package com.bitcamp.sc.web.review;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.bitcamp.sc.domain.login.LoginInfo;
+import com.bitcamp.sc.web.login.dto.LoginInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

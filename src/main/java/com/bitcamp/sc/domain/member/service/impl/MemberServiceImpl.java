@@ -5,8 +5,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bitcamp.sc.domain.login.LoginInfo;
-import com.bitcamp.sc.domain.member.domain.MemberAddress;
+import com.bitcamp.sc.web.login.dto.LoginInfo;
+import com.bitcamp.sc.domain.member.domain.Address;
 import com.bitcamp.sc.domain.member.repository.MemberDao;
 
 @Service
@@ -23,7 +23,7 @@ public class MemberServiceImpl implements MemberService {
 
 	// 회원의 midx로 주소 정보 가지고 오기
 	@Override
-	public MemberAddress getMemberAdd(int midx) {
+	public Address getMemberAdd(int midx) {
 		return template.getMapper(MemberDao.class).selectAddressByMidx(midx);
 	}
 	//회원 수정 에서 기존 비밀번호 확인하기

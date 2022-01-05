@@ -3,7 +3,7 @@ package com.bitcamp.sc.domain.member.repository;
 import org.apache.ibatis.annotations.Insert;
 
 import com.bitcamp.sc.domain.member.domain.Member;
-import com.bitcamp.sc.domain.member.domain.MemberAddress;
+import com.bitcamp.sc.domain.member.domain.Address;
 
 public interface MemberDao {
 
@@ -11,17 +11,15 @@ public interface MemberDao {
 	Member selectByEmailPw(String email, String pw);
 	//이메일로 회원정보 불러오기
 	Member selectByEmail(String email);
-//	Optional<Member> selectByEmail(String email);
-
 
 	//회원가입
-	int insertMember(Member member);
+	int saveMember(Member member);
 	//이메일(아이디) 중복 체크
 	int selectByEmail2(String email);
 	
 	//회원 주소 입력
 	@Insert("insert into address (midx, postcode, address1, address2) values(#{midx}, #{postcode}, #{address1}, #{address2})")
-	int insertAddress(MemberAddress memberAddress);
+	int saveAddress(Address memberAddress);
 	
 	//이메일 찾기 (멤버 객체)
 	Member emailSearch(String name, String phone);
@@ -42,7 +40,7 @@ public interface MemberDao {
 	Member selectByMidx(int idx);
 	
 	//멤버의 idx로 주소 조회하기.
-	MemberAddress selectAddressByMidx(int idx);
+	Address selectAddressByMidx(int idx);
 	
 	//회원 수정 에서 기존 비밀번호 확인하기
 	String selectPw(int midx);

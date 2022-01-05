@@ -1,4 +1,4 @@
-package com.bitcamp.sc.web.member;
+package com.bitcamp.sc.web.member.controller;
 
 import java.util.Map;
 

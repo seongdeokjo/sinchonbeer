@@ -1,7 +1,7 @@
 package com.bitcamp.sc.web.shop;
 
-import com.bitcamp.sc.domain.login.LoginInfo;
-import com.bitcamp.sc.domain.member.domain.MemberAddress;
+import com.bitcamp.sc.web.login.dto.LoginInfo;
+import com.bitcamp.sc.domain.member.domain.Address;
 import com.bitcamp.sc.domain.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import javax.servlet.http.HttpSession;
@@ -77,7 +77,7 @@ public class ShopController {
 			
 			LoginInfo loginInfo = (LoginInfo)session.getAttribute("loginInfo");
 			
-			MemberAddress memberAddress = memberService.getMemberAdd(loginInfo.getIdx());
+			Address memberAddress = memberService.getMemberAdd(loginInfo.getIdx());
 			
 			model.addAttribute("address1", memberAddress.getAddress1());
 			model.addAttribute("address2", memberAddress.getAddress2());

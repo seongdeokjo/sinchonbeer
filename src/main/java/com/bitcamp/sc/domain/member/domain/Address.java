@@ -13,13 +13,20 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class MemberAddress {
+public class Address {
 
     private int aidx;
     private int midx;
     private String postcode;
     private String address1;
     private String address2;
+
+    public Address(int midx, String postcode, String address1, String address2) {
+        this.midx = midx;
+        this.postcode = postcode;
+        this.address1 = address1;
+        this.address2 = address2;
+    }
 
     // 주소를 모두 입력하였는지 확인하는 메소드
     public boolean formValidate() {
@@ -28,11 +35,6 @@ public class MemberAddress {
         if ((postcode != null || postcode.trim().isEmpty()) && (address1 != null || address1.trim().isEmpty())) {
             check = true;
         }
-        System.out.println("=======주소 입력 정보=======");
-        System.out.println("입력한 postcode :" + postcode);
-        System.out.println("입력한 address1 :" + address1);
-        System.out.println("입력한 address2 :" + address2);
-        System.out.println("=======================");
         return check;
     }
 }

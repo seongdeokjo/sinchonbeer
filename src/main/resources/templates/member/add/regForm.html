@@ -6,8 +6,6 @@
     <!-- metaheader 영역 -->
     <link rel="stylesheet" th:href="@{/css/member/regForm.css}">
     <th:block th:replace="frame/metaheader"></th:block>
-
-
 </head>
 <body>
 <!-- header 영역 -->
@@ -18,30 +16,30 @@
 <div id="main_wrap">
     <div class="join_title">JOIN</div>
     <div class="small_text">안녕하세요 신촌맥주입니다.</div>
-    <form id="regInputForm" method="post">
+    <form id="regInputForm" th:action th:object="${regRequest}" method="post">
         <div class="every_box">
             <div class="email_input margin_bottom">
                 <label for="email">이메일 <i aria-hidden="true" class="icon_orange"></i></label>
-                <input type="text" placeholder="이메일" id="email" name="MemberRegRequest.email" class="red_round">
+                <input type="text" placeholder="이메일" id="email" th:field="*{email}" class="red_round">
                 <div class="msg"></div>
             </div>
 
             <div class="couple_box margin_bottom ">
                 <label for="pw">비밀번호 <i aria-hidden="true" class="icon_orange"></i></label>
-                <input type="password" placeholder="비밀번호" id="pw" name="MemberRegRequest.Pw" class="red_round">
+                <input type="password" placeholder="비밀번호" id="pw" th:field="*{pw}" class="red_round">
                 <input type="password" placeholder="비밀번호 확인" id="repw" class="red_round">
                 <div class="msg"></div>
             </div>
 
             <div class="margin_bottom">
                 <label for="username">이름 <i aria-hidden="true" class="icon_orange"></i></label>
-                <input type="text" placeholder="이름을 입력하세요" id="username" name="MemberRegRequest.Name" class="red_round">
+                <input type="text" placeholder="이름을 입력하세요" id="username" th:field="*{name}" class="red_round">
                 <div class="msg"></div>
             </div>
 
             <div class="margin_bottom">
                 <label for="phone">연락처 <i class="icon_orange"></i></label>
-                <input type="text" placeholder="'-'제외하고 입력하세요" id="phone" name="MemberRegRequest.Phone"
+                <input type="text" placeholder="'-'제외하고 입력하세요" id="phone" th:field="*{phone}"
                        class="red_round">
                 <div class="msg"></div>
             </div>
@@ -49,19 +47,14 @@
                 <label for="address">주소 <i aria-hidden="true" class="icon_orange"></i> </label>
                 <div class="couple_box ">
                     <!-- 카카오 주소 api//---->
-                    <input type="hidden" id="postcode" placeholder="우편번호" name="MemberAddressRequest.postcode">
-                    <script>
-                        console.log(typeof ($('#address2')));
-                        console.log($('#address2'));
-                        console.log($('#postcode'));
-                    </script>
-                    <input type="text" class="foldTarget" onclick="execDaumPostcode()" id="address"
-                           name="MemberAddressRequest.address1"
+                    <input type="hidden" id="postcode" placeholder="우편번호" th:field="*{postcode}">
+                    <input type="text" class="foldTarget" th:onclick="execDaumPostcode()" id="address"
+                           th:field="*{address1}"
                            placeholder="주소">
                     <div class="foldTarget" id="wrap"
                          style="display:none;border:1px solid;width:400px;height:300px;margin:5px 0;position:relative">
                     </div>
-                    <input type="text" id="detailAddress" name="MemberAddressRequest.address2" placeholder="상세주소">
+                    <input type="text" id="detailAddress" th:field="*{address2}" placeholder="상세주소">
                     <input type="hidden" id="extraAddress" placeholder="참고항목">
                     <div class="msg"></div>
                     <!-- 카카오 주소 api source-->
@@ -75,6 +68,6 @@
 <!-- footer 영역 -->
 <th:block th:replace="frame/footer"></th:block>
 
-<!-- <script th:src="@{/js/member/regForm.js}"></script>-->
+ <script th:src="@{/js/member/regForm.js}"></script>
 </body>
 </html>

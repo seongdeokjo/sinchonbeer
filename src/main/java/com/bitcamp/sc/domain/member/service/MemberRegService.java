@@ -8,12 +8,13 @@ import org.springframework.stereotype.Service;
 
 //import com.bitcamp.sc.member.config.WebSecurityConfig;
 import com.bitcamp.sc.domain.member.domain.Member;
-import com.bitcamp.sc.domain.member.domain.MemberAddress;
-import com.bitcamp.sc.domain.member.domain.RegRequest;
+import com.bitcamp.sc.domain.member.domain.Address;
+import com.bitcamp.sc.web.member.dto.RegRequest;
 import com.bitcamp.sc.domain.member.repository.MemberDao;
 import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
+@Transactional
 @Service
 @RequiredArgsConstructor
 public class MemberRegService {
@@ -22,31 +23,35 @@ public class MemberRegService {
 
     private MemberDao memberDao;
 
-    public int regMember(RegRequest regRequest) {
-
-        // 주소를 제외한 회원가입 - toMember(): midx, email, pw, name, phone
+    public boolean regMember(RegRequest regRequest) {
+        boolean result = false;
+        // 회원등록 - toMember(): midx, email, pw, name, phone
         memberDao = template.getMapper(MemberDao.class);
-        Member member = regRequest.getMemberRegRequest().toMember();
+        Member member = regRequest.toMember();
         //암호화
         encryptionPw(member);
 
-        int resultCnt = memberDao.insertMember(member); // 1또는 0 반환.
+        int resultCnt = memberDao.saveMember(member); // 1또는 0 반환.
         if (resultCnt == 1) {
             log.info("member = {}", member);
             int idx = member.getIdx();
-            // 사용자가 입력한 주소를 주소테이블에 넣기
-            int result = regAddress(regRequest, idx);
-            return result;
-        }
-        return 0;
-    }
+            // 사용자가 입력한 주소등록
+            result = regAddress(regRequest, idx);
 
-    private int regAddress(RegRequest regRequest, int idx) {
-        int result = 0;
-        MemberAddress memberAddress = regRequest.getMemberAddressRequest().toMemberAddress();
+        }
+        return result;
+    }
+    
+    // 주소 등록
+    private boolean regAddress(RegRequest regRequest, int idx) {
+        boolean result = false;
+        Address memberAddress = regRequest.toMemberAddress();
         if (memberAddress.formValidate()) {
             memberAddress.setMidx(idx);
-            result = memberDao.insertAddress(memberAddress);
+           int resultCnt = memberDao.saveAddress(memberAddress);
+           if(resultCnt == 1){
+               result = true;
+           }
         }
         return result;
     }

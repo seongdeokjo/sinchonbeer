@@ -1,6 +1,6 @@
 package com.bitcamp.sc.domain.tour.service;
 
-import com.bitcamp.sc.domain.login.LoginInfo;
+import com.bitcamp.sc.web.login.dto.LoginInfo;
 import com.bitcamp.sc.domain.tour.domain.ChangeTourDto;
 import com.bitcamp.sc.domain.pay.domain.PayInfo;
 

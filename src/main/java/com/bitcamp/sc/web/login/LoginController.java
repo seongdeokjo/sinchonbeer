@@ -1,8 +1,8 @@
 package com.bitcamp.sc.web.login;
 
-import com.bitcamp.sc.domain.login.LoginForm;
+import com.bitcamp.sc.web.login.dto.LoginForm;
 import com.bitcamp.sc.domain.login.service.LoginService;
-import com.bitcamp.sc.domain.login.LoginInfo;
+import com.bitcamp.sc.web.login.dto.LoginInfo;
 import com.bitcamp.sc.web.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -44,7 +44,7 @@ public class LoginController {
         log.info("request={}", request.getRequestURL().toString());
         log.info("loginForm ={}", form);
         if (bindingResult.hasErrors()) {
-            log.info("errorcount= {}", bindingResult.getFieldErrorCount());
+            log.info("errorCount= {}", bindingResult.getFieldErrorCount());
             return "login/loginForm";
         }
 

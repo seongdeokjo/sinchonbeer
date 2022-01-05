@@ -1,4 +1,4 @@
-package com.bitcamp.sc.domain.login;
+package com.bitcamp.sc.web.login.dto;
 
 import lombok.Getter;
 import lombok.Setter;

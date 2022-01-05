@@ -1,4 +1,4 @@
-package com.bitcamp.sc.web.member;
+package com.bitcamp.sc.web.member.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
