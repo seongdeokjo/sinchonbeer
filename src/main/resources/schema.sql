@@ -1,4 +1,4 @@
-drop table basket;
+/* drop table basket;
 select * from orders;
 -- 멤버 테이블(member)
 create table member
@@ -124,4 +124,7 @@ create table comment
 );
 
 commit;
+
+   */
+
 

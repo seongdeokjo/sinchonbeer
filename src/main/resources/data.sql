@@ -1,1 +1,1 @@
-insert into member(name) values ('test1');
+/*insert into member(name) values ('test1');*/
