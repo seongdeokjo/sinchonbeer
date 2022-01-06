@@ -18,8 +18,8 @@ public interface MypageService {
 	List<UpdateMember> getMemberInfo(int idx);
 
 	// 회원 정보 수정
-	public int updateMember(UpdateMember member);
+	int updateMember(UpdateMember member);
 
 	// 회원 탈퇴
-	public void deleteMember(int idx);
+	 void deleteMember(int idx);
 }

@@ -20,7 +20,7 @@ public class MemberFindController {
 	// 이메일과 비밀번호 찾기 첫번째 화면
 	@GetMapping
 	public String getFindForm() {
-		return "member/findEmailPwForm";
+		return "/member/findForm";
 	}
 
 	//(1) 아이디 찾기  - ajax에서 아이디 찾기 (요청)매핑

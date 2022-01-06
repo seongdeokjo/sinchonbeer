@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>신촌 맥주 : 회원가입</title>
+    <!-- metaheader 영역 -->
+    <link rel="stylesheet" th:href="@{/css/member/findEmailPwForm.css}">
+    <th:block th:replace="frame/metaheader"></th:block>
+</head>
+<body>
+<!-- header 영역 -->
+<th:block th:replace="frame/header"></th:block>
+<!-- nav 영역 -->
+<th:block th:replace="frame/nav"></th:block>
+
+<!-- content 영역 -->
+<!-- html(1). 이메일/비밀번호 찾기 form 메인  -사용자 요청:/inquiry, FindAccountController 와 연결. -->
+<div class="wrap_main " id="emailPwFindFormContent">
+    <h1>이메일/비밀번호 찾기</h1>
+    <p class="id_tab ">
+        이메일이 기억나지 않으세요? <br>본인인증을 통해 이메일을 확인하실 수 있어요!
+    </p>
+    <p class="pw_tab display_none">
+        비밀번호가 기억나지 않으세요? <br>이메일 인증을 통해 비밀번호를 재설정하실 수 있어요!
+    </p>
+
+    <ul class=" nav nav-tabs nav-fill mx-6" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active " id="home-tab" data-toggle="tab"
+               href="#home" role="tab" aria-controls="home" aria-selected="true">이메일
+                찾기</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+               aria-controls="profile" aria-selected="false">비밀번호 초기화</a>
+        </li>
+    </ul>
+
+    <div class="tab-content mt-1" id="myTabContent">
+        <div class=" tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="inner-tab">
+                <div id="id " class="id_tab">
+                    <div class="label_space">
+                        <label for="username" id="name_label">이름</label>
+                    </div>
+                    <input type="text" id="username" placeholder="이름을 입력해 주세요.">
+
+                    <div class="label_space">
+                        <label for="phone" id="phone_label">휴대폰 번호</label>
+                    </div>
+                    <input type="text" id="phone" placeholder="휴대폰 번호를 입력해 주세요. ( - 제외)">
+                </div>
+            </div>
+            <input type="submit" value="확인" id="emailSearch" class="chkok">
+
+        </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div id="pwin" class="">
+                <div class="inner-tab ">
+                    <div id="pw" class="pw_tab">
+                        <div class="label_space">
+                            <label for="name" id="pwName_label">이름</label>
+                        </div>
+                        <input type="text" id="name" placeholder="이름을 입력해 주세요" name="mname">
+                        <div class="label_space">
+                            <label for="email" id="pwUserEmail_label">이메일</label>
+                        </div>
+                        <input type="email" id="email" placeholder="이메일을 입력해 주세요" name="memail">
+                    </div>
+                </div>
+                <input type="submit" value="확인" class="chkok" id="pwSearch">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- html(2). 이메일 찾기 성공 -사용자 요청:  /inquiry/pw,  FindAccountController 와 연결. -->
+<div class="wrap_main display_none" id="emailSuccessContent">
+    <h1>이메일 찾기</h1>
+    <p class="pw_tab ">
+        이메일이 기억나지 않으세요? <br>본인인증을 통해 이메일을 확인하실 수 있어요!
+    </p>
+    <div class="result_box">
+        <p>
+            입력하신 정보와 일치하는 계정을 발견했습니다. <br> <br><span id="inquiryEmail"></span>
+        </p>
+        <a th:href="@{/login}"><input type="button" value="로그인"></a>
+    </div>
+</div>
+<!-- html(3). 비밀번호 찾기. 인증번호 발송여부 묻기 - 사용자 요청: /inquiry/pw/auth,  MailSenderController와 연결. -->
+<div class="wrap_main display_none" id="pwContinueContent">
+    <h1>비밀번호 재설정</h1>
+    <p class="pw_tab ">
+        비밀번호가 기억나지 않으세요? <br>이메일 인증을 통해 비밀번호를 재설정하실 수 있어요!
+    </p>
+    <div class="result_box">
+        <p>
+            입력하신 정보와 일치하는 계정을 발견했습니다. 아래의 이메일로 인증을 받아서 <br>비밀번호 재설정을
+            진행하시겠습니까? <br>
+            <br> <span id="inquiryPw"></span>
+        </p>
+        <input type="submit" value="계속" id="pwContinueBtn" data-toggle="modal" data-target="#staticBackdrop">
+    </div>
+</div>
+<!-- html(4). 비밀번호 찾기. 인증번호 입력 - 사용자 요청: /inquiry/pw/input-code,  AuthNumberController 와 연결. -->
+<div class="wrap_main display_none" id="pwInputCodeContent">
+    <h1>비밀번호 재설정</h1>
+    <p class="pw_tab ">
+        비밀번호가 기억나지 않으세요? <br>이메일 인증을 통해 비밀번호를 재설정하실 수 있어요!
+    </p>
+    <div class="result_box">
+        <p>
+            이메일을 보내드렸으며 인증을 통해 <br> 비밀번호를 재설정 할 수 있습니다.
+        </p>
+        <table>
+            <tr>
+                <td class="border-1"><label for="authNum">인증번호 입력</label></td>
+                <td class="border-1"><input type="text" class="border_none"
+                                            id="authNum"></td>
+            </tr>
+        </table>
+        <input type="submit" value="확인" id="codeBtn">
+    </div>
+</div>
+
+<!-- html(5). 비밀번호 찾기. 인증번호 재설정 form - 사용자 요청: /inquiry/pw/reset,  PwResetController 와 연결. -->
+<div class="wrap_main display_none" id="pwResetContent">
+    <h1>비밀번호 재설정</h1>
+    <p class="pw_tab ">
+        비밀번호가 기억나지 않으세요? <br>이메일 인증을 통해 비밀번호를 재설정하실 수 있어요!
+    </p>
+    <div class="result_box">
+        <p>비밀번호를 새로 입력해 주세요.</p>
+        <table class="pwInput">
+            <tr>
+                <td class="border-1" id="newPwInput">
+                    <input type="password" class="border_none width_400px"
+                           placeholder="새로운 비밀번호" id="newPw">
+                </td>
+            </tr>
+            <tr>
+                <td class="border-1" id="reNewPwInput">
+                    <input type="password" class="border_none width_400px"
+                           placeholder="새로운 비밀번호 확인" id="reNewPw">
+                </td>
+            </tr>
+        </table>
+        <div class="newPwMsg"></div>
+        <input type="submit" value="확인" id="pwResetBtn">
+    </div>
+</div>
+<!-- html(6). 비밀번호 찾기 성공 화면 - 사용자 요청: 따로 없음,  ajax로 처리하여 연결. -->
+<div class="wrap_main display_none" id="pwSuccessContent">
+    <h1>비밀번호 찾기</h1>
+    <p class="pw_tab ">
+        비밀번호가 기억나지 않으세요? <br>이메일 인증을 통해 비밀번호를 재설정하실 수 있어요!
+    </p>
+    <div class="result_box">
+        <p>비밀번호 재설정이 완료되었습니다.</p>
+        <a th:href="@{/login}">
+            <input type="button" value="로그인">
+        </a>
+    </div>
+</div>
+
+<!-- content 영역 끝 ---->
+
+<script th:src="@{/js/member/findForm.js}"></script>
+<!-- footer 영역 -->
+<th:block th:replace="frame/footer"></th:block>
+
+</body>
+</html>

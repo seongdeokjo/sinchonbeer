@@ -1,84 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE mapper 
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.bitcamp.sc.domain.member.repository.MemberDao">
 
-	<!-- 로그인할 때 사용 - 이메일 + 비밀번호로 멤버객체 조회하기 -->
-	<select id="findByEmailPw"
-		resultType="com.bitcamp.sc.domain.member.domain.Member"
-		>
-		select * from member where email=#{email} and pw=#{pw}
-	</select>
-	
-	<!-- 로그인할 때 사용 - 이메일로 멤버객체 조회 -->
-	<select id="findByEmail"
-		resultType="com.bitcamp.sc.domain.member.domain.Member"
-		>
-		select * from member where email=#{email}
-	</select>
-	
-	<!-- 회원가입 -->
-	<insert id="save"
-		parameterType="com.bitcamp.sc.domain.member.domain.Member"
-		useGeneratedKeys="true"
-		keyProperty="idx"
-	>
-		insert into member (email, pw, name, phone)
-		values(#{email}, #{pw}, #{name}, #{phone})
-	</insert>
+    <!-- 로그인할 때 사용 - 이메일 + 비밀번호로 멤버객체 조회하기 -->
+    <select id="findByEmailPw" parameterType="string"
+            resultType="com.bitcamp.sc.domain.member.domain.Member"
+    >
+        select *
+        from member
+        where email = #{email}
+          and pw = #{pw}
+    </select>
 
-	<!-- 이메일 찾기 -->
-	<select id="findByNameAndPhone"
-		resultType="com.bitcamp.sc.domain.member.domain.Member"
-		parameterType="string"
-		>
-		select email from member where name=#{name} and phone=#{phone}
-	</select>
+    <!-- 로그인할 때 사용 - 이메일로 멤버객체 조회 -->
+    <select id="findByEmail" parameterType="strings"
+            resultType="com.bitcamp.sc.domain.member.domain.Member"
+    >
+        select *
+        from member
+        where email = #{email}
+    </select>
 
-	<!-- 비밀번호 찾기 -->
-	<select id="findByNameAndEmail"
-		resultType="com.bitcamp.sc.domain.member.domain.Member"
-		parameterMap="string"
-		>
-		select email from member where name=#{name} and email=#{email}
-	</select>
-	
-	<!-- 비밀번호 찾기 중 인증번호 저장하기 -->
-	<update id="updateCode" parameterType="String">
-		update member set code=#{code} where email=#{email}
-	</update>
+    <!-- 회원가입 -->
+    <insert id="save"
+            parameterType="com.bitcamp.sc.domain.member.domain.Member"
+            useGeneratedKeys="true"
+            keyProperty="idx"
+    >
+        insert into member (email, pw, name, phone)
+        values (#{email}, #{pw}, #{name}, #{phone})
+    </insert>
 
-	<!-- 비밀번호 찾기 중 새로운 비밀번호 생성 -->
-	<update id="updatePw"
-		parameterType="com.bitcamp.sc.domain.member.domain.Member"
-		>
-		update member set pw = #{pw} where email=#{email}
-	</update>
-	
-	<select id="findByMidx"
-		parameterType="int"
-		resultType="com.bitcamp.sc.domain.member.domain.Member"
-		>
-		select * from member where id=#{midx}
-	</select>
+    <!-- 이메일 찾기 -->
+    <select id="findByNameAndPhone"
+            resultType="com.bitcamp.sc.domain.member.domain.Member"
+            parameterType="string"
+    >
+        select email
+        from member
+        where name = #{name}
+          and phone = #{phone}
+    </select>
 
-	<!-- 회원 수정 에서 기존 비밀번호 확인하기 -->
-	<select id="selectPw"
-			parameterType="int"
-			resultType="String"
-	>
-		select pw from member where id=#{midx}
-	</select>
+    <!-- 비밀번호 찾기 -->
+    <select id="findByNameAndEmail" parameterMap="string"
+            resultType="com.bitcamp.sc.domain.member.domain.Member">
+        select email
+        from member
+        where name = #{name}
+          and email = #{email}
+    </select>
 
+    <!-- 비밀번호 찾기 중 인증번호 저장하기 -->
+    <update id="updateCode" parameterType="String">
+        update member
+        set code=#{code}
+        where email = #{email}
+    </update>
 
-	<select id="findAddressByMidx"
-		parameterType="int"
-		resultType="com.bitcamp.sc.domain.address.domain.Address"
-		>
-		select * from address where midx=#{midx}
-	</select>
+    <!-- 비밀번호 찾기 중 새로운 비밀번호 생성 -->
+    <update id="updatePw" parameterType="string">
+        update member
+        set pw = #{pw}
+        where email = #{email}
+    </update>
+
+    <select id="findByMidx" parameterType="int"
+            resultType="com.bitcamp.sc.domain.member.domain.Member">
+        select *
+        from member
+        where id = #{midx}
+    </select>
+
+    <!-- 회원 수정 에서 기존 비밀번호 확인하기 -->
+    <select id="selectPw" parameterType="int" resultType="String">
+        select pw
+        from member
+        where id = #{midx}
+    </select>
+
+    <select id="findAddressByMidx" parameterType="int"
+            resultType="com.bitcamp.sc.domain.address.domain.Address">
+        select *
+        from address
+        where midx = #{midx}
+    </select>
 
 </mapper>

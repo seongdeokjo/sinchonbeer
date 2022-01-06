@@ -39,7 +39,6 @@ public class MemberFindService {
         return resultEmail;
     }
 
-
     // 비밀번호 재설정
     public Boolean modifyPw(String userEmail, String newPw) {
 
@@ -50,6 +49,4 @@ public class MemberFindService {
         }
         return result;
     }
-
-
 }

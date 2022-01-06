@@ -28,8 +28,8 @@ public class MemberVerifyService {
 	public Boolean checkCode(String inputNum, String email) {
 
 		Boolean result = false;
-		String memberCode = template.getMapper(MemberDao.class).findByEmail(email).getCode();
-		if (memberCode.equals(inputNum)) {
+		String verifyCode = template.getMapper(MemberDao.class).findByEmail(email).getCode();
+		if (verifyCode.equals(inputNum)) {
 			result = true;
 		}
 		return result;

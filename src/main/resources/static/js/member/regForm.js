@@ -1,8 +1,5 @@
-
 let element_wrap;
-
 $(document).ready(function () {
-
     //script(1) submit : 주소를 제외하고 빈칸 없이 입력해야만 회원가입이 넘어감. 
     let email = $('#email');
     let pw = $('#pw');
@@ -11,9 +8,7 @@ $(document).ready(function () {
     let phone = $('#phone');
     let address1 = $('#address');
     let address2 = $('#detailAddress');
-
     $('#submitBtn').on('click',function () {
-
         //이메일 공백일 경우 메시지 출력
          if (email.val().trim().length < 1) {
             $('#email + div.msg').html('<p>필수항목입니다.</p>');

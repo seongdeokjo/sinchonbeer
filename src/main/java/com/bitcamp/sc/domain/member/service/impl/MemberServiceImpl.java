@@ -4,16 +4,17 @@ import com.bitcamp.sc.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bitcamp.sc.web.login.dto.LoginInfo;
 import com.bitcamp.sc.domain.address.domain.Address;
 import com.bitcamp.sc.domain.member.repository.MemberDao;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class MemberServiceImpl implements MemberService {
 
 	private final SqlSessionTemplate template;
@@ -32,7 +33,7 @@ public class MemberServiceImpl implements MemberService {
 
 	//회원 수정 에서 기존 비밀번호 확인하기
 	@Override
-	public String getPw(int midx) {
-		return template.getMapper(MemberDao.class).selectPw(midx);
+	public String getPw(int idx) {
+		return template.getMapper(MemberDao.class).findByMidx(idx).getPw();
 	}
 }
