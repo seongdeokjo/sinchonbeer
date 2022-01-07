@@ -2,18 +2,19 @@ package com.bitcamp.sc.domain.shop.service.impl;
 
 import com.bitcamp.sc.domain.shop.domain.GoodsVO;
 import com.bitcamp.sc.domain.shop.repository.GoodsDao;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 import com.bitcamp.sc.domain.shop.service.ShopService;
 
+@Slf4j
 @Service
 public class ShopServiceImpl implements ShopService{
 
 	GoodsDao goodsDao;
-	
-	@Autowired
+
 	public ShopServiceImpl(GoodsDao goodsDao) {
 		this.goodsDao = goodsDao;
 

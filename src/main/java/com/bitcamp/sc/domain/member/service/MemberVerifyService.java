@@ -12,13 +12,12 @@ import com.bitcamp.sc.domain.member.repository.MemberDao;
 @Service
 @RequiredArgsConstructor
 public class MemberVerifyService {
-	
-	private final SqlSessionTemplate template;
-	
+	private final MemberDao memberDao;
+
 	//이메일이 중복이면  "Y", 중복되지 않았으면 "N"를 반환
 	public String checkEmail(String email) {
 		String result="Y";
-		Member member = template.getMapper(MemberDao.class).findByEmail(email);
+		Member member = memberDao.findByEmail(email);
 		if(member != null) {
 			result="N";
 		}
@@ -28,7 +27,7 @@ public class MemberVerifyService {
 	public Boolean checkCode(String inputNum, String email) {
 
 		Boolean result = false;
-		String verifyCode = template.getMapper(MemberDao.class).findByEmail(email).getCode();
+		String verifyCode = memberDao.findByEmail(email).getCode();
 		if (verifyCode.equals(inputNum)) {
 			result = true;
 		}

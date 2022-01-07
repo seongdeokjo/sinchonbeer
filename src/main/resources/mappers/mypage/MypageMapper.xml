@@ -27,10 +27,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<resultMap type="com.bitcamp.sc.domain.mypage.domain.UpdateMember" id="UpdateMemberDomain">
 		<result property="midx" column="id"/>
-		<result property="memail" column="email"/>
-		<result property="mname" column="name"/>
-		<result property="mnewPw" column="pw"/>
-		<result property="mphone" column="phone"/>
+		<result property="email" column="email"/>
+		<result property="name" column="name"/>
+		<result property="newPw" column="pw"/>
+		<result property="phone" column="phone"/>
 		<result property="postcode" column="postcode"/>
 		<result property="address1" column="address1"/>
 		<result property="address2" column="address2"/>
@@ -50,15 +50,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 회원 정보 조회 -->
-	<select id="getMemberInfo" resultType="com.bitcamp.sc.domain.mypage.domain.UpdateMember">
-		SELECT m.id,m.email, m.name, m.phone, a.postcode, a.address1, a.address2 FROM member m, address a
+	<select id="getMemberInfo" resultMap="UpdateMemberDomain" parameterType="long">
+		SELECT m.id,m.email, m.name, m.phone, a.postcode, a.address1, a.address2
+		FROM member m, address a
 		WHERE m.id=a.midx AND m.id=#{idx};
 	</select>
 
 	<!-- 회원 정보 수정 -->
 	<update id="updateMember" parameterType="com.bitcamp.sc.domain.mypage.domain.UpdateMember">
 		UPDATE member m, address a
-        SET m.name=#{mname}, m.pw=#{mnewPw}, m.phone=#{mphone}, a.postcode=#{postcode}, a.address1=#{address1}, a.address2=#{address2}
+        SET m.name=#{name}, m.pw=#{newPw}, m.phone=#{phone}, a.postcode=#{postcode}, a.address1=#{address1}, a.address2=#{address2}
         WHERE m.id=a.midx AND m.id=#{midx};
 	</update>
 

@@ -78,4 +78,9 @@ class MemberRegServiceTest {
             template.getMapper(AddressDao.class).save(address);
         }
     }
+
+    @Test
+    void 멤버_찾기(){
+
+    }
 }

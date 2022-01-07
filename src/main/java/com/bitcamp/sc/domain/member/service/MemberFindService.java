@@ -14,13 +14,13 @@ import com.bitcamp.sc.domain.member.repository.MemberDao;
 @RequiredArgsConstructor
 public class MemberFindService {
 
-    private final SqlSessionTemplate template;
+    private final MemberDao memberDao;
     private final PasswordEncoder passwordEncoder;
 
     // 이름+전화번호로 이메일 찾기 --> 매개변수 값이 동일할 경우 = ?
     public String getEmail(String name, String phone) {
         String email = null;
-        Member member = template.getMapper(MemberDao.class).findByNameAndPhone(name, phone);
+        Member member = memberDao.findByNameAndPhone(name, phone);
         if (member != null) {
             email = member.getEmail();
         }
@@ -31,7 +31,7 @@ public class MemberFindService {
     public String getEmailForPw(String name, String email) {
         String resultEmail = null;
         try {
-            resultEmail = template.getMapper(MemberDao.class).findByNameAndEmail(name, email).getEmail();
+            resultEmail = memberDao.findByNameAndEmail(name, email).getEmail();
         } catch (NullPointerException e) {
             e.printStackTrace();
             log.info("찾으려는 이메일이 없을 경우 발생하는 예외");
@@ -43,7 +43,7 @@ public class MemberFindService {
     public Boolean modifyPw(String userEmail, String newPw) {
 
         Boolean result = false;
-        int resultCnt = template.getMapper(MemberDao.class).updatePw(userEmail, passwordEncoder.encode(newPw));
+        int resultCnt = memberDao.updatePw(userEmail, passwordEncoder.encode(newPw));
         if (resultCnt == 1) {
             result = true;
         }

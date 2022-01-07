@@ -17,17 +17,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class MemberServiceImpl implements MemberService {
 
-	private final SqlSessionTemplate template;
+	private final MemberDao memberDao;
 
 	// 회원의 midx로 회원 정보 조회하기.
 	@Override
 	public LoginInfo getMember(long idx) {
-		return template.getMapper(MemberDao.class).findByMidx(idx).toLoginInfo();
+		return memberDao.findByMidx(idx).toLoginInfo();
 	}
 
 	// 회원의 midx로 주소 정보 가지고 오기
 	@Override
 	public Address getMemberAdd(long midx) {
-		return template.getMapper(MemberDao.class).findAddressByMidx(midx);
+		return memberDao.findAddressByMidx(midx);
 	}
 }

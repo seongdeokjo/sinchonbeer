@@ -4,7 +4,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.bitcamp.sc.domain.member.repository.MemberDao">
+<mapper namespace="MemberMapper">
 
     <!-- 로그인할 때 사용 - 이메일 + 비밀번호로 멤버객체 조회하기 -->
     <select id="findByEmailPw" parameterType="string"

@@ -10,7 +10,6 @@ import javax.mail.internet.MimeMessage.RecipientType;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberEmailService {
 
 	private  JavaMailSender sender;
-	private  SqlSessionTemplate template;
+	private MemberDao memberDao;
 
 	// 메일 전송
 	@Async
@@ -34,7 +33,7 @@ public class MemberEmailService {
 		log.info("번호 = {}",authNum);
 
 		// 인증번호를 db에 저장하기.
-		template.getMapper(MemberDao.class).updateCode(authNum, userEmail);
+		memberDao.updateCode(authNum, userEmail);
 
 		MimeMessage message = sender.createMimeMessage();
 		// MimeMessage에는 메일 내용이 들어가게 됨. 제목, 내용, 발신, 수신, 첨부

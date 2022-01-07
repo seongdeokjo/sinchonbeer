@@ -8,11 +8,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateMember {
+
 	private String midx;
-	private String memail;
-	private String mname;
-	private String mnewPw;
-	private String mphone;
+	private String email;
+	private String name;
+	private String newPw;
+	private String phone;
 	private String postcode;
 	private String address1;
 	private String address2;

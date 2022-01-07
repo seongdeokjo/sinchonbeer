@@ -3,7 +3,6 @@ package com.bitcamp.sc.domain.member.service;
 import com.bitcamp.sc.domain.address.repository.AddressDao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class MemberRegService {
-    private final SqlSessionTemplate template;
+    private final MemberDao memberDao;
+    private final AddressDao addressDao;
     private final PasswordEncoder passwordEncoder;
-
 
     public boolean saveMember(RegRequest regRequest) {
         boolean result = false;
@@ -30,7 +29,7 @@ public class MemberRegService {
         Member saveMember = regRequest.toMember();
         //암호화
         encryptionPw(saveMember);
-        template.getMapper(MemberDao.class).save(saveMember);
+        memberDao.save(saveMember);
         if (saveMember != null) {
             log.info("member = {}", saveMember);
             long idx = saveMember.getIdx();
@@ -46,7 +45,7 @@ public class MemberRegService {
         Address address = regRequest.toAddress();
         if (address.formValidate()) {
             address.setMidx(idx);
-            template.getMapper(AddressDao.class).save(address);
+            addressDao.save(address);
             if (address != null) {
                 result = true;
             }

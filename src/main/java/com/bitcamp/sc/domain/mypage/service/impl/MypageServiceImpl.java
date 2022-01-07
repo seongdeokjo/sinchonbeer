@@ -2,45 +2,32 @@ package com.bitcamp.sc.domain.mypage.service.impl;
 
 import java.util.List;
 
-import com.bitcamp.sc.domain.member.repository.MemberDao;
-import com.bitcamp.sc.domain.mypage.repository.MypageDao;
+import com.bitcamp.sc.domain.mypage.repository.impl.MybatisMypageDao;
 import com.bitcamp.sc.domain.mypage.service.MypageService;
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import com.bitcamp.sc.domain.mypage.domain.OrderList;
 import com.bitcamp.sc.domain.mypage.domain.RezList;
-import com.bitcamp.sc.domain.mypage.domain.UpdateMember;
 
+@Slf4j
 @Service
 public class MypageServiceImpl implements MypageService {
-	MypageDao dao;
-	MemberDao memberDao;
-	SqlSessionTemplate template;
-	PasswordEncoder passwordEncoder;
+    private MybatisMypageDao dao;
 
-	@Autowired
-	public MypageServiceImpl(MypageDao dao, SqlSessionTemplate template, PasswordEncoder passwordEncoder) {
-		this.dao = dao;
-		this.template = template;
-		this.passwordEncoder = passwordEncoder;
-	}
+    public MypageServiceImpl(MybatisMypageDao dao) {
+        this.dao = dao;
+    }
 
-	// 주문 내역 조회
-	@Override
-	public List<OrderList> getOrderList(long idx) {
-		return dao.getOrderList(idx);
-	}
+    // 주문 내역 조회
+    @Override
+    public List<OrderList> getOrderList(long idx) {
+        return dao.getOrderList(idx);
+    }
 
-	// 예약 내역 조회
-	@Override
-	public List<RezList> getRezList(long idx) {
-		return dao.getRezList(idx);
-	}
-
-
-
-
+    // 예약 내역 조회
+    @Override
+    public List<RezList> getRezList(long idx) {
+        return dao.getRezList(idx);
+    }
 }
