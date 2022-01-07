@@ -45,7 +45,7 @@
 //	@Rollback(true)
 //	void 투어예약완료() {
 //	
-//		int midx = 3;
+//		long midx = 3;
 //		String date = "2021-09-11";
 //		
 //		dao.addTourPeople(midx, date);		
@@ -55,7 +55,7 @@
 //	@Transactional
 //	@Rollback(true)
 //	void 투어취소() {
-//		int midx=3;
+//		long midx=3;
 //		String date ="2021-09-11";
 //		
 //		dao.subTourPeople(midx, date);
@@ -66,7 +66,7 @@
 //	@Rollback(true)
 //	void 투어예약변경() {
 //		// 멤버 번호
-//		int midx=3;
+//		long midx=3;
 //		// 기존 예약 날짜
 //		String currentDate ="2021-09-11";
 //		// 바뀌는 예약 날짜
@@ -97,7 +97,7 @@
 //	@Rollback(true)
 //	void 투어날짜확인하기ByTidx() {
 //
-//		int idx = 23;
+//		long idx = 23;
 //	String expectedDate = "2021-09-25";	
 //	String tdate =	dao.getTourDateByTidx(idx);
 //		

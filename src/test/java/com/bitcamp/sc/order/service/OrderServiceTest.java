@@ -33,11 +33,11 @@ class OrderServiceTest {
 	@DisplayName("주문정보를 넣으면 주문이 생성된다")
 	void createOrderTest() {
 		// given
-		// String category, int price, int tourIdx, int tourPeople, int memberIdx, int addressIdx
+		// String category, int price, int tourIdx, int tourPeople, long memberIdx, int addressIdx
 		OrderInfo orderInfo = new OrderInfo("tour", 3000, 60, 3, 2, 1);
 		
 		// when
-		int orderIdx = orderService.createOrder("tour", orderInfo);
+		long orderIdx = orderService.createOrder("tour", orderInfo);
 		
 		// then
 		OrderInfo findOrderInfo = orderService.getOrderInfo(orderIdx);
@@ -56,7 +56,7 @@ class OrderServiceTest {
 	@DisplayName("주문정보를 잘못 넣으면 주문 생성이 실패된다")
 	void createOrderTestFail() {
 		// given
-		// String category, int price, int tourIdx, int tourPeople, int memberIdx, int addressIdx
+		// String category, int price, int tourIdx, int tourPeople, long memberIdx, int addressIdx
 		OrderInfo orderInfo1 = new OrderInfo("tour", 0, 60, 3, 2, 1);
 		OrderInfo orderInfo2 = new OrderInfo("tour", 3000, 0, 3, 2, 1);
 		OrderInfo orderInfo3 = new OrderInfo("tour", 3000, 60, 0, 2, 1);

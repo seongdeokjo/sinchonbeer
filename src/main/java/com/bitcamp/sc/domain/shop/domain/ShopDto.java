@@ -7,10 +7,10 @@ import lombok.Setter;
 @Setter
 public class ShopDto {
 	
-	private int midx;
+	private long midx;
 	private String name;
 	private int amount;
 	private int price;
-	private int gidx;
+	private long gidx;
 
 }

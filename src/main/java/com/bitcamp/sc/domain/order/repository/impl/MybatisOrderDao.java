@@ -30,17 +30,17 @@ public class MybatisOrderDao implements OrderDao {
 	}
 
 	@Override
-	public OrderInfo findByIdx(int idx) {
+	public OrderInfo findByIdx(long idx) {
 		return template.selectOne(NAME_SPACE + ".findByIdx", idx);
 	}
 
 	@Override
-	public List<OrderInfo> findByMemberIdx(int memberIdx) {
+	public List<OrderInfo> findByMemberIdx(long memberIdx) {
 		return template.selectList(NAME_SPACE + ".findByMemberIdx", memberIdx);
 	}
 
 	@Override
-	public List<OrderInfo> findByCategoryAndMemberIdx(String category, int memberIdx) {
+	public List<OrderInfo> findByCategoryAndMemberIdx(String category, long memberIdx) {
 		Map<String, Object> param = new HashMap<>();
 		param.put("category", category);
 		param.put("memberIdx", memberIdx);
@@ -48,12 +48,12 @@ public class MybatisOrderDao implements OrderDao {
 	}
 
 	@Override
-	public int deleteByIdx(int idx) {
+	public int deleteByIdx(long idx) {
 		return template.delete(NAME_SPACE + ".deleteByIdx", idx);
 	}
 
 	@Override
-	public int updateStatus(String status, int idx) {
+	public int updateStatus(String status, long idx) {
 		Map<String, Object> param = new HashMap<>();
 		param.put("status", status);
 		param.put("idx", idx);

@@ -9,10 +9,10 @@ public interface GoodsDao {
 	public GoodsVO insertGoods(GoodsVO vo);
 	
 	// 02.상품삭제
-	public void deleteGoods(int idx);
+	public void deleteGoods(long idx);
 	
 	// 03.상품정보
-	public GoodsVO findIdx(int idx);
+	public GoodsVO findIdx(long idx);
 	
 
 

@@ -7,8 +7,8 @@ import lombok.ToString;
 @ToString
 public class BasketVo {
     private int bidx;
-    private int midx;
-    private int gidx;
+    private long midx;
+    private long gidx;
     private String gname;
     private String gphoto;
     private int bcount;

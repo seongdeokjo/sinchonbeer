@@ -26,18 +26,18 @@ public class JdbcTemplateOrderDao implements OrderDao {
 	}
 
 	@Override
-	public OrderInfo findByIdx(int idx) {
+	public OrderInfo findByIdx(long idx) {
 		List<OrderInfo> result = template.query("select * from orders where oidx = ?", orderRowMapper(), idx);
 		return result.get(0);
 	}
 
 	@Override
-	public List<OrderInfo> findByMemberIdx(int memberIdx) {
+	public List<OrderInfo> findByMemberIdx(long memberIdx) {
 		return null;
 	}
 
 	@Override
-	public List<OrderInfo> findByCategoryAndMemberIdx(String category, int memberIdx) {
+	public List<OrderInfo> findByCategoryAndMemberIdx(String category, long memberIdx) {
 		return null;
 	}
 
@@ -52,12 +52,12 @@ public class JdbcTemplateOrderDao implements OrderDao {
 	}
 
 	@Override
-	public int deleteByIdx(int idx) {
+	public int deleteByIdx(long idx) {
 		return 0;
 	}
 
 	@Override
-	public int updateStatus(String status, int idx) {
+	public int updateStatus(String status, long idx) {
 		return 0;
 	}
 }

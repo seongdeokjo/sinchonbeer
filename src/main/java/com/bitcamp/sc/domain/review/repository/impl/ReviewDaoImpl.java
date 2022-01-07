@@ -37,7 +37,7 @@ public class ReviewDaoImpl implements ReviewDao {
 	
 	// 02. 게시글 상세보기
 	@Override
-	public ReviewVO readReview(Integer idx) throws Exception {
+	public ReviewVO readReview(long idx) throws Exception {
     	return template.selectOne(NAME_SPACE + ".readReview", idx);
 	}
     
@@ -49,7 +49,7 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
     // 04. 게시글 삭제
     @Override
-    public void deleteReview(Integer idx) throws Exception {
+    public void deleteReview(long idx) throws Exception {
     	template.delete(NAME_SPACE + ".deleteReview",idx);
  
     }

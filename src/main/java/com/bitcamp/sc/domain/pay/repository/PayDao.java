@@ -27,19 +27,19 @@ public class PayDao {
 		return payInfo;
 	}
 
-	public PayInfo findByIdx(int idx) {
+	public PayInfo findByIdx(long idx) {
 		return template.selectOne(NAME_SPACE + ".findByIdx", idx);
 	}
 
-	public PayInfo findByOrderIdx(int orderIdx) {
+	public PayInfo findByOrderIdx(long orderIdx) {
 		return template.selectOne(NAME_SPACE + ".findByOrderIdx", orderIdx);
 	}
 	
-	public List<PayInfo> findByMemberId(int memberIdx) {
+	public List<PayInfo> findByMemberId(long memberIdx) {
 		return template.selectOne(NAME_SPACE + ".findByMemberIdx", memberIdx);
 	}
 
-	public List<PayInfo> findByCategoryAndMemberIdx(String category, int memberIdx) {
+	public List<PayInfo> findByCategoryAndMemberIdx(String category, long memberIdx) {
 		Map<String, Object> param = new HashMap<>();
 		param.put("category", category);
 		param.put("memberIdx", memberIdx);

@@ -1,10 +1,6 @@
 package com.bitcamp.sc.domain.address.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -15,13 +11,13 @@ import lombok.extern.slf4j.Slf4j;
 @ToString
 public class Address {
 
-    private int idx;
-    private int midx;
+    private long idx;
+    private long midx;
     private String postcode;
     private String address1;
     private String address2;
 
-    public Address(int midx, String postcode, String address1, String address2) {
+    public Address(long midx, String postcode, String address1, String address2) {
         this.midx = midx;
         this.postcode = postcode;
         this.address1 = address1;

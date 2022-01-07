@@ -32,7 +32,7 @@
 //		dao.save(order);
 //
 //		// then
-//		int idx = order.getIdx();
+//		long idx = order.getIdx();
 //
 //		assertThat(dao.findByIdx(idx).getCategory()).isEqualTo(order.getCategory());
 //		assertThat(dao.findByIdx(idx).getPrice()).isEqualTo(order.getPrice());

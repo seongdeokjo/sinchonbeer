@@ -8,7 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class BasketDto {
-    private int gidx;
-    private int midx;
+    private long gidx;
+    private long midx;
     private int amount;
 }

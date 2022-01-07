@@ -36,7 +36,7 @@ public class BasketServiceImpl implements BasketService {
 
     // 장바구니 리스트 가져오기
     @Override
-    public List<BasketVo> getList(int midx) {
+    public List<BasketVo> getList(long midx) {
         List<BasketVo> list = new ArrayList<>();
         if(midx != 0) {
             list = bDao.getBasketList(midx);
@@ -50,19 +50,19 @@ public class BasketServiceImpl implements BasketService {
 
     // 장바구니 총액 가져오기
     @Override
-    public int getTotalPayByMidx(int midx) {
+    public int getTotalPayByMidx(long midx) {
         return bDao.getTotalPay(midx);
     }
 
     // 장바구니 한 행만 삭제
     @Override
-    public int getDeleteRowByGidx(int gidx,int midx) {
+    public int getDeleteRowByGidx(long gidx,long midx) {
         return 	bDao.deleteRowByGidx(gidx,midx);
     }
 
     // 장바구니 모두 삭제
     @Override
-    public void deleteAllByMidx(int midx) {
+    public void deleteAllByMidx(long midx) {
         bDao.deleteAll(midx);
     }
 
@@ -74,7 +74,7 @@ public class BasketServiceImpl implements BasketService {
 
     // 장바구니 선택한 품목 삭제
     @Override
-    public int getDeleteRowByGidx(List<Integer> gidxList, int midx) {
+    public int getDeleteRowByGidx(List<Integer> gidxList, long midx) {
         int result = 0;
         for(int i = 0; i < gidxList.size(); i++ ) {
             result += bDao.deleteRowByGidx((int)gidxList.get(i), midx);

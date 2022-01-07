@@ -40,7 +40,7 @@ public class TourServiceImpl implements TourService {
 	
 	// 결제 : 투어 날짜로 투어 번호 가져오기
 	@Override
-	public String getTourDateByTidx(int tidx) {
+	public String getTourDateByTidx(long tidx) {
 		return dao.getTourDateByTidx(tidx);
 	}
 

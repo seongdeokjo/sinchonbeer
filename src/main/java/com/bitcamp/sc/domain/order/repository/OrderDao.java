@@ -6,11 +6,11 @@ import com.bitcamp.sc.domain.order.domain.OrderInfo;
 
 public interface OrderDao {
 	
-	public OrderInfo save(OrderInfo orderInfo);
-	public OrderInfo findByIdx(int idx);
-	public List<OrderInfo> findByMemberIdx(int memberIdx);
-	public List<OrderInfo> findByCategoryAndMemberIdx(String category, int memberIdx);
-	public int deleteByIdx(int idx);
-	public int updateStatus(String status, int idx);
+	 OrderInfo save(OrderInfo orderInfo);
+	 OrderInfo findByIdx(long idx);
+	 List<OrderInfo> findByMemberIdx(long memberIdx);
+	 List<OrderInfo> findByCategoryAndMemberIdx(String category, long memberIdx);
+	 int deleteByIdx(long idx);
+	 int updateStatus(String status, long idx);
 	
 }

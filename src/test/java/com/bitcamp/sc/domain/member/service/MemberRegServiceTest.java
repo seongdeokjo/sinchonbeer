@@ -23,11 +23,8 @@ class MemberRegServiceTest {
     @Autowired
     MemberRegService service;
 
-    MemberDao mdao;
-    AddressDao adao;
-
     @Test
-    void regMember() {
+    void 회원_저장() {
         //given
         RegRequest regRequest = new RegRequest();
 
@@ -36,9 +33,8 @@ class MemberRegServiceTest {
         regRequest.setName("테스트1");
         regRequest.setPhone("01011111111");
 
-        mdao = template.getMapper(MemberDao.class);
         Member member = regRequest.toMember();
-        mdao.save(member);
+        template.getMapper(MemberDao.class).save(member);
 
         assertThat(member.getEmail()).isEqualTo(regRequest.getEmail());
         log.info("member ={}",member);
@@ -47,8 +43,7 @@ class MemberRegServiceTest {
     @Test
     void 회원과주소_저장() {
         //given
-        mdao = template.getMapper(MemberDao.class);
-        adao = template.getMapper(AddressDao.class);
+
         RegRequest regRequest = new RegRequest();
 
         regRequest.setEmail("test1234@naver.com");
@@ -63,13 +58,10 @@ class MemberRegServiceTest {
         Address address = regRequest.toAddress();
         boolean resultA = address.formValidate();
 
-
         // then
-
         Member member = regRequest.toMember();
-        mdao.save(member);
+        template.getMapper(MemberDao.class).save(member);
         log.info("memberId ={}", member.getIdx());
-
 
         saveAddress(address, member);
 
@@ -83,8 +75,7 @@ class MemberRegServiceTest {
     private void saveAddress(Address address, Member member) {
         if (member != null) {
             address.setMidx(member.getIdx());
-            adao.save(address);
+            template.getMapper(AddressDao.class).save(address);
         }
     }
-
 }

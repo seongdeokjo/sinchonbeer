@@ -32,7 +32,7 @@
 //
 //			
 //			
-//			int idx = vo.getIdx();
+//			long idx = vo.getIdx();
 //
 //			assertThat(dao.insertGoods(vo).getGname()).isEqualTo(vo.getGname());
 //			assertThat(dao.insertGoods(vo).getPrice()).isEqualTo(vo.getPrice());
@@ -54,7 +54,7 @@
 ////		dao.insertGoods(vo);
 //		
 //		
-//		int idx=2;
+//		long idx=2;
 //		
 //		dao.deleteGoods(idx);
 //		

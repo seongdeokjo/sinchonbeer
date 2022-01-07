@@ -23,7 +23,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int createOrder(String type, OrderInfo orderInfo) {
+	public long createOrder(String type, OrderInfo orderInfo) {
 		validateOrderInfo(type, orderInfo);
 
 		orderInfo = orderDao.save(orderInfo);
@@ -32,32 +32,32 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public OrderInfo getOrderInfo(int orderIdx) {
+	public OrderInfo getOrderInfo(long orderIdx) {
 		OrderInfo orderInfo = orderDao.findByIdx(orderIdx);
 		return orderInfo;
 	}
 
 	@Override
-	public List<OrderInfo> getOrderInfos(int memberIdx) {
+	public List<OrderInfo> getOrderInfos(long memberIdx) {
 		List<OrderInfo> orderInfos = orderDao.findByMemberIdx(memberIdx);
 
 		return orderInfos;
 	}
 
 	@Override
-	public List<OrderInfo> getOrderInfosByType(String type, int memberIdx) {
+	public List<OrderInfo> getOrderInfosByType(String type, long memberIdx) {
 		List<OrderInfo> orderInfos = orderDao.findByCategoryAndMemberIdx(type, memberIdx);
 
 		return orderInfos;
 	}
 	
 	@Override
-	public int deleteOrder(int idx) {
+	public int deleteOrder(long idx) {
 		return orderDao.deleteByIdx(idx);
 	}
 	
 	@Override
-	public int changeOrderStatus(int idx, String status) {
+	public int changeOrderStatus(long idx, String status) {
 		return orderDao.updateStatus(status, idx);
 	}
 
@@ -86,7 +86,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int confirmOrder(int idx) {
+	public int confirmOrder(long idx) {
 		return orderDao.updateStatus("confirmed", idx);
 	}
 

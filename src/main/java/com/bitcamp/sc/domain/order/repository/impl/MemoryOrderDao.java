@@ -10,7 +10,7 @@ import com.bitcamp.sc.domain.order.repository.OrderDao;
 
 public class MemoryOrderDao implements OrderDao {
 
-	private static Map<Integer, OrderInfo> store = new HashMap<>();
+	private static Map<Long, OrderInfo> store = new HashMap<>();
 	private static int index;
 
 	@Override
@@ -21,14 +21,14 @@ public class MemoryOrderDao implements OrderDao {
 	}
 
 	@Override
-	public OrderInfo findByIdx(int idx) {
+	public OrderInfo findByIdx(long idx) {
 		return store.get(idx);
 	}
 
 	@Override
-	public List<OrderInfo> findByMemberIdx(int memberIdx) {
+	public List<OrderInfo> findByMemberIdx(long memberIdx) {
 		List<OrderInfo> orderInfos = new ArrayList<>();
-		for (int key : store.keySet()) {
+		for (long key : store.keySet()) {
 			if (store.get(key).getMemberIdx() == memberIdx) {
 				orderInfos.add(store.get(key));
 			}
@@ -37,9 +37,9 @@ public class MemoryOrderDao implements OrderDao {
 	}
 
 	@Override
-	public List<OrderInfo> findByCategoryAndMemberIdx(String category, int memberIdx) {
+	public List<OrderInfo> findByCategoryAndMemberIdx(String category, long memberIdx) {
 		List<OrderInfo> orderInfos = new ArrayList<>();
-		for (int key : store.keySet()) {
+		for (long key : store.keySet()) {
 			if (store.get(key).getCategory().equals(category) && store.get(key).getMemberIdx() == memberIdx) {
 				orderInfos.add(store.get(key));
 			}
@@ -53,12 +53,12 @@ public class MemoryOrderDao implements OrderDao {
 	}
 
 	@Override
-	public int deleteByIdx(int idx) {
+	public int deleteByIdx(long idx) {
 		return 0;
 	}
 
 	@Override
-	public int updateStatus(String status, int idx) {
+	public int updateStatus(String status, long idx) {
 		return 0;
 	}
 }

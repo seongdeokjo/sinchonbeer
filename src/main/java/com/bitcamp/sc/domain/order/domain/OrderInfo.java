@@ -12,18 +12,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderInfo {
-	private int idx;
+	private long idx;
 	private Timestamp date;
 	private String category;
 	private int price;
-	private Integer tourIdx;
+	private long tourIdx;
 	private Integer tourPeople;
-	private int memberIdx;
-	private Integer addressIdx;
-	private Integer goodsIdx;
+	private long memberIdx;
+	private long addressIdx;
+	private long goodsIdx;
 	private Integer amount;
 
-	public OrderInfo(String category, int price, Integer tourIdx, Integer tourPeople, int memberIdx, Integer addressIdx) {
+	public OrderInfo(String category, int price, long tourIdx, Integer tourPeople, long memberIdx, long addressIdx) {
 		this.category = category;
 		this.price = price;
 		this.tourIdx = tourIdx;

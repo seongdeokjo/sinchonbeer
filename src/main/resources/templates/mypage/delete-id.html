@@ -40,7 +40,7 @@
 	</div>
 
 	<div class="container">
-		<input type="hidden" th:value="${session.loginInfo.idx}" name="idx">
+		<input type="hidden" th:value="${session.loginMember.idx}" name="idx">
 		<p class="text-center text-32 mb-5">회원 탈퇴</p>
 		<div class="row">
 			<div class="col-lg-2" id="sideBar">
@@ -53,7 +53,8 @@
 						>회원 탈퇴</span></a></li>
 				</ul>
 			</div>
-			<form id="withdrawContent" name="withdrawContent" class="col-lg-8">
+
+			<form id="withdrawContent" name="withdrawContent" class="col-lg-8" th:action method="post">
 				<div class="row justify-content-center mt-2 p-5 border border-sinchon">
 					<div class="col-10">
 						<div class="text-16">
@@ -62,10 +63,9 @@
 								같은 계정으로 재가입시 기존의 적립금과 쿠폰은 복원되지 않습니다.<br> 회원 탈퇴를 진행하시겠습니까?
 							</p>
 							<div class="row justify-content-center mx-auto" style="width: 300px;">
-								<label for="mpw">비밀번호<i class="icon_orange"></i></label> <input type="password" id="mpw"
-									placeholder="기존 비밀번호 입력"> 
+								<label for="mpw">비밀번호<i class="icon_orange"></i></label>
+								<input type="password" id="mpw" placeholder="기존 비밀번호 입력">
 								<a href="javascript:void(0);" onclick="frmSubmit();" id="submitBtn" class="btn btn-sinchon btn-block mt-2">탈퇴하기</a>
-								<!-- <input type="submit" id="submitBtn" class="btn btn-sinchon btn-block mt-2" value="탈퇴하기"> -->
 							</div>
 						</div>
 					</div>
@@ -77,7 +77,7 @@
 	<th:block th:replace="frame/footer"></th:block>
 
 	<script>
-    var pw = $('#mpw');
+    let pw = $('#mpw');
     
     $('#mpw').focusout(function() {
 		console.log($(this).val());
@@ -98,7 +98,6 @@
 			contentType: 'application/json; charset=UTF-8;',
 			data : pw.val(),
 			success : function(data) {
-				console.log(data);
 				// data : Y / N
 				console.log('data success 접근 성공');
 				if (data == 'N') {
@@ -118,7 +117,7 @@
 								alert('비밀번호가 일치하지 않습니다. ');
 					            return false;
 							}else{
-							    var myForm = document.withdrawContent;
+							    let myForm = document.withdrawContent;
 							    myForm.method = "post";
 							    myForm.action = "/mypage/delete-id";
 							    myForm.submit();

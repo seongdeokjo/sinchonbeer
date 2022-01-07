@@ -11,14 +11,14 @@ import lombok.Data;
 @AllArgsConstructor
 public class PayInfo {
 
-	private int idx;
+	private long idx;
 	private int price;
 	private Timestamp date;
 	private String way;
 	private String status;
-	private int orderIdx;
+	private long orderIdx;
 
-	public PayInfo(int price, Timestamp date, String way, String status, int orderIdx) {
+	public PayInfo(int price, Timestamp date, String way, String status, long orderIdx) {
 		this.price = price;
 		this.way = way;
 		this.status = status;

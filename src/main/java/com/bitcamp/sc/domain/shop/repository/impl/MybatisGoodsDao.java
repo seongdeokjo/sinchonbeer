@@ -31,7 +31,7 @@ public class MybatisGoodsDao implements GoodsDao{
 
 	// 2.상품 삭제
 	@Override
-	public void deleteGoods(int idx) {
+	public void deleteGoods(long idx) {
 		template.delete(NAME_SPACE + ".deleteGoods", idx);
 		
 	}
@@ -39,7 +39,7 @@ public class MybatisGoodsDao implements GoodsDao{
 
 	// 3.샹폼 챶기
 	@Override
-	public GoodsVO findIdx(int idx) {
+	public GoodsVO findIdx(long idx) {
 		return template.selectOne(NAME_SPACE + ".findIdx", idx);
 	}
 

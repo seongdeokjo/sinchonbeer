@@ -26,11 +26,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<resultMap type="com.bitcamp.sc.domain.mypage.domain.UpdateMember" id="UpdateMemberDomain">
-		<result property="midx" column="midx"/>
-		<result property="memail" column="memail"/>
-		<result property="mname" column="mname"/>
-		<result property="mnewPw" column="mpw"/>
-		<result property="mphone" column="mphone"/>
+		<result property="midx" column="id"/>
+		<result property="memail" column="email"/>
+		<result property="mname" column="name"/>
+		<result property="mnewPw" column="pw"/>
+		<result property="mphone" column="phone"/>
 		<result property="postcode" column="postcode"/>
 		<result property="address1" column="address1"/>
 		<result property="address2" column="address2"/>
@@ -38,14 +38,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 주문 내역 조회 -->
 	<select id="getOrderList" resultType="com.bitcamp.sc.domain.mypage.domain.OrderList" resultMap="OrderListDomain">
-		SELECT p.id, p.price, date_format(p.date,'%Y-%m-%d') as pdate, p.status, o.id, g.title, g.name, g.photo, o.status, o.amount
+		SELECT p.id, p.price, date_format(p.date,'%Y-%m-%d') as pdate, p.status, o.id, g.tittle, g.name, g.photo, o.status, o.amount
 		FROM payment p, orders o, goods g
-		WHERE p.oidx=o.id AND o.gidx=g.id AND o.midx=#{idx} ORDER BY p.date desc;
+		WHERE p.oidx=o.id AND o.gidx =g.id AND o.midx=#{idx} ORDER BY p.date desc;
 	</select>
 	
 	<!-- 예약 내역 조회 -->
 	<select id="getRezList" resultType="com.bitcamp.sc.domain.mypage.domain.RezList" resultMap="RezListDomain">
-		SELECT p.id, p.price, p.way, o.people, t.date FROM payment p, orders o, tour t
+		SELECT p.id, p.price, p.pway, o.people, t.date FROM payment p, orders o, tour t
 		WHERE p.oidx=o.id AND o.tidx=t.id AND o.status='confirmed' AND o.midx=#{idx} ORDER BY t.date;
 	</select>
 
@@ -62,8 +62,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE m.id=a.midx AND m.id=#{midx};
 	</update>
 
-	<!-- 회원 탈퇴 -->
-	<delete id="deleteMember">
-		DELETE FROM member WHERE id=#{idx};
-	</delete>
+
 </mapper>

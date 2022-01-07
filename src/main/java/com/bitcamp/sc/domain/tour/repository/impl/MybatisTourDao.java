@@ -59,7 +59,7 @@ public class MybatisTourDao implements TourDao {
 
 	// 주문 테이블의 예약 날짜를 변경 --> 현재는 test code
 	@Override
-	public int changeDateByMidx(int oidx, String newDate) {
+	public int changeDateByMidx(long oidx, String newDate) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("oidx", oidx);
 		params.put("tdate", newDate);
@@ -67,8 +67,9 @@ public class MybatisTourDao implements TourDao {
 		
 	}
 
-	public String getTourDateByTidx(int tidx) {
+	public String getTourDateByTidx(long tidx) {
 		return template.selectOne(NAME_SPACE+".getTourDateByTidx",tidx);
+
 	}
 
 	@Override

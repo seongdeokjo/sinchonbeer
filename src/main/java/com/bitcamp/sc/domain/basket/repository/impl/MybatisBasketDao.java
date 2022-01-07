@@ -27,12 +27,12 @@ public class MybatisBasketDao implements BasketDao {
     }
 
     @Override
-    public List<BasketVo> getBasketList(int midx) {
+    public List<BasketVo> getBasketList(long midx) {
         return template.selectList(NAME_SPACE+".getBasketList",midx);
     }
 
     @Override
-    public int getTotalPay(int midx) {
+    public int getTotalPay(long midx) {
         log.info("mybatis 진입");
         Integer test = template.selectOne(NAME_SPACE+".getTotal",midx) ;
         test  = test == null ? 0 : test;
@@ -41,7 +41,7 @@ public class MybatisBasketDao implements BasketDao {
     }
 
     @Override
-    public int deleteRowByGidx(int gidx,int midx) {
+    public int deleteRowByGidx(long gidx,long midx) {
         Map<String,Object> params = new HashMap<>();
         params.put("gidx", gidx);
         params.put("midx", midx);
@@ -49,12 +49,12 @@ public class MybatisBasketDao implements BasketDao {
     }
 
     @Override
-    public void deleteAll(int midx) {
+    public void deleteAll(long midx) {
         template.delete(NAME_SPACE+".deleteAll",midx);
     }
 
     @Override
-    public int checkBasket(int gidx, int midx) {
+    public int checkBasket(long gidx, long midx) {
         log.info("check mybatis 진입");
         log.info(gidx+":"+midx);
         Map<String,Object> params = new HashMap<>();

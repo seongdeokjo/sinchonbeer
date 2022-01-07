@@ -24,7 +24,7 @@ public class PayServiceImpl implements PayService {
 	}
 
 	@Override
-	public int savePayment(PayInfo payInfo) {
+	public long savePayment(PayInfo payInfo) {
 		validatePayInfo(payInfo);
 
 		payInfo = payDao.save(payInfo);
@@ -42,19 +42,19 @@ public class PayServiceImpl implements PayService {
 	}
 
 	@Override
-	public PayInfo getPayInfo(int payIdx) {
+	public PayInfo getPayInfo(long payIdx) {
 		PayInfo payInfo = payDao.findByIdx(payIdx);
 		return payInfo;
 	}
 
 	@Override
-	public List<PayInfo> getPayInfos(int memberIdx) {
+	public List<PayInfo> getPayInfos(long memberIdx) {
 		List<PayInfo> payInfos = payDao.findByMemberId(memberIdx);
 		return payInfos;
 	}
 
 	@Override
-	public List<PayInfo> getPayInfosByType(String type, int memberIdx) {
+	public List<PayInfo> getPayInfosByType(String type, long memberIdx) {
 		List<PayInfo> payInfos = payDao.findByCategoryAndMemberIdx(type, memberIdx);
 		return payInfos;
 	}
@@ -71,7 +71,7 @@ public class PayServiceImpl implements PayService {
 	}
 
 	@Override
-	public PayInfo getPayInfoByOrderIdx(int orderIdx) {
+	public PayInfo getPayInfoByOrderIdx(long orderIdx) {
 		PayInfo payInfo = payDao.findByOrderIdx(orderIdx);
 		return payInfo;
 	}

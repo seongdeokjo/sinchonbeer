@@ -5,35 +5,33 @@ import com.bitcamp.sc.domain.address.domain.Address;
 import org.apache.ibatis.annotations.Param;
 
 public interface MemberDao {
-	//회원가입
-	void save(Member member);
+    //회원가입
+    void save(Member member);
 
-	// 이메일 + 비밀번호로 로그인 정보 가져오기
-	Member findByEmailAndPw(String email, String pw);
-	//이메일로 회원정보 불러오기
-	Member findByEmail(String email);
-	//이메일 찾기 (멤버 객체)
-	Member findByNameAndPhone(String name, String phone);
-	//비밀번호 찾기 (멤버 객체)
-	Member findByNameAndEmail(String name, String email);
-	//멤버의 idx로 멤버 정보 조회하기
-	Member findByMidx(int idx);
+    // 이메일 + 비밀번호로 로그인 정보 가져오기
+    Member findByEmailAndPw(String email, String pw);
 
-	//멤버의 idx로 주소 조회하기.
-	Address findAddressByMidx(int idx);
+    //이메일로 회원정보 불러오기
+    Member findByEmail(String email);
 
-	//비밀번호 찾기 - 인증번호 저장하기.
-	int updateCode(@Param("code") String code, @Param("email") String email);
-	//비밀번호 찾기 - 비밀번호 재설정
-	int updatePw(@Param("email") String email, @Param("pw") String pw);
+    //이메일 찾기 (멤버 객체)
+    Member findByNameAndPhone(String name, String phone);
 
-	// 회원 목록 조회
-	
+    //비밀번호 찾기 (멤버 객체)
+    Member findByNameAndEmail(String name, String email);
 
-	// 회원 정보 수정
+    //멤버의 idx로 멤버 정보 조회하기
+    Member findByMidx(long idx);
 
+    //멤버의 idx로 주소 조회하기.
+    Address findAddressByMidx(long idx);
 
-	// 회원 정보 삭제
+    //비밀번호 찾기 - 인증번호 저장하기.
+    int updateCode(@Param("code") String code, @Param("email") String email);
 
+    //비밀번호 찾기 - 비밀번호 재설정
+    int updatePw(@Param("email") String email, @Param("pw") String pw);
 
+    // 회원 탈퇴
+    void deleteMember(long idx);
 }

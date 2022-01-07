@@ -10,10 +10,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LoginInfo {
-
-	private int idx;
+	private long idx;
 	private String email;
 	private String name;
 	private String phone;
-	
 }

@@ -113,7 +113,7 @@ public class ChangeTourController {
 	// 예약 취소 메일 
 	@GetMapping("/tour/sendCancleMail/{oidx}")
 	@ResponseBody
-	public void sendCancleMail(@PathVariable("oidx") int idx,HttpServletRequest req) {
+	public void sendCancleMail(@PathVariable("oidx") long idx,HttpServletRequest req) {
 		logger.info("취소 메일 컨트롤러 진입 oidx"+idx);
 		LoginInfo login = getLoginInfo(req);
 		PayInfo payInfo = payService.getPayInfoByOrderIdx(idx);

@@ -14,7 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 public class Member {
 
-	private int idx;
+	private long idx;
 	private String email;
 	private String pw;
 	private String name;

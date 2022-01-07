@@ -33,7 +33,7 @@ public class ShopController {
 	
 	// 상품 상세페이지
 	@RequestMapping(value="/shop/{idx}", method = RequestMethod.GET)
-	public String getShopDesc(@PathVariable("idx") int idx) {
+	public String getShopDesc(@PathVariable("idx") long idx) {
 		return "shop/product"+idx;
 			
 
@@ -53,7 +53,7 @@ public class ShopController {
 			
 			@RequestParam("gphotoname") String gphotoname,
 			@RequestParam("gname") String gname,
-			@RequestParam("gidx") int gidx,
+			@RequestParam("gidx") long gidx,
 			@RequestParam("gprice") int gprice,
 			@RequestParam("amount") int amount,
 			

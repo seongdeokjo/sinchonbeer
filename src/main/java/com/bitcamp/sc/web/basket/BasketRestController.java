@@ -16,7 +16,7 @@ public class BasketRestController {
     private final BasketService basketService;
 
     @GetMapping("/deleteRow")
-    public boolean getDeleteRow(@RequestParam("gidx") int gidx,@RequestParam("midx") int midx) {
+    public boolean getDeleteRow(@RequestParam("gidx") long gidx,@RequestParam("midx") long midx) {
         boolean result = false;
         int cnt = basketService.getDeleteRowByGidx(gidx,midx);
         if(cnt > 0) {
@@ -27,7 +27,7 @@ public class BasketRestController {
     }
 
     @GetMapping("/deleteAllByMidx/{midx}")
-    public void deleteAll(@PathVariable("midx") int midx) {
+    public void deleteAll(@PathVariable("midx") long midx) {
         basketService.deleteAllByMidx(midx);
     }
     @GetMapping("/basket/changeAmount")
@@ -44,7 +44,7 @@ public class BasketRestController {
     @PostMapping("/deleteBasketByPicking")
     public int deleteBasketByPicking(
             @RequestParam(value="gidxList[]") List<Integer> gidxList,
-            @RequestParam(value="midx") int midx
+            @RequestParam(value="midx") long midx
     ) {
         int result = 0;
         log.info("gidx List : " + gidxList.toString());

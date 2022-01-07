@@ -90,7 +90,7 @@ public class ReviewController {
 	public String goToView(HttpServletRequest request, Model model) throws Exception {
 		
 		/* System.out.println(request.getParameter("idx")); */
-		int idx = 0;
+		long idx = 0;
 		ReviewVO vo = new ReviewVO();
 		
 		if( request.getParameter("idx") != null) {
@@ -113,7 +113,7 @@ public class ReviewController {
 	@RequestMapping("delete.do") 
 	public int delete(HttpServletRequest request, Model model) throws Exception { 
 		System.out.println("idx: " + request.getParameter("idx"));
-		int idx = 0;
+		long idx = 0;
 		int check = 0;
 		
 		if( request.getParameter("idx") != null) {
@@ -134,7 +134,7 @@ public class ReviewController {
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String goToModify(HttpServletRequest request, Model model) throws Exception {
 		
-		int idx;
+		long idx;
 		ReviewVO vo = new ReviewVO();
 		
 		if(!"".equals(request.getParameter("idx")) && request.getParameterMap().containsKey("idx")) {
@@ -178,7 +178,7 @@ public class ReviewController {
 	@RequestMapping("like.do") 
 	public int like(HttpServletRequest request, Model model) throws Exception { 
 		System.out.println("idx: " + request.getParameter("idx"));
-		int idx = 0;
+		long idx = 0;
 		int check = 0;
 		
 		/*

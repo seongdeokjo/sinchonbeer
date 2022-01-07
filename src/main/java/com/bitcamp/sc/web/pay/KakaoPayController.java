@@ -88,7 +88,7 @@ public class KakaoPayController {
 	@GetMapping("/kakaoPaySuccess")
 	public String kakaoPaySuccess(
 			@RequestParam("pg_token") String pg_token,
-			@RequestParam("orderIdx") int orderIdx,
+			@RequestParam("orderIdx") long orderIdx,
 			Model model) {
 		
 		OrderInfo orderInfo = orderService.getOrderInfo(orderIdx);
@@ -115,7 +115,7 @@ public class KakaoPayController {
 	}
 	
 	@GetMapping("/kakaoPayCancel")
-	public String kakaoPayCancel(@RequestParam("orderIdx") int orderIdx, Model model) {
+	public String kakaoPayCancel(@RequestParam("orderIdx") long orderIdx, Model model) {
 		if (orderService.getOrderInfo(orderIdx) != null) {
 			orderService.deleteOrder(orderIdx);
 		}

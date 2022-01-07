@@ -2,6 +2,7 @@ package com.bitcamp.sc.domain.mypage.service.impl;
 
 import java.util.List;
 
+import com.bitcamp.sc.domain.member.repository.MemberDao;
 import com.bitcamp.sc.domain.mypage.repository.MypageDao;
 import com.bitcamp.sc.domain.mypage.service.MypageService;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -16,6 +17,7 @@ import com.bitcamp.sc.domain.mypage.domain.UpdateMember;
 @Service
 public class MypageServiceImpl implements MypageService {
 	MypageDao dao;
+	MemberDao memberDao;
 	SqlSessionTemplate template;
 	PasswordEncoder passwordEncoder;
 
@@ -28,34 +30,17 @@ public class MypageServiceImpl implements MypageService {
 
 	// 주문 내역 조회
 	@Override
-	public List<OrderList> getOrderList(int idx) {
+	public List<OrderList> getOrderList(long idx) {
 		return dao.getOrderList(idx);
 	}
 
 	// 예약 내역 조회
 	@Override
-	public List<RezList> getRezList(int idx) {
+	public List<RezList> getRezList(long idx) {
 		return dao.getRezList(idx);
 	}
 
-	// 회원 정보 조회
-	@Override
-	public List<UpdateMember> getMemberInfo(int idx) {
-		return dao.getMemberInfo(idx);
-	}
 
-	// 회원 정보 수정
-	@Override
-	public int updateMember(UpdateMember member) {
-		String securityPw = passwordEncoder.encode(member.getMnewPw());
-		member.setMnewPw(securityPw);
-		
-		return dao.updateMember(member);
-	}
 
-	// 회원 탈퇴
-	@Override
-	public void deleteMember(int idx) {
-		dao.deleteMember(idx);
-	}
+
 }

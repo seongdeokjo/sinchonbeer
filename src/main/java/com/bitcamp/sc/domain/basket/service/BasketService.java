@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface BasketService {
     void saveBasket(BasketDto bDto);
-    List<BasketVo> getList(int midx);
-    int getTotalPayByMidx(int midx);
-    int getDeleteRowByGidx(int gidx, int midx);
-    int getDeleteRowByGidx(List<Integer> gidxList, int midx);
-    void deleteAllByMidx(int midx);
+    List<BasketVo> getList(long midx);
+    int getTotalPayByMidx(long midx);
+    int getDeleteRowByGidx(long gidx, long midx);
+    int getDeleteRowByGidx(List<Integer> gidxList, long midx);
+    void deleteAllByMidx(long midx);
     int changeBasketAmount(BasketDto bDto);
 }

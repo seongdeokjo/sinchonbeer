@@ -34,7 +34,7 @@ public class TourController {
 
 	// 투어 공지 페이지에서 /번호로 식별
 	@RequestMapping(value = "/notice/{idx}", method = RequestMethod.GET)
-	public String getTourNoticeDesc(@PathVariable("idx") int idx) {
+	public String getTourNoticeDesc(@PathVariable("idx") long idx) {
 		return "tour/views/notice" + idx;
 	}
 

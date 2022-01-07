@@ -14,7 +14,7 @@ import lombok.ToString;
 public class GoodsVO {
 
 	
-	private int idx; // 상품번호
+	private long idx; // 상품번호
 	private String gname; // 상품이름
 	private int price; //상품가격
 	private String photo; //상품이미지

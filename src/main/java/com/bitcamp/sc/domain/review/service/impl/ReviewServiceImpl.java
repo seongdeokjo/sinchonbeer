@@ -10,67 +10,69 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
-    
-	
 	@Autowired
     ReviewDao reviewDao;
-	 
-    
+
 	@Autowired
 	public ReviewServiceImpl(ReviewDao dao) {
 		this.reviewDao = dao;
 	}
-	
-    // 01. 게시글쓰기
+
+	// 01. 게시글쓰기
     @Override
     public int insertReview(ReviewVO vo) throws Exception {
-    	
+
     	int check = 0;
-    	
+
         try {
         	check = reviewDao.insertReview(vo);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
     	return check;
-    	
+
     }
-    
-    // 02. 게시글 상세보기
+
+	// 02. 게시글 상세보기
     @Override
-    public ReviewVO readReview(Integer idx) throws Exception {
+    public ReviewVO readReview(long idx) throws Exception {
         return reviewDao.readReview(idx);
     }
-        
-   
-    // 03. 게시글 수정
+
+
+	// 03. 게시글 수정
     @Override
     public int updateReview(ReviewVO vo) throws Exception {
     	int check = 0;
         try {
         	check = reviewDao.updateReview(vo);
-        	
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
     	return check;
     }
-    
-    
-    // 04. 게시글 삭제
-    @Override
-    public void deleteReview(Integer idx) throws Exception {
-    	reviewDao.deleteReview(idx);
-    }
-    
-    
+//    // 04. 게시글 삭제
+//    @Override
+//    public void deleteReview(long idx) throws Exception {
+
+//    	reviewDao.deleteReview(idx);
+//    }
+
+
+	@Override
+	public void deleteReview(Long idx) throws Exception {
+		reviewDao.deleteReview(idx);
+	}
+
+
 	// 05. 게시글 전체 목록
+
 	@Override
 	public List<ReviewVO> listAllReview() throws Exception {
     	return reviewDao.listAllReview();
 	}
-	
-	
+
     // 06. 게시글 좋아요
 	@Override
     public int likeReview(ReviewVO vo) throws Exception {

@@ -10,11 +10,11 @@ public interface BasketDao {
     int createBasket(BasketDto bDto);
 
     // 장바구니 확인
-    int checkBasket(int gidx, int midx);
-    List<BasketVo> getBasketList(int midx);
-    int getTotalPay(int midx);
-    int deleteRowByGidx(int gidx, int midx);
-    void deleteAll(int midx);
+    int checkBasket(long gidx, long midx);
+    List<BasketVo> getBasketList(long midx);
+    int getTotalPay(long midx);
+    int deleteRowByGidx(long gidx, long midx);
+    void deleteAll(long midx);
     void modifyAmount(BasketDto bDto);
     int changeBasketAmount(BasketDto bDto);
 }

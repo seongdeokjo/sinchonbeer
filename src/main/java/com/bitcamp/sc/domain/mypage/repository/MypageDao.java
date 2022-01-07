@@ -19,27 +19,22 @@ public class MypageDao {
 	}
 
 	// 주문 내역 조회
-	public List<OrderList> getOrderList(int idx) {
+	public List<OrderList> getOrderList(long idx) {
 		return template.selectList(namespace + ".getOrderList", idx);
 	}
 
 	// 예약 내역 조회
-	public List<RezList> getRezList(int idx) {
+	public List<RezList> getRezList(long idx) {
 		return template.selectList(namespace + ".getRezList", idx);
 	}
 
-	// 회원 정보 조회
-	public List<UpdateMember> getMemberInfo(int idx) {
-		return template.selectList(namespace + ".getMemberInfo", idx);
+	// 회원 정보 조회 --> return Member로 변경
+	public UpdateMember getMemberInfo(long idx){
+		return template.selectOne(namespace+".getMemberInfo",idx);
 	}
 
 	// 회원 정보 수정
-	public int updateMember(UpdateMember member) {
-		return template.update(namespace + ".updateMember", member);
-	}
-
-	// 회원 탈퇴
-	public void deleteMember(int idx) {
-		template.delete(namespace + ".deleteMember", idx);
+	public int updateMember(UpdateMember member){
+		return template.update(namespace+".updateMember",member);
 	}
 }

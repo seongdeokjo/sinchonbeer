@@ -13,8 +13,8 @@ import lombok.ToString;
 @ToString
 public class GoodsToBuyNow {
 
-	private int idx;	// 상품번호
-	private int orderIdx; // 주문번호
+	private long idx;	// 상품번호
+	private long orderIdx; // 주문번호
 	private int amount;	//수량
 	
 }
