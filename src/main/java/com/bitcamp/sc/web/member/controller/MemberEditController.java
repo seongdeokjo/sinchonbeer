@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bitcamp.sc.web.login.dto.LoginInfo;
-import com.bitcamp.sc.domain.member.service.MemberService;
 import com.bitcamp.sc.domain.mypage.domain.UpdateMember;
 
 @Slf4j

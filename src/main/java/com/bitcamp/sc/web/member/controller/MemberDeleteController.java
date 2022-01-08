@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.bitcamp.sc.web.login.dto.LoginInfo;
-import com.bitcamp.sc.domain.member.service.MemberService;
 
 @Slf4j
 @Controller
