@@ -27,7 +27,7 @@
                     <div class="edge_color">
                         <td>수량</td>
                         <hr>
-                        <form id="form1"  name='form1' action="/shop/shop_payment"  method='get'>  <!-- get -->
+                        <form id="form1"  name='form1' action="/shop/shop-payment"  method='get'>  <!-- get -->
                         <th:block th:unless="${session.loginInfo == null}">
                         	<input type="hidden" th:value="${session.loginInfo.idx}" name="midx"> 
                         </th:block>	
