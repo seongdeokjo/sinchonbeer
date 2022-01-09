@@ -1,17 +1,12 @@
 package com.bitcamp.sc.domain.member.domain;
 
 import com.bitcamp.sc.web.login.dto.LoginInfo;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
-@AllArgsConstructor
+@ToString
 public class Member {
 
 	private long idx;
@@ -22,6 +17,7 @@ public class Member {
 	private String code;
 //	private MemberType role;
 
+	@Builder
 	public Member(String email, String pw, String name, String phone) {
 		this.email = email;
 		this.pw = pw;

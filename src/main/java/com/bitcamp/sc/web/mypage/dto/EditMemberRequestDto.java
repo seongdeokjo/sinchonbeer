@@ -1,16 +1,12 @@
-package com.bitcamp.sc.domain.mypage.domain;
+package com.bitcamp.sc.web.mypage.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
+@Getter
 @NoArgsConstructor
-public class UpdateMember {
+public class EditMemberRequestDto {
 
-	private String midx;
-	private String email;
 	private String name;
 	private String newPw;
 	private String phone;

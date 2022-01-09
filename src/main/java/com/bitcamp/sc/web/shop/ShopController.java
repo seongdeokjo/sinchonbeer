@@ -3,64 +3,47 @@ package com.bitcamp.sc.web.shop;
 import com.bitcamp.sc.web.login.dto.LoginInfo;
 import com.bitcamp.sc.domain.address.domain.Address;
 import com.bitcamp.sc.domain.member.service.MemberService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import com.bitcamp.sc.domain.shop.domain.GoodsToBuyNow;
+import com.bitcamp.sc.web.shop.dto.GoodsToBuyNow;
 
-
-
-
+@Slf4j
 @Controller
+@RequiredArgsConstructor
+@RequestMapping("/shop")
 public class ShopController {
 
-	@Autowired
-    MemberService memberService;
+    private final MemberService memberService;
 	
 	// shop메인 페이지
-	@RequestMapping(value="/shop", method = RequestMethod.GET)
+	@GetMapping
 	public String getShop() {
 		return "shop/shopMain";
 	}
 	
 	// 상품 상세페이지
-	@RequestMapping(value="/shop/{idx}", method = RequestMethod.GET)
+	@GetMapping("/{idx}")
 	public String getShopDesc(@PathVariable("idx") long idx) {
 		return "shop/product"+idx;
-			
 
-		
-		
 	}
-	
-	
+
 	 // BuyNow 페이지로 가기
 	 // @RequestParam("name 이름") 타입지정 변수명
-	
-	@RequestMapping(value="/shop/shop_payment", method = RequestMethod.GET)
-	public String getBuyNow(	
-			
-			
+	@GetMapping("/shop-payment")
+	public String getBuyNow(HttpSession session, Model model,
 			@ModelAttribute GoodsToBuyNow buynow,
-			
 			@RequestParam("gphotoname") String gphotoname,
 			@RequestParam("gname") String gname,
 			@RequestParam("gidx") long gidx,
 			@RequestParam("gprice") int gprice,
-			@RequestParam("amount") int amount,
-			
-			HttpSession session,
-			
-			Model model
-			) {
+			@RequestParam("amount") int amount) {
 			
 			model.addAttribute("buynow", buynow);
 			
@@ -70,11 +53,6 @@ public class ShopController {
 			model.addAttribute("gprice",gprice);
 			model.addAttribute("amount", amount);
 			
-			System.out.println("입력한 gname : " + gname);
-			System.out.println("입력한 idx : " + gidx);
-			System.out.println("입력한 gprice : " + gprice);
-			System.out.println("입력한 amount : " + amount);
-			
 			LoginInfo loginInfo = (LoginInfo)session.getAttribute("loginInfo");
 			
 			Address memberAddress = memberService.getMemberAdd(loginInfo.getIdx());
@@ -83,20 +61,5 @@ public class ShopController {
 			model.addAttribute("address2", memberAddress.getAddress2());
 			
 			return "shop/shop_payment";
-		
 	}
-	
-
-	
 }
-	
-
-	
-
-	
-	
-	
-
-	
-
-

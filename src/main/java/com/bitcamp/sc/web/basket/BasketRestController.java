@@ -1,6 +1,6 @@
 package com.bitcamp.sc.web.basket;
 
-import com.bitcamp.sc.domain.basket.domain.BasketDto;
+import com.bitcamp.sc.web.basket.dto.BasketDto;
 import com.bitcamp.sc.domain.basket.service.BasketService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

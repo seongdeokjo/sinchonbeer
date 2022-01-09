@@ -21,24 +21,6 @@ public class MemberDeleteServiceTest {
 
     @Test
     void 회원_삭제() {
-        //given
-        RegRequest regRequest = new RegRequest();
-
-        regRequest.setEmail("test1234@naver.com");
-        regRequest.setPw("1q2w3e4r!!");
-        regRequest.setName("테스트1");
-        regRequest.setPhone("01011111111");
-
-        Member member = regRequest.toMember();
-        template.getMapper(MemberDao.class).save(member);
-        log.info("member = {}",member);
-        long memgerId = member.getIdx();
-
-        template.getMapper(MemberDao.class).deleteMember(member.getIdx());
-
-        Member byMidx = template.getMapper(MemberDao.class).findByMidx(memgerId);
-        log.info("member = {}",byMidx);
-        assertThat(byMidx).isNull();
 
     }
 }

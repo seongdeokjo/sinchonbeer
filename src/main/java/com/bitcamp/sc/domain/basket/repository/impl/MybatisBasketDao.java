@@ -1,7 +1,7 @@
 package com.bitcamp.sc.domain.basket.repository.impl;
 
-import com.bitcamp.sc.domain.basket.domain.BasketDto;
-import com.bitcamp.sc.domain.basket.domain.BasketVo;
+import com.bitcamp.sc.web.basket.dto.BasketDto;
+import com.bitcamp.sc.domain.basket.domain.Basket;
 import com.bitcamp.sc.domain.basket.repository.BasketDao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,19 +16,19 @@ import java.util.Map;
 @Repository
 @RequiredArgsConstructor
 public class MybatisBasketDao implements BasketDao {
-    private static final String NAME_SPACE = "BasketMapper";
 
+    private static final String NAME_SPACE = "BasketMapper";
     private final SqlSessionTemplate template;
 
+    // 장바구니 생성
     @Override
-    public int createBasket(BasketDto bDto) {
-        log.info("장바구니 mybatis 진입"+bDto.toString());
-        return template.insert(NAME_SPACE+".insertBasket", bDto);
+    public void save(Basket basket) {
+       template.insert(NAME_SPACE+".save", basket);
     }
 
     @Override
-    public List<BasketVo> getBasketList(long midx) {
-        return template.selectList(NAME_SPACE+".getBasketList",midx);
+    public List<BasketDto> findAllByMidx(long midx) {
+        return template.selectList(NAME_SPACE+".findAllByMidx",midx);
     }
 
     @Override

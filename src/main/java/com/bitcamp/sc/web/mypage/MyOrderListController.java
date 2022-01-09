@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.bitcamp.sc.web.login.dto.LoginInfo;
 import com.bitcamp.sc.domain.mypage.domain.OrderList;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class MyOrderListController {
@@ -19,8 +20,8 @@ public class MyOrderListController {
     MypageService service;
 
 	// 주문 내역 페이지 이동
-	@GetMapping("/mypage/orderList")
-	public String mypageShop(Model model, HttpSession session) {
+	@GetMapping("/mypage/orderList/{id}")
+	public String mypageShop(Model model, HttpSession session, @PathVariable("id") long id) {
 		LoginInfo login = (LoginInfo) session.getAttribute("loginInfo");
 
 		if (session.getAttribute("loginInfo") == null) {

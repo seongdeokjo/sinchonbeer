@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
-@Transactional
+
 @Service
 @RequiredArgsConstructor
 public class MemberRegServiceImpl implements MemberRegService {
@@ -21,31 +21,31 @@ public class MemberRegServiceImpl implements MemberRegService {
     private final AddressDao addressDao;
     private final PasswordEncoder passwordEncoder;
 
+    @Transactional
     public boolean saveMember(RegRequest regRequest) {
         boolean result = false;
         // 회원등록 - toMember(): email, pw, name, phone
 
-        Member saveMember = regRequest.toMember();
+        Member newMember = regRequest.toMember();
         //암호화
-        encryptionPw(saveMember);
-        memberDao.save(saveMember);
-        if (saveMember != null) {
-            log.info("member = {}", saveMember);
-            long idx = saveMember.getIdx();
+        encryptionPw(newMember);
+        memberDao.save(newMember);
+        if (newMember != null) {
+            log.info("member = {}", newMember);
             // 사용자가 입력한 주소등록
-            result = saveAddress(regRequest, idx);
+            result = saveAddress(regRequest.toAddress(), newMember);
         }
         return result;
     }
 
     // 주소 등록
-    private boolean saveAddress(RegRequest regRequest, long idx) {
+    private boolean saveAddress(Address newAddress, Member newMember) {
         boolean result = false;
-        Address address = regRequest.toAddress();
-        if (address.formValidate()) {
-            address.setMidx(idx);
-            addressDao.save(address);
-            if (address != null) {
+        if (newAddress.formValidate()) {
+            newAddress.setMember(newMember);
+            addressDao.save(newAddress);
+            if (newAddress != null) {
+                log.info("newAddress ={}",newAddress);
                 result = true;
             }
         }

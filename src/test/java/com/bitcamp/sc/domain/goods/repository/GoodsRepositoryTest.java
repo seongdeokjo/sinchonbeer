@@ -1,6 +1,6 @@
 package com.bitcamp.sc.domain.goods.repository;
 
-import com.bitcamp.sc.domain.goods.domain.GoodsVO;
+import com.bitcamp.sc.domain.goods.domain.Goods;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class GoodsRepositoryTest {
     @Test
     void 상품_저장_조회() {
         //given
-        GoodsVO goods = GoodsVO.builder()
+        Goods goods = Goods.builder()
                 .name("테스트상품1")
                 .photo("이미지1")
                 .price(10000)
@@ -30,7 +30,7 @@ public class GoodsRepositoryTest {
         //when
         goodsDao.save(goods);
         long idx = goods.getIdx();
-        GoodsVO findGoods = goodsDao.findByIdx(idx);
+        Goods findGoods = goodsDao.findByIdx(idx);
         //then
         assertThat(findGoods.getIdx()).isEqualTo(idx);
     }
@@ -38,7 +38,7 @@ public class GoodsRepositoryTest {
     @Test
     void 상품_삭제(){
         //given
-        GoodsVO goods = GoodsVO.builder()
+        Goods goods = Goods.builder()
                 .name("테스트상품1")
                 .photo("이미지1")
                 .price(10000)

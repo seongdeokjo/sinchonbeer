@@ -1,6 +1,5 @@
 package com.bitcamp.sc.domain.member.repository.impl;
 
-import com.bitcamp.sc.domain.address.domain.Address;
 import com.bitcamp.sc.domain.member.domain.Member;
 import com.bitcamp.sc.domain.member.repository.MemberDao;
 import lombok.RequiredArgsConstructor;
@@ -45,11 +44,6 @@ public class MybatisMemberDao implements MemberDao {
     @Override
     public Member findByMidx(long idx) {
         return template.selectOne(NAME_SPACE+".findByMidx",idx);
-    }
-
-    @Override
-    public Address findAddressByMidx(long idx) {
-        return template.selectOne(NAME_SPACE+".findAddressByMidx",idx);
     }
 
     @Override

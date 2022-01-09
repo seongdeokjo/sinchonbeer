@@ -12,4 +12,6 @@ public interface AddressDao {
     // 주소 삭제
     
     // 주소 조회
+    //멤버의 idx로 주소 조회하기.
+    Address findAddressByMidx(long idx);
 }

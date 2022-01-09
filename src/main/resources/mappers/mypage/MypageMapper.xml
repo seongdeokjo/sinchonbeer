@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="tdate" column="tdate"/>
 	</resultMap>
 	
-	<resultMap type="com.bitcamp.sc.domain.mypage.domain.UpdateMember" id="UpdateMemberDomain">
+	<resultMap type="com.bitcamp.sc.web.mypage.dto.EditMemberRequestDto" id="UpdateMemberDomain">
 		<result property="midx" column="id"/>
 		<result property="email" column="email"/>
 		<result property="name" column="name"/>
@@ -57,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 회원 정보 수정 -->
-	<update id="updateMember" parameterType="com.bitcamp.sc.domain.mypage.domain.UpdateMember">
+	<update id="updateMember" parameterType="com.bitcamp.sc.web.mypage.dto.EditMemberRequestDto">
 		UPDATE member m, address a
         SET m.name=#{name}, m.pw=#{newPw}, m.phone=#{phone}, a.postcode=#{postcode}, a.address1=#{address1}, a.address2=#{address2}
         WHERE m.id=a.midx AND m.id=#{midx};

@@ -2,7 +2,7 @@ package com.bitcamp.sc.domain.member.service.impl;
 
 import com.bitcamp.sc.domain.member.repository.MemberDao;
 import com.bitcamp.sc.domain.member.service.MemberEditService;
-import com.bitcamp.sc.domain.mypage.domain.UpdateMember;
+import com.bitcamp.sc.web.mypage.dto.EditMemberRequestDto;
 import com.bitcamp.sc.domain.mypage.repository.MypageDao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,14 +25,14 @@ public class MemberEditServiceImpl implements MemberEditService {
     }
 
     // 회원 정보 수정
-    public int updateMember(UpdateMember member) {
+    public int updateMember(EditMemberRequestDto member) {
         String securityPw = passwordEncoder.encode(member.getNewPw());
         member.setNewPw(securityPw);
         return mypageDao.updateMember(member);
     }
 
     // 회원 정보 조회
-    public UpdateMember getMemberInfo(long idx) {
+    public EditMemberRequestDto getMemberInfo(long idx) {
         return mypageDao.getMemberInfo(idx);
     }
 }

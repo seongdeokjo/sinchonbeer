@@ -7,116 +7,7 @@
     <title>신촌맥주 양조장 투어 예약</title>
 
     <th:block th:include="frame/metaheader"></th:block>
-
-	<style>
-        body {
-            background-color: #f3f3f3;
-        }
-
-        #header, #gnb, #footer{
-            background-color: white;
-        }
-
-        .tip-off {
-            background-color: white;
-            margin-bottom: 16px;
-            padding: 24px;
-        }
-
-        .tip-off h6 {
-            margin: 0;
-            padding-bottom: 20px;
-            font-size: 18px;
-        }
-
-        .tip-off a, .tip-off a:hover {
-            color: #3d464b;
-            text-decoration: none;
-        }
-
-        .product-info-wrap {
-            display: table-cell;
-            vertical-align: top;
-            word-break: break-all;
-            font-size: 14px;
-        }
-
-        .text-gray {
-            color: #757575 !important;
-        }
-
-        .text-sinchon {
-            color: #05cdd5 !important;
-        }
-
-        .text-15 {
-            font-size: 16px !important;
-        }
-
-        .text-15 {
-            font-size: 15px !important;
-        }
-
-        .text-14 {
-            font-size: 14px !important;
-        }
-
-        .text-13 {
-            font-size: 13px !important;
-        }
-
-        .btn-sinchon{
-            color: white !important;
-            background-color: #05cdd5;
-            border-color: #05cdd5;
-        }
-
-        .btn-sinchon:hover {
-            color: #05cdd5 !important;
-            background-color: white;
-            border-color: #05cdd5;
-        }
-
-        .btn-pay {
-            color: white !important;
-            background-color: #05cdd5;
-            border-color: #05cdd5;
-            border-radius: 0 !important;
-        }
-
-        .btn-pay:hover {
-            color: white !important;
-            background-color: #189fa6;
-            border-color: #189fa6;
-        }
-
-        .btn-sm-padding {
-            padding: 6px 12px;
-        }
-
-        .btn_top_right {
-            position: absolute;
-            right: 15px;
-            top: 0;
-        }
-
-        .btn-coupon {
-            height: 36px;
-            width: 100%;
-            line-height: 34px;
-            padding: 0 !important;
-        }
-
-        .btn-tools {
-            height: 36px;
-            padding: 0;
-            line-height: 36px;
-            background-color: #F2F2F2;
-            border: 1px solid #ddd;
-            color: #20252b;
-        }
-    </style>
-
+    <link rel="stylesheet" th:href="@{/css/shop/shop-payment.css}">
 </head>
 
 <body>
@@ -284,30 +175,6 @@
 
     <!-- Footer 영역 -->
         <th:block th:include="frame/footer"></th:block>
-
-	<script>
-		function frmSubmit() {
-			if($('input[name=payType]').is(':checked') == false) {
-				alert('결제 수단이 선택되지 않았습니다. \n 결제수단을 선택해주세요.');
-				return false;
-			} else if ($('input[id=payAgree]').is(':checked') == false) {
-				alert('구매조건 확인 및 결제 진행에 동의에 동의 해주세요.');
-				return false;
-			}
-			
-			window.name = "opner_win";
-			var myForm = document.payForm;
-			var myWin = window.open("about:blank", "kakaoPayWin", "status=yes, scrollbars=yes, width=440, height=500, left=300, top=100");
-			myForm.method = "post";
-			myForm.target = "kakaoPayWin";
-			myForm.action = "/kakaoPay/shop";
-			myForm.submit();
-		}
-
-        $("#payAllCheck").click(function () {
-            $(".check").prop('checked', $(this).prop('checked'));
-        });
-    	
-    </script>
+    <script th:src="@{/js/shop/shop-payment.js}"></script>
 </body>
 </html>

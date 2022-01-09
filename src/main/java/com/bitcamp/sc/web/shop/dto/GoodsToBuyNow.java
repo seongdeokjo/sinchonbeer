@@ -1,4 +1,4 @@
-package com.bitcamp.sc.domain.shop.domain;
+package com.bitcamp.sc.web.shop.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

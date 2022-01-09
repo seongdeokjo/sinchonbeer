@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="GoodsMapper">
 	
-	<resultMap type="com.bitcamp.sc.domain.goods.domain.GoodsVO" id="GoodsDomain">
+	<resultMap type="com.bitcamp.sc.domain.goods.domain.Goods" id="GoodsDomain">
 		<result property="idx" column="id"/>
 		<result property="name" column="name"/>
 		<result property="price" column="price"/>
@@ -12,7 +12,7 @@
 	
 	<!-- 01.상품추가 -->
 	<insert id="save"
-			parameterType="com.bitcamp.sc.domain.goods.domain.GoodsVO"
+			parameterType="com.bitcamp.sc.domain.goods.domain.Goods"
 			useGeneratedKeys="true"
 			keyProperty="idx"
 	>
@@ -20,7 +20,7 @@
 	</insert>
 
 	<!-- 상품 삭제 -->
-	<delete id="deleteGoods" parameterType="com.bitcamp.sc.domain.goods.domain.GoodsVO">
+	<delete id="deleteGoods" parameterType="com.bitcamp.sc.domain.goods.domain.Goods">
 		DELETE FROM goods WHERE id= #{idx}
 	</delete>
 	

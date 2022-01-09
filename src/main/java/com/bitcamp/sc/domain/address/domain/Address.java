@@ -1,24 +1,25 @@
 package com.bitcamp.sc.domain.address.domain;
 
+import com.bitcamp.sc.domain.member.domain.Member;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @ToString
 public class Address {
 
     private long idx;
-    private long midx;
+    private Member member;
     private String postcode;
     private String address1;
     private String address2;
 
-    public Address(long midx, String postcode, String address1, String address2) {
-        this.midx = midx;
+    @Builder
+    public Address(Member member, String postcode, String address1, String address2) {
+        this.member = member;
         this.postcode = postcode;
         this.address1 = address1;
         this.address2 = address2;

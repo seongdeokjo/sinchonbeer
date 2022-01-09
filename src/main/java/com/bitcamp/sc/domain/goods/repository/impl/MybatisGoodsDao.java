@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.bitcamp.sc.domain.goods.domain.GoodsVO;
+import com.bitcamp.sc.domain.goods.domain.Goods;
 import com.bitcamp.sc.domain.goods.repository.GoodsDao;
 
 @Repository
@@ -16,7 +16,7 @@ public class MybatisGoodsDao implements GoodsDao{
 
 	// 1.상품추가
 	@Override
-	public void save(GoodsVO vo) {
+	public void save(Goods vo) {
 		template.insert(NAME_SPACE + ".save", vo);
 	}
 
@@ -29,7 +29,7 @@ public class MybatisGoodsDao implements GoodsDao{
 
 	// 3.샹폼 챶기
 	@Override
-	public GoodsVO findByIdx(long idx) {
+	public Goods findByIdx(long idx) {
 		return template.selectOne(NAME_SPACE + ".findByIdx", idx);
 	}
 }

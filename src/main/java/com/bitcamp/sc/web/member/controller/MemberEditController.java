@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bitcamp.sc.web.login.dto.LoginInfo;
-import com.bitcamp.sc.domain.mypage.domain.UpdateMember;
+import com.bitcamp.sc.web.mypage.dto.EditMemberRequestDto;
 
 @Slf4j
 @Controller
@@ -28,7 +28,7 @@ public class MemberEditController {
 	@GetMapping("/mypage/edit-info")
 	public String editInfoGet(Model model, HttpSession session) {
 		LoginInfo login = (LoginInfo) session.getAttribute("loginInfo");
-			UpdateMember list = service.getMemberInfo(login.getIdx());
+			EditMemberRequestDto list = service.getMemberInfo(login.getIdx());
 			model.addAttribute("list", list);
 			return "mypage/edit-info";
 
@@ -36,7 +36,7 @@ public class MemberEditController {
 
 	// 정보 수정 실행
 	@PostMapping("/mypage/edit-info")
-	public String editInfoPost(UpdateMember member) {
+	public String editInfoPost(EditMemberRequestDto member) {
 		service.updateMember(member);
 		return "redirect:/mypage/edit-info";
 	}

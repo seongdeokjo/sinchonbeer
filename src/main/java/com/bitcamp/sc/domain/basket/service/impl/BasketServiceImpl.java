@@ -1,7 +1,7 @@
 package com.bitcamp.sc.domain.basket.service.impl;
 
-import com.bitcamp.sc.domain.basket.domain.BasketDto;
-import com.bitcamp.sc.domain.basket.domain.BasketVo;
+import com.bitcamp.sc.web.basket.dto.BasketDto;
+import com.bitcamp.sc.domain.basket.domain.Basket;
 import com.bitcamp.sc.domain.basket.repository.BasketDao;
 import com.bitcamp.sc.domain.basket.service.BasketService;
 import lombok.RequiredArgsConstructor;
@@ -21,30 +21,28 @@ public class BasketServiceImpl implements BasketService {
     // 장바구니 생성
     @Override
     public void saveBasket(BasketDto bDto) {
-        log.info("dto 값 서비스 진입"+bDto.toString());
         int avaiableBasket = bDao.checkBasket(bDto.getGidx(), bDto.getMidx());
-        if(avaiableBasket > 0) {
+        if (avaiableBasket > 0) {
             log.info("이미 장바구니에 값이 존재합니다.");
             bDao.modifyAmount(bDto);
-        }else {
+        } else {
             log.info("생성된 장바구니가 존재하지 않습니다.");
-            if(	bDao.createBasket(bDto) == 1) {
-                log.info("장바구니 생성 완료");
-            }
+            Basket basket = bDto.toBasket();
+            bDao.save(basket);
+
         }
     }
 
     // 장바구니 리스트 가져오기
     @Override
-    public List<BasketVo> getList(long midx) {
-        List<BasketVo> list = new ArrayList<>();
-        if(midx != 0) {
-            list = bDao.getBasketList(midx);
-            if(list.isEmpty()) {
+    public List<BasketDto> getList(long midx) {
+        List<BasketDto> list = new ArrayList<>();
+        if (midx != 0) {
+            list = bDao.findAllByMidx(midx);
+            if (list.isEmpty()) {
                 log.info("장바구니 목록이 없습니다.");
             }
         }
-        log.info("장바구니 조회 완료");
         return list;
     }
 
@@ -56,8 +54,8 @@ public class BasketServiceImpl implements BasketService {
 
     // 장바구니 한 행만 삭제
     @Override
-    public int getDeleteRowByGidx(long gidx,long midx) {
-        return 	bDao.deleteRowByGidx(gidx,midx);
+    public int getDeleteRowByGidx(long gidx, long midx) {
+        return bDao.deleteRowByGidx(gidx, midx);
     }
 
     // 장바구니 모두 삭제
@@ -76,8 +74,8 @@ public class BasketServiceImpl implements BasketService {
     @Override
     public int getDeleteRowByGidx(List<Integer> gidxList, long midx) {
         int result = 0;
-        for(int i = 0; i < gidxList.size(); i++ ) {
-            result += bDao.deleteRowByGidx((int)gidxList.get(i), midx);
+        for (int i = 0; i < gidxList.size(); i++) {
+            result += bDao.deleteRowByGidx((int) gidxList.get(i), midx);
             log.info("gidx반복 횟수" + 1);
         }
         log.info("result 값" + result);

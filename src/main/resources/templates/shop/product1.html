@@ -13,7 +13,7 @@
 	<th:block th:include="frame/header"></th:block>
 	<th:block th:include="frame/nav"></th:block>
 	<!-- 세션 정보가 없을 때 -> modal 창 -->
-	<th:block th:if="${session.loginInfo == null}">
+	<th:block th:if="${session.loginMember == null}">
 		<input type="hidden" th:value="Y" id="check">
 	</th:block>
  
@@ -28,8 +28,8 @@
                         <td>수량</td>
                         <hr>
                         <form id="form1"  name='form1' action="/shop/shop-payment"  method='get'>  <!-- get -->
-                        <th:block th:unless="${session.loginInfo == null}">
-                        	<input type="hidden" th:value="${session.loginInfo.idx}" name="midx"> 
+                        <th:block th:unless="${session.loginMember == null}">
+                        	<input type="hidden" th:value="${session.loginMember.idx}" name="midx">
                         </th:block>	
 							<input name="gphotoname" type="hidden" value="gimbugag">	
                         	<input name="gname" type="hidden" value="신촌에서 만난 김부각">                        

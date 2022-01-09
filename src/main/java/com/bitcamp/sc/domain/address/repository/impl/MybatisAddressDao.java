@@ -15,10 +15,16 @@ public class MybatisAddressDao implements AddressDao {
 
     private final SqlSessionTemplate template;
 
-
+    // 회원의 주소 저장
     @Override
     public void save(Address memberAddress) {
         template.insert(NAME_SPACE+".save",memberAddress);
+    }
+    
+    // 회원 번호로 회원+주소 가져오기
+    @Override
+    public Address findAddressByMidx(long idx) {
+        return template.selectOne(NAME_SPACE+".findAddressByMidx",idx);
     }
 
 }

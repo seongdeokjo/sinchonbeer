@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bitcamp.sc.domain.mypage.domain.OrderList;
 import com.bitcamp.sc.domain.mypage.domain.RezList;
-import com.bitcamp.sc.domain.mypage.domain.UpdateMember;
+import com.bitcamp.sc.web.mypage.dto.EditMemberRequestDto;
 
 @Repository
 public class MybatisMypageDao implements MypageDao {
@@ -30,12 +30,12 @@ public class MybatisMypageDao implements MypageDao {
 	}
 
 	// 회원 정보 조회 --> return Member로 변경
-	public UpdateMember getMemberInfo(long idx){
+	public EditMemberRequestDto getMemberInfo(long idx){
 		return template.selectOne(namespace+".getMemberInfo",idx);
 	}
 
 	// 회원 정보 수정
-	public int updateMember(UpdateMember member){
+	public int updateMember(EditMemberRequestDto member){
 		return template.update(namespace+".updateMember",member);
 	}
 }

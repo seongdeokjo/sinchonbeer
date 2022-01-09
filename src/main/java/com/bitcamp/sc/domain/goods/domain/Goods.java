@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class GoodsVO {
+public class Goods {
 
 
 	private long idx; // 상품번호
@@ -17,7 +17,7 @@ public class GoodsVO {
 	private String title; // 상품 상세 설명
 
 	@Builder
-	public GoodsVO(String name, int price, String photo, String title) {
+	public Goods(String name, int price, String photo, String title) {
 		this.name = name;
 		this.price = price;
 		this.photo = photo;

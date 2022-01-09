@@ -7,7 +7,7 @@ import com.bitcamp.sc.domain.order.domain.OrderInfo;
 import com.bitcamp.sc.domain.order.service.OrderService;
 import com.bitcamp.sc.domain.pay.service.impl.PayServiceImpl;
 import com.bitcamp.sc.domain.pay.service.impl.type.KakaoPay;
-import com.bitcamp.sc.domain.shop.domain.ShopDto;
+import com.bitcamp.sc.web.shop.dto.ShopDto;
 import com.bitcamp.sc.domain.tour.domain.TourDto;
 import com.bitcamp.sc.domain.tour.service.MailService;
 import com.bitcamp.sc.domain.tour.service.TourService;

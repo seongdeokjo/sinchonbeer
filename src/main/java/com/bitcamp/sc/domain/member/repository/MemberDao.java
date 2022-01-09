@@ -1,7 +1,6 @@
 package com.bitcamp.sc.domain.member.repository;
 
 import com.bitcamp.sc.domain.member.domain.Member;
-import com.bitcamp.sc.domain.address.domain.Address;
 import org.apache.ibatis.annotations.Param;
 
 public interface MemberDao {
@@ -22,9 +21,6 @@ public interface MemberDao {
 
     //멤버의 idx로 멤버 정보 조회하기
     Member findByMidx(long idx);
-
-    //멤버의 idx로 주소 조회하기.
-    Address findAddressByMidx(long idx);
 
     //비밀번호 찾기 - 인증번호 저장하기.
     int updateCode(@Param("code") String code, @Param("email") String email);

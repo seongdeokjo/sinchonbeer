@@ -1,86 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="BasketMapper">
-	<resultMap type="com.bitcamp.sc.domain.basket.domain.BasketVo" id="BasketDomain">
-		<result property="bidx" column="id"/>
-		<result property="midx" column="midx"/>
-		<result property="gidx" column="gidx"/>
-		<result property="gname" column="name"/>
-		<result property="gphoto" column="photo"/>
-		<result property="bcount" column="count"/>
-		<result property="gprice" column="price"/>
-	</resultMap>
-	<!--  00. 장바구니 gidx 존재여부 -->
-	<select id="checkBasket" resultType="Integer">
-		select gidx from basket where gidx = #{gidx} and midx = #{midx}
-	</select>
-	<!-- 01.장바구니 추가 -->
-	<insert id="insertBasket" parameterType="com.bitcamp.sc.domain.basket.domain.BasketDto">
-		INSERT INTO basket(count, midx, gidx) VALUES( #{amount}, #{midx}, #{gidx})
-	</insert>
-	<!-- 장바구니 페이지에서 버튼을 통한 수량 변경  -->
-	<update id="changeAmount">
-		update basket set count = #{amount} where gidx = #{gidx} and midx = #{midx}
-	</update>
-	
-	<!-- 상품 목록에서 장바구니 담기 클릭시 이미 존재할 경우 수량만 추가 -->
-	<update id="updateBasket">
-		update basket set count =count+ #{amount} where gidx = #{gidx} and midx = #{midx}
-	</update>
-	<!-- 02.장바구니 리스트 -->
-	<select id="getBasketList" resultMap="BasketDomain" parameterType="int">
-		select id,midx,gidx,count,name,(count*price) as gprice,photo
-		from basket natural join goods
-		where midx = #{midx}  
-		order by gidx
-	</select>
-	<!-- 각 고객의 장바구니에 담긴 총 금액 -->
-	<select id="getTotal" resultType="int">
-		select sum(count * price) as total from basket natural join goods where midx= #{midx}
-	</select>
-	
-	<!-- 03. 장바구니 삭제 -->
-	<delete id="deleteRow" >
-		DELETE FROM basket where gidx = #{gidx} and midx = #{midx}
-	</delete>
-	
-		<!-- 03. 장바구니 전부 삭제 -->
-	<delete id="deleteAll" >
-		DELETE FROM basket where midx = #{midx}
-	</delete>
-	
-	
-	
-	<!-- 04. 장바구니 수정 -->
-	<update id="modifyCart" >
-		UPDATE basket SET count = #{count}
-		where midx= #{memberIdx} AND gidx= #{goodsIdx}
-	</update>
-	
-	
-	<!-- ################################################################################################################# -->
-	
-	
-	
-	<!-- 다시 한번 확인!!!!!!!!! -->
-	<!-- 05. 장바구니 금액 합계 -->
-	<select id="sumMoney"  resultType="int">
-		SELECT IFNULL(SUM(price * count), 0) money
-		FROM
-		 basket b, goods g
-		WHERE
-		 b.id = g.id AND midx = #{memberIdx}
-	</select>
-	
-	<!-- 06.장바구니 상품확인 -->
-	<select id="countCart" resultType="int">
-		SELECT COUNT(*) FROM basket
-		WHERE midx=#{memberIdx} AND gidx = #{goodsIdx}
-	</select>
-	
-	<!-- 07.장바구니에 기존의 상품이 존재하면 수정 -->
-	<update id="updateCart">
-		UPDATE basket SET count = count + #{count}
-		WHERE midx = #{memberIdx} AND gidx=#{goodsIdx}
-	</update>
+    <resultMap type="com.bitcamp.sc.web.basket.dto.BasketDto" id="BasketDomain">
+        <result property="id" column="id"/>
+        <result property="midx" column="midx"/>
+        <result property="gidx" column="gidx"/>
+        <result property="name" column="name"/>
+        <result property="photo" column="photo"/>
+        <result property="count" column="count"/>
+        <result property="price" column="price"/>
+    </resultMap>
+    <!-- 장바구니 추가 -->
+    <insert id="save" parameterType="com.bitcamp.sc.domain.basket.domain.Basket"
+            useGeneratedKeys="true"
+            keyProperty="idx">
+        INSERT INTO basket(count, midx, gidx)
+        VALUES (#{count}, #{midx}, #{gidx})
+    </insert>
+    <!--  00. 장바구니 gidx 존재여부 -->
+    <select id="checkBasket" resultType="long">
+        select gidx
+        from basket
+        where gidx = #{gidx}
+        and midx = #{midx}
+    </select>
+    <!-- 장바구니 페이지에서 버튼을 통한 수량 변경  -->
+    <update id="changeAmount">
+        update basket
+        set count = #{amount}
+        where gidx = #{gidx}
+          and midx = #{midx}
+    </update>
+
+    <!-- 상품 목록에서 장바구니 담기 클릭시 이미 존재할 경우 수량만 추가 -->
+    <update id="updateBasket">
+        update basket
+        set count =count + #{amount}
+        where gidx = #{gidx}
+          and midx = #{midx}
+    </update>
+    <!-- 02.장바구니 리스트 -->
+    <select id="findAllByMidx" resultMap="BasketDomain" parameterType="int">
+        select id, midx, gidx, count, name, (count * price) as price, photo
+        from basket
+                 natural join goods
+        where midx = #{midx}
+        order by gidx
+    </select>
+    <!-- 각 고객의 장바구니에 담긴 총 금액 -->
+    <select id="getTotal" resultType="int">
+        select sum(count * price) as total
+        from basket
+                 natural join goods
+        where midx = #{midx}
+    </select>
+
+    <!-- 03. 장바구니 삭제 -->
+    <delete id="deleteRow">
+        DELETE
+        FROM basket
+        where gidx = #{gidx}
+          and midx = #{midx}
+    </delete>
+
+    <!-- 03. 장바구니 전부 삭제 -->
+    <delete id="deleteAll">
+        DELETE
+        FROM basket
+        where midx = #{midx}
+    </delete>
+
+    <!-- 04. 장바구니 수정 -->
+    <update id="modifyCart">
+        UPDATE basket
+        SET count = #{count}
+        where midx = #{memberIdx}
+          AND gidx = #{goodsIdx}
+    </update>
+
+    <!-- 다시 한번 확인!!!!!!!!! -->
+    <!-- 05. 장바구니 금액 합계 -->
+    <select id="sumMoney" resultType="int">
+        SELECT IFNULL(SUM(price * count), 0) money
+        FROM basket b,
+             goods g
+        WHERE b.id = g.id
+          AND midx = #{memberIdx}
+    </select>
+
+    <!-- 06.장바구니 상품확인 -->
+    <select id="countCart" resultType="int">
+        SELECT COUNT(*)
+        FROM basket
+        WHERE midx = #{memberIdx}
+          AND gidx = #{goodsIdx}
+    </select>
+
+    <!-- 07.장바구니에 기존의 상품이 존재하면 수정 -->
+    <update id="updateCart">
+        UPDATE basket
+        SET count = count + #{count}
+        WHERE midx = #{memberIdx}
+          AND gidx = #{goodsIdx}
+    </update>
 </mapper>

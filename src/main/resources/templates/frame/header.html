@@ -18,7 +18,7 @@
 				<th:block th:unless="${session.loginMember == null}">
 					<li><span th:text="|${session.loginMember.getName()} 님 환영합니다.|"></span></li>
 					<li><a th:href="@{/login/logout}">LOGOUT</a></li>
-					<li><a th:href="@{/mypage/orderList}">MYPAGE</a></li>
+					<li><a th:href="@{/mypage/orderList/{id}=(${session.loginMember.getIdx()})}">MYPAGE</a></li>
 					<li><a th:href="@{/basket/cart}">CART</a></li>
 				</th:block>
 				<a th:href="@{/tour/pick-date}"><button class="rez-btn-icon">양조장 예약</button></a>
