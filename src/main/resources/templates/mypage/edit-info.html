@@ -58,8 +58,8 @@
 						<th:block th:each="list : ${list}">
 							<fieldset class="mb-4">
 								<label for="memail">이메일</label>
-									<input type="text" id="memail" th:value="${list.memail}"readonly/>
-									<input type="hidden" th:value="${list.midx}" name="midx">
+									<input type="text" id="memail" th:value="${list.email}"readonly/>
+									<input type="hidden" th:value="${list.idx}" name="midx">
 							</fieldset>
 							<fieldset class="mb-4">
 								<label for="mpw">비밀번호<i class="icon_orange"></i></label>
@@ -72,14 +72,14 @@
 							<fieldset class="mb-4">
 								<div>
 								<label for="mname">이름<i class="icon_orange"></i></label>
-									<input type="text" id="mname" name="mname" th:value="${list.mname}">
+									<input type="text" id="mname" name="mname" th:value="${list.name}">
 									<div class="msg"></div>
 								</div>
 							</fieldset>
 							<fieldset class="mb-4">
 								<label for="mphone">연락처<i class="icon_orange"></i></label>
 								<div>
-									<input type="text" id="mphone" name="mphone" th:value="${list.mphone}">
+									<input type="text" id="mphone" name="mphone" th:value="${list.phone}">
 									<div class="msg"></div>
 								</div>
 							</fieldset>

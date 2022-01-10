@@ -3,6 +3,7 @@ package com.bitcamp.sc.web.member.controller;
 import javax.servlet.http.HttpSession;
 
 import com.bitcamp.sc.domain.member.service.MemberEditService;
+import com.bitcamp.sc.web.mypage.dto.EditMemberResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bitcamp.sc.web.login.dto.LoginInfo;
-import com.bitcamp.sc.web.mypage.dto.EditMemberRequestDto;
+import com.bitcamp.sc.web.mypage.dto.EditMemberRequest;
 
 @Slf4j
 @Controller
@@ -28,7 +29,7 @@ public class MemberEditController {
 	@GetMapping("/mypage/edit-info")
 	public String editInfoGet(Model model, HttpSession session) {
 		LoginInfo login = (LoginInfo) session.getAttribute("loginInfo");
-			EditMemberRequestDto list = service.getMemberInfo(login.getIdx());
+			EditMemberResponse list = service.getMemberInfo(login.getIdx());
 			model.addAttribute("list", list);
 			return "mypage/edit-info";
 
@@ -36,7 +37,7 @@ public class MemberEditController {
 
 	// 정보 수정 실행
 	@PostMapping("/mypage/edit-info")
-	public String editInfoPost(EditMemberRequestDto member) {
+	public String editInfoPost(EditMemberRequest member) {
 		service.updateMember(member);
 		return "redirect:/mypage/edit-info";
 	}

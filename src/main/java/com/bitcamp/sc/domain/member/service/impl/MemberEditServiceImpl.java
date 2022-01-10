@@ -1,9 +1,11 @@
 package com.bitcamp.sc.domain.member.service.impl;
 
+import com.bitcamp.sc.domain.member.domain.Member;
 import com.bitcamp.sc.domain.member.repository.MemberDao;
 import com.bitcamp.sc.domain.member.service.MemberEditService;
-import com.bitcamp.sc.web.mypage.dto.EditMemberRequestDto;
+import com.bitcamp.sc.web.mypage.dto.EditMemberRequest;
 import com.bitcamp.sc.domain.mypage.repository.MypageDao;
+import com.bitcamp.sc.web.mypage.dto.EditMemberResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,14 +27,19 @@ public class MemberEditServiceImpl implements MemberEditService {
     }
 
     // 회원 정보 수정
-    public int updateMember(EditMemberRequestDto member) {
-        String securityPw = passwordEncoder.encode(member.getNewPw());
-        member.setNewPw(securityPw);
-        return mypageDao.updateMember(member);
+    public int updateMember(EditMemberRequest request) {
+        Member findMember = mypageDao.findMemberAddressByMidx(request.getIdx());
+        if(findMember != null){
+            findMember.updateAccount(request.getNewPw(), request.getPhone(), request.toAddress());
+            log.info("before member = {}",findMember);
+            findMember.encryptionPw(passwordEncoder, findMember.getPw());
+            log.info("update member = {}",findMember);
+        }
+        return mypageDao.updateMember(findMember);
     }
 
     // 회원 정보 조회
-    public EditMemberRequestDto getMemberInfo(long idx) {
-        return mypageDao.getMemberInfo(idx);
+    public EditMemberResponse getMemberInfo(long idx) {
+        return new EditMemberResponse(mypageDao.findMemberAddressByMidx(idx));
     }
 }
