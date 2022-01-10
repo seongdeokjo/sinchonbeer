@@ -48,9 +48,9 @@ public class AddressRepositoryTest {
                 .address2(address2)
                 .build());
         Address findAddress = addressDao.findAddressByMidx(findMember.getIdx());
-        log.info("address = {}",findAddress);
-        Assertions.assertThat(findAddress.getAddress1()).isEqualTo(address1);
+        log.info("address = {}", findAddress);
 
+        Assertions.assertThat(findAddress.getAddress1()).isEqualTo(address1);
 
     }
 

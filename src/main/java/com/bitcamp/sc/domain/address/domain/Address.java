@@ -6,7 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Getter
-@Setter
 @NoArgsConstructor
 @ToString
 public class Address {
@@ -17,6 +16,12 @@ public class Address {
     private String address1;
     private String address2;
 
+    public Address(String postcode, String address1, String address2) {
+        this.postcode = postcode;
+        this.address1 = address1;
+        this.address2 = address2;
+    }
+
     @Builder
     public Address(Member member, String postcode, String address1, String address2) {
         this.member = member;
@@ -24,6 +29,12 @@ public class Address {
         this.address1 = address1;
         this.address2 = address2;
     }
+
+
+
+   public void changeMemberInfo(Member member){
+        this.member = member;
+   }
 
     // 주소를 모두 입력하였는지 확인하는 메소드
     public boolean formValidate() {

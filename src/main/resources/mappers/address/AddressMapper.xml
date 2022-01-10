@@ -8,24 +8,13 @@
     <resultMap id="AddressVo" type="com.bitcamp.sc.domain.address.domain.Address">
         <id property="idx" column="id" />
         <result property="postcode" column="postcode"/>
-        <result property="address1" column="address1"/>
-        <result property="address2" column="address2"/>
-        <association property="member" javaType="com.bitcamp.sc.domain.member.domain.Member">
-            <id property="idx" column="midx" ></id>
-            <result property="email" column="email"/>
-            <result property="pw" column="pw" />
-            <result property="name" column="name" />
-            <result property="phone" column="phone" />
+        <result property="address1" column="address1" />
+        <result property="address2" column="address2" />
+        <association property="member" javaType="com.bitcamp.sc.domain.member.domain.Member" foreignColumn="midx" fetchType="lazy">
+            <id property="idx" column="midx"/>
         </association>
     </resultMap>
-
-    <select id="findAddressByMidx" parameterType="long"
-            resultMap="AddressVo">
-        select a.*, m.email, m.name, m.pw, m.phone
-        from address a, member m
-        where a.midx = m.id and a.midx = #{idx}
-    </select>
-
+    <!-- 주소 저장 -->
     <insert id="save"
             parameterType="com.bitcamp.sc.domain.address.domain.Address"
             useGeneratedKeys="true"
@@ -35,5 +24,13 @@
         values (#{member.idx}, #{postcode}, #{address1}, #{address2})
     </insert>
 
+    <select id="findAddressByMidx" parameterType="long" resultMap="AddressVo">
+        select * from address where midx = #{idx}
+    </select>
+
+    <!--회원 번호로 주소 번호 반환-->
+    <select id="findIdxByMidx" parameterType="long" resultType="long">
+        select id from address where midx = #{idx}
+    </select>
 
 </mapper>
