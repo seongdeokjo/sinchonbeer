@@ -91,8 +91,6 @@
     </select>
 
 
-
-
     <!-- 회원 탈퇴 -->
     <delete id="deleteMember" parameterType="long">
         DELETE FROM member WHERE id=#{idx};

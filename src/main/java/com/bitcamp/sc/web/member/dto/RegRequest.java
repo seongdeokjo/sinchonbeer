@@ -5,6 +5,7 @@ import com.bitcamp.sc.domain.member.domain.Member;
 import lombok.*;
 
 @Getter
+@Setter
 @NoArgsConstructor
 public class RegRequest {
 

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
-
 @Service
 @RequiredArgsConstructor
 public class MemberRegServiceImpl implements MemberRegService {
@@ -26,36 +25,30 @@ public class MemberRegServiceImpl implements MemberRegService {
         boolean result = false;
         // 회원등록 - toMember(): email, pw, name, phone
 
-        Member newMember = regRequest.toMember();
+        Member regMember = regRequest.toMember();
         //암호화
-        encryptionPw(newMember);
-        memberDao.save(newMember);
-        if (newMember != null) {
-            log.info("member = {}", newMember);
+        regMember.encryptionPw(passwordEncoder, regMember.getPw());
+        memberDao.save(regMember);
+        if (regMember != null) {
+            log.info("member = {}", regMember);
             // 사용자가 입력한 주소등록
-            result = saveAddress(regRequest.toAddress(), newMember);
+            result = saveAddress(regRequest.toAddress(), regMember);
         }
         return result;
     }
 
     // 주소 등록
-    private boolean saveAddress(Address newAddress, Member newMember) {
+    private boolean saveAddress(Address regAddress, Member member) {
         boolean result = false;
-        if (newAddress.formValidate()) {
-            newAddress.setMember(newMember);
-            addressDao.save(newAddress);
-            if (newAddress != null) {
-                log.info("newAddress ={}",newAddress);
+        if (regAddress.formValidate()) {
+            regAddress.changeMemberInfo(member);
+            addressDao.save(regAddress);
+            if (regAddress != null) {
+                log.info("newAddress ={}",regAddress);
                 result = true;
             }
         }
         return result;
     }
 
-    private void encryptionPw(Member member) {
-        String securityPw = passwordEncoder.encode(member.getPw());
-        log.info("암호화 테스트 : " + securityPw);
-        member.setPw(securityPw);
-        log.info("암호화 결과 : " + passwordEncoder.matches(member.getPw(), securityPw));
-    }
 }

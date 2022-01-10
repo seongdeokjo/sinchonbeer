@@ -2,22 +2,21 @@ package com.bitcamp.sc.domain.mypage.repository.impl;
 
 import java.util.List;
 
+import com.bitcamp.sc.domain.member.domain.Member;
 import com.bitcamp.sc.domain.mypage.repository.MypageDao;
+import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.bitcamp.sc.domain.mypage.domain.OrderList;
 import com.bitcamp.sc.domain.mypage.domain.RezList;
-import com.bitcamp.sc.web.mypage.dto.EditMemberRequestDto;
+import com.bitcamp.sc.web.mypage.dto.EditMemberRequest;
 
 @Repository
+@RequiredArgsConstructor
 public class MybatisMypageDao implements MypageDao {
 	private static final String namespace = "MypageMapper";
 	private final SqlSessionTemplate template;
-
-	public MybatisMypageDao(SqlSessionTemplate template) {
-		this.template = template;
-	}
 
 	// 주문 내역 조회
 	public List<OrderList> getOrderList(long idx) {
@@ -29,13 +28,14 @@ public class MybatisMypageDao implements MypageDao {
 		return template.selectList(namespace + ".getRezList", idx);
 	}
 
-	// 회원 정보 조회 --> return Member로 변경
-	public EditMemberRequestDto getMemberInfo(long idx){
-		return template.selectOne(namespace+".getMemberInfo",idx);
+
+	@Override
+	public Member findMemberAddressByMidx(long idx) {
+		return template.selectOne(namespace+".findMemberAddressByMidx",idx);
 	}
 
 	// 회원 정보 수정
-	public int updateMember(EditMemberRequestDto member){
+	public int updateMember(Member member){
 		return template.update(namespace+".updateMember",member);
 	}
 }

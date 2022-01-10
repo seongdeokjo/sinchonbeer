@@ -17,10 +17,10 @@ import static org.assertj.core.api.Assertions.*;
 @Transactional
 public class MemberDeleteServiceTest {
     @Autowired
-    SqlSessionTemplate template;
+    MemberDeleteService deleteService;
 
     @Test
     void 회원_삭제() {
-
+        deleteService.deleteMember(55);
     }
 }

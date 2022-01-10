@@ -4,11 +4,9 @@ import com.bitcamp.sc.domain.address.repository.AddressDao;
 import com.bitcamp.sc.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
 
 import com.bitcamp.sc.web.login.dto.LoginInfo;
-import com.bitcamp.sc.domain.address.domain.Address;
 import com.bitcamp.sc.domain.member.repository.MemberDao;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberServiceImpl implements MemberService {
 
 	private final MemberDao memberDao;
-	private final AddressDao addressDao;
 
 	// 회원의 midx로 회원 정보 조회하기.
 	@Override
@@ -27,9 +24,5 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.findByMidx(idx).toLoginInfo();
 	}
 
-	// 회원의 midx로 주소 정보 가지고 오기
-	@Override
-	public Address getMemberAdd(long midx) {
-		return addressDao.findAddressByMidx(midx);
-	}
+
 }

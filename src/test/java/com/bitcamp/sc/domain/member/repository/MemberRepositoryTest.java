@@ -4,6 +4,7 @@ import com.bitcamp.sc.domain.address.domain.Address;
 import com.bitcamp.sc.domain.address.repository.AddressDao;
 import com.bitcamp.sc.domain.member.domain.*;
 
+import com.bitcamp.sc.domain.mypage.repository.MypageDao;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -21,22 +22,38 @@ class MemberRepositoryTest {
     SqlSessionTemplate template;
     @Autowired
     MemberDao memberDao;
+    @Autowired
+    MypageDao mypageDao;
+    @Autowired
+    AddressDao addressDao;
 
     @Test
-    void 회원_저장_찾기() {
-        String name ="테스트";
-        String email = "test@naver.com";
+    void 회원주소_저장(){
+        String email = "test1@naver.com";
+        String pw = "1234";
+        String name = "테스트";
+        String phone = "01012345678";
+        String postCode = "01";
+        String address1 = "서울";
+        String address2 = "1";
         //given
         memberDao.save(Member.builder()
                 .email(email)
                 .name(name)
-                .pw("1234")
-                .phone("01012341234")
+                .pw(pw)
+                .phone(phone)
+                .build());
+        Member findMember = memberDao.findByEmail(email);
+        log.info("member = {}",findMember);
+
+        addressDao.save(Address.builder()
+                .member(findMember)
+                .postcode(postCode)
+                .address1(address1)
+                .address2(address2)
                 .build());
 
-        Member findMember = memberDao.findByEmail(email);
-        log.info("member ={}", findMember);
-        assertThat(findMember.getEmail()).isEqualTo(email);
+
     }
 
 }

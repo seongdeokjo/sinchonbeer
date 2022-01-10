@@ -1,8 +1,9 @@
 package com.bitcamp.sc.domain.mypage.repository;
 
+import com.bitcamp.sc.domain.member.domain.Member;
 import com.bitcamp.sc.domain.mypage.domain.OrderList;
 import com.bitcamp.sc.domain.mypage.domain.RezList;
-import com.bitcamp.sc.web.mypage.dto.EditMemberRequestDto;
+import com.bitcamp.sc.web.mypage.dto.EditMemberRequest;
 
 import java.util.List;
 
@@ -11,7 +12,6 @@ public interface MypageDao {
 
     List<OrderList> getOrderList(long idx);
 
-    EditMemberRequestDto getMemberInfo(long idx);
-
-    int updateMember(EditMemberRequestDto member);
+    Member findMemberAddressByMidx(long idx);
+    int updateMember(Member member);
 }
