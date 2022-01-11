@@ -5,6 +5,7 @@ import com.bitcamp.sc.domain.basket.domain.Basket;
 import com.bitcamp.sc.domain.basket.repository.BasketDao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -54,23 +55,16 @@ public class MybatisBasketDao implements BasketDao {
     }
 
     @Override
-    public int checkBasket(long gidx, long midx) {
-        log.info("check mybatis 진입");
-        log.info(gidx+":"+midx);
+    public Basket getBasket( long midx, long gidx) {
         Map<String,Object> params = new HashMap<>();
         params.put("gidx", gidx);
         params.put("midx", midx);
-
-        Integer test=template.selectOne(NAME_SPACE+".checkBasket", params);
-        log.info("test : " + test);
-        int result = (test == null) ? 0 : test;
-        log.info("result int 변환 : " + result);
-        return result;
+        return template.selectOne(NAME_SPACE+".findByGidxAndMidx",params);
     }
 
     @Override
-    public void modifyAmount(BasketDto bDto) {
-        template.update(NAME_SPACE+".updateBasket", bDto);
+    public void updateCount(Basket basket) {
+        template.update(NAME_SPACE+".updateBasket", basket);
     }
 
     @Override

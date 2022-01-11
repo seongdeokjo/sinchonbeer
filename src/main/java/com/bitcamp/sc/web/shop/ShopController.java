@@ -55,10 +55,10 @@ public class ShopController {
 			
 			LoginInfo loginInfo = (LoginInfo)session.getAttribute("loginInfo");
 			
-			Address memberAddress = memberService.getMemberAdd(loginInfo.getIdx());
-			
-			model.addAttribute("address1", memberAddress.getAddress1());
-			model.addAttribute("address2", memberAddress.getAddress2());
+//			Address memberAddress = memberService.getMemberAdd(loginInfo.getIdx());
+//
+//			model.addAttribute("address1", memberAddress.getAddress1());
+//			model.addAttribute("address2", memberAddress.getAddress2());
 			
 			return "shop/shop_payment";
 	}

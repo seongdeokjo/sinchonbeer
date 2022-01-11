@@ -63,27 +63,27 @@ public class KakaoPayController {
 		return "redirect:" + kakaoPay.kakaoPayReady(orderInfo);
 	}
 	
-	@PostMapping("/kakaoPay/shop")
-	public String kakaoPayShop(
-			@ModelAttribute ShopDto shop,
-			Model model
-			) {
-		
-		Address memberAddress = memberService.getMemberAdd(shop.getMidx());
-		
-		OrderInfo orderInfo = OrderInfo.builder()
-									   .category("shop")
-									   .price(shop.getPrice())
-									   .goodsIdx(shop.getGidx())
-									   .addressIdx(memberAddress.getIdx())
-									   .memberIdx(shop.getMidx())
-									   .amount(shop.getAmount())
-									   .build();
-		
-		orderService.createOrder("shop", orderInfo);
-			
-		return "redirect:" + kakaoPay.kakaoPayReady(orderInfo);
-	}
+//	@PostMapping("/kakaoPay/shop")
+//	public String kakaoPayShop(
+//			@ModelAttribute ShopDto shop,
+//			Model model
+//			) {
+//
+//		Address memberAddress = memberService.getMemberAdd(shop.getMidx());
+//
+//		OrderInfo orderInfo = OrderInfo.builder()
+//									   .category("shop")
+//									   .price(shop.getPrice())
+//									   .goodsIdx(shop.getGidx())
+//									   .addressIdx(memberAddress.getIdx())
+//									   .memberIdx(shop.getMidx())
+//									   .amount(shop.getAmount())
+//									   .build();
+//
+//		orderService.createOrder("shop", orderInfo);
+//
+//		return "redirect:" + kakaoPay.kakaoPayReady(orderInfo);
+//	}
 	
 	@GetMapping("/kakaoPaySuccess")
 	public String kakaoPaySuccess(
@@ -145,9 +145,9 @@ public class KakaoPayController {
 		if (orderInfo.getCategory().equals("shop")) {
 			LoginInfo member = memberService.getMember(orderInfo.getMemberIdx());
 			
-			Address memberAddress = memberService.getMemberAdd(orderInfo.getMemberIdx());
-			
-			model.addAttribute("addressInfo", memberAddress);
+//			Address memberAddress = memberService.getMemberAdd(orderInfo.getMemberIdx());
+//
+//			model.addAttribute("addressInfo", memberAddress);
 			model.addAttribute("memberInfo", member);
 		}
 	}

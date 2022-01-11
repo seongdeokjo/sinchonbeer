@@ -21,15 +21,16 @@ public class BasketServiceImpl implements BasketService {
     // 장바구니 생성
     @Override
     public void saveBasket(BasketDto bDto) {
-        int avaiableBasket = bDao.checkBasket(bDto.getGidx(), bDto.getMidx());
-        if (avaiableBasket > 0) {
+        Basket findBasket = bDao.getBasket(bDto.getGidx(), bDto.getMidx());
+        if (findBasket != null) {
             log.info("이미 장바구니에 값이 존재합니다.");
-            bDao.modifyAmount(bDto);
+            findBasket.addCount(bDto.getCount());
+            log.info("add count = {}",findBasket.getCount());
+            bDao.updateCount(findBasket);
         } else {
             log.info("생성된 장바구니가 존재하지 않습니다.");
-            Basket basket = bDto.toBasket();
-            bDao.save(basket);
-
+            Basket newBasket = bDto.toBasket();
+            bDao.save(newBasket);
         }
     }
 

@@ -1,29 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="BasketMapper">
-    <resultMap type="com.bitcamp.sc.web.basket.dto.BasketDto" id="BasketDomain">
-        <result property="id" column="id"/>
+    <resultMap type="com.bitcamp.sc.domain.basket.domain.Basket" id="BasketVo">
+        <id property="idx" column="id"/>
         <result property="midx" column="midx"/>
-        <result property="gidx" column="gidx"/>
-        <result property="name" column="name"/>
-        <result property="photo" column="photo"/>
         <result property="count" column="count"/>
-        <result property="price" column="price"/>
+        <association property="goods"  column="gidx" javaType="com.bitcamp.sc.domain.goods.domain.Goods">
+            <id property="idx" column="gidx" />
+            <result property="name" column="name" />
+            <result property="price" column="price" />
+            <result property="photo" column="photo" />
+            <result property="title" column="title" />
+        </association>
     </resultMap>
+
     <!-- 장바구니 추가 -->
     <insert id="save" parameterType="com.bitcamp.sc.domain.basket.domain.Basket"
             useGeneratedKeys="true"
             keyProperty="idx">
         INSERT INTO basket(count, midx, gidx)
-        VALUES (#{count}, #{midx}, #{gidx})
+        VALUES (#{count}, #{midx}, #{goods.idx})
     </insert>
-    <!--  00. 장바구니 gidx 존재여부 -->
-    <select id="checkBasket" resultType="long">
-        select gidx
-        from basket
-        where gidx = #{gidx}
-        and midx = #{midx}
+    <!-- 장바구니 gidx 존재여부 -->
+    <select id="findByGidxAndMidx" resultMap="BasketVo" >
+        select basket.midx, basket.count, basket.id,
+               goods.id as gidx, goods.name, goods.title, goods.price,goods.photo
+        from basket join goods  on goods.id = basket.gidx
+        where midx = #{midx} and gidx = #{gidx}
     </select>
+    <!-- 장바구니 생성시 이미 gidx 값이 존재할 경우 수량만 변경 -->
+    <update id="updateCount" parameterType="com.bitcamp.sc.domain.basket.domain.Basket">
+        update basket
+        set count = #{count}
+        where gidx = #{goods.idx}
+          and midx = #{midx}
+    </update>
     <!-- 장바구니 페이지에서 버튼을 통한 수량 변경  -->
     <update id="changeAmount">
         update basket
@@ -32,15 +43,8 @@
           and midx = #{midx}
     </update>
 
-    <!-- 상품 목록에서 장바구니 담기 클릭시 이미 존재할 경우 수량만 추가 -->
-    <update id="updateBasket">
-        update basket
-        set count =count + #{amount}
-        where gidx = #{gidx}
-          and midx = #{midx}
-    </update>
     <!-- 02.장바구니 리스트 -->
-    <select id="findAllByMidx" resultMap="BasketDomain" parameterType="int">
+    <select id="findAllByMidx" resultMap="BasketVo" parameterType="long">
         select id, midx, gidx, count, name, (count * price) as price, photo
         from basket
                  natural join goods

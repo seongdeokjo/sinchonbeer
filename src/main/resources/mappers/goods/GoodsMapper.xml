@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="GoodsMapper">
 	
-	<resultMap type="com.bitcamp.sc.domain.goods.domain.Goods" id="GoodsDomain">
+	<resultMap type="com.bitcamp.sc.domain.goods.domain.Goods" id="GoodsVo">
 		<result property="idx" column="id"/>
 		<result property="name" column="name"/>
 		<result property="price" column="price"/>
@@ -25,7 +25,7 @@
 	</delete>
 	
 	<!-- 상품 찾기 -->
-	<select id="findByIdx" resultMap="GoodsDomain">
+	<select id="findByIdx" resultMap="GoodsVo" parameterType="long">
 		SELECT * FROM goods where id= #{idx}
 	</select>
 

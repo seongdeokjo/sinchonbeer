@@ -24,7 +24,7 @@ public class AddressRepositoryTest {
     @Test
     @Transactional
     void 회원과주소_저장() {
-        String email = "test1@naver.com";
+        String email = "test2@naver.com";
         String pw = "1234";
         String name = "테스트";
         String phone = "01012345678";
