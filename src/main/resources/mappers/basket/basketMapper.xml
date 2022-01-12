@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="BasketMapper">
+
     <resultMap type="com.bitcamp.sc.domain.basket.domain.Basket" id="BasketVo">
         <id property="idx" column="id"/>
         <result property="midx" column="midx"/>
@@ -21,6 +22,7 @@
         INSERT INTO basket(count, midx, gidx)
         VALUES (#{count}, #{midx}, #{goods.idx})
     </insert>
+
     <!-- 장바구니 gidx 존재여부 -->
     <select id="findByGidxAndMidx" resultMap="BasketVo" >
         select basket.midx, basket.count, basket.id,
@@ -28,29 +30,16 @@
         from basket join goods  on goods.id = basket.gidx
         where midx = #{midx} and gidx = #{gidx}
     </select>
-    <!-- 장바구니 생성시 이미 gidx 값이 존재할 경우 수량만 변경 -->
-    <update id="updateCount" parameterType="com.bitcamp.sc.domain.basket.domain.Basket">
-        update basket
-        set count = #{count}
-        where gidx = #{goods.idx}
-          and midx = #{midx}
-    </update>
-    <!-- 장바구니 페이지에서 버튼을 통한 수량 변경  -->
-    <update id="changeAmount">
-        update basket
-        set count = #{amount}
-        where gidx = #{gidx}
-          and midx = #{midx}
-    </update>
 
     <!-- 02.장바구니 리스트 -->
     <select id="findAllByMidx" resultMap="BasketVo" parameterType="long">
-        select id, midx, gidx, count, name, (count * price) as price, photo
+        select basket.id as id, midx, gidx, count, name, (count * price) as price, photo
         from basket
-                 natural join goods
+                 inner join goods on basket.gidx = goods.id
         where midx = #{midx}
         order by gidx
     </select>
+
     <!-- 각 고객의 장바구니에 담긴 총 금액 -->
     <select id="getTotal" resultType="int">
         select sum(count * price) as total
@@ -59,30 +48,6 @@
         where midx = #{midx}
     </select>
 
-    <!-- 03. 장바구니 삭제 -->
-    <delete id="deleteRow">
-        DELETE
-        FROM basket
-        where gidx = #{gidx}
-          and midx = #{midx}
-    </delete>
-
-    <!-- 03. 장바구니 전부 삭제 -->
-    <delete id="deleteAll">
-        DELETE
-        FROM basket
-        where midx = #{midx}
-    </delete>
-
-    <!-- 04. 장바구니 수정 -->
-    <update id="modifyCart">
-        UPDATE basket
-        SET count = #{count}
-        where midx = #{memberIdx}
-          AND gidx = #{goodsIdx}
-    </update>
-
-    <!-- 다시 한번 확인!!!!!!!!! -->
     <!-- 05. 장바구니 금액 합계 -->
     <select id="sumMoney" resultType="int">
         SELECT IFNULL(SUM(price * count), 0) money
@@ -100,11 +65,37 @@
           AND gidx = #{goodsIdx}
     </select>
 
-    <!-- 07.장바구니에 기존의 상품이 존재하면 수정 -->
-    <update id="updateCart">
-        UPDATE basket
-        SET count = count + #{count}
-        WHERE midx = #{memberIdx}
-          AND gidx = #{goodsIdx}
+    <!-- 장바구니 한 상품 당 수량 변경 -->
+    <update id="updateCount" parameterType="com.bitcamp.sc.domain.basket.domain.Basket">
+        update basket
+        set count = #{count}
+        where gidx = #{goods.idx}
+          and midx = #{midx}
     </update>
+
+
+    <!-- 03. 장바구니 단일 행 삭제 -->
+    <delete id="deleteRow" >
+        DELETE
+        FROM basket
+        where gidx = #{gidx}
+          and midx = #{midx}
+    </delete>
+
+    <delete id="deleteGoods" parameterType="map">
+        delete from basket
+        <where>
+            midx = #{midx} and gidx in
+            <foreach collection="gidxList" item="item" open="(" close=")" separator=",">
+                   #{item}
+            </foreach>
+        </where>
+    </delete>
+
+    <!-- 03. 장바구니 전부 삭제 -->
+    <delete id="deleteAll">
+        DELETE
+        FROM basket
+        where midx = #{midx}
+    </delete>
 </mapper>

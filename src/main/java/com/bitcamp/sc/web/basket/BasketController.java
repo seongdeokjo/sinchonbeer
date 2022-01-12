@@ -4,6 +4,7 @@ import com.bitcamp.sc.web.SessionConst;
 import com.bitcamp.sc.web.basket.dto.BasketDto;
 import com.bitcamp.sc.domain.basket.domain.Basket;
 import com.bitcamp.sc.domain.basket.service.BasketService;
+import com.bitcamp.sc.web.basket.dto.BasketListResponse;
 import com.bitcamp.sc.web.login.dto.LoginInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +31,7 @@ public class BasketController {
     public String getBasketPage(HttpSession session, Model model) {
         LoginInfo loginInfo = (LoginInfo) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
-        List<BasketDto> list = basketService.getList(loginInfo.getIdx());
+        List<BasketListResponse> list = basketService.getList(loginInfo.getIdx());
         int total = basketService.getTotalPayByMidx(loginInfo.getIdx());
 
         model.addAttribute("list", list);

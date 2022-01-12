@@ -30,13 +30,10 @@ public class BasketRestController {
     public void deleteAll(@PathVariable("midx") long midx) {
         basketService.deleteAllByMidx(midx);
     }
+
     @GetMapping("/basket/changeAmount")
     public boolean modifyAmount(BasketDto bDto) {
         boolean result = false;
-        int check = basketService.changeBasketAmount(bDto);
-        if(check == 1) {
-            result = true;
-        }
         return result;
     }
 
@@ -44,17 +41,12 @@ public class BasketRestController {
     @PostMapping("/deleteBasketByPicking")
     public int deleteBasketByPicking(
             @RequestParam(value="gidxList[]") List<Integer> gidxList,
-            @RequestParam(value="midx") long midx
-    ) {
+            @RequestParam(value="midx") long midx) {
         int result = 0;
         log.info("gidx List : " + gidxList.toString());
         log.info("받아온 midx 값 : " + midx);
-        // service에 반복문?
         if(!gidxList.isEmpty()) {
-            result = basketService.getDeleteRowByGidx(gidxList, midx);
-        }
-        if(result > 0) {
-            log.info("삭제 성공");
+            result = basketService.getDeleteGoodsByGidxList(gidxList, midx);
         }
         return result;
     }

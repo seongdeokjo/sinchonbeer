@@ -28,7 +28,7 @@ public class MybatisBasketDao implements BasketDao {
     }
 
     @Override
-    public List<BasketDto> findAllByMidx(long midx) {
+    public List<Basket> findAllByMidx(long midx) {
         return template.selectList(NAME_SPACE+".findAllByMidx",midx);
     }
 
@@ -50,6 +50,16 @@ public class MybatisBasketDao implements BasketDao {
     }
 
     @Override
+    public int deleteGoods(List<Integer> list, long midx) {
+        log.info("선택 상품 삭제 ----------------");
+        log.info("gidx list 개수 = {}",list.size());
+        Map<String,Object> params = new HashMap<>();
+        params.put("gidxList", list);
+        params.put("midx", midx);
+        return template.delete(NAME_SPACE+".deleteGoods",params);
+    }
+
+    @Override
     public void deleteAll(long midx) {
         template.delete(NAME_SPACE+".deleteAll",midx);
     }
@@ -65,10 +75,5 @@ public class MybatisBasketDao implements BasketDao {
     @Override
     public void updateCount(Basket basket) {
         template.update(NAME_SPACE+".updateBasket", basket);
-    }
-
-    @Override
-    public int changeBasketAmount(BasketDto bDto) {
-        return template.update(NAME_SPACE+".changeAmount", bDto);
     }
 }
