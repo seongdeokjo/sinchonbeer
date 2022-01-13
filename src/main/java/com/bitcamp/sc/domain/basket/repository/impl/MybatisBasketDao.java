@@ -26,12 +26,14 @@ public class MybatisBasketDao implements BasketDao {
     public void save(Basket basket) {
        template.insert(NAME_SPACE+".save", basket);
     }
-
+    
+    // 회원의 장바구니 상품 모두 가져오기
     @Override
     public List<Basket> findAllByMidx(long midx) {
         return template.selectList(NAME_SPACE+".findAllByMidx",midx);
     }
 
+    //
     @Override
     public int getTotalPay(long midx) {
         log.info("mybatis 진입");

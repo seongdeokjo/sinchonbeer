@@ -18,7 +18,7 @@ public class BasketRestController {
     @GetMapping("/deleteRow")
     public boolean getDeleteRow(@RequestParam("gidx") long gidx,@RequestParam("midx") long midx) {
         boolean result = false;
-        int cnt = basketService.getDeleteRowByGidx(gidx,midx);
+        int cnt = basketService.deleteRowByGidx(gidx,midx);
         if(cnt > 0) {
             log.info("선택 상품이 삭제되었습니다.");
             result = true;
@@ -46,7 +46,7 @@ public class BasketRestController {
         log.info("gidx List : " + gidxList.toString());
         log.info("받아온 midx 값 : " + midx);
         if(!gidxList.isEmpty()) {
-            result = basketService.getDeleteGoodsByGidxList(gidxList, midx);
+            result = basketService.deleteGoodsByGidxList(gidxList, midx);
         }
         return result;
     }

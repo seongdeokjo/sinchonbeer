@@ -1,4 +1,4 @@
-package com.bitcamp.sc.domain.tour.domain;
+package com.bitcamp.sc.web.tour.dto;
 
 
 import lombok.Getter;

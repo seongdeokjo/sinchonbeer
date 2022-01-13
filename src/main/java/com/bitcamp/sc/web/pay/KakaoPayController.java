@@ -1,14 +1,12 @@
 package com.bitcamp.sc.web.pay;
 
 import com.bitcamp.sc.web.login.dto.LoginInfo;
-import com.bitcamp.sc.domain.address.domain.Address;
 import com.bitcamp.sc.domain.member.service.MemberService;
 import com.bitcamp.sc.domain.order.domain.OrderInfo;
 import com.bitcamp.sc.domain.order.service.OrderService;
 import com.bitcamp.sc.domain.pay.service.impl.PayServiceImpl;
 import com.bitcamp.sc.domain.pay.service.impl.type.KakaoPay;
-import com.bitcamp.sc.web.shop.dto.ShopDto;
-import com.bitcamp.sc.domain.tour.domain.TourDto;
+import com.bitcamp.sc.web.tour.dto.TourDto;
 import com.bitcamp.sc.domain.tour.service.MailService;
 import com.bitcamp.sc.domain.tour.service.TourService;
 import org.slf4j.Logger;

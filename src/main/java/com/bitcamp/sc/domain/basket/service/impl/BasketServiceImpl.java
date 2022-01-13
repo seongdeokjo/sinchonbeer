@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,7 +51,7 @@ public class BasketServiceImpl implements BasketService {
 
     // 장바구니 한 상품만 삭제
     @Override
-    public int getDeleteRowByGidx(long gidx, long midx) {
+    public int deleteRowByGidx(long gidx, long midx) {
         return bDao.deleteRowByGidx(gidx, midx);
     }
 
@@ -64,7 +63,7 @@ public class BasketServiceImpl implements BasketService {
 
     // 장바구니 선택한 품목 삭제
     @Override
-    public int getDeleteGoodsByGidxList(List<Integer> gidxList, long midx) {
+    public int deleteGoodsByGidxList(List<Integer> gidxList, long midx) {
         return bDao.deleteGoods(gidxList, midx);
     }
 }

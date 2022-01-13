@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bitcamp.sc.domain.pay.domain.PayInfo;
 import com.bitcamp.sc.domain.pay.service.PayService;
-import com.bitcamp.sc.domain.tour.domain.ChangeTourDto;
+import com.bitcamp.sc.web.tour.dto.ChangeTourDto;
 import com.bitcamp.sc.domain.tour.service.MailService;
 import com.bitcamp.sc.domain.tour.service.TourService;
 

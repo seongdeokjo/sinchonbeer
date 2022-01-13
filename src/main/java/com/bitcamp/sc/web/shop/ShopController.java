@@ -1,7 +1,6 @@
 package com.bitcamp.sc.web.shop;
 
 import com.bitcamp.sc.web.login.dto.LoginInfo;
-import com.bitcamp.sc.domain.address.domain.Address;
 import com.bitcamp.sc.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -54,11 +53,6 @@ public class ShopController {
 			model.addAttribute("amount", amount);
 			
 			LoginInfo loginInfo = (LoginInfo)session.getAttribute("loginInfo");
-			
-//			Address memberAddress = memberService.getMemberAdd(loginInfo.getIdx());
-//
-//			model.addAttribute("address1", memberAddress.getAddress1());
-//			model.addAttribute("address2", memberAddress.getAddress2());
 			
 			return "shop/shop_payment";
 	}

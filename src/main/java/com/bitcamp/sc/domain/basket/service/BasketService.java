@@ -10,7 +10,7 @@ public interface BasketService {
     void saveBasket(BasketDto bDto);
     List<BasketListResponse> getList(long midx);
     int getTotalPayByMidx(long midx);
-    int getDeleteRowByGidx(long gidx, long midx);
-    int getDeleteGoodsByGidxList(List<Integer> gidxList, long midx);
+    int deleteRowByGidx(long gidx, long midx);
+    int deleteGoodsByGidxList(List<Integer> gidxList, long midx);
     void deleteAllByMidx(long midx);
 }
