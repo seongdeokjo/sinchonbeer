@@ -41,6 +41,7 @@ public class Member {
 	}
 
 	public LoginInfo toLoginInfo() {
+		log.info("로그인 정보 생성자 호출");
 		return new LoginInfo(this.idx, this.email, this.name, this.phone);
 	}
 

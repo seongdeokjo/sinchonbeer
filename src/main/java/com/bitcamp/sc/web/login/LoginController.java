@@ -50,6 +50,7 @@ public class LoginController {
 
         LoginInfo info = service.login(form);
         if (info == null) {
+            log.info("null 호출 체크");
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
             return "login/loginForm";
         }

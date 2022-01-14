@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>예약 날짜+인원 선택</title>
+    <title>예약날짜선택</title>
 
     <link rel="stylesheet" th:href="@{/css/tour/pick-date.css}">
     <th:block th:include="frame/metaheader"></th:block>
@@ -30,8 +30,8 @@
         <li><a th:href="@{/tour/change-info}">예약 확인/취소</a></li>
     </ul>
 </div>
-
 <!-- submenu 끝  -->
+
 <!-- content 영역 -->
 <div id="content_wrap" class="container-fulid totalPage">
     <div class="keyVisualBox full">
@@ -42,14 +42,13 @@
                     <ul>
                         <li>
                             <input type="text" id="datepicker" class="jejuInputBox">
-                            <input type="hidden" id="select" name="selectDate">
+                            <input type="hidden" id="selectDate" name="selectDate">
                             <input type="text" id="msg" readonly class="text-center border-0" value="잔여석: ">
-                            <input type="hidden" th:name="price" value="22000">
-                            <input type="hidden" th:name="category" value="tour">
-
+                            <input type="hidden"  name="price" th:value="20000">
+                            <input type="hidden" name="category" th:value="tour">
                         </li>
                         <li>
-                            <select id="count" class="out" th:name="tourPeople">
+                            <select class="out" id="tourPeople" name="tourPeople">
                                 <option value="0" selected>인원선택</option>
                                 <option value="1">1명</option>
                                 <option value="2">2명</option>
@@ -58,12 +57,12 @@
                             </select>
                         </li>
                         <li>
+                            <!-- 로그인 체크여부를 위한 hidden 옵션 -->
+                            <input type="hidden" th:value="${session.loginMember == null ? 'Y' : 'N'}" id="login">
                             <input type="submit" value="예약" class="out" id="btn">
                         </li>
                     </ul>
                 </form>
-                <!-- 로그인 체크여부를 위한 hidden 옵션 -->
-                <input type="hidden" th:value="${session.loginInfo == null ? 'Y' : 'N'}" id="login">
             </div>
         </div>
     </div>

@@ -5,24 +5,22 @@ import java.util.List;
 
 import com.bitcamp.sc.domain.order.domain.OrderInfo;
 import com.bitcamp.sc.domain.tour.repository.TourDao;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import com.bitcamp.sc.domain.tour.service.TourService;
+
+@Slf4j
+@RequiredArgsConstructor
 @Service
 public class TourServiceImpl implements TourService {
 	
-	private TourDao dao;
-	
-	@Autowired
-	public TourServiceImpl(TourDao dao) {
-		this.dao = dao;
-	}
-	
+	private final TourDao dao;
+
 	// 투어 날짜로 투어 번호 가져오기
 	@Override
 	public int getTidxByTdate(String tdate) {
-		
 		return dao.getTidxbyTdate(tdate);
 	}
 	
@@ -52,9 +50,6 @@ public class TourServiceImpl implements TourService {
 			String  date =	dao.getTourDateByTidx(list.get(i).getTourIdx());
 			dateList.add(date);
 		}
-		
-		
 		return dateList;
 	}
-
 }

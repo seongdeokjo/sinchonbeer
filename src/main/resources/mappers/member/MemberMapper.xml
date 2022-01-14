@@ -14,7 +14,7 @@
     </resultMap>
 
     <!-- 로그인할 때 사용 - 이메일 + 비밀번호로 멤버객체 조회하기 -->
-    <select id="findByEmailPw" parameterType="string"
+    <select id="findByEmailAndPw" parameterType="com.bitcamp.sc.web.login.dto.LoginForm"
             resultMap="MemberVo"
     >
         select *

@@ -17,19 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class LoginService {
-    private final SqlSessionTemplate template;
     private final PasswordEncoder passwordEncoder;
-
-    private MemberDao memberDao;
+    private final MemberDao memberDao;
 
     public LoginInfo login(LoginForm form) {
-        LoginInfo info = new LoginInfo();
-        memberDao = template.getMapper(MemberDao.class);
-        Member member = memberDao.findByEmailAndPw(form.getEmail(), form.getPw());
+
+        Member member = memberDao.findByEmail(form.getEmail());
         log.info("member={}", member);
-        if (member != null && passwordEncoder.matches(form.getPw(), member.getPw())) {
-            info = member.toLoginInfo();
-        }
-        return info;
+        return (member != null && passwordEncoder.matches(form.getPw(), member.getPw())) ? member.toLoginInfo() : null;
     }
 }

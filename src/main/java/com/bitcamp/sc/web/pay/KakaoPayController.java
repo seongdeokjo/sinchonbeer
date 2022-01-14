@@ -45,10 +45,8 @@ public class KakaoPayController {
 	public String kakaoPayTour(
 			@ModelAttribute TourDto tour,
 			@RequestParam("pType") String pway,
-			Model model
-			) {
-		
-		OrderInfo orderInfo = OrderInfo.builder()
+			Model model) {
+				OrderInfo orderInfo = OrderInfo.builder()
 									   .category("tour")
 									   .price(tour.getPrice())
 									   .tourIdx(tourService.getTidxByTdate(tour.getSelectDate()))
@@ -142,10 +140,6 @@ public class KakaoPayController {
 	private void addAddressToModel(OrderInfo orderInfo, Model model) {
 		if (orderInfo.getCategory().equals("shop")) {
 			LoginInfo member = memberService.getMember(orderInfo.getMemberIdx());
-			
-//			Address memberAddress = memberService.getMemberAdd(orderInfo.getMemberIdx());
-//
-//			model.addAttribute("addressInfo", memberAddress);
 			model.addAttribute("memberInfo", member);
 		}
 	}

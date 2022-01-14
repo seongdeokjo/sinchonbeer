@@ -1,6 +1,7 @@
 package com.bitcamp.sc.domain.member.repository;
 
 import com.bitcamp.sc.domain.member.domain.Member;
+import com.bitcamp.sc.web.login.dto.LoginForm;
 import org.apache.ibatis.annotations.Param;
 
 public interface MemberDao {
@@ -8,7 +9,7 @@ public interface MemberDao {
     void save(Member member);
 
     // 이메일 + 비밀번호로 로그인 정보 가져오기
-    Member findByEmailAndPw(String email, String pw);
+    Member findByEmailAndPw(LoginForm form);
 
     //이메일로 회원정보 불러오기
     Member findByEmail(String email);

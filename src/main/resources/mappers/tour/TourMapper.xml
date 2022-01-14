@@ -6,12 +6,12 @@
 <mapper namespace="TourMapper">
 
 	<!-- 가능인원 체크 -->
-	<select id="selectCount" resultType="int">
-		select (total-current) from tour where date = date_format(#{tdate},'%Y-%m-%d')
+	<select id="selectCount" resultType="Integer" parameterType="string">
+		select (total-current) from tour where date = date_format(#{date},'%Y-%c-%d')
 	</select>
 	
 	<!-- 투어 날짜로 tidx 값 가져오기 -->
-	<select id="getTidxByTdate" resultType="int">
+	<select id="getTidxByTdate" resultType="Integer">
 		select id from tour where date= date_format(#{tdate},'%Y-%m-%d')
 	</select>
 	

@@ -32,7 +32,7 @@
 	</div>
 	<div class="container">
 		<form id="payForm" name="payForm">
-			<input type="hidden" th:value="${session.loginInfo.idx}" name="midx" id="midx">
+			<input type="hidden" th:value="${session.loginMember.getIdx()}" name="midx" id="midx">
 			<input type="hidden" th:value="${tour.selectDate}" name="selectDate">
 			<input type="hidden" th:value="${tour.tourPeople*tour.price}" name="price">
 			<input type="hidden" th:value="${tour.category}" name="category">
@@ -55,7 +55,7 @@
 			
 				<div class="form-group my-5 pb-3">
 					<label for="username" class="control-label required">신청자명</label>
-					<div class=" pl-1 pt-1 text-22" th:text="${session.loginInfo.name}"></div>
+					<div id="username" class=" pl-1 pt-1 text-22" th:text="${session.loginMember.getName()}"></div>
 				</div>
 
 				<label for="userphone" class="control-label required">핸드폰 번호</label>
@@ -69,7 +69,7 @@
 
 				<label for="certnum" class="control-label required">인증 번호</label>
 				<!-- 전송받은 인증번호 입력란  -->
-				<div class="input-group mb-5 pb-3">
+				<div id="certnum" class="input-group mb-5 pb-3">
 						<input type="text" name="verifyCode" class="form-control form-control-lg" id="verifyNum">
 					<div class="input-group-append">
 						<button class="btn btn-secondary" id="checkNum">확인</button>
@@ -78,7 +78,7 @@
 
 				<div class="form-group mb-5 pb-3">
 					<label for="useremail" class="control-label required">이메일</label>
-					<div class=" pl-1 pt-1 text-22" th:text="${session.loginInfo.email}"></div>
+					<div  id="useremail" class=" pl-1 pt-1 text-22" th:text="${session.loginMember.getEmail()}"></div>
 				</div>
 
 				<label for="usercoupon">쿠폰입력</label>
@@ -244,7 +244,6 @@
 								</li>
 							</ul>
 						</div>
-
 						<!-- Modal footer -->
 						<div class="modal-footer">
 							<button type="button" id="modalButton"

@@ -50,10 +50,5 @@ public class AuthInterceptor implements HandlerInterceptor {
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
                            ModelAndView modelAndView) throws Exception {
         log.info("interceptor postHandle execute===================");
-		HttpSession session = request.getSession();
-		if (session.getAttribute("loginMember") != null) {
-			Object dest = session.getAttribute("dest");
-			response.sendRedirect(dest != null ? (String)dest : "/");
-		}
     }
 }

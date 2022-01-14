@@ -1,10 +1,7 @@
-/**
- * 
- */
  $(function() {
 		let midx = $('#midx').val();
 		// 정규식 : 숫자만 가능 11자리		 
-		//	var regexp = /^[0-9]{11}*$/	
+		//	let regexp = /^[0-9]{11}*$/	
 		// 숫자만 입력가능한 input
 		$("input:text[name=phoneNumber]").keyup(function(e) {
 			reg = /[^0-9]/gi;
@@ -14,7 +11,6 @@
 		    	$(this).focus();
 		    }
 		});
-		
 		// 문자 인증 : 이름,이메일은 세션에 저장된 loginInfo를 통해 가져옴 ->
 		// 휴대전화는 직접 입력 (db 멤버 휴대전화 번호와 비교할지?) ->
 		// 인증번호 전송 버튼 : 입력된 휴대 전화 번호로 6자리 난수 전송 -> ajax url:'/sendMessage type:'get' ->
@@ -23,7 +19,6 @@
 		// 불일치 : alert('인증번호가 일치 하지 않습니다. 다시 입력해주세요.') location.reload()?  
 		$('#submitMessage').on('click',function(){
 			let phone = $('#userphone').val();
-			
 			console.log(phone);
 			$.ajax({
 				url : '/verifyMyPhone',
@@ -36,7 +31,6 @@
 						alert('등록된 번호가 아닙니다. \n 다시 시도해주세요.');
 						return false;
 					}
-					 
 					$.ajax({
 						url : '/sendMessage',
 						type : 'get',
@@ -67,19 +61,18 @@
 				}
 			}); 
 		});
-		 		 
-		var payHow = $('#payHow').val();
+		let payHow = $('#payHow').val();
 		console.log(payHow);
 		 
-		var reDate = $('#appendDate').text();
+		let reDate = $('#appendDate').text();
 		// 해당 날짜의 요일을 리턴하는 함수	
 		function day(reDate) {
-			var week=['월','화','수','목','금','토','일'];
-			var dayOfWeek = week[new Date(reDate).getDay()];
+			let week=['월','화','수','목','금','토','일'];
+			let dayOfWeek = week[new Date(reDate).getDay()];
 			return dayOfWeek;
 		}
 		// 리턴된 요일을 날짜에 append로 추가 
-		var result = day(reDate);
+		let result = day(reDate);
 		$('#appendDate').append(' ('+result+')');
 			// 동의 후 확인 클릭
 			$('#modalButton').click(function() {
@@ -102,20 +95,17 @@
 			}
 		});
 	});
-	
-	
-		// 카카오 페이 결제 
 
+		// 카카오 페이 결제
 		function frmSubmit() {
 			if ($('#payHow').val() == '') {
 				alert('결제 수단이 선택되지 않았습니다. \n 결제수단을 선택해주세요.');
 				$('input[name=paymentType]').focus();
 				return false;
 			}
-
 			window.name = "opner_win";
-			var myForm = document.payForm;
-			var myWin = window
+			let myForm = document.payForm;
+			let myWin = window
 					.open("about:blank", "kakaoPayWin",
 							"status=yes, scrollbars=yes, width=440, height=500, left=300, top=100");
 			myForm.method = "post";

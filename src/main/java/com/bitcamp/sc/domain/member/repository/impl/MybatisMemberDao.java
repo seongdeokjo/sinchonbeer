@@ -2,6 +2,7 @@ package com.bitcamp.sc.domain.member.repository.impl;
 
 import com.bitcamp.sc.domain.member.domain.Member;
 import com.bitcamp.sc.domain.member.repository.MemberDao;
+import com.bitcamp.sc.web.login.dto.LoginForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
@@ -13,7 +14,6 @@ import org.springframework.stereotype.Repository;
 @RequiredArgsConstructor
 public class MybatisMemberDao implements MemberDao {
     private static final String NAME_SPACE ="MemberMapper";
-
     private final SqlSessionTemplate template;
 
     @Override
@@ -22,8 +22,9 @@ public class MybatisMemberDao implements MemberDao {
     }
 
     @Override
-    public Member findByEmailAndPw(@Param("email") String email, @Param("pw") String pw) {
-        return template.selectOne(NAME_SPACE+".findByEmailAndPw");
+    public Member findByEmailAndPw(LoginForm form) {
+        log.info("form = {}",form);
+        return template.selectOne(NAME_SPACE+".findByEmailAndPw",form);
     }
 
     @Override
