@@ -37,7 +37,7 @@ class OrderServiceTest {
 		OrderInfo orderInfo = new OrderInfo("tour", 3000, 60, 3, 2, 1);
 		
 		// when
-		long orderIdx = orderService.createOrder("tour", orderInfo);
+		long orderIdx = orderService.createOrder( orderInfo);
 		
 		// then
 		OrderInfo findOrderInfo = orderService.getOrderInfo(orderIdx);
@@ -65,16 +65,16 @@ class OrderServiceTest {
 		// when
 		// then
 		assertThrows(IllegalStateException.class, () -> {
-			orderService.createOrder("tour", orderInfo1);
+			orderService.createOrder( orderInfo1);
 		});
 		assertThrows(IllegalStateException.class, () -> {
-			orderService.createOrder("tour", orderInfo2);
+			orderService.createOrder( orderInfo2);
 		});
 		assertThrows(IllegalStateException.class, () -> {
-			orderService.createOrder("tour", orderInfo3);
+			orderService.createOrder(orderInfo3);
 		});
 		assertThrows(IllegalStateException.class, () -> {
-			orderService.createOrder("tour", orderInfo4);
+			orderService.createOrder( orderInfo4);
 		});
 	}
 	

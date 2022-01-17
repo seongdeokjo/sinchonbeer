@@ -9,8 +9,7 @@ import com.bitcamp.sc.domain.pay.service.impl.type.KakaoPay;
 import com.bitcamp.sc.web.tour.dto.TourDto;
 import com.bitcamp.sc.domain.tour.service.MailService;
 import com.bitcamp.sc.domain.tour.service.TourService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,13 +21,11 @@ import com.bitcamp.sc.domain.pay.domain.KakaoPayApproval;
 import com.bitcamp.sc.domain.pay.domain.PayInfo;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.java.Log;
 
-@Log
+@Slf4j
 @AllArgsConstructor
 @Controller
 public class KakaoPayController {
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	private KakaoPay kakaoPay;
 	private PayServiceImpl payService;
 	private OrderService orderService;
@@ -44,17 +41,16 @@ public class KakaoPayController {
 	@PostMapping("/kakaoPay/tour")
 	public String kakaoPayTour(
 			@ModelAttribute TourDto tour,
-			@RequestParam("pType") String pway,
-			Model model) {
+			@RequestParam("pType") String pway) {
 				OrderInfo orderInfo = OrderInfo.builder()
-									   .category("tour")
+									   .category(tour.getCategory())
 									   .price(tour.getPrice())
 									   .tourIdx(tourService.getTidxByTdate(tour.getSelectDate()))
 									   .tourPeople(tour.getTourPeople())
 									   .memberIdx(tour.getMidx())
 									   .build();
-		
-		orderService.createOrder("tour", orderInfo);
+		log.info("tourDto = {}",tour);
+		orderService.createOrder(orderInfo);
 			
 		return "redirect:" + kakaoPay.kakaoPayReady(orderInfo);
 	}
@@ -88,9 +84,9 @@ public class KakaoPayController {
 			Model model) {
 		
 		OrderInfo orderInfo = orderService.getOrderInfo(orderIdx);
-		
+
 		KakaoPayApproval kakaoPayApproval = kakaoPay.kakaoPayInfo(pg_token, orderInfo);
-		logger.info("getCid = "+kakaoPayApproval.getCid() +", getTid = "+kakaoPayApproval.getTid()+
+		log.info("getCid = "+kakaoPayApproval.getCid() +", getTid = "+kakaoPayApproval.getTid()+
 					"getTax_free = "+kakaoPayApproval.getTax_free_amount()+", getAmount = "+kakaoPayApproval.getAmount()+", get_vat_amount =  "+kakaoPayApproval.getVat_amount()
 					);
 		
@@ -102,7 +98,7 @@ public class KakaoPayController {
 		
 		if (orderInfo.getCategory().equals("tour")) {
 			tourService.addTourPeopleByDate(orderInfo.getTourPeople(), tourService.getTourDateByTidx(orderInfo.getTourIdx()));
-			mailService.completeMail(payInfo, memberService.getMember(orderInfo.getMemberIdx()));
+//			mailService.completeMail(payInfo, memberService.getMember(orderInfo.getMemberIdx()));
 		}
 		
 		orderService.confirmOrder(orderInfo.getIdx());
@@ -111,7 +107,7 @@ public class KakaoPayController {
 	}
 	
 	@GetMapping("/kakaoPayCancel")
-	public String kakaoPayCancel(@RequestParam("orderIdx") long orderIdx, Model model) {
+	public String kakaoPayCancel(@RequestParam("orderIdx") long orderIdx) {
 		if (orderService.getOrderInfo(orderIdx) != null) {
 			orderService.deleteOrder(orderIdx);
 		}
@@ -128,12 +124,9 @@ public class KakaoPayController {
 	public String paySuccess(@RequestParam(value = "payIdx", required = false) String payIdx, Model model) {
 		PayInfo payInfo = payService.getPayInfo(Integer.parseInt(payIdx));
 		OrderInfo orderInfo = orderService.getOrderInfo(payInfo.getOrderIdx());
-		
 		model.addAttribute("payInfo", payInfo);
 		model.addAttribute("orderInfo", orderInfo);
-		
 		addAddressToModel(orderInfo, model);
-		
 		return selectPaySuccessPageByType(orderInfo.getCategory());
 	}
 	

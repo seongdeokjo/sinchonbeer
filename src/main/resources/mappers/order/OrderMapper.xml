@@ -17,7 +17,15 @@
 	</resultMap>
 
 	<insert id="save" parameterType="com.bitcamp.sc.domain.order.domain.OrderInfo" useGeneratedKeys="true" keyProperty="idx">
-		INSERT INTO orders(category, price, tidx, people, midx, aidx, gidx, amount) VALUES(#{category}, #{price}, #{tourIdx}, #{tourPeople}, #{memberIdx}, #{addressIdx}, #{goodsIdx}, #{amount})
+		INSERT INTO orders
+		<choose>
+			<when test='category.equals("tour")'>
+				(category, price, tidx, people,midx) VALUES(#{category}, #{price}, #{tourIdx}, #{tourPeople}, #{memberIdx})
+			</when>
+			<when test='category.equals("shop")'>
+				(category,midx,aidx,amount,gidx,) values(#{category},#{midx},#{aidx},#{amount},#{gidx})
+			</when>
+		</choose>
 	</insert>
 	
 	<select id="findByIdx" resultType="com.bitcamp.sc.domain.order.domain.OrderInfo" resultMap="OrderDomain">

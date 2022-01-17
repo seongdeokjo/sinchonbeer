@@ -47,11 +47,10 @@ public class ChangeTourController {
 		log.info("login: " + login);
 		// 로그인된 회원 중 예약 내역일 없을 경우도 예약 페이지로 이동
 		List<OrderInfo> list = orderService.getOrderInfosByType("tour", login.getIdx());
-		log.info("list : " + list);
-
+		log.info("list = {}",list);
 		// 로그인 상태이고 예약 정보가 있다면 모델에 저장
 		model.addAttribute("tourOrderList", list);
-		if (!list.isEmpty()) {
+		if (list != null && !list.isEmpty()) {
 			log.info("예약 정보가 존재 합니다.");
 			// 날짜가 담긴 리스트
 			List<String> dateList = service.getDateToList(list);
@@ -107,7 +106,7 @@ public class ChangeTourController {
 	// 세션 정보 가져오기
 	private LoginInfo getLoginInfo(HttpServletRequest req) {
 		HttpSession session = req.getSession();
-		LoginInfo login = (LoginInfo) session.getAttribute("loginInfo");
+		LoginInfo login = (LoginInfo) session.getAttribute("loginMember");
 		return login;
 	}
 }

@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <link rel="stylesheet" th:href="@{/css/tour/change-info.css}">
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -35,32 +34,28 @@
 			<li><a href="/tour/change-info" id="selectPage">예약 확인/취소</a></li>
 		</ul>
 	</div>
-	
 
 	<!-- content 영역 -->
 	<div th:unless="${#lists.isEmpty(tourOrderList)}">
 		<div class="container text-center p-2">
 			<div th:each="list,index : ${tourOrderList} ">
-						
 				<div class="row  mt-5 ">
 					<div class="col">
 						<h1>투어 확인/변경/취소</h1>
 					</div>
 				</div>
 				<div class="inline-row"></div>
-				
 				<div class="row m-3">
 					<div class="col-4">
 						<p>신청자명</p>
 					</div>
 					<div class="col-4 text-left outline_del">
-						<input type="text" th:value="${session.loginInfo.name}" id="name" readonly class="border-0">
+						<input type="text" th:value="${session.loginMember.name}" id="name" readonly class="border-0">
 						<input type="hidden" id="oidx" th:value="${list.idx}">	
 					</div>
 					<div class="col-4 "></div>
 				</div>
 				<div class="row m-3">
-				
 					<div class="col-4">
 						<p>프로그램 명</p>
 					</div>
@@ -69,7 +64,6 @@
 					</div>
 				</div>
 				<div class="row m-3">
-				
 					<div class="col-4">
 						<p>일시</p>
 					</div>
@@ -112,9 +106,7 @@
 							</div>
 						</div>
 					</div>
-						
 				</div>
-			
 				<div class="row m-3">
 					<div class="col-4">
 						<p>인원</p>
@@ -123,17 +115,15 @@
 						<input type="text" th:id="tourPeople+${list.idx}" th:value="${list.tourPeople}" class="border-0" readonly>
 					</div>
 				</div>
-				
 				<div class="row m-3">
 					<div class="col-4">
 						<p>휴대폰 번호</p>
 					</div>
 					<div class="col-4 text-left outline_del">
-						<input type="text" th:value="${session.loginInfo.phone}" class="border-0" readonly>
+						<input type="text" th:value="${session.loginMember.phone}" class="border-0" readonly>
 					</div>
 				</div>
 				<div class="inline-row2"></div>
-				
 				<div class="row ">
 					<div class="col-12 col-sm-6 p-3">
 						<input type="submit" value="예약일시 변경 확정" id="confirmedDateBtn" class="set_input color_input" th:onclick="|modify(${list.idx})|">
@@ -143,13 +133,11 @@
 					</div>
 				</div>
 			</div>
-			
 		</div>		
 	</div> <!-- content 영역 끝 -->
 	<!-- footer  -->
 	<th:block th:include="frame/footer"></th:block>
 	<!-- script  -->
 	<script th:src="@{/js/tour/change-info.js}"></script>
-
 </body>
 </html>

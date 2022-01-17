@@ -48,6 +48,7 @@ public class TourController {
 	// 날짜 , 인원 선택 후 예약 폼으로 이동 --> 로그인 여부 체크 / 날짜,인원,카테고리(투어), 회원 정보가 잘 들어오는지 ?
 	@RequestMapping(value = "/reserve/form", method = RequestMethod.GET)
 	public String getForm(TourDto tourDto, Model model) {
+		log.info("tourDto = {}",tourDto);
 		model.addAttribute("tour", tourDto);
 		return "tour/reservation/reservationForm";
 	}
