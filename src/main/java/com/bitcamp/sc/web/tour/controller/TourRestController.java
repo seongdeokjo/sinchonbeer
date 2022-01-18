@@ -1,4 +1,4 @@
-package com.bitcamp.sc.web.tour;
+package com.bitcamp.sc.web.tour.controller;
 
 import java.util.Random;
 
@@ -35,7 +35,7 @@ public class TourRestController {
 	@GetMapping("/verifyMyPhone")
 	public String verifyMyPhone(@RequestParam("phone") String ph,HttpServletRequest req) {
 		HttpSession session = req.getSession();
-		LoginInfo login = (LoginInfo)session.getAttribute("loginInfo");
+		LoginInfo login = (LoginInfo)session.getAttribute("loginMember");
 		String result ="";
 		if(login.getPhone().equals(ph)) {
 			result = "Y";

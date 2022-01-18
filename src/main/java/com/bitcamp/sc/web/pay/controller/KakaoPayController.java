@@ -1,4 +1,4 @@
-package com.bitcamp.sc.web.pay;
+package com.bitcamp.sc.web.pay.controller;
 
 import com.bitcamp.sc.web.login.dto.LoginInfo;
 import com.bitcamp.sc.domain.member.service.MemberService;
@@ -51,7 +51,7 @@ public class KakaoPayController {
 									   .build();
 		log.info("tourDto = {}",tour);
 		orderService.createOrder(orderInfo);
-			
+
 		return "redirect:" + kakaoPay.kakaoPayReady(orderInfo);
 	}
 	
@@ -87,22 +87,18 @@ public class KakaoPayController {
 
 		KakaoPayApproval kakaoPayApproval = kakaoPay.kakaoPayInfo(pg_token, orderInfo);
 		log.info("getCid = "+kakaoPayApproval.getCid() +", getTid = "+kakaoPayApproval.getTid()+
-					"getTax_free = "+kakaoPayApproval.getTax_free_amount()+", getAmount = "+kakaoPayApproval.getAmount()+", get_vat_amount =  "+kakaoPayApproval.getVat_amount()
-					);
+					"getTax_free = "+kakaoPayApproval.getTax_free_amount()+", getAmount = "+kakaoPayApproval.getAmount()+
+						", get_vat_amount =  "+kakaoPayApproval.getVat_amount());
 		
 		PayInfo payInfo = payService.approvalToPayInfo(kakaoPayApproval);
 		payService.savePayment(payInfo);
-		
 		log.info(payInfo.toString());
 		model.addAttribute("payIdx", payInfo.getIdx());
-		
 		if (orderInfo.getCategory().equals("tour")) {
 			tourService.addTourPeopleByDate(orderInfo.getTourPeople(), tourService.getTourDateByTidx(orderInfo.getTourIdx()));
 //			mailService.completeMail(payInfo, memberService.getMember(orderInfo.getMemberIdx()));
 		}
-		
 		orderService.confirmOrder(orderInfo.getIdx());
-		
 		return "pay/kakaoPaySuccess";
 	}
 	

@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import com.bitcamp.sc.domain.tour.service.TourService;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -19,6 +20,7 @@ public class TourServiceImpl implements TourService {
 	private final TourDao dao;
 
 	// 투어 날짜로 투어 번호 가져오기
+	@Transactional(readOnly = true)
 	@Override
 	public int getTidxByTdate(String tdate) {
 		return dao.getTidxbyTdate(tdate);

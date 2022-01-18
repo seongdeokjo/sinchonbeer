@@ -1,4 +1,4 @@
-package com.bitcamp.sc.web.review;
+package com.bitcamp.sc.web.review.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

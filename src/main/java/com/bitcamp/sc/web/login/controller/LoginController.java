@@ -1,4 +1,4 @@
-package com.bitcamp.sc.web.login;
+package com.bitcamp.sc.web.login.controller;
 
 import com.bitcamp.sc.web.login.dto.LoginForm;
 import com.bitcamp.sc.domain.login.service.LoginService;

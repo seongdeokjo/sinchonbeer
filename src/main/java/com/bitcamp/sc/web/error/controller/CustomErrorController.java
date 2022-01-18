@@ -1,4 +1,4 @@
-package com.bitcamp.sc.web.error;
+package com.bitcamp.sc.web.error.controller;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;

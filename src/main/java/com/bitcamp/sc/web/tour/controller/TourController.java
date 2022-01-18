@@ -1,4 +1,4 @@
-package com.bitcamp.sc.web.tour;
+package com.bitcamp.sc.web.tour.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -44,8 +44,8 @@ public class TourController {
 	public String getPickDate() {
 		return "tour/reservation/pick-date";
 	}
-
-	// 날짜 , 인원 선택 후 예약 폼으로 이동 --> 로그인 여부 체크 / 날짜,인원,카테고리(투어), 회원 정보가 잘 들어오는지 ?
+	
+	// 투어 결제 폼으로 이동
 	@RequestMapping(value = "/reserve/form", method = RequestMethod.GET)
 	public String getForm(TourDto tourDto, Model model) {
 		log.info("tourDto = {}",tourDto);

@@ -1,4 +1,4 @@
-package com.bitcamp.sc.web.tour;
+package com.bitcamp.sc.web.tour.controller;
 
 import java.util.List;
 

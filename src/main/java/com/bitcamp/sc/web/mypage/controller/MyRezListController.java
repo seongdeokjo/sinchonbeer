@@ -1,4 +1,4 @@
-package com.bitcamp.sc.web.mypage;
+package com.bitcamp.sc.web.mypage.controller;
 
 import java.util.List;
 

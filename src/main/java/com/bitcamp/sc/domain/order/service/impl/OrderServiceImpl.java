@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.bitcamp.sc.domain.order.domain.OrderInfo;
 import com.bitcamp.sc.domain.order.repository.OrderDao;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
@@ -43,6 +44,7 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderInfo> getOrderInfosByType(String type, long memberIdx) {
         return orderDao.findByCategoryAndMemberIdx(type, memberIdx);
     }
+
 
     @Override
     public int deleteOrder(long idx) {

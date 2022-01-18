@@ -1,4 +1,4 @@
-package com.bitcamp.sc.web.basket;
+package com.bitcamp.sc.web.basket.controller;
 
 import com.bitcamp.sc.web.SessionConst;
 import com.bitcamp.sc.web.basket.dto.BasketDto;

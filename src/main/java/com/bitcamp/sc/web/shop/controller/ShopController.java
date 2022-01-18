@@ -1,4 +1,4 @@
-package com.bitcamp.sc.web.shop;
+package com.bitcamp.sc.web.shop.controller;
 
 import com.bitcamp.sc.web.login.dto.LoginInfo;
 import com.bitcamp.sc.domain.member.service.MemberService;
