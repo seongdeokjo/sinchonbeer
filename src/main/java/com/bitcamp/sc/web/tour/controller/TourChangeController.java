@@ -5,10 +5,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.bitcamp.sc.domain.order.domain.Order;
 import com.bitcamp.sc.web.login.dto.LoginInfo;
-import com.bitcamp.sc.domain.order.domain.OrderInfo;
 import com.bitcamp.sc.domain.order.service.OrderService;
-import com.bitcamp.sc.domain.tour.service.ChangeReservationService;
+import com.bitcamp.sc.domain.tour.service.TourChangeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,8 +23,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bitcamp.sc.domain.pay.domain.PayInfo;
 import com.bitcamp.sc.domain.pay.service.PayService;
-import com.bitcamp.sc.web.tour.dto.ChangeTourDto;
-import com.bitcamp.sc.domain.tour.service.MailService;
+import com.bitcamp.sc.web.tour.dto.EditTourDto;
+import com.bitcamp.sc.domain.tour.service.TourMailService;
 import com.bitcamp.sc.domain.tour.service.TourService;
 
 import lombok.RequiredArgsConstructor;
@@ -32,61 +32,46 @@ import lombok.RequiredArgsConstructor;
 @Slf4j
 @RequiredArgsConstructor
 @Controller
-public class ChangeTourController {
+public class TourChangeController {
 
-	private final ChangeReservationService changeTourService;
+	private final TourChangeService changeTourService;
 	private final OrderService orderService;
 	private final TourService service;	
-	private final MailService mailService;
+	private final TourMailService mailService;
 	private final PayService payService;
 
 	// 투어 예약 변경/확인/취소 페이지 가져오기
 	@RequestMapping(value = "/tour/change-info", method = RequestMethod.GET)
 	public String getChangePage(Model model, HttpServletRequest req) {
 		LoginInfo login = getLoginInfo(req);
-		log.info("login: " + login);
-		// 로그인된 회원 중 예약 내역일 없을 경우도 예약 페이지로 이동
-		List<OrderInfo> list = orderService.getOrderInfosByType("tour", login.getIdx());
-		log.info("list = {}",list);
-		// 로그인 상태이고 예약 정보가 있다면 모델에 저장
+		List<Order> list = orderService.getOrderTourByMidxAndType(login.getIdx(),"tour");
 		model.addAttribute("tourOrderList", list);
-		if (list != null && !list.isEmpty()) {
-			log.info("예약 정보가 존재 합니다.");
-			// 날짜가 담긴 리스트
-			List<String> dateList = service.getDateToList(list);
-			log.info("list2 size : " + dateList.size());
-			log.info("새롭게 생성된  dateList : " + dateList);
-			model.addAttribute("tourDate", dateList);
-		}
 		return "tour/reservation/change/change-info";
 	}
 
 	// 예약 변경 확정 버튼 클릭 처리 -> orders테이블 tidx 수정 -> tour 테이블 날짜 각각 인원 수정
-	@PostMapping("/tour/changeTour")
+	@PostMapping("/tour/changeTour/{idx}")
 	@ResponseBody
-	public boolean changeTour(@RequestBody ChangeTourDto changeDto) {
-		return changeTourService.changeTourOrder(changeDto);
+	public boolean changeTour(@RequestBody EditTourDto changeDto,@PathVariable("idx") long oidx) {
+		return changeTourService.changeTourOrder(oidx,changeDto);
 	}
 	
 	// 예약 변경 메일 전송
-	@PostMapping("/tour/sendMailchange")
+	@PostMapping("/tour/sendMailchange/{idx}")
 	@ResponseBody
-	public void sendChangeMail(@RequestBody ChangeTourDto changeDto,HttpServletRequest req) {
+	public void sendChangeMail(@RequestBody EditTourDto changeDto, HttpServletRequest req) {
 		LoginInfo login = getLoginInfo(req);
-		log.info("changeDto : "+changeDto);
 		if(changeDto != null && login != null) {
 			mailService.changeMail(changeDto, login);
 		}
 	}
 	
 	// 예약 취소
-	@GetMapping("/tour/cancleOrder")
+	@GetMapping("/tour/cancleOrder/{oidx}")
 	@ResponseBody
-	public int cancelTourOrder(@RequestParam("idx") int oidx, @RequestParam("people") int people,
+	public int cancelTourOrder(@PathVariable("oidx") long oidx, @RequestParam("people") int people,
 			@RequestParam("tdate") String tdate) {
-		log.info("idx / people / tdate = " + oidx + " / " + people + " / " + tdate);
 		int result = orderService.changeOrderStatus(oidx, "cancled");
-		log.info("주문 상태 변경 결과 : " + result);
 		return (result == 1) ? service.subTourPeopleByDate(people, tdate) : 0;
 	}
 	
@@ -94,10 +79,8 @@ public class ChangeTourController {
 	@GetMapping("/tour/sendCancleMail/{oidx}")
 	@ResponseBody
 	public void sendCancleMail(@PathVariable("oidx") long idx,HttpServletRequest req) {
-		log.info("취소 메일 컨트롤러 진입 oidx"+idx);
 		LoginInfo login = getLoginInfo(req);
 		PayInfo payInfo = payService.getPayInfoByOrderIdx(idx);
-		log.info("payInfo 확인 : "+payInfo);
 		if(payInfo !=null) {
 			mailService.refundMail(payInfo,login);
 		}

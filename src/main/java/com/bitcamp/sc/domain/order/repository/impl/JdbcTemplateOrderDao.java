@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import com.bitcamp.sc.domain.order.domain.Order;
 import com.bitcamp.sc.domain.order.repository.OrderDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -59,5 +60,10 @@ public class JdbcTemplateOrderDao implements OrderDao {
 	@Override
 	public int updateStatus(String status, long idx) {
 		return 0;
+	}
+
+	@Override
+	public List<Order> findTourOrderByMidxAndCategory(long midx, String category) {
+		return null;
 	}
 }

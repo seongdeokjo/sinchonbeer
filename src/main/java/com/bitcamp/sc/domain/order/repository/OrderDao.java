@@ -2,6 +2,7 @@ package com.bitcamp.sc.domain.order.repository;
 
 import java.util.List;
 
+import com.bitcamp.sc.domain.order.domain.Order;
 import com.bitcamp.sc.domain.order.domain.OrderInfo;
 
 public interface OrderDao {
@@ -12,5 +13,7 @@ public interface OrderDao {
 	 List<OrderInfo> findByCategoryAndMemberIdx(String category, long memberIdx);
 	 int deleteByIdx(long idx);
 	 int updateStatus(String status, long idx);
+
+	 List<Order> findTourOrderByMidxAndCategory(long midx, String category);
 	
 }

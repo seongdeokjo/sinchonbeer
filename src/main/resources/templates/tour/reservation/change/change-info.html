@@ -51,7 +51,8 @@
 					</div>
 					<div class="col-4 text-left outline_del">
 						<input type="text" th:value="${session.loginMember.name}" id="name" readonly class="border-0">
-						<input type="hidden" id="oidx" th:value="${list.idx}">	
+						<input type="hidden" id="oidx" th:value="${list.idx}">
+						<input type="hidden" id="midx" th:value="${session.loginMember.idx}">
 					</div>
 					<div class="col-4 "></div>
 				</div>
@@ -68,8 +69,8 @@
 						<p>일시</p>
 					</div>
 					<div class="col-4 text-left outline_del">
-						<input type="text" th:id="newDate+${list.idx}" th:value="${tourDate[index.index]}"	name="newDate" class="border-0" readonly> 
-						<input type="hidden" th:id="resDate+${list.idx}" th:value="${tourDate[index.index]}"name="resDate">
+						<input type="text" th:id="newDate+${list.idx}" th:value="${list.tour.tourDate}"	name="newDate" class="border-0" readonly>
+						<input type="hidden" th:id="resDate+${list.idx}" th:value="${list.tour.tourDate}"name="resDate">
 					</div>
 					<div class="col-4">
 						<button data-toggle="modal"  data-target="#myModal" th:attrappend="data-target=${list.idx}"  

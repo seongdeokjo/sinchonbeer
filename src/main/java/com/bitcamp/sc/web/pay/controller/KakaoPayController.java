@@ -7,7 +7,7 @@ import com.bitcamp.sc.domain.order.service.OrderService;
 import com.bitcamp.sc.domain.pay.service.impl.PayServiceImpl;
 import com.bitcamp.sc.domain.pay.service.impl.type.KakaoPay;
 import com.bitcamp.sc.web.tour.dto.TourDto;
-import com.bitcamp.sc.domain.tour.service.MailService;
+import com.bitcamp.sc.domain.tour.service.TourMailService;
 import com.bitcamp.sc.domain.tour.service.TourService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -30,7 +30,7 @@ public class KakaoPayController {
 	private PayServiceImpl payService;
 	private OrderService orderService;
 	private TourService tourService;
-	private MailService mailService;
+	private TourMailService mailService;
 	private MemberService memberService;
 	
 	@GetMapping("/kakaoPay")

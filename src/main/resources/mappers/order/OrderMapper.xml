@@ -5,7 +5,7 @@
 
 	<resultMap type="com.bitcamp.sc.domain.order.domain.OrderInfo" id="OrderDomain">
 		<result property="idx" column="id"/>
-		<result property="date" column="date"/>
+		<result property="date" column="regdate"/>
 		<result property="category" column="category"/>
 		<result property="tourIdx" column="tidx"/>
 		<result property="memberIdx" column="midx"/>
@@ -15,6 +15,26 @@
 		<result property="goodsIdx" column="gidx"/>
 		<result property="amount" column="amount"/>
 	</resultMap>
+
+	<resultMap id="OrderTour" type="com.bitcamp.sc.domain.order.domain.Order">
+		<result property="idx" column="id"/>
+		<result property="date" column="regdate"/>
+		<result property="category" column="category"/>
+		<result property="tourPeople" column="people" />
+		<result property="price" column="price" />
+		<association property="tour" javaType="com.bitcamp.sc.domain.tour.domain.Tour" column="tidx">
+			<id property="idx" column="tidx" />
+			<result property="tourDate" column="tour_date"/>
+		</association>
+	</resultMap>
+
+
+
+	<select id="findOrderTourByMidx" resultMap="OrderTour">
+		select orders.id as id, orders.regdate, orders.people, orders.category,t.id as tidx, t.tour_date as tour_date
+		from orders join tour t on orders.tidx = t.id
+		where midx = #{midx} and category = #{category} and status = 'confirmed'
+	</select>
 
 	<insert id="save" parameterType="com.bitcamp.sc.domain.order.domain.OrderInfo" useGeneratedKeys="true" keyProperty="idx">
 		INSERT INTO orders

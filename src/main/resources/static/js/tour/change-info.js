@@ -99,12 +99,10 @@
 						// 변경된 날짜	
 						"newDate" : $('#newDate'+idx).val(),
 						// 현재 날짜
-						"resDate" : $('#resDate'+idx).val(),				
-						// 주문 번호 
-						"oidx" : idx	
+						"resDate" : $('#resDate'+idx).val()
 				};
 				$.ajax({
-					url : '/tour/changeTour',
+					url : '/tour/changeTour/'+idx,
 					type : 'post',
 					contentType : "application/json",
 					data :JSON.stringify(changeInfo),			
@@ -112,7 +110,7 @@
 						console.log(data);
 						if(data == true){
 							alert('예약이 변경되었습니다.');
-							sendChangeMail(changeInfo);
+							sendChangeMail(idx,changeInfo);
 							// 현재 페이지 다시로드	
 							location.reload();
 						}
@@ -129,10 +127,10 @@
 		}		
      }
      // 예약 변경 안내 메일 
-     function sendChangeMail(changeInfo){
+     function sendChangeMail(idx,changeInfo){
     	 console.log(changeInfo);
     	 $.ajax({
-    		 url : '/tour/sendMailchange',
+    		 url : '/tour/sendMailchange'+idx,
     		 type : 'post',
     		 contentType : "application/json",
     		 data : JSON.stringify(changeInfo)
@@ -143,19 +141,14 @@
     	let people = $('#tourPeople'+idx).val();
     	let tdate = $('#resDate'+idx).val();
     	let oidx = idx;
-    	
-    	console.log(idx);
-    	console.log(people+' : '+tdate);
-    	console.log(typeof idx +" : "+ typeof people +" : "+ typeof idx);
 		if (confirm('예약을 취소하시겠습니까?') == true) {
 		
 			$.ajax({
-				url : '/tour/cancleOrder/',
+				url : '/tour/cancleOrder/'+oidx,
 				type : 'get',
 				data : {
 					"people" : people,
 					"tdate" : tdate,
-					"idx" : idx
 				}, 
 				success : function(data){
 					if(data == 1){

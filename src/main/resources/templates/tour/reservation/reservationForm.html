@@ -170,12 +170,10 @@
 					<dd class="text-right py-2">
 						<h2 class="font-weight-bold" th:text="${tour.tourPeople*tour.price}+원"></h2>
 					</dd>
-
 					<dt class="float-left pt-3">
 						정상가 <span class="small" th:text="${tour.price} +원 + x + ${tour.tourPeople} +명"></span>
 					</dt>
 					<dd class="text-right pt-3" th:text="${tour.tourPeople * tour.price}+원"></dd>
-
 					<dt class="pt-3">할인</dt>
 					<dd class="text-right"></dd>
 				</dl>
@@ -183,7 +181,6 @@
 				<dl class="pt-3 px-3">
 					<dt class="float-left">합계</dt>
 					<dd  class="text-right" th:text="${tour.tourPeople * tour.price}+ 원"></dd>
-						
 				</dl>
 
 				<div class="form-check">
@@ -255,8 +252,6 @@
 	</div>
 	<!-- content 끝  -->
 	<th:block th:include="frame/footer"></th:block>
-	
 	<script th:src="@{/js/tour/reservationForm.js}" ></script>
-
 </body>
 </html>

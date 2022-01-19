@@ -1,24 +1,41 @@
-//package com.bitcamp.sc.order.repository.impl;
-//
-//import static org.assertj.core.api.Assertions.assertThat;
-//import static org.junit.jupiter.api.Assertions.assertThrows;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//import org.junit.jupiter.api.Test;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.context.SpringBootTest;
-//import org.springframework.test.annotation.Rollback;
-//import org.springframework.transaction.annotation.Transactional;
-//
-//import com.bitcamp.sc.order.domain.OrderInfo;
-//
-//@SpringBootTest
-//class MybatisOrderDaoTest {
-//
-//	@Autowired
-//	MybatisOrderDao dao;
+package com.bitcamp.sc.order.repository.impl;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+
+import com.bitcamp.sc.domain.order.domain.Order;
+import com.bitcamp.sc.domain.order.repository.impl.MybatisOrderDao;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
+
+@Slf4j
+@SpringBootTest
+class MybatisOrderDaoTest {
+
+	@Autowired
+    MybatisOrderDao dao;
+
+    @Test
+    @Transactional(readOnly = true)
+    void 투어주문_가져오기(){
+        // given
+        long midx = 60;
+        String category = "tour";
+        // then
+        List<Order> tourOrderByMidxAndCategory = dao.findTourOrderByMidxAndCategory(midx, category);
+        for (Order order : tourOrderByMidxAndCategory) {
+            log.info("ordertour = {}",order);
+        }
+       
+        // when
+        assertThat(tourOrderByMidxAndCategory.size()).isEqualTo(1);
+    }
+
+
 //
 //	@Test
 //	@Transactional
@@ -120,4 +137,4 @@
 //		assertThat(findOrders.size()).isEqualTo(1);
 //	}
 //
-//}
+}

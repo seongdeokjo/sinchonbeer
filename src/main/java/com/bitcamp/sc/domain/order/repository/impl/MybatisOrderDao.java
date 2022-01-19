@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bitcamp.sc.domain.order.domain.Order;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -58,6 +59,14 @@ public class MybatisOrderDao implements OrderDao {
 		param.put("status", status);
 		param.put("idx", idx);
 		return template.update(NAME_SPACE + ".updateStatus", param);
+	}
+
+	@Override
+	public List<Order> findTourOrderByMidxAndCategory(long midx, String category) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("midx", midx);
+		param.put("category", category);
+		return template.selectList(NAME_SPACE+".findOrderTourByMidx",param);
 	}
 
 }

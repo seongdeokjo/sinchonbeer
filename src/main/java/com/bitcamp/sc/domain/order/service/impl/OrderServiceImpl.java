@@ -2,6 +2,7 @@ package com.bitcamp.sc.domain.order.service.impl;
 
 import java.util.List;
 
+import com.bitcamp.sc.domain.order.domain.Order;
 import com.bitcamp.sc.domain.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +44,11 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderInfo> getOrderInfosByType(String type, long memberIdx) {
         return orderDao.findByCategoryAndMemberIdx(type, memberIdx);
+    }
+
+    @Override
+    public List<Order> getOrderTourByMidxAndType(long memberIdx, String type) {
+        return orderDao.findTourOrderByMidxAndCategory(memberIdx,type);
     }
 
 

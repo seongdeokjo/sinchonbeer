@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bitcamp.sc.domain.order.domain.Order;
 import com.bitcamp.sc.domain.order.domain.OrderInfo;
 import com.bitcamp.sc.domain.order.repository.OrderDao;
 
@@ -60,5 +61,10 @@ public class MemoryOrderDao implements OrderDao {
 	@Override
 	public int updateStatus(String status, long idx) {
 		return 0;
+	}
+
+	@Override
+	public List<Order> findTourOrderByMidxAndCategory(long midx, String category) {
+		return null;
 	}
 }
