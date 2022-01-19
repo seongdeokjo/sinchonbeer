@@ -71,6 +71,7 @@ public class TourChangeController {
 	@ResponseBody
 	public int cancelTourOrder(@PathVariable("oidx") long oidx, @RequestParam("people") int people,
 			@RequestParam("tdate") String tdate) {
+
 		int result = orderService.changeOrderStatus(oidx, "cancled");
 		return (result == 1) ? service.subTourPeopleByDate(people, tdate) : 0;
 	}

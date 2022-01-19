@@ -5,6 +5,8 @@ import java.net.URISyntaxException;
 import java.util.Collections;
 
 import com.bitcamp.sc.domain.order.domain.OrderInfo;
+import com.bitcamp.sc.domain.pay.domain.KakaoPayRefund;
+import com.bitcamp.sc.domain.pay.domain.PayInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -27,11 +29,36 @@ public class KakaoPay {
 	
 	private KakaoPayReady kakaoPayReady;
 	private KakaoPayApproval kakaoPayApproval;
+	private KakaoPayRefund kakaoPayRefund;
+
+	public KakaoPayRefund kakaoPayRefund(PayInfo payInfo){
+		RestTemplate restTemplate = new RestTemplate();
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization", "KakaoAK ef2f8bf297a5c48bad11089fb2ba33f0");
+		headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+		params.add("cid", "TC0ONETIME");
+		params.add("tid",payInfo.getPayTid());
+		params.add("cancel_amount",Integer.toString(payInfo.getPrice()));
+		params.add("cancel_tax_free_amount","100");
+
+		HttpEntity<MultiValueMap<String,String>> body = new HttpEntity<>(params,headers);
+		try{
+			kakaoPayRefund = restTemplate.postForObject(new URI("https://kapi.kakao.com/v1/payment/cancel"), body, KakaoPayRefund.class);
+			log.info("refundReady = {}", kakaoPayRefund.toString());
+			return kakaoPayRefund;
+		} catch (RestClientException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	public String kakaoPayReady(OrderInfo orderInfo) {
-		
 		RestTemplate restTemplate = new RestTemplate();
-		
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Authorization", "KakaoAK ef2f8bf297a5c48bad11089fb2ba33f0");
 		headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");

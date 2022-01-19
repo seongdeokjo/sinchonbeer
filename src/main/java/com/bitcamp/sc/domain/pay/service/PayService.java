@@ -11,5 +11,5 @@ public interface PayService {
 	 List<PayInfo> getPayInfos(long memberIdx);
 	 List<PayInfo> getPayInfosByType(String type, long memberIdx);
 	 PayInfo getPayInfoByOrderIdx(long orderIdx);
-
+	int refundPayByOidx(long oidx);
 }

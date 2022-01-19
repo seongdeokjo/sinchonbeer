@@ -31,8 +31,8 @@
 
 
 	<select id="findOrderTourByMidx" resultMap="OrderTour">
-		select orders.id as id, orders.regdate, orders.people, orders.category,t.id as tidx, t.tour_date as tour_date
-		from orders join tour t on orders.tidx = t.id
+		select o.id as id, o.regdate, o.people, o.category,o.tidx as tidx, t.tour_date as tour_date
+		from orders o join tour t on o.tidx = t.id
 		where midx = #{midx} and category = #{category} and status = 'confirmed'
 	</select>
 

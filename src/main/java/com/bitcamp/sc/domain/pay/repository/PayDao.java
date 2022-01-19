@@ -42,4 +42,8 @@ public class PayDao {
 		param.put("memberIdx", memberIdx);
 		return template.selectList(NAME_SPACE + ".findByCategoryAndMemberIdx", param);
 	}
+
+	public int refundPayByOidx(long oidx){
+		return template.delete(NAME_SPACE+".deletePay",oidx);
+	}
 }

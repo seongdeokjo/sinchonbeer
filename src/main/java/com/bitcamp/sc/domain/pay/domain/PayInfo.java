@@ -17,6 +17,7 @@ public class PayInfo {
 	private String way;
 	private String status;
 	private long orderIdx;
+	private String payTid;
 
 	public PayInfo(int price, Timestamp date, String way, String status, long orderIdx) {
 		this.price = price;

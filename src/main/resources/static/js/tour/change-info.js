@@ -137,6 +137,7 @@
     	 });
      }
      // 예약 취소 버튼 클릭시
+	// 환불처리 -> 결재 테이블 status(cancled) -> 주문 테이블 status(cancle) -> 투어 테이블 date,people 변경
      function reservationCancle(idx){
     	let people = $('#tourPeople'+idx).val();
     	let tdate = $('#resDate'+idx).val();
@@ -144,14 +145,14 @@
 		if (confirm('예약을 취소하시겠습니까?') == true) {
 		
 			$.ajax({
-				url : '/tour/cancleOrder/'+oidx,
+				url : '/kakaoPay/tour/refund/'+oidx,
 				type : 'get',
 				data : {
 					"people" : people,
 					"tdate" : tdate,
 				}, 
 				success : function(data){
-					if(data == 1){
+					if(data == 'Y'){
 						alert('예약이 취소되었습니다.');
 						cancleMail(idx);
 						location.reload();

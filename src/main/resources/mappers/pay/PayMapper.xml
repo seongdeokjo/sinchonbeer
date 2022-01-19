@@ -10,10 +10,11 @@
 		<result property="way" column="way"/>
 		<result property="status" column="status"/>
 		<result property="orderIdx" column="oidx"/>
+		<result property="payTid" column="pay_tid" />
 	</resultMap>
 
 	<insert id="save" parameterType="com.bitcamp.sc.domain.pay.domain.PayInfo" useGeneratedKeys="true" keyProperty="idx">
-		INSERT INTO payment(price, date, way, status, oidx) VALUES(#{price}, #{date}, #{way}, #{status}, #{orderIdx})
+		INSERT INTO payment(price, date, way, status, oidx,pay_tid) VALUES(#{price}, #{date}, #{way}, #{status}, #{orderIdx},#{payTid})
 	</insert>
 	
 	<select id="findByIdx" resultType="com.bitcamp.sc.domain.pay.domain.PayInfo" resultMap="PayDomain">
@@ -33,5 +34,11 @@
 		FROM payment p, orders o
 		WHERE p.oidx=o.id AND o.category=#{category} AND o.midx=#{memberIdx}
 	</select>
+
+	<update id="deletePay" parameterType="long">
+		update payment set status = 'cancle' where oidx = #{oidx}
+	</update>
+	
+
 
 </mapper>

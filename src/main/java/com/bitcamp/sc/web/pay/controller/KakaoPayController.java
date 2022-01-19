@@ -1,5 +1,6 @@
 package com.bitcamp.sc.web.pay.controller;
 
+import com.bitcamp.sc.domain.pay.domain.KakaoPayRefund;
 import com.bitcamp.sc.web.login.dto.LoginInfo;
 import com.bitcamp.sc.domain.member.service.MemberService;
 import com.bitcamp.sc.domain.order.domain.OrderInfo;
@@ -12,10 +13,7 @@ import com.bitcamp.sc.domain.tour.service.TourService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import com.bitcamp.sc.domain.pay.domain.KakaoPayApproval;
 import com.bitcamp.sc.domain.pay.domain.PayInfo;
@@ -37,6 +35,25 @@ public class KakaoPayController {
 	public String kakaoPayGet() {
 		return "pay/kakaoPay";
 	}
+
+	@GetMapping("/kakaoPay/tour/refund/{oidx}")
+	@ResponseBody
+	public String kakaoPayTourRefund(@PathVariable("oidx") long oidx,
+									 @RequestParam("people") int people,
+									 @RequestParam("tdate") String tdate) {
+		String result = "N";
+		PayInfo payInfo = payService.getPayInfoByOrderIdx(oidx);
+		KakaoPayRefund kakaoPayRefund = kakaoPay.kakaoPayRefund(payInfo);
+
+		if(kakaoPayRefund != null && kakaoPayRefund.getStatus().equals("CANCEL_PAYMENT")){
+			log.info("결제 취소 완료");
+			payService.refundPayByOidx(Long.parseLong(kakaoPayRefund.getPartner_order_id()));
+			orderService.changeOrderStatus(Long.parseLong(kakaoPayRefund.getPartner_order_id()), "cancle");
+			tourService.subTourPeopleByDate(people, tdate);
+			result = "Y";
+		}
+		return result;
+	}
 	
 	@PostMapping("/kakaoPay/tour")
 	public String kakaoPayTour(
@@ -51,7 +68,6 @@ public class KakaoPayController {
 									   .build();
 		log.info("tourDto = {}",tour);
 		orderService.createOrder(orderInfo);
-
 		return "redirect:" + kakaoPay.kakaoPayReady(orderInfo);
 	}
 	

@@ -54,4 +54,5 @@ public class TourServiceImpl implements TourService {
 		}
 		return dateList;
 	}
+
 }
