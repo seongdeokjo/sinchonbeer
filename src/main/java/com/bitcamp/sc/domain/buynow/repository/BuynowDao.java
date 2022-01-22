@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface BuynowDao {
     List<Buynow> getListByMidx(long midx);
+    void save(long oidx,long gidx, int amount);
 }

@@ -1,5 +1,6 @@
 package com.bitcamp.sc.web.pay.controller;
 
+import com.bitcamp.sc.domain.buynow.service.BuynowService;
 import com.bitcamp.sc.domain.pay.domain.KakaoPayRefund;
 import com.bitcamp.sc.web.login.dto.LoginInfo;
 import com.bitcamp.sc.domain.member.service.MemberService;
@@ -7,6 +8,7 @@ import com.bitcamp.sc.domain.order.domain.OrderInfo;
 import com.bitcamp.sc.domain.order.service.OrderService;
 import com.bitcamp.sc.domain.pay.service.impl.PayServiceImpl;
 import com.bitcamp.sc.domain.pay.service.impl.type.KakaoPay;
+import com.bitcamp.sc.web.shop.dto.BuynowDto;
 import com.bitcamp.sc.web.tour.dto.TourDto;
 import com.bitcamp.sc.domain.tour.service.TourMailService;
 import com.bitcamp.sc.domain.tour.service.TourService;
@@ -30,6 +32,7 @@ public class KakaoPayController {
 	private TourService tourService;
 	private TourMailService mailService;
 	private MemberService memberService;
+	private BuynowService buynowService;
 	
 	@GetMapping("/kakaoPay")
 	public String kakaoPayGet() {
@@ -71,27 +74,25 @@ public class KakaoPayController {
 		return "redirect:" + kakaoPay.kakaoPayReady(orderInfo);
 	}
 	
-//	@PostMapping("/kakaoPay/shop")
-//	public String kakaoPayShop(
-//			@ModelAttribute ShopDto shop,
-//			Model model
-//			) {
-//
-//		Address memberAddress = memberService.getMemberAdd(shop.getMidx());
-//
-//		OrderInfo orderInfo = OrderInfo.builder()
-//									   .category("shop")
-//									   .price(shop.getPrice())
-//									   .goodsIdx(shop.getGidx())
-//									   .addressIdx(memberAddress.getIdx())
-//									   .memberIdx(shop.getMidx())
-//									   .amount(shop.getAmount())
-//									   .build();
-//
-//		orderService.createOrder("shop", orderInfo);
-//
-//		return "redirect:" + kakaoPay.kakaoPayReady(orderInfo);
-//	}
+	@PostMapping("/kakaoPay/shop")
+	public String kakaoPayShop(
+			@ModelAttribute BuynowDto shop,
+			Model model
+			) {
+		OrderInfo orderInfo = OrderInfo.builder()
+									   .category("shop")
+									   .price(shop.getPrice())
+									   .goodsIdx(shop.getGidx())
+									   .addressIdx(shop.getAidx())
+									   .memberIdx(shop.getMidx())
+									   .amount(shop.getAmount())
+									   .build();
+
+		long orderIdx = orderService.createOrder(orderInfo);
+		buynowService.saveBuynow(orderIdx,shop.getGidx(),shop.getAmount());
+
+		return "redirect:" + kakaoPay.kakaoPayReady(orderInfo);
+	}
 	
 	@GetMapping("/kakaoPaySuccess")
 	public String kakaoPaySuccess(

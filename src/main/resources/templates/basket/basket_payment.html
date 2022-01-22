@@ -1,56 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>신촌맥주 양조장 투어 예약</title>
-
+    <title>신촌맥주 장바구니 결제페이지</title>
     <th:block th:include="frame/metaheader"></th:block>
-    <link rel="stylesheet" th:href="@{/css/shop/shop-payment.css}">
+<!--    <link rel="stylesheet" th:href="@{/css/shop/shop-payment.css}">-->
 </head>
-
 <body>
     <!-- Header 영역 -->
 	<th:block th:include="frame/header"></th:block>
 	<th:block th:include="frame/nav"></th:block>
-	
-	
     <!-- Content 영역 -->
     <div class="my-5 text-center">
         <h2 class="font-weight-bold">
 			결제하기
         </h2>
     </div>
-
     <div class="container">
         <form id="payForm" name="payForm">
 			<input type="hidden" th:value="${session.loginMember.idx}" name="midx" id="midx">
-			<input type="hidden" th:value="${goods.name}" name="name">
+			<input type="hidden" th:value="${gname}" name="name">
 			<input type="hidden" th:value="${amount}" name="amount">
-			<input type="hidden" th:value="${amount * goods.price}" name="price">
-			<input type="hidden" th:value="${goods.gidx}" name="gidx">
-            <input type="hidden" th:value="${address.aidx}" name="aidx">
+			<input type="hidden" th:value="${amount * gprice}" name="price">
+			<input type="hidden" th:value="${gidx}" name="gidx">
 			
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="tip-off">
                         <h6>주문 상품 정보</h6>
                         <div>
-                            <a th:href="@{/shop/{gidx}(gidx=${goods.gidx})}">
+                            <a th:href="@{/shop/{gidx}(gidx=${gidx})}">
                                 <div class="product-info-wrap" style="width: 100px;">
-                                	<img th:src="@{${'/images/shop/' + goods.photo + '.png'}}" width="90" height="90" >
+                                
+                                	<img th:src="@{${'/images/shop/' + gphotoname + '.png'}}" width="90" height="90" >
+
                                 </div>
                                 <div class="product-info-wrap m-4">
                                     <div>
                                         <div class="pb-2">
-                                            <span th:text="${goods.name}"></span>
+                                            <span th:text="${gname}"></span>
                                         </div>
                                         <div class="small pb-2" > 
                                             <span th:text="${amount + '개'}">s</span>
                                         </div>
                                         <div class="font-weight-bold">
-                                            <span th:text="${amount * goods.price + '원'}"></span>
+                                            <span th:text="${amount * gprice + '원'}"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -71,57 +66,70 @@
                                 <span th:text="${session.loginMember.email}" ></span>
                             </div>
                             <div class="text-14 text-gray font-weight-bold mb-1">
-                                <span th:text="${address.address1}" ></span>
+                                <span th:text="${address1}" ></span>
                             </div>
                             <div class="text-14 text-gray font-weight-bold mb-1">
-                                <span th:text="${address.address2}" ></span>
+                                <span th:text="${address2}" ></span>
                             </div>
+
                             <a th:href="@{/mypage/change-info}" class="btn-sinchon btn btn-sm-padding text-13 btn_top_right" id="btn-orderer-edit" role="button">
 								수정
                             </a>
                         </div>
                     </div>
+
+
                     <div class="tip-off">
                         <h6>쿠폰</h6>
                         <p class="text-14">쿠폰</p>
+
                         <div class="row">
+
                             <div class="col-8">
                                 <input title="쿠폰" class="form-control bg-white" name="useCoupon" placeholder="보유쿠폰 0장" readonly>
                             </div>
+
                             <div class="col-4">
                                 <a href="javascript:"class="btn-sinchon btn-coupon btn text-13" id="btn-orderer-edit" role="button">
 									쿠폰적용
                                 </a>
                             </div>
+
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-4">
                     <div class="tip-off">
                         <h6>최종 결제금액</h6>
+
                         <div class="row border-bottom">
                             <div class="col-6">
                                 <p class="text-gray text-left text-14 mb-1">상품가격</p>
                                 <p class="text-gray text-left text-14 mb-3">배송비</p>
                             </div>
+
                             <div class="col-6">
-                                <p class="text-right text-14 mb-1"><span th:text="${goods.price* amount + '원'}"></span></p>
+                                <p class="text-right text-14 mb-1"><span th:text="${gprice* amount + '원'}"></span></p> 
                                 <p class="text-right text-14 mb-3">무료</p>
                             </div>
                         </div>
+
                         <div class="row mt-3">
                             <div class="col-6">
                                 <p class="text-14 text-left mb-0"><span th:text="${'총' + amount + '개'}"></span></p> <!-- 총 결제금액(1개) -->
                             </div>
 
                             <div class="col-6">
-                                <p class="text-14 text-right font-weight-bold text-sinchon mb-0"><span th:text="${goods.price * amount + '원'}"></span></p> <!-- 12,100원 -->
+                                <p class="text-14 text-right font-weight-bold text-sinchon mb-0"><span th:text="${gprice * amount + '원'}"></span></p> <!-- 12,100원 -->
                             </div>
 
                         </div>
                     </div>
+
                     <div class="tip-off">
                         <h6>결제 방법</h6>
+
                         <div class="row payTypeWrap mb-3">
                             <div class="col-6">
                                 <div class="form-check">
@@ -133,7 +141,7 @@
                             
                             <div class="col-6">
                                 <div class="form-check">
-                                    <label class="form-check-label text-14" >
+                                    <label class="form-check-label text-14" for="card">
                                         <input type="radio" name="payType" id=bankTransfer value="bankTransfer" class="form-check-input" disabled>실시간 계좌이체
                                     </label>
                                 </div>
@@ -158,8 +166,9 @@
             </div>
         </form>
     </div>
+
     <!-- Footer 영역 -->
         <th:block th:include="frame/footer"></th:block>
-    <script th:src="@{/js/shop/shop-payment.js}"></script>
+    <!--<script th:src="@{/js/shop/shop-payment.js}"></script>-->
 </body>
 </html>
