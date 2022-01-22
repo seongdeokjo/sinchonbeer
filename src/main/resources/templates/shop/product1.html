@@ -27,15 +27,9 @@
                     <div class="edge_color">
                         <td>수량</td>
                         <hr>
-                        <form id="form1"  name='form1' action="/shop/shop-payment"  method='get'>  <!-- get -->
-                        <th:block th:unless="${session.loginMember == null}">
-                        	<input type="hidden" th:value="${session.loginMember.idx}" name="midx">
-                        </th:block>	
-							<input name="gphotoname" type="hidden" value="gimbugag">	
-                        	<input name="gname" type="hidden" value="신촌에서 만난 김부각">                        
-                            <input name="gprice" type="hidden" id="price" value="12100">
-                            <input name="gidx" type="hidden" id="idx" value="1">
-                            <input  type="button"  class="count_btn1" value="+" id="plus"  >    
+                        <form id="form1"  name='form1' th:action="@{/shop/shop-payment/{idx}(idx = ${gidx})}"  method='get'>  <!-- get -->
+                            <input name="price" type="hidden" id="price" value="12100">
+                            <input  type="button"  class="count_btn1" value="+" id="plus" >
                             <input name="amount" type="text"  class="amount_number"     value="1" id ="amount" >   
                             <input type="button"  class="count_btn2" value="-" id="minus" > 
                             <div class="opt_block">
