@@ -15,24 +15,26 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @RequiredArgsConstructor
 @Service
+@Transactional(readOnly = true)
 public class TourServiceImpl implements TourService {
 	
 	private final TourDao dao;
 
 	// 투어 날짜로 투어 번호 가져오기
-	@Transactional(readOnly = true)
 	@Override
 	public int getTidxByTdate(String tdate) {
 		return dao.getTidxbyTdate(tdate);
 	}
 	
-	// 투어 : 결제 성공시 예약 날짜 인원 증가  / 
+	// 투어 : 결제 성공시 예약 날짜 인원 증가  /
+	@Transactional
 	@Override
 	public int addTourPeopleByDate(int tourPeople,String tdate) {
 		return dao.addTourPeople(tourPeople, tdate);
 	}
-	
-	// 투어 : 결제 취소시 예약 날짜 인원 감소 
+
+	// 투어 : 결제 취소시 예약 날짜 인원 감소
+	@Transactional
 	@Override
 	public int subTourPeopleByDate(int tourPeople, String tdate) {
 		return dao.subTourPeople(tourPeople, tdate);

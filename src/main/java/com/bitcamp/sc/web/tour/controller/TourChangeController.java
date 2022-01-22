@@ -36,7 +36,6 @@ public class TourChangeController {
 
 	private final TourChangeService changeTourService;
 	private final OrderService orderService;
-	private final TourService service;	
 	private final TourMailService mailService;
 	private final PayService payService;
 
@@ -64,16 +63,6 @@ public class TourChangeController {
 		if(changeDto != null && login != null) {
 			mailService.changeMail(changeDto, login);
 		}
-	}
-	
-	// 예약 취소
-	@GetMapping("/tour/cancleOrder/{oidx}")
-	@ResponseBody
-	public int cancelTourOrder(@PathVariable("oidx") long oidx, @RequestParam("people") int people,
-			@RequestParam("tdate") String tdate) {
-
-		int result = orderService.changeOrderStatus(oidx, "cancled");
-		return (result == 1) ? service.subTourPeopleByDate(people, tdate) : 0;
 	}
 	
 	// 예약 취소 메일 
