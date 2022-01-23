@@ -54,7 +54,7 @@ public class KakaoPayController {
 		if(kakaoPayRefund != null && kakaoPayRefund.getStatus().equals("CANCEL_PAYMENT")){
 			log.info("결제 취소 완료");
 			payService.refundPayByOidx(Long.parseLong(kakaoPayRefund.getPartner_order_id()));
-			orderService.changeOrderStatus(Long.parseLong(kakaoPayRefund.getPartner_order_id()), "cancle");
+			orderService.changeOrderStatus(Long.parseLong(kakaoPayRefund.getPartner_order_id()), "cancled");
 			tourService.subTourPeopleByDate(people, tdate);
 			result = "Y";
 		}

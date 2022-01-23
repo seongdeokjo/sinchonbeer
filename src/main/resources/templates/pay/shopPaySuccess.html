@@ -121,7 +121,7 @@
                     <a th:href="@{/}" class="btn btn-secondary btn-block btn-lg text-18 rounded-0">홈화면</a>
                 </div>
                 <div class="col-sm-6 p-0">
-                    <a th:href="@{/mypage/orderList}" class="btn btn-pay btn-block btn-lg text-white text-18 rounded-0">마이페이지</a>
+                    <a th:href="@{/mypage/orderList/{idx}(idx = ${memberInfo.idx})}" class="btn btn-pay btn-block btn-lg text-white text-18 rounded-0">마이페이지</a>
                 </div>
             </div>
         </div>

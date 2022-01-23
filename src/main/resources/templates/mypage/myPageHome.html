@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>마이페이지 홈</title>
+    <link rel="stylesheet" th:href="@{/css/mypage/orderList.css}">
+    <th:block th:replace="frame/metaheader"/>
+</head>
+<body>
+<th:block th:replace="frame/header"/>
+<th:block th:replace="frame/nav"/>
+<input type="hidden" id="midx" th:value="${session.loginMember.idx}">
+<div class="mt-5 text-center pb-5">
+    <p class="text-center text-48 text-sinchon mb-0">MY PAGE</p>
+    <p class="text-center text-14">안녕하세요 신촌맥주입니다.</p>
+</div>
+<div id="scrollableNavBar">
+    <div class="row justify-content-between mb-5 pb-5" th:with="idx=${session.loginMember.idx}">
+        <div class="col text-center text-14" >
+            <a th:href="@{/mypage/orderList/idx}" class="link-unstyle">상품 주문 내역 :<br>
+                <span class="countOrderGoods"></span>
+            </a>
+        </div>
+        <div class="col text-center text-14">
+            <a th:href="@{/mypage/rezList/idx}" class="link-unstyle">투어 예약 내역 :<br>
+                <span class="countOrderTour"></span>
+            </a>
+        </div>
+        <div class="col text-center text-14">
+            <a th:href="@{/mypage/edit-info/idx}" class="link-unstyle">정보 수정</a>
+        </div>
+        <div class="col text-center text-14">
+            <a th:href="@{/mypage/delete-id/idx}" class="link-unstyle">회원 탈퇴</a>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <p class="text-center text-32 mb-5">마이페이지</p>
+    <div class="row">
+        <div class="col-lg-2" id="sideBar" th:with="idx=${session.loginMember.idx}">
+            <ul class="text-14 list-unstyled">
+                <li class="mb-4"><a th:href="@{/mypage/orderList/idx}" class="link-unstyle">상품 주문 내역 :
+                    <span class="countOrderGoods"></span></a>
+                </li>
+                <li class="mb-4"><a th:href="@{/mypage/rezList/idx}" class="link-unstyle">투어 예약 내역 :
+                    <span class="countOrderTour"></span></a>
+                </li>
+                <li class="mb-4"><a th:href="@{/mypage/edit-info/idx}" class="link-unstyle">정보 수정</a></li>
+                <li class="mb-4"><a th:href="@{/mypage/delete-id/idx}" class="link-unstyle">회원 탈퇴</a></li>
+                <!-- 나의 리뷰 목록  -->
+            </ul>
+        </div>
+        <div class="col-lg-8 pb-5">
+            <div class="border border-sinchon">
+                <div class="pt-4 pb-3 text-center">
+                    <div>
+                        <img th:src="@{/images/member/complete.png}" style="width: 75%;"/>
+                    </div>
+                    <div class="text-22 font-weight-bold mb-2 profileContent">
+                        <p class="text-sinchon mt-4" th:text="${session.loginMember.name + '님 안녕하세요.'}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="frame/footer"></th:block>
+<script>
+    $(function () {
+        let idx = $('#midx').val();
+        getGoods(idx);
+        getTour(idx);
+    });
+
+    function getGoods(idx) {
+        $.ajax({
+            url: "/find/order/goods/" + idx, // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
+            method: "GET", // HTTP 요청 메소드(GET, POST 등)
+            dataType: "json" // 서버에서 보내줄 데이터의 타입
+        })
+            .done(function (json) {
+                console.log(json);
+                $('.countOrderGoods').text(json + '건');
+            })
+            .fail(function (xhr, status, errorThrown) {
+                alert('오류가 발생했습니다.\n' + xhr + '\n' + errorThrown + '\n' + status);
+            });
+    }
+
+    function getTour(idx) {
+        $.ajax({
+            url: "/find/order/tour/" + idx, // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
+            method: "GET", // HTTP 요청 메소드(GET, POST 등)
+            dataType: "json" // 서버에서 보내줄 데이터의 타입
+        })
+            .done(function (json) {
+                console.log(json);
+                $('.countOrderTour').text(json + '건');
+            })
+            .fail(function (xhr, status, errorThrown) {
+                alert('오류가 발생했습니다.\n' + xhr + '\n' + errorThrown + '\n' + status);
+            });
+    }
+</script>
+</body>
+</html>

@@ -30,4 +30,16 @@ public class MypageServiceImpl implements MypageService {
     public List<RezList> getRezList(long idx) {
         return dao.getRezList(idx);
     }
+
+    @Override
+    public int getOrderGoods(long idx) {
+        return dao.findOrderGoodsCount(idx);
+    }
+
+    @Override
+    public int getOrderTour(long idx) {
+        return dao.findOrderTourCount(idx);
+    }
+
+
 }

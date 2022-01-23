@@ -14,4 +14,6 @@ public interface MypageDao {
 
     Member findMemberAddressByMidx(long idx);
     int updateMember(Member member);
+    int findOrderGoodsCount(long idx);
+    int findOrderTourCount(long idx);
 }

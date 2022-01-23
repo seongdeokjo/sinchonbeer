@@ -11,4 +11,7 @@ public interface MypageService {
 
 	// 예약 내역 조회
 	List<RezList> getRezList(long idx);
+
+	int getOrderGoods(long idx);
+	int getOrderTour(long idx);
 }

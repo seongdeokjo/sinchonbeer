@@ -92,7 +92,7 @@
 
     <!-- 예약 내역 조회 -->
     <select id="getRezList" resultType="com.bitcamp.sc.domain.mypage.domain.RezList" resultMap="RezListDomain">
-        SELECT p.id, p.price, p.pway, o.people, t.date
+        SELECT p.id, p.price, p.way, o.people, t.tour_date
         FROM payment p,
              orders o,
              tour t
@@ -100,7 +100,15 @@
           AND o.tidx = t.id
           AND o.status = 'confirmed'
           AND o.midx = #{idx}
-        ORDER BY t.date;
+        ORDER BY t.tour_date;
+    </select>
+
+    <select id="findOrderGoods" parameterType="long" resultType="int">
+        select count(*) from orders where midx = #{idx} and category = 'shop' and status ='confirmed'
+    </select>
+
+    <select id="findOrderTour" parameterType="long" resultType="int">
+        select count(*) from orders where midx = #{idx} and category = 'tour' and status ='confirmed'
     </select>
 
 
