@@ -15,6 +15,6 @@ public class BuynowServiceImpl implements BuynowService {
 
     @Override
     public void saveBuynow(long oidx, long gidx, int amount) {
-
+        buynowDao.save(oidx,gidx,amount);
     }
 }

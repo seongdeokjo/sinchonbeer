@@ -43,7 +43,7 @@
 				(category, price, tidx, people,midx) VALUES(#{category}, #{price}, #{tourIdx}, #{tourPeople}, #{memberIdx})
 			</when>
 			<when test='category.equals("shop")'>
-				(category,midx,aidx,amount,gidx,) values(#{category},#{midx},#{aidx},#{amount},#{gidx})
+				(category,midx,aidx,amount,gidx,price) values(#{category},#{memberIdx},#{addressIdx},#{amount},#{goodsIdx},#{price})
 			</when>
 		</choose>
 	</insert>

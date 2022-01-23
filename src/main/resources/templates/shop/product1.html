@@ -18,7 +18,7 @@
 	</th:block>
  
     <div class="container">    			
-            <img class="gim_thumbnail" src="/images/shop/gimbugag.png " alt="김부각가가가가" >
+            <img class="gim_thumbnail" src="/images/shop/gimbugag.png " alt="김부각" >
             <div class="product_1">
                 <h1 class="product_name">CRISPY LAVAR SNACK</h1>
                 <h3 style="color: rgb(83, 81, 81);">신촌에서 만난 찹쌀 김부각(20ea)</h3>
@@ -28,18 +28,12 @@
                         <td>수량</td>
                         <hr>
                         <form id="form1"  name='form1' th:action="@{/shop/shop-payment/{idx}(idx = ${gidx})}"  method='get'>  <!-- get -->
-                            <input name="price" type="hidden" id="price" value="12100">
+                            <input name="price" type="text" id="price" value="12100">
                             <input  type="button"  class="count_btn1" value="+" id="plus" >
                             <input name="amount" type="text"  class="amount_number"     value="1" id ="amount" >   
-                            <input type="button"  class="count_btn2" value="-" id="minus" > 
-                            <div class="opt_block">
-                                <p style="padding-top: 10px;">
-                                    <span  class="totalcount" style="text-align: left;"  >총 상품금액</span>
-                                    <span  id="sum_p_num" class="total_price" style="text-align: right; padding-left: 110px;" >12100</span>
-                                </p>
-                            </div>
+                            <input type="button"  class="count_btn2" value="-" id="minus" >
 		                    <div class="row">
-		                            <input type="submit" id="BuyNow" value="BuyNow"   class="button_form1" style="color: #fff; background-color: #5ae5ec;">	<!-- formation="/shop/shop_payment" -->
+		                            <input type="submit" id="BuyNow" value="BuyNow"   class="button_form1" style="color: #fff; background-color: #5ae5ec;">
 		                            <input type="submit" id="basket" value="Basket" formaction="/basket/basket" class="button_form2"  style="color: #5ae5ec; background-color: #fff;">			
 		                    </div>	                
                         </form>                        
@@ -162,7 +156,7 @@
             </div>
         </div>
     </div>
-    <script th:src="@{/js/shop/proudct.js}"></script>
+    <script th:src="@{/js/shop/product.js}"></script>
      <!-- footer -->
     <th:block th:include="frame/footer"></th:block>
 </body>

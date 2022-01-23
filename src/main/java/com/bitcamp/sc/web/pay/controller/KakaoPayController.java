@@ -1,7 +1,9 @@
 package com.bitcamp.sc.web.pay.controller;
 
+import com.bitcamp.sc.domain.address.service.AddressService;
 import com.bitcamp.sc.domain.buynow.service.BuynowService;
 import com.bitcamp.sc.domain.pay.domain.KakaoPayRefund;
+import com.bitcamp.sc.web.address.dto.MemberAddress;
 import com.bitcamp.sc.web.login.dto.LoginInfo;
 import com.bitcamp.sc.domain.member.service.MemberService;
 import com.bitcamp.sc.domain.order.domain.OrderInfo;
@@ -33,6 +35,7 @@ public class KakaoPayController {
 	private TourMailService mailService;
 	private MemberService memberService;
 	private BuynowService buynowService;
+	private AddressService addressService;
 	
 	@GetMapping("/kakaoPay")
 	public String kakaoPayGet() {
@@ -76,9 +79,8 @@ public class KakaoPayController {
 	
 	@PostMapping("/kakaoPay/shop")
 	public String kakaoPayShop(
-			@ModelAttribute BuynowDto shop,
-			Model model
-			) {
+			@ModelAttribute BuynowDto shop) {
+		log.info("shop  ={} ",shop);
 		OrderInfo orderInfo = OrderInfo.builder()
 									   .category("shop")
 									   .price(shop.getPrice())
@@ -87,10 +89,10 @@ public class KakaoPayController {
 									   .memberIdx(shop.getMidx())
 									   .amount(shop.getAmount())
 									   .build();
-
+		log.info("orderInfo = {}",orderInfo);
 		long orderIdx = orderService.createOrder(orderInfo);
 		buynowService.saveBuynow(orderIdx,shop.getGidx(),shop.getAmount());
-
+		log.info("바로구매한 상품 저장 성공");
 		return "redirect:" + kakaoPay.kakaoPayReady(orderInfo);
 	}
 	
@@ -146,7 +148,9 @@ public class KakaoPayController {
 	private void addAddressToModel(OrderInfo orderInfo, Model model) {
 		if (orderInfo.getCategory().equals("shop")) {
 			LoginInfo member = memberService.getMember(orderInfo.getMemberIdx());
+			MemberAddress address = addressService.getAddressByMidx(member.getIdx());
 			model.addAttribute("memberInfo", member);
+			model.addAttribute("address",address);
 		}
 	}
 	

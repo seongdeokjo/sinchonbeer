@@ -1,37 +1,36 @@
- 	var gphotoname; // 사진이름
-    var gname;
-    var price;
-    var amount;
-    var gidx;
-    var totalPrice;
+let gname;
+let price;
+let amount;
+let totalPrice;
+$(document).ready(function () {
+    price = $('#price').val();
+    amount = $('#amount').val();
 
-        $(document).ready(function(){
-            price = $('#price').val();
-            amount = $('#amount').val();
-            gidx = $('#price').val();
+    // 버튼 이벤트
+    $('#plus').click(function () {
+        amount++;
+        totalPrice = price * amount;
 
-            // 버튼 이벤트
-            $('#plus').click(function(){
-                amount++;
-                totalPrice = price * amount;
-                
-                $('#sum_p_num').text(totalPrice);
-                $('#amount').val(amount);
-            });
+        $('#price').val(totalPrice);
+        $('#amount').val(amount);
+    });
 
-            $('#minus').click(function(){
-                amount--;
-                totalPrice = price * amount;
+    $('#minus').click(function () {
+        if(amount <= 1){
+            totalPrice = price;
+        }else {
+            amount--;
+            totalPrice = price * amount;
+        }
+        $('#price').val(totalPrice);
+        $('#amount').val(amount);
+    });
 
-                $('#sum_p_num').text(totalPrice);
-                $('#amount').val(amount);
-            });
-            
-            $('#basket').on('click',function(){
-      			var ck = $('#check').val();
-      			console.log(ck);
-      			if($('#check').val() === 'Y'){
-      				alert('로그인이 필요합니다.');	
-      			}
-            });
-        }); 
+    $('#basket').on('click', function () {
+        let ck = $('#check').val();
+        console.log(ck);
+        if ($('#check').val() === 'Y') {
+            alert('로그인이 필요합니다.');
+        }
+    });
+});
