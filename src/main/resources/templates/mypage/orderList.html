@@ -72,14 +72,14 @@
                                 <thead class="thead-light text-15">
                                 <tr>
                                     <th width="18%">
-                                        <div th:text="${list.pdate}"></div>
+                                        <div th:text="${list.date}"></div>
                                     </th>
                                     <th width="45%"/>
                                     <th width="25%" class="pr-0">
                                         <div class="float-right">주문번호</div>
                                     </th>
                                     <th width="12%" class="pl-2">
-                                        <div th:text="|${#strings.replace(list.pdate,'-','')}${list.oidx}${list.pidx}|"></div>
+                                        <div th:text="|${#strings.replace(list.date,'-','')}${list.oidx}${list.pidx}|"></div>
                                     </th>
                                 </tr>
                                 </thead>
@@ -96,10 +96,10 @@
                                     <td class="pt-3">
                                         <div class="font-nanum" th:text="|구매 수량 : ${list.amount}|"></div>
                                         <div class="font-nanum" th:text="|결제 금액 : ${list.pprice}|"></div>
-                                        <th:block th:if="${list.pstatus == 'complete'}">
+                                        <th:block th:if="${list.status == 'complete'}">
                                             <div class="font-nanum" th:text="|결제 상태 : 완료|"></div>
                                         </th:block>
-                                        <th:block th:unless="${list.pstatus == 'complete'}">
+                                        <th:block th:unless="${list.status == 'complete'}">
                                             <div class="font-nanum" th:text="|결제 상태 : 대기|"></div>
                                         </th:block>
                                     </td>
