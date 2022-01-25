@@ -9,7 +9,7 @@
 <body>
 <th:block th:replace="frame/header"/>
 <th:block th:replace="frame/nav"/>
-<input type="hidden" id="midx" th:value="${session.loginMember.idx}">
+
 <div class="mt-5 text-center pb-5">
     <p class="text-center text-48 text-sinchon mb-0">MY PAGE</p>
     <p class="text-center text-14">안녕하세요 신촌맥주입니다.</p>
@@ -17,7 +17,7 @@
 <div id="scrollableNavBar">
     <div class="row justify-content-between mb-5 pb-5" >
         <div class="col text-center text-14" >
-            <a th:href="@{/mypage/orderList/${idx}}" class="link-unstyle">상품 주문 내역 :<br>
+            <a th:href="@{/mypage/orderList/{midx} (midx = ${idx})}" class="link-unstyle">상품 주문 내역 :<br>
                 <span class="countOrderGoods"></span>
             </a>
         </div>
@@ -39,7 +39,7 @@
     <div class="row">
         <div class="col-lg-2" id="sideBar" >
             <ul class="text-14 list-unstyled">
-                <li class="mb-4"><a th:href="@{/mypage/orderList/${idx}}" class="link-unstyle">상품 주문 내역 :
+                <li class="mb-4"><a th:href="@{/mypage/orderList/{midx}(midx = ${idx})}" class="link-unstyle">상품 주문 내역 :
                     <span class="countOrderGoods"></span></a>
                 </li>
                 <li class="mb-4"><a th:href="@{/mypage/rezList/${idx}}" class="link-unstyle">투어 예약 내역 :
@@ -65,9 +65,9 @@
     </div>
 </div>
 <th:block th:replace="frame/footer"></th:block>
-<script>
+<script th:inline="javascript">
     $(function () {
-        let idx = $('#midx').val();
+        let idx = [[${idx}]];
         getGoods(idx);
         getTour(idx);
     });

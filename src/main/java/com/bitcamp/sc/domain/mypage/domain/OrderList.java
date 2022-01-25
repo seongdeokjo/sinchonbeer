@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderList {
-	private int pidx;
+	private long pidx;
 	private int pprice;
 	private String pdate;
 	private String pstatus;
-	private int oidx;
+	private long oidx;
 	private int amount;
 	private String gtitle;
 	private String gname;

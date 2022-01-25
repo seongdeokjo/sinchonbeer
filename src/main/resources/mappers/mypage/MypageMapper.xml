@@ -8,7 +8,7 @@
     <resultMap type="com.bitcamp.sc.domain.mypage.domain.OrderList" id="OrderListDomain">
         <result property="pidx" column="pidx"/>
         <result property="pprice" column="price"/>
-        <result property="pdate" column="date"/>
+        <result property="pdate" column="pdate"/>
         <result property="pstatus" column="status"/>
         <result property="oidx" column="oidx"/>
         <result property="amount" column="amount"/>
@@ -70,17 +70,16 @@
 
 
     <!-- 주문 내역 조회 -->
-    <select id="getOrderList" resultType="com.bitcamp.sc.domain.mypage.domain.OrderList" resultMap="OrderListDomain">
-        SELECT p.id,
-               p.price,
-               date_format(p.date, '%Y-%m-%d') as pdate,
-               p.status,
-               o.id,
-               g.title,
-               g.name,
-               g.photo,
-               o.status,
-               o.amount
+    <select id="getOrderList" parameterType="long" resultMap="OrderListDomain">
+        SELECT p.id as pidx,
+               p.price as price,
+               date_format(p.date, '%Y-%m-%d %H:%i:%s') as pdate,
+               p.status as status,
+               o.id as oidx,
+               g.title as title,
+               g.name as name,
+               g.photo as photo,
+               o.amount as amount
         FROM payment p,
              orders o,
              goods g
