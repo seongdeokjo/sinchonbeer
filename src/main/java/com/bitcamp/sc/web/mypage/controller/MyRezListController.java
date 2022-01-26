@@ -22,6 +22,7 @@ public class MyRezListController {
     @GetMapping("/mypage/rezList/{id}")
     public String mypageTour(@PathVariable("id") long idx, Model model) {
         List<RezList> list = service.getRezList(idx);
+        model.addAttribute("idx",idx);
         model.addAttribute("list", list);
         return "mypage/rezList";
     }

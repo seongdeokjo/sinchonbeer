@@ -28,6 +28,7 @@ public class MyPageMemberEditController {
 	@GetMapping("/{midx}/edit")
 	public String editInfoGet(@PathVariable long midx, Model model) {
 			EditMemberResponse list = service.getMemberInfo(midx);
+			model.addAttribute("idx",midx);
 			model.addAttribute("list", list);
 			return "mypage/edit-info";
 	}

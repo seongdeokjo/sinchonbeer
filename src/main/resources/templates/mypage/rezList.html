@@ -16,31 +16,32 @@
 <div id="scrollableNavBar">
     <div class="row justify-content-between mb-5 pb-3">
         <div class="col text-center text-14">
-            <a th:href="@{/mypage/orderList}" class="link-unstyle">주문 내역</a>
+            <a th:href="@{/mypage/orderList/{midx}(midx = ${idx})}" class="link-unstyle">주문 내역</a>
         </div>
         <div class="col text-center text-14">
-            <a th:href="@{/mypage/rezList}" class="link-unstyle">
+            <a th:href="@{/mypage/rezList/{midx}(midx = ${idx})}" class="link-unstyle">
                 <span class="pb-1 border-bottom border-sinchon text-sinchon">예약 내역</span></a>
         </div>
         <div class="col text-center text-14">
-            <a th:href="@{/mypage/edit-info}" class="link-unstyle">정보 수정</a>
+            <a th:href="@{/mypage/member/{midx}/edit (midx = ${idx})}" class="link-unstyle">정보 수정</a>
         </div>
         <div class="col text-center text-14">
-            <a th:href="@{/mypage/delete-id}" class="link-unstyle">회원 탈퇴</a>
+            <a th:href="@{/mypage/delete-id/{midx}(midx = ${idx})}" class="link-unstyle">회원 탈퇴</a>
         </div>
     </div>
 </div>
 <div class="container">
     <p class="text-center text-32 mb-5">투어 예약 내역</p>
     <div class="row justify-content-center">
-        <div class="col-lg-2" id="sideBar">
+        <div class="col-lg-2" id="sideBar" >
             <ul class="text-14 list-unstyled">
-                <li class="mb-4"><a th:href="@{/mypage/orderList}" class="link-unstyle">주문 내역</a></li>
-                <li class="mb-4"><a th:href="@{/mypage/rezList}" class="link-unstyle">
+                <li class="mb-4"><a th:href="@{/mypage/orderList/{midx}(midx = ${idx})}" class="link-unstyle">상품 주문 내역 :</a></li>
+                <li class="mb-4"><a th:href="@{/mypage/rezList/{midx}(midx = ${idx})}" class="link-unstyle">투어 예약 내역 :
                     <span class="pb-1 border-bottom border-sinchon text-sinchon">예약 내역</span></a>
                 </li>
-                <li class="mb-4"><a th:href="@{/mypage/edit-info}" class="link-unstyle">정보 수정</a></li>
-                <li class="mb-4"><a th:href="@{/mypage/delete-id}" class="link-unstyle">회원 탈퇴</a></li>
+                <li class="mb-4"><a th:href="@{/mypage/member/{midx}/edit (midx = ${idx})}" class="link-unstyle">정보 수정</a></li>
+                <li class="mb-4"><a th:href="@{/mypage/delete-id/{midx}(midx = ${idx})}" class="link-unstyle">회원 탈퇴</a></li>
+                <!-- 나의 리뷰 목록  -->
             </ul>
         </div>
         <div class="col-lg-8 pb-5">

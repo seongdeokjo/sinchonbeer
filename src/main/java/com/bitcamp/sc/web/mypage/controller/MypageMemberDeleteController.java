@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.bitcamp.sc.web.login.dto.LoginInfo;
@@ -20,16 +21,16 @@ public class MypageMemberDeleteController {
     private final PasswordEncoder passwordEncoder;
 
     // 회원 탈퇴 페이지 이동
-    @GetMapping("/mypage/delete-id")
-    public String deleteIdGet() {
+    @GetMapping("/mypage/delete-id/{idx}")
+    public String deleteIdGet(@PathVariable long idx, Model model) {
+        model.addAttribute("idx",idx);
         return "mypage/delete-id";
     }
 
     // 회원 탈퇴 실행
-    @PostMapping("/mypage/delete-id")
-    public String deleteIdPost(HttpSession session) {
-        LoginInfo login = (LoginInfo) session.getAttribute(SessionConst.LOGIN_MEMBER);
-        service.deleteMember(login.getIdx());
+    @PostMapping("/mypage/delete-id/{idx}")
+    public String deleteIdPost(@PathVariable long idx,HttpSession session) {
+        service.deleteMember(idx);
         // 세션 초기화
         session.invalidate();
         return "redirect:/main";

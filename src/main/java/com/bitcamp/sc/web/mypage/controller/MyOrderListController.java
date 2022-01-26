@@ -22,6 +22,7 @@ public class MyOrderListController {
 	@GetMapping("/mypage/orderList/{id}")
 	public String mypageShop(Model model, @PathVariable("id") long id) {
 			List<OrderList> list = service.getOrderList(id);
+			model.addAttribute("idx",id);
 			model.addAttribute("list", list);
 			return "mypage/orderList";
 	}
