@@ -23,7 +23,8 @@ public class Address {
     }
 
     @Builder
-    public Address(Member member, String postcode, String address1, String address2) {
+    public Address(long idx,Member member, String postcode, String address1, String address2) {
+        this.idx = idx;
         this.member = member;
         this.postcode = postcode;
         this.address1 = address1;

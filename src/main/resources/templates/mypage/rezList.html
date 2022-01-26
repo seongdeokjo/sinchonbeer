@@ -1,103 +1,109 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>마이페이지 예약 내역</title>
-
-<th:block th:replace="frame/metaheader"></th:block>
-<link rel="stylesheet" th:href="@{/css/mypage/rezList.css}">
-
+    <meta charset="UTF-8">
+    <title>마이페이지 투어 예약 내역</title>
+    <th:block th:replace="frame/metaheader"></th:block>
+    <link rel="stylesheet" th:href="@{/css/mypage/rezList.css}">
 </head>
 <body>
-	<th:block th:replace="frame/header"></th:block>
-	<th:block th:replace="frame/nav"></th:block>
-
-	<div class="mt-5 text-center pb-5">
-		<p class="text-center text-48 text-sinchon mb-0">MY PAGE</p>
-		<p class="text-center text-14">안녕하세요 신촌맥주입니다.</p>
-	</div>
-
-	<div id="scrollableNavBar">
-		<div class="row justify-content-between mb-5 pb-3">
-			<div class="col text-center text-14">
-				<a th:href="@{/mypage/orderList}" class="link-unstyle">주문 내역</a>
-			</div>
-			<div class="col text-center text-14">
-				<a th:href="@{/mypage/rezList}" class="link-unstyle">
-				<span class="pb-1 border-bottom border-sinchon text-sinchon">예약 내역</span></a>
-			</div>
-			<div class="col text-center text-14">
-				<a th:href="@{/mypage/edit-info}" class="link-unstyle">정보 수정</a>
-			</div>
-			<div class="col text-center text-14">
-				<a th:href="@{/mypage/delete-id}" class="link-unstyle">회원 탈퇴</a>
-			</div>
-		</div>
-	</div>
-
-	<div class="container">
-		<p class="text-center text-32 mb-5">투어 예약 내역</p>
-		<div class="row justify-content-center">
-			<div class="col-lg-2" id="sideBar">
-				<ul class="text-14 list-unstyled">
-					<li class="mb-4"><a th:href="@{/mypage/orderList}" class="link-unstyle">주문 내역</a></li>
-					<li class="mb-4"><a th:href="@{/mypage/rezList}" class="link-unstyle">
-						<span class="pb-1 border-bottom border-sinchon text-sinchon">예약 내역</span></a>
-					</li>
-					<li class="mb-4"><a th:href="@{/mypage/edit-info}" class="link-unstyle">정보 수정</a></li>
-					<li class="mb-4"><a th:href="@{/mypage/delete-id}" class="link-unstyle">회원 탈퇴</a></li>
-				</ul>
-			</div>
-
-			<div class="col-lg-8 pb-5">
-				<div class="row justify-content-center">
-					<th:block th:if="${list.empty}">
-						<div class="text-center text-15 text-light-gray my-5 py-5">예약 내역이 없습니다.</div>
-					</th:block>
-					<th:block th:unless="${list.empty}">
-						<th:block th:each="list : ${list}">
-							<table class="text-15 table" style="width: 80%;">
-								<thead class="thead-light">
-									<th width="40%">프로그램</th>
-									<th width="60%" class="font-nanum">신촌맥주 양조장 투어</th>
-								</thead>
-								<tbody>
-									<tr>
-										<td scope="row">예약 번호</td>
-										<td><div class="font-nanum" th:text="${list.pidx}"></div></td>
-									</tr>
-									<tr>
-										<td scope="row">예약일</td>
-										<td><div class="font-nanum" th:text="${list.tdate}"></div></td>
-									</tr>
-									<tr>
-										<td scope="row">신청자</td>
-										<td><div class="font-nanum" th:text="${session.loginInfo.name}"></div></td>
-									</tr>
-									<tr>
-										<td scope="row">인원</td>
-										<td><div class="font-nanum" th:text="|${list.tpeople}명|"></div></td>
-									</tr>
-									<tr>
-										<td scope="row">결제 금액</td>
-										<td><div class="font-nanum" th:text="${list.pprice}"></div></td>
-									</tr>
-									<tr>
-										<td scope="row">결제 정보</td>
-										<td><div class="font-nanum" th:text="${list.pway}"></div></td>
-									</tr>
-								</tbody>
-							</table>
-						</th:block>
-						<a th:href="@{/tour/change-info}" class="link-unstyle">
-							<button class="btn btn-sinchon" id="rezChangeBtn">예약일 변경</button></a>
-					</th:block>
-				</div>
-			</div>
-			<div class="col-lg-2"></div>
-		</div>
-	</div>
-
-	<th:block th:replace="frame/footer"></th:block>
+<th:block th:replace="frame/header"></th:block>
+<th:block th:replace="frame/nav"></th:block>
+<div class="mt-5 text-center pb-5">
+    <p class="text-center text-48 text-sinchon mb-0">MY PAGE</p>
+    <p class="text-center text-14">안녕하세요 신촌맥주입니다.</p>
+</div>
+<div id="scrollableNavBar">
+    <div class="row justify-content-between mb-5 pb-3">
+        <div class="col text-center text-14">
+            <a th:href="@{/mypage/orderList}" class="link-unstyle">주문 내역</a>
+        </div>
+        <div class="col text-center text-14">
+            <a th:href="@{/mypage/rezList}" class="link-unstyle">
+                <span class="pb-1 border-bottom border-sinchon text-sinchon">예약 내역</span></a>
+        </div>
+        <div class="col text-center text-14">
+            <a th:href="@{/mypage/edit-info}" class="link-unstyle">정보 수정</a>
+        </div>
+        <div class="col text-center text-14">
+            <a th:href="@{/mypage/delete-id}" class="link-unstyle">회원 탈퇴</a>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <p class="text-center text-32 mb-5">투어 예약 내역</p>
+    <div class="row justify-content-center">
+        <div class="col-lg-2" id="sideBar">
+            <ul class="text-14 list-unstyled">
+                <li class="mb-4"><a th:href="@{/mypage/orderList}" class="link-unstyle">주문 내역</a></li>
+                <li class="mb-4"><a th:href="@{/mypage/rezList}" class="link-unstyle">
+                    <span class="pb-1 border-bottom border-sinchon text-sinchon">예약 내역</span></a>
+                </li>
+                <li class="mb-4"><a th:href="@{/mypage/edit-info}" class="link-unstyle">정보 수정</a></li>
+                <li class="mb-4"><a th:href="@{/mypage/delete-id}" class="link-unstyle">회원 탈퇴</a></li>
+            </ul>
+        </div>
+        <div class="col-lg-8 pb-5">
+            <div class="row justify-content-center">
+                <th:block th:if="${list.empty}">
+                    <div class="text-center text-15 text-light-gray my-5 py-5">예약 내역이 없습니다.</div>
+                </th:block>
+                <th:block th:unless="${list.empty}">
+                    <th:block th:each="list : ${list}">
+                        <table class="text-15 table" style="width: 80%;">
+                            <thead class="thead-light">
+                            <th width="40%">프로그램</th>
+                            <th width="60%" class="font-nanum">신촌맥주 양조장 투어</th>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td scope="row">예약 번호</td>
+                                <td>
+                                    <div class="font-nanum" th:text="${list.pidx}"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td scope="row">예약일</td>
+                                <td>
+                                    <div class="font-nanum" th:text="${list.tdate}"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td scope="row">신청자</td>
+                                <td>
+                                    <div class="font-nanum" th:text="${session.loginMember.name}"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td scope="row">인원</td>
+                                <td>
+                                    <div class="font-nanum" th:text="|${list.tpeople}명|"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td scope="row">결제 금액</td>
+                                <td>
+                                    <div class="font-nanum" th:text="${list.pprice}"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td scope="row">결제 정보</td>
+                                <td>
+                                    <div class="font-nanum" th:text="${list.pway}"></div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </th:block>
+                    <a th:href="@{/tour/change-info}" class="link-unstyle">
+                        <button class="btn btn-sinchon" id="rezChangeBtn">예약일 변경</button>
+                    </a>
+                </th:block>
+            </div>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+</div>
+<th:block th:replace="frame/footer"></th:block>
 </body>
 </html>

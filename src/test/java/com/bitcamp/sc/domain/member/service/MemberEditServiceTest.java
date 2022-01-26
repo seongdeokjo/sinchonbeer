@@ -54,7 +54,7 @@ public class MemberEditServiceTest {
         request.setAddress1(editAddress1);
         request.setAddress2(editAddress2);
 
-        int result = editService.updateMember(request);
+        int result = editService.updateMember(idx,request);
         log.info("result = {}",result);
 
         assertThat(result).isEqualTo(2);

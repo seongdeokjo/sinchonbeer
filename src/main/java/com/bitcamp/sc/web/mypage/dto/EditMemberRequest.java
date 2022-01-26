@@ -18,6 +18,7 @@ public class EditMemberRequest {
 	private String postcode;
 	private String address1;
 	private String address2;
+	private long aidx;
 
 
 	public Address toAddress(){
@@ -25,6 +26,7 @@ public class EditMemberRequest {
 				.postcode(this.postcode)
 				.address1(this.address1)
 				.address2(this.address2)
+				.idx(this.aidx)
 				.build();
 	}
 

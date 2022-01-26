@@ -27,8 +27,8 @@ public class MemberEditServiceImpl implements MemberEditService {
     }
 
     // 회원 정보 수정
-    public int updateMember(EditMemberRequest request) {
-        Member findMember = mypageDao.findMemberAddressByMidx(request.getIdx());
+    public int updateMember(long idx,EditMemberRequest request) {
+        Member findMember = mypageDao.findMemberAddressByMidx(idx);
         if(findMember != null){
             findMember.updateAccount(request.getNewPw(), request.getPhone(), request.toAddress());
             log.info("before member = {}",findMember);

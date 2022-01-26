@@ -1,4 +1,4 @@
-package com.bitcamp.sc.web.member.controller;
+package com.bitcamp.sc.web.mypage.controller;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,7 +15,7 @@ import com.bitcamp.sc.web.login.dto.LoginInfo;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-public class MemberDeleteController {
+public class MypageMemberDeleteController {
     private final MemberDeleteService service;
     private final PasswordEncoder passwordEncoder;
 

@@ -15,6 +15,7 @@ public class EditMemberResponse {
     private String postcode;
     private String address1;
     private String address2;
+    private long aidx;
 
     @Builder
     public EditMemberResponse(Member fromMember){
@@ -25,5 +26,6 @@ public class EditMemberResponse {
         this.postcode = fromMember.getAddress().getPostcode();
         this.address1 = fromMember.getAddress().getAddress1();
         this.address2 = fromMember.getAddress().getAddress2();
+        this.aidx = fromMember.getAddress().getIdx();
     }
 }

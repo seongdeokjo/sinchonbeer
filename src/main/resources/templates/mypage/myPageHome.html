@@ -9,7 +9,6 @@
 <body>
 <th:block th:replace="frame/header"/>
 <th:block th:replace="frame/nav"/>
-
 <div class="mt-5 text-center pb-5">
     <p class="text-center text-48 text-sinchon mb-0">MY PAGE</p>
     <p class="text-center text-14">안녕하세요 신촌맥주입니다.</p>
@@ -22,15 +21,15 @@
             </a>
         </div>
         <div class="col text-center text-14">
-            <a th:href="@{/mypage/rezList/${idx}}" class="link-unstyle">투어 예약 내역 :<br>
+            <a th:href="@{/mypage/rezList/{midx} (midx = ${idx})}" class="link-unstyle">투어 예약 내역 :<br>
                 <span class="countOrderTour"></span>
             </a>
         </div>
         <div class="col text-center text-14">
-            <a th:href="@{/mypage/edit-info/${idx}}" class="link-unstyle">정보 수정</a>
+            <a th:href="@{/mypage/member/{midx}/edit (midx = ${idx})}" class="link-unstyle">정보 수정</a>
         </div>
         <div class="col text-center text-14">
-            <a th:href="@{/mypage/delete-id/${idx}}" class="link-unstyle">회원 탈퇴</a>
+            <a th:href="@{/mypage/delete-id/{midx} (midx = ${idx})}" class="link-unstyle">회원 탈퇴</a>
         </div>
     </div>
 </div>
@@ -42,11 +41,11 @@
                 <li class="mb-4"><a th:href="@{/mypage/orderList/{midx}(midx = ${idx})}" class="link-unstyle">상품 주문 내역 :
                     <span class="countOrderGoods"></span></a>
                 </li>
-                <li class="mb-4"><a th:href="@{/mypage/rezList/${idx}}" class="link-unstyle">투어 예약 내역 :
+                <li class="mb-4"><a th:href="@{/mypage/rezList/{midx}(midx = ${idx})}" class="link-unstyle">투어 예약 내역 :
                     <span class="countOrderTour"></span></a>
                 </li>
-                <li class="mb-4"><a th:href="@{/mypage/edit-info/${idx}}" class="link-unstyle">정보 수정</a></li>
-                <li class="mb-4"><a th:href="@{/mypage/delete-id/${idx}}" class="link-unstyle">회원 탈퇴</a></li>
+                <li class="mb-4"><a th:href="@{/mypage/member/{midx}/edit (midx = ${idx})}" class="link-unstyle">정보 수정</a></li>
+                <li class="mb-4"><a th:href="@{/mypage/delete-id/{midx}(midx = ${idx})}" class="link-unstyle">회원 탈퇴</a></li>
                 <!-- 나의 리뷰 목록  -->
             </ul>
         </div>
