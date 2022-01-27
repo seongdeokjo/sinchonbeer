@@ -104,9 +104,9 @@
                                             <div class="font-nanum" th:text="|결제 상태 : 대기|"></div>
                                         </th:block>
                                     </td>
-                                    <!-- 리뷰 쓰기 시 사진 정보 같이 보내주기 -->
+                                    <!-- 리뷰 작성 -->
                                     <td class="pt-3">
-                                        <a th:onclick="|fnc_writeReview('${list.oidx}')|" class="link-unstyle">
+                                        <a th:href="@{/review/save}" class="link-unstyle">
                                             <button class="btn btn-sinchon mb-2"
                                                     style="width: 100px; height: 30px; line-height: 100%;">후기
                                             </button>
@@ -122,13 +122,6 @@
         </div>
     </div>
 </div>
-<!-- 리뷰 쓰기 시 사진 정보 같이 보내주기 -->
-<script>
-    function fnc_writeReview(order_idx) {
-        console.log(order_idx);
-        window.location = "/review/write?order_idx=" + order_idx;
-    }
-</script>
 <th:block th:replace="frame/footer"></th:block>
 </body>
 </html>

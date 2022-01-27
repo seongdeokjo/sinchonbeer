@@ -3,115 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title>리뷰 메인</title>
-
     <link rel="stylesheet" th:href="@{/css/review/reviewMain.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
     <th:block th:replace="frame/metaheader"></th:block>
-
-    <script type="text/javascript">
-
-        // 해당 상세 게시글 가기
-        function goToView(idx) {
-            console.log("상세 view로 갑니다");
-            console.log(idx);
-            window.location = "review/view?idx=" + idx;
-        }
-
-        /*
-        // 해당 게시글 좋아요
-        function likeReview(idx) {
-            $.ajax({
-                    url: "/review/like.do",
-                    type: "POST",
-                    data: {"idx":idx},
-                    dataType: "json",
-                    success: function (data) {
-
-                        console.log(data);
-                            if(data == 1) {
-
-                           } else {
-                           }
-                    }
-            );
-        }
-            */
-    </script>
-
-
 </head>
-
 <body>
 <th:block th:replace="frame/header"></th:block>
 <th:block th:replace="frame/nav"></th:block>
-
 <!-- Content 영역 -->
 <div class="my-5 text-center">
-    <h1 class="font-weight-bold">
-        리뷰
-    </h1>
+    <h1 class="font-weight-bold">리뷰</h1>
 </div>
-
 <div class="container gallery-container">
-    <form action="">
-        <div class="gallery">
-            <!-- <div class="col text-right text-18">
-                <th:block th:unless="${session.loginInfo == null}">
-                    <a th:href="@{review/write}" class="btn-sinchon btn btn-sm-padding text-13 btn_top_right"
-                       id="btn-orderer-edit" role="button">
-                        글쓰기
-                    </a>
-                </th:block>
-            </div> -->
-            <div class="row">
-                <div class="col-lg border mx-2">
-                    <div class="container">
-                        <div class="row row-cols-2 g-3">
-                            <th:block th:each="reviewInfo : ${reviewMain}">
-                                <div class="card shadow-sm">
-                                    <div class="thumbnail">
-                                        <a class="lightbox" th:onclick="|goToView('${reviewInfo.idx}')|">
-										  <th:block th:if="${reviewInfo.gphoto == ''}">
-										      <img th:src="@{/images/review/scbeer.png}" alt="SinChonbeer">
-										  </th:block>
-										  <th:block th:unless="${reviewInfo.gphoto == ''}">
-										      <img th:src="@{|/images/shop/${reviewInfo.gphoto}.png|}" alt="SinChonbeer">
-										  </th:block>
-										</a>
-                                        <div class="card-body">
-                                            <a class="card-text review-title" th:text="${reviewInfo.title}"
-                                               th:onclick="|goToView('${reviewInfo.idx}')|"
-                                               style="font-size:30px;"></a>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div class="btn-group">
-                                                    <button type="button"
-                                                            class="btn btn-sm btn-outline-secondary"
-                                                            id="likeBtn">좋아요
-                                                    </button>
-                                                    <!-- <a class="btn-sinchon btn btn-sm-padding" th:onclick="|likeReview('${view.idx}')|" >좋아요</a> -->
-                                                </div>
-                                                <small class="text-muted" th:text="${reviewInfo.date}"></small>
+    <div class="gallery">
+        <div class="row">
+            <div class="col-lg border mx-2">
+                <div class="container">
+                    <div class="row row-cols-2 g-3">
+                        <th:block th:if="${#lists.isEmpty(reviewInfo)}">
+                            <p>아직 작성된 리뷰가 없습니다.</p><br>
+                            <p>제일 첫번째로 리뷰를 남겨주세요!</p>
+                            <span><a th:href="@{/reviews/save}">리뷰작성</a></span>
+                        </th:block>
+                        <th:block th:each="list : ${reviewInfo}">
+                            <div class="card shadow-sm">
+                                <div class="thumbnail">
+                                    <th:block th:if="${list.gphoto == ''}">
+                                        <img th:src="@{/images/review/scbeer.png}" alt="SinChonbeer">
+                                    </th:block>
+                                    <th:block th:unless="${list.gphoto == ''}">
+                                        <img th:src="@{|/images/shop/${list.gphoto}.png|}" alt="SinChonbeer">
+                                    </th:block>
+                                    <div class="card-body">
+                                        <a class="card-text review-title" th:text="${list.title}"
+                                           th:href="@{/reviews/{idx} (idx = ${list.idx})}"
+                                           style="font-size:30px;"></a>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-sm btn-outline-secondary"
+                                                        id="likeBtn">좋아요
+                                                </button>
+                                                <!-- <a class="btn-sinchon btn btn-sm-padding" th:onclick="|likeReview('${view.idx}')|" >좋아요</a> -->
                                             </div>
+                                            <small class="text-muted" th:text="${list.date}"></small>
                                         </div>
                                     </div>
                                 </div>
-                            </th:block>
-                        </div>
+                            </div>
+                        </th:block>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
 <script>
     baguetteBox.run('.gallery');
 </script>
-
-
 <th:block th:replace="frame/footer"></th:block>
-
-
 </body>
-
 </html>
