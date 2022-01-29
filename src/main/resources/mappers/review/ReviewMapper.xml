@@ -18,6 +18,9 @@
 	<select id="findAll" resultMap="ReviewVo">
 		select id, title, date, photo from review
 	</select>
+	<insert id="save" parameterType="com.bitcamp.sc.domain.review.domain.ReviewVO">
+		insert into review(title,name,contents,photo,category,rate) values (#{title},#{name},#{contents},#{gphoto},#{category},#{rate})
+	</insert>
 
 	
 </mapper>

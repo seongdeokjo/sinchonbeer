@@ -7,4 +7,5 @@ public interface ReviewDao {
 
 
     List<ReviewVO> findAll();
+    long save(ReviewVO reviewVO);
 }

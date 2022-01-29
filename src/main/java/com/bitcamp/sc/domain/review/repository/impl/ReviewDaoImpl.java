@@ -23,4 +23,10 @@ public class ReviewDaoImpl implements ReviewDao {
 	public List<ReviewVO> findAll() {
 		return template.selectList(NAME_SPACE+".findAll");
 	}
+
+	@Override
+	public long save(ReviewVO reviewVO) {
+		template.insert(NAME_SPACE+".save",reviewVO);
+		return reviewVO.getIdx();
+	}
 }

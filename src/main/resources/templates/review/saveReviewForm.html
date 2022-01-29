@@ -57,7 +57,8 @@
             <div class="row">
                 <div class="col-auto mr-auto"></div>
                 <div class="col-auto">
-                    <input class="btn btn-primary" type="submit" role="button" value="글쓰기">
+                    <input class="btn btn-primary" type="submit" role="button" value="작성">
+                    <button><a th:href="@{/reviews}">취소</a></button>
                 </div>
             </div>
         </form>
@@ -69,53 +70,6 @@
             var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
-     // 게시글 삽입
-        function insertBoard() {
-           let form = $("#boardInsertForm").serialize();
-           console.log(form);
-            if ($("#write_status").val() === "write") {
-                $.ajax({
-                    url: "/board/ajaxInsert",
-                    type: "POST",
-                    enctype: "multipart/form-data", // 파일업로드처리 시 필수
-                    processData: false,             // 파일업로드처리 시 필수
-                    contentType: false,             // 파일업로드처리 시 필수
-                    cache: false,
-                    data: form,
-                    dataType: "json",
-                    success: function () {
-                        $('#kt_modal_loading').modal().hide();
-                        alert("글 등록이 완료되었습니다.");
-                        window.location = '/board/list/' + board_div_cd;
-                    },
-                    error: function (request, status, error) {
-                        console.clear();
-                        console.log(request.responseText);
-                        alert("code:" + request.status + "\n\n" + "error:" + error);
-                    }
-                });
-            } else if ($("#write_status").val() === "modify") {
-                $.ajax({
-                    url: "/board/ajaxModify",
-                    type: "POST",
-                    enctype: "multipart/form-data", // 파일업로드처리 시 필수
-                    processData: false,             // 파일업로드처리 시 필수
-                    contentType: false,             // 파일업로드처리 시 필수
-                    cache: false,
-                    data: form,
-                    dataType: "json",
-                    success: function () {
-                        alert("글 수정이 완료되었습니다.");
-                        window.location = '/board/list/' + board_div_cd;
-                    },
-                    error: function (request, status, error) {
-                        console.clear();
-                        console.log(request.responseText);
-                        alert("code:" + request.status + "\n\n" + "error:" + error);
-                    }
-                });
-            }
-        }
     </script>
    <th:block th:replace="frame/footer"></th:block>
 </body>

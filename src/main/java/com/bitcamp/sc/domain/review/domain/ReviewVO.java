@@ -1,13 +1,8 @@
 package com.bitcamp.sc.domain.review.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
-@Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,4 +19,16 @@ public class ReviewVO {
     private String gphoto;        // 썸네일
 //    private Integer viewcnt; // 게시글 조회수
 
+    @Builder
+    public ReviewVO(String title, String name, String contents, Integer rate, String category){
+        this.title = title;
+        this.name = name;
+        this.contents = contents;
+        this.category = category;
+        this.rate = rate;
+    }
+
+    public void setPhotoPath(String fileName){
+        this.gphoto = fileName;
+    }
 }
