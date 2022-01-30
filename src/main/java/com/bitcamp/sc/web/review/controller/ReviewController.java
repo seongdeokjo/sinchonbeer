@@ -3,7 +3,6 @@ package com.bitcamp.sc.web.review.controller;
 import com.bitcamp.sc.web.review.dto.ReviewSaveDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +34,7 @@ public class ReviewController {
 	// 리뷰 등록 페이지
 	@GetMapping("/save")
 	public String writeForm(){
+
 		return "review/saveReviewForm";
 	}
 
@@ -50,6 +50,11 @@ public class ReviewController {
 		log.info("size = {}",size);
 		reviewService.save(saveDto);
 		return "redirect:/reviews";
+	}
+
+	@GetMapping("/buyList")
+	public String getList(){
+		return "review/mybuyList";
 	}
 
 	// 리뷰 수정 페이지

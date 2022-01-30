@@ -25,8 +25,7 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 
 	@Override
-	public long save(ReviewVO reviewVO) {
+	public void save(ReviewVO reviewVO) {
 		template.insert(NAME_SPACE+".save",reviewVO);
-		return reviewVO.getIdx();
 	}
 }

@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
 public class AuthInterceptor implements HandlerInterceptor {
-    public List<String> loginEssential = Arrays.asList("/tour/reserve/form", "/tour/change-info", "/shop/shop-payment/**", "/basket/basket", "/mypage/**");
+    public List<String> loginEssential = Arrays.asList("/tour/reserve/form", "/tour/change-info", "/shop/shop-payment/**", "/basket/basket", "/mypage/**","/reviews/save");
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {

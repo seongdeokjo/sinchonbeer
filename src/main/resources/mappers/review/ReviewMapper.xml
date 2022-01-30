@@ -12,13 +12,13 @@
 	<result property="likes" column="rlikes"/>
 	<result property="viewcnt" column="viewcnt"/>
 	<result property="gphoto" column="photo"/>
-	<result property="pidx" column="pidx"/>
+	<result property="oidx" column="oidx"/>
 </resultMap>
 
 	<select id="findAll" resultMap="ReviewVo">
 		select id, title, date, photo from review
 	</select>
-	<insert id="save" parameterType="com.bitcamp.sc.domain.review.domain.ReviewVO">
+	<insert id="save" parameterType="com.bitcamp.sc.domain.review.domain.ReviewVO" useGeneratedKeys="true" keyProperty="idx">
 		insert into review(title,name,contents,photo,category,rate) values (#{title},#{name},#{contents},#{gphoto},#{category},#{rate})
 	</insert>
 

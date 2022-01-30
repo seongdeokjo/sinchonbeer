@@ -29,18 +29,19 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public long save(ReviewSaveDto saveDto) throws IOException {
+    public void save(ReviewSaveDto saveDto) throws IOException {
         // 파일을 저장 -> 파일의 이름 추출 -> 저장
         MultipartFile file = saveDto.getFile();
         ReviewVO reviewVO = saveDto.toReview();
+
         if(!file.isEmpty()){
             String originalFilename = file.getOriginalFilename();
             String storeFileName = createStoreFileName(originalFilename);
             file.transferTo(new File(getFullPath(storeFileName)));
             reviewVO.setPhotoPath(storeFileName);
+            log.info("review = {}",reviewVO);
         }
-
-        return reviewDao.save(reviewVO);
+        reviewDao.save(reviewVO);
     }
 
     private String getFullPath(String storeFileName) {
@@ -56,6 +57,5 @@ public class ReviewServiceImpl implements ReviewService {
     private String extractedExt(String originalFilename) {
         int pos = originalFilename.lastIndexOf(".");
         return originalFilename.substring(pos + 1);
-
     }
 }

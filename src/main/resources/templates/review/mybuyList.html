@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>구매 리스트</title>
+    <th:block th:replace="frame/metaheader"></th:block>
+</head>
+<body>
+<!-- Content 영역 -->
+<div class="my-5 text-center">
+    <h1 class="font-weight-bold">
+        리뷰
+    </h1>
+</div>
+<!-- 게시판 -->
+<div class="container">
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th colspan="3" style="background-color: #eeeeee; text-align: center;">
+                    구매 목록
+                </th>
+            </tr>
+            </thead>
+            <p>테스트</p>
+      <!--      <tbody th:each="list : ${myList}">
+            <tr>
+                <th class="listTag">제목</th>
+                <td class="listContents" th:text="${list}" colspan="2">
+                </td>
+            </tr>
+            <tr>
+                <th class="listTag">작성자</th>
+                <td class="listContents" th:text="${view.name}" colspan="2">
+                </td>
+            </tr>
+            <tr>
+                <th class="listTag">작성일</th>
+                <td class="listContents" th:text="${view.date}" colspan="2"></td>
+            </tr>
+            <tr>
+                <td id="summernote" class="contents_writing" th:utext="${view.contents}" colspan="2"></td>
+            </tr>-->
+            </tbody>
+        </table>
+        <div class="btn_div">
+            <a class="btn btn-sm-padding btn_list" href="/review">목록</a>
+            <a class="btn btn-sm-padding btn_del">선택</a>
+            <a class="btn btn-sm-padding btn_modf">취소</a>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

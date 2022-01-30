@@ -8,6 +8,6 @@ import com.bitcamp.sc.web.review.dto.ReviewSaveDto;
 public interface ReviewService {
 
     List<ReviewVO> findAll();
-    long save(ReviewSaveDto saveDto) throws IOException;
+    void save(ReviewSaveDto saveDto) throws IOException;
 
 }
