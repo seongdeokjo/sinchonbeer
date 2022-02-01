@@ -18,12 +18,42 @@
     <div class="gallery">
         <div class="row">
             <div class="col-lg border mx-2">
+                <div>
+                    <button><a th:href="@{/reviews/save}">리뷰작성</a></button>
+                    <label for="search">게시글 검색</label>
+                    <select id="search" name="search">
+                        <option th:value="all" selected>전체</option>
+                        <option th:value="name">작성자</option>
+                        <option th:value="title">제목</option>
+                        <option th:value="content">내용</option>
+                        <option th:value="titleContent">제목+내용</option>
+                    </select>
+                    <input type="text" id="find" name="find" th:placeholder="'검색할 내용을 입력하세요.'">
+                    <input type="submit" th:value="검색">
+                    <label for="category">분류</label>
+                    <select id="category" name="category">
+                        <option value='' selected>선택</option>
+                        <option th:value="tour">투어</option>
+                        <option th:value="shop">상품</option>
+                    </select>
+                    <label for="period">기간</label>
+                    <select id="period" name="period">
+                        <option value='' selected>선택</option>
+                        <option th:value="latest">최신순</option>
+                        <option th:value="oldest">늦은순</option>
+                    </select>
+                </div>
                 <div class="container">
                     <div class="row row-cols-2 g-3">
                         <th:block th:if="${#lists.isEmpty(reviewInfo)}">
                             <p>아직 작성된 리뷰가 없습니다.</p><br>
                             <p>제일 첫번째로 리뷰를 남겨주세요!</p>
                             <span><a th:href="@{/reviews/save}">리뷰작성</a></span>
+                        </th:block>
+                        <th:block th:if="${param.status}">
+                            <script>
+                                alert('작성완료!');
+                            </script>
                         </th:block>
                         <th:block th:each="list : ${reviewInfo}">
                             <div class="card shadow-sm">
@@ -32,7 +62,7 @@
                                         <img th:src="@{/images/review/scbeer.png}" alt="SinChonbeer">
                                     </th:block>
                                     <th:block th:unless="${list.gphoto == ''}">
-                                        <img th:src="@{|/images/shop/${list.gphoto}.png|}" alt="SinChonbeer">
+                                        <img th:src="@{/reviews/image/{filename}(filename = ${list.gphoto})}" alt="SinChonbeer">
                                     </th:block>
                                     <div class="card-body">
                                         <a class="card-text review-title" th:text="${list.title}"

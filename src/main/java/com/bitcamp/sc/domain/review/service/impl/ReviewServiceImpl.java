@@ -40,16 +40,19 @@ public class ReviewServiceImpl implements ReviewService {
             file.transferTo(new File(getFullPath(storeFileName)));
             reviewVO.setPhotoPath(storeFileName);
             log.info("review = {}",reviewVO);
+        }else{
+            reviewVO.setPhotoPath("basic");
         }
         reviewDao.save(reviewVO);
     }
 
-    private String getFullPath(String storeFileName) {
+    public String getFullPath(String storeFileName) {
         return pathDir + storeFileName;
     }
 
     private String createStoreFileName(String originalFilename) {
         String ext = extractedExt(originalFilename);
+        log.info("ext = {}",ext); // png
         String uuid = UUID.randomUUID().toString();
         return uuid + "." + ext;
     }

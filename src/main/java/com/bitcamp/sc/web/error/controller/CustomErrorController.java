@@ -22,7 +22,6 @@ public class CustomErrorController implements ErrorController{
 		@GetMapping("/error")
 	    public String handleError(HttpServletRequest request) {
 	        Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
-	      
 	       
 	        if (status != null) {
 	            int statusCode = Integer.valueOf(status.toString());
@@ -35,6 +34,6 @@ public class CustomErrorController implements ErrorController{
 	            	return ERROR_500_PAGE_PATH;
 	            }
 	        }
-	        return "error";
+	        return "errors/500";
 		}
 }

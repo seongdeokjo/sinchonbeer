@@ -3,6 +3,9 @@ package com.bitcamp.sc.web.review.controller;
 import com.bitcamp.sc.web.review.dto.ReviewSaveDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,8 +13,10 @@ import org.springframework.web.bind.annotation.*;
 import com.bitcamp.sc.domain.review.domain.ReviewVO;
 import com.bitcamp.sc.domain.review.service.ReviewService;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 
 @Slf4j
@@ -21,6 +26,8 @@ import java.util.List;
 public class ReviewController {
 
 	private final ReviewService reviewService;
+	@Value("${file.dir}")
+	private String path;
 
 	// 리뷰 메인 페이지
 	@GetMapping
@@ -30,31 +37,26 @@ public class ReviewController {
 		model.addAttribute("reviewInfo",list);
 		return "review/reviewMain";
 	}
+	// 저장된 이미지 불러오기
+	@ResponseBody
+	@GetMapping("/image/{filename}")
+	public Resource getImage(@PathVariable String filename) throws MalformedURLException {
+		log.info("filename = {}",filename);
+		return new UrlResource("file:"+path+filename);
+	}
 
 	// 리뷰 등록 페이지
 	@GetMapping("/save")
-	public String writeForm(){
-
+	public String saveForm(Model model){
+		model.addAttribute("saveDto",new ReviewSaveDto());
 		return "review/saveReviewForm";
 	}
 
 	@PostMapping("/save")
-	public String saveReview(ReviewSaveDto saveDto) throws IOException {
-		log.info("dto = {}",saveDto);
-		MultipartFile file = saveDto.getFile();
-		String originalFilename = file.getOriginalFilename();
-		log.info("originalName = {}",originalFilename);
-		String name = file.getName();
-		log.info("name = {}",name);
-		long size = file.getSize();
-		log.info("size = {}",size);
+	public String saveReview(ReviewSaveDto saveDto, RedirectAttributes redirectAttributes) throws IOException {
 		reviewService.save(saveDto);
+		redirectAttributes.addAttribute("status",true);
 		return "redirect:/reviews";
-	}
-
-	@GetMapping("/buyList")
-	public String getList(){
-		return "review/mybuyList";
 	}
 
 	// 리뷰 수정 페이지

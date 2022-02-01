@@ -12,7 +12,6 @@
 	<result property="likes" column="rlikes"/>
 	<result property="viewcnt" column="viewcnt"/>
 	<result property="gphoto" column="photo"/>
-	<result property="oidx" column="oidx"/>
 </resultMap>
 
 	<select id="findAll" resultMap="ReviewVo">
