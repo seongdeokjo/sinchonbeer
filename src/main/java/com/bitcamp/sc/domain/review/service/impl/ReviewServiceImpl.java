@@ -8,6 +8,7 @@ import java.util.UUID;
 import com.bitcamp.sc.domain.review.domain.ReviewVO;
 import com.bitcamp.sc.domain.review.repository.ReviewDao;
 import com.bitcamp.sc.domain.review.service.ReviewService;
+import com.bitcamp.sc.web.paging.Criteria;
 import com.bitcamp.sc.web.review.dto.ReviewSaveDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,8 +25,13 @@ public class ReviewServiceImpl implements ReviewService {
     private String pathDir;
 
     @Override
-    public List<ReviewVO> findAll() {
-        return reviewDao.findAll();
+    public List<ReviewVO> findAll(Criteria cri) {
+        return reviewDao.findAll(cri);
+    }
+
+    @Override
+    public int countReview() {
+        return reviewDao.getCountReview();
     }
 
     @Override

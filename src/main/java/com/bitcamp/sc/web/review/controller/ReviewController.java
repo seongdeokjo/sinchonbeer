@@ -1,5 +1,7 @@
 package com.bitcamp.sc.web.review.controller;
 
+import com.bitcamp.sc.web.paging.Criteria;
+import com.bitcamp.sc.web.paging.PageMaker;
 import com.bitcamp.sc.web.review.dto.ReviewSaveDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.bitcamp.sc.domain.review.domain.ReviewVO;
 import com.bitcamp.sc.domain.review.service.ReviewService;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
@@ -31,10 +32,15 @@ public class ReviewController {
 
 	// 리뷰 메인 페이지
 	@GetMapping
-	public String getReview(Model model){
-		List<ReviewVO> list = reviewService.findAll();
+	public String getReview(@ModelAttribute("cri") Criteria cri, Model model){
+		log.info("cri = {}",cri);
+		List<ReviewVO> list = reviewService.findAll(cri);
 		log.info("list ={}",list);
 		model.addAttribute("reviewInfo",list);
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(reviewService.countReview());
+		model.addAttribute("pageMaker",pageMaker);
 		return "review/reviewMain";
 	}
 	// 저장된 이미지 불러오기
@@ -51,7 +57,8 @@ public class ReviewController {
 		model.addAttribute("saveDto",new ReviewSaveDto());
 		return "review/saveReviewForm";
 	}
-
+	
+	// 리뷰 등록
 	@PostMapping("/save")
 	public String saveReview(ReviewSaveDto saveDto, RedirectAttributes redirectAttributes) throws IOException {
 		reviewService.save(saveDto);

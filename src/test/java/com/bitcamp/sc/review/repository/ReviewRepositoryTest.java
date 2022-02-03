@@ -2,8 +2,8 @@ package com.bitcamp.sc.review.repository;
 
 import com.bitcamp.sc.domain.review.domain.ReviewVO;
 import com.bitcamp.sc.domain.review.repository.ReviewDao;
+import com.bitcamp.sc.web.paging.Criteria;
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,12 +19,10 @@ public class ReviewRepositoryTest {
 
     @Test
     @Transactional
-    void 리뷰_생성(){
-        ReviewVO reviewVO = new ReviewVO("테스트","사용자","hihihihihhi",4,"tour");
+    void 리뷰_조회(){
 
-        reviewDao.save(reviewVO);
-
-        List<ReviewVO> all = reviewDao.findAll();
+        Criteria cri = new Criteria();
+        List<ReviewVO> all = reviewDao.findAll(cri);
         for (ReviewVO vo : all) {
             log.info("list = {}",vo.toString());
         }
