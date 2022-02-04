@@ -32,14 +32,15 @@ public class ReviewController {
 
 	// 리뷰 메인 페이지
 	@GetMapping
-	public String getReview(@ModelAttribute("cri") Criteria cri, Model model){
+	public String getReview(Criteria cri, Model model){
 		log.info("cri = {}",cri);
 		List<ReviewVO> list = reviewService.findAll(cri);
 		log.info("list ={}",list);
 		model.addAttribute("reviewInfo",list);
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(reviewService.countReview());
+		pageMaker.setTotalCount(reviewService.countReview(cri));
+		log.info("pageMaker = {}",pageMaker);
 		model.addAttribute("pageMaker",pageMaker);
 		return "review/reviewMain";
 	}

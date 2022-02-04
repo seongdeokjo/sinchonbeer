@@ -63,7 +63,7 @@
                                     </th:block>
                                     <th:block th:unless="${list.gphoto == ''}">
                                         <img th:src="@{/reviews/image/{filename}(filename = ${list.gphoto})}"
-                                             alt="SinChonbeer">
+                                             alt="SinChonbeer" width="100px" height="30px">
                                     </th:block>
                                     <div class="card-body">
                                         <a class="card-text review-title" th:text="${list.title}"
@@ -90,17 +90,17 @@
                                 <a href="#">&laquo;</a>
                             </li>
                             <li th:if="${pageMaker.prev} == true">
-                                <a th:href="@{/reivews(page=${pageMaker.startPage}-1,perPageNum=${pageMaker.cri.perPageNum})}">&lt;</a>
+                                <a th:href="@{/reviews(page=${pageMaker.startPage}-1,perPageNum=${pageMaker.cri.perPageNum})}">&lt;</a>
                             </li>
                             <li th:each="idx,iterStat : ${#numbers.sequence(pageMaker.startPage,pageMaker.endPage)}"
-                                th:classappend="${pageMaker.cri.page} == ${idx} ? active : null" >
+                                 th:classappend="${pageMaker.cri.page} == ${idx} ? active : null">
                                 <a th:href="@{/reviews(page=${idx},perPageNum=${pageMaker.cri.perPageNum})}"
                                    th:text="${idx}"></a>
                             </li>
                             <li th:if="${pageMaker.next} == true and ${pageMaker.endPage > 0}">
                                 <a th:href="@{/reviews(page=${pageMaker.endPage}+1,perPageNum=${pageMaker.cri.perPageNum})}">&gt;</a>
                             </li>
-                            <li>
+                            <li>D
                                 <a href="#">&raquo;</a>
                             </li>
                         </ul>

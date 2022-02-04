@@ -30,8 +30,8 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public int countReview() {
-        return reviewDao.getCountReview();
+    public int countReview(Criteria cri) {
+        return reviewDao.getCountReview(cri);
     }
 
     @Override

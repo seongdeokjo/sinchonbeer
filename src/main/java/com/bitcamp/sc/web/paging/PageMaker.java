@@ -1,9 +1,12 @@
 package com.bitcamp.sc.web.paging;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class PageMaker {
 
     private int totalCount; // 게시글 전체 개수
-    private int displayPageNum = 10; // 게시판 화면에서 한번에 보여질 페이지 번호의 개수
+    private int displayPageNum = 5; // 게시판 화면에서 한번에 보여질 페이지 번호의 개수
     private int startPage; // 현재 화면에서 보이는 startPage 번호
     private int endPage; // 현재 화면에 보이는 endPage 번호
     private boolean prev; // 페이지 이전 버튼 활성화 여부
@@ -21,12 +24,15 @@ public class PageMaker {
 
     private void calcData() {
         endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum);
+        log.info("endPage = {}",endPage);
         startPage = (endPage - displayPageNum) + 1;
+        log.info("start = {}",startPage);
         int tempEndPage = (int) (Math.ceil(totalCount / (double) cri.getPerPageNum()));
+        log.info("tempEnd = {}",tempEndPage);
         if (endPage > tempEndPage) {
             endPage = tempEndPage;
+            log.info("last = {}",endPage);
         }
-
         prev = startPage == 1 ? true : false;
         next = endPage * cri.getPerPageNum() >= totalCount ? false : true;
     }

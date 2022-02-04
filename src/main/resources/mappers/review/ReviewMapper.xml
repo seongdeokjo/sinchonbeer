@@ -20,7 +20,7 @@
 	</select>
 
 	<select id="countReview" resultType="int">
-		select count(*) from review
+		select count(*) from review where id > 0
 	</select>
 
 	<insert id="save" parameterType="com.bitcamp.sc.domain.review.domain.ReviewVO" useGeneratedKeys="true" keyProperty="idx">
