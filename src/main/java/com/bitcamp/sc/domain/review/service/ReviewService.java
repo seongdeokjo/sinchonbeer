@@ -9,6 +9,7 @@ import com.bitcamp.sc.web.review.dto.ReviewSaveDto;
 public interface ReviewService {
 
     List<ReviewVO> findAll(Criteria cri);
+    ReviewVO findByIdx(long idx);
     int countReview(Criteria cri);
     void save(ReviewSaveDto saveDto) throws IOException;
 

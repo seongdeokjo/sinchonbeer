@@ -73,8 +73,9 @@ public class ReviewController {
 
 	// 리뷰 상세 페이지
 	@GetMapping("/{idx}")
-	public String getDetail(@PathVariable long idx){
-
+	public String getDetail(@PathVariable long idx,Model model){
+		ReviewVO review = reviewService.findByIdx(idx);
+		model.addAttribute("view",review);
 		return "review/view";
 	}
 }

@@ -13,7 +13,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 @Slf4j
 public class AuthInterceptor implements HandlerInterceptor {
-    public List<String> loginEssential = Arrays.asList("/tour/reserve/form", "/tour/change-info", "/shop/shop-payment/**", "/basket/basket", "/mypage/**","/reviews/save");
+    public List<String> loginEssential = Arrays.asList("/tour/reserve/form", "/tour/change-info", "/shop/shop-payment/**", "/basket/basket", "/mypage/**","/reviews/save","/reviews/{idx}");
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {

@@ -23,6 +23,11 @@
 		select count(*) from review where id > 0
 	</select>
 
+	<select id="findByIdx" parameterType="long" resultMap="ReviewVo">
+		select id, title, name, contents, rate, date, rlikes,viewcnt,photo
+		from review where id = #{idx}
+	</select>
+
 	<insert id="save" parameterType="com.bitcamp.sc.domain.review.domain.ReviewVO" useGeneratedKeys="true" keyProperty="idx">
 		insert into review(title,name,contents,photo,category,rate) values (#{title},#{name},#{contents},#{gphoto},#{category},#{rate})
 	</insert>

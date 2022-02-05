@@ -6,6 +6,7 @@ import com.bitcamp.sc.web.paging.Criteria;
 
 public interface ReviewDao {
     List<ReviewVO> findAll(Criteria cri);
+    ReviewVO findByIdx(long idx);
     int getCountReview(Criteria cri);
     void save(ReviewVO reviewVO);
 }
