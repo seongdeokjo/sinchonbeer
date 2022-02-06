@@ -31,6 +31,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public ReviewVO findByIdx(long idx) {
+        reviewDao.updateCountView(idx);
         return reviewDao.findByIdx(idx);
     }
 

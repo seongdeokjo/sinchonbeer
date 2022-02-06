@@ -15,9 +15,7 @@ body {
   border-radius: 20px;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.06);
 }
-
 /* Styles for the gallery */
-
 .gallery {
   padding: 40px;
   overflow: hidden;
@@ -29,19 +27,14 @@ body {
 }
 
 .card {
-	height: 415px;
-	
+	height: 200px;
 }
 
 .shadow-sm {
-    /* width: 48%; */
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     border-bottom:  1px solid black;
     border-bottom-color:  black;
 }
-
-
-
 .gallery .col a {
 	margin : 10px 0 10px 10px;
 	font-size: 15px;
@@ -51,15 +44,16 @@ body {
 
 .gallery .thumbnail {
   padding: 0;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
+  margin-left: 10px;
   border: 1px solid #1ecad3;
   border-radius: 4px;
   background-color: #fff;
   transition: 0.15s ease-in-out;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.06);
-  width: 100%;
+  width: 95%;
   max-width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
   object-fit: contain;
 }
@@ -75,14 +69,9 @@ body {
   margin-bottom: 5px;
   transition: 0.2s ease-in-out;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
-  /* object-fit: cover; */
   object-fit: contain;
 }
 
-/* .gallery .lightbox img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-} */
 
 .gallery .card-body .card-text {
   margin-bottom: 5px;

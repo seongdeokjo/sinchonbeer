@@ -29,6 +29,11 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 
 	@Override
+	public int updateCountView(long idx) {
+		return template.update(NAME_SPACE+".updateCountView",idx);
+	}
+
+	@Override
 	public int getCountReview(Criteria cri) {
 		return template.selectOne(NAME_SPACE+".countReview",cri);
 	}

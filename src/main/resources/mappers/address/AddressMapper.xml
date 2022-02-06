@@ -10,7 +10,7 @@
         <result property="postcode" column="postcode"/>
         <result property="address1" column="address1" />
         <result property="address2" column="address2" />
-        <association property="member" javaType="com.bitcamp.sc.domain.member.domain.Member" foreignColumn="midx" fetchType="lazy">
+        <association property="member" javaType="com.bitcamp.sc.domain.member.domain.Member">
             <id property="idx" column="midx"/>
         </association>
     </resultMap>

@@ -50,69 +50,120 @@
                             <p>제일 첫번째로 리뷰를 남겨주세요!</p>
                             <span><a th:href="@{/reviews/save}">리뷰작성</a></span>
                         </th:block>
-                        <th:block th:if="${param.status}">
+                        <th:block th:if="${message} == '등록되었습니다.'">
                             <script>
                                 alert('작성완료!');
                             </script>
                         </th:block>
-                        <th:block th:each="list : ${reviewInfo}">
-                            <div class="card shadow-sm">
-                                <div class="thumbnail">
-                                    <th:block th:if="${list.gphoto == ''}">
-                                        <img th:src="@{/images/review/scbeer.png}" alt="SinChonbeer">
-                                    </th:block>
-                                    <th:block th:unless="${list.gphoto == ''}">
-                                        <img th:src="@{/reviews/image/{filename}(filename = ${list.gphoto})}"
-                                             alt="SinChonbeer" width="100px" height="30px">
-                                    </th:block>
-                                    <div class="card-body">
-                                        <a class="card-text review-title" th:text="${list.title}"
-                                           th:href="@{/reviews/{idx} (idx = ${list.idx})}"
-                                           style="font-size:30px;"></a>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary"
-                                                        id="likeBtn">좋아요
-                                                </button>
-                                                <!-- <a class="btn-sinchon btn btn-sm-padding" th:onclick="|likeReview('${view.idx}')|" >좋아요</a> -->
+                    </div>
+                    <th:block th:each="list : ${reviewInfo}">
+                        <div class="card shadow-sm">
+                            <div class="thumbnail">
+                                <a th:href="@{/reviews/{idx} (idx = ${list.idx})}" id="cntView">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <th:block th:if="${list.gphoto == ''}">
+                                                <img th:src="@{/images/review/scbeer.png}" alt="SinChonbeer">
+                                            </th:block>
+                                            <th:block th:unless="${list.gphoto == ''}">
+                                                <img th:src="@{/reviews/image/{filename}(filename = ${list.gphoto})}"
+                                                     alt="SinChonbeer" width="90%" height="150px" class="pl-3 pt-3">
+                                            </th:block>
+                                        </div>
+                                        <div class="col-md-8 pt-3 text-muted">
+                                            <div class="row mb-4">
+                                                <div class="col-md-6">
+                                                    <span th:text="|No. ${list.idx}|"></span>
+                                                </div>
+                                                <div class="col-md-6 text-right">
+                                                    <span class="pr-5" th:text="|조회수: ${list.viewcnt}|"></span>
+                                                </div>
                                             </div>
-                                            <small class="text-muted" th:text="${list.date}"></small>
+                                            <div class="row mb-5">
+                                                <div class="col-md-12">
+                                                    <span th:text="${list.title}"/>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <button type="button" class="btn btn-sm btn-outline-secondary"
+                                                            id="likeBtn">좋아요
+                                                    </button>
+                                                </div>
+                                                <div class="col-md-8 text-right">
+                                                    <small class="mr-3"
+                                                           th:text="${list.date}" th:id="|regDate${list.idx}|"></small>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
+                        </div>
+                    </th:block>
+                </div>
+                <!-- 게시판 하단의 페이징 버튼 -->
+                <div class="row justify-content-center">
+                    <ul class="pagination pagination-sm ">
+                        <th:block th:if="${pageMaker.cri.page != 1}">
+                            <li class="page-item">
+                                <a class="page-link" th:href="@{/reviews(page = 1,perPageNum=${pageMaker.cri.perPageNum})}">맨앞</a>
+                            </li>
+                            <li class="page-item" th:if="${pageMaker.prev} == true">
+                                <a class="page-link" th:href="@{/reviews(page=${pageMaker.startPage}-1,perPageNum=${pageMaker.cri.perPageNum})}">&lt;</a>
+                            </li>
                         </th:block>
-                    </div>
-                    <!-- 게시판 하단의 페이징 버튼 -->
-                    <div class="box-footer clearfix">
-                        <ul class="pagination pagination-sm no-margin pull-right">
-                            <li>
-                                <a href="#">&laquo;</a>
-                            </li>
-                            <li th:if="${pageMaker.prev} == true">
-                                <a th:href="@{/reviews(page=${pageMaker.startPage}-1,perPageNum=${pageMaker.cri.perPageNum})}">&lt;</a>
-                            </li>
-                            <li th:each="idx,iterStat : ${#numbers.sequence(pageMaker.startPage,pageMaker.endPage)}"
-                                 th:classappend="${pageMaker.cri.page} == ${idx} ? active : null">
-                                <a th:href="@{/reviews(page=${idx},perPageNum=${pageMaker.cri.perPageNum})}"
-                                   th:text="${idx}"></a>
-                            </li>
-                            <li th:if="${pageMaker.next} == true and ${pageMaker.endPage > 0}">
-                                <a th:href="@{/reviews(page=${pageMaker.endPage}+1,perPageNum=${pageMaker.cri.perPageNum})}">&gt;</a>
-                            </li>
-                            <li>
-                                <a href="#">&raquo;</a>
-                            </li>
-                        </ul>
-                    </div>
+                        <li class="page-item"
+                            th:each="idx,iterStat : ${#numbers.sequence(pageMaker.startPage,pageMaker.endPage)}"
+                            th:classappend="${pageMaker.cri.page} == ${idx} ? active : null">
+                            <a class="page-link" th:href="@{/reviews(page=${idx},perPageNum=${pageMaker.cri.perPageNum})}"
+                               th:text="${idx}"></a>
+                        </li>
+                        <li class="page-item" th:if="${pageMaker.next} == true and ${pageMaker.endPage > 0}">
+                            <a class="page-link" th:href="@{/reviews(page=${pageMaker.endPage}+1,perPageNum=${pageMaker.cri.perPageNum})}">&gt;</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">맨뒤</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 </div>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
-<script>
-    baguetteBox.run('.gallery');
+<script th:inline="javascript">
+    $(function () {
+        [# th:each="list : ${reviewInfo}"]
+        let regDate[[${list.idx}]] = $('#regDate[[${list.idx}]]').text();
+        console.log(regDate[[${list.idx}]]);
+        let result[[${list.idx}]] = calcDate(regDate[[${list.idx}]]);
+        console.log(result[[${list.idx}]]);
+        $('#regDate[[${list.idx}]]').text(result[[${list.idx}]]);
+        [/]
+
+
+    });
+
+    function calcDate(regDate) {
+        const milliSeconds = new Date() - new Date(regDate);
+        console.log(milliSeconds);
+        const seconds = milliSeconds / 1000
+        if (seconds < 60) return `방금 전`
+        const minutes = seconds / 60
+        if (minutes < 60) return `${Math.floor(minutes)}분 전`
+        const hours = minutes / 60
+        if (hours < 24) return `${Math.floor(hours)}시간 전`
+        const days = hours / 24
+        if (days < 7) return `${Math.floor(days)}일 전`
+        const weeks = days / 7
+        if (weeks < 5) return `${Math.floor(weeks)}주 전`
+        const months = days / 30
+        if (months < 12) return `${Math.floor(months)}개월 전`
+        const years = days / 365
+        return `${Math.floor(years)}년 전`
+    }
 </script>
 <th:block th:replace="frame/footer"></th:block>
 </body>

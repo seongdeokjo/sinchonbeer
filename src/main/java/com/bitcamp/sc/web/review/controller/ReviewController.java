@@ -63,7 +63,8 @@ public class ReviewController {
 	@PostMapping("/save")
 	public String saveReview(ReviewSaveDto saveDto, RedirectAttributes redirectAttributes) throws IOException {
 		reviewService.save(saveDto);
-		redirectAttributes.addAttribute("status",true);
+		String message = "등록되었습니다.";
+		redirectAttributes.addFlashAttribute("message",message);
 		return "redirect:/reviews";
 	}
 
