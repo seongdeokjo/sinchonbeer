@@ -10,6 +10,7 @@ public interface ReviewService {
 
     List<ReviewVO> findAll(Criteria cri);
     ReviewVO findByIdx(long idx);
+    int viewCountUp(long idx);
     int countReview(Criteria cri);
     void save(ReviewSaveDto saveDto) throws IOException;
 

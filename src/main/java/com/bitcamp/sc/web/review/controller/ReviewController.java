@@ -16,6 +16,9 @@ import com.bitcamp.sc.domain.review.domain.ReviewVO;
 import com.bitcamp.sc.domain.review.service.ReviewService;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.List;
@@ -73,10 +76,38 @@ public class ReviewController {
 	// 리뷰 삭제 페이지
 
 	// 리뷰 상세 페이지
-	@GetMapping("/{idx}")
-	public String getDetail(@PathVariable long idx,Model model){
+	@GetMapping("/read/{idx}")
+	public String getDetail(@PathVariable Long idx, Model model, HttpServletRequest request, HttpServletResponse response) {
+		findViewCookie(idx, request, response);
 		ReviewVO review = reviewService.findByIdx(idx);
-		model.addAttribute("view",review);
+		model.addAttribute("view", review);
 		return "review/view";
+	}
+	
+	private void findViewCookie(Long idx, HttpServletRequest request, HttpServletResponse response) {
+		Cookie oldCookie = null;
+		Cookie[] cookies = request.getCookies();
+		if(cookies != null){
+			for (Cookie cookie : cookies) {
+				if(cookie.getName().equals("reviewView")){
+					oldCookie = cookie;
+				}
+			}
+		}
+		if(oldCookie != null){
+			if(!oldCookie.getValue().contains("["+ idx.toString()+"]")){
+				reviewService.viewCountUp(idx);
+				oldCookie.setValue(oldCookie.getValue()+"_["+ idx +"]");
+				oldCookie.setPath("/");
+				oldCookie.setMaxAge(60 * 60 * 24);
+				response.addCookie(oldCookie);
+			}
+		}else{
+			reviewService.viewCountUp(idx);
+			Cookie newCookie = new Cookie("reviewView","["+ idx +"]");
+			newCookie.setPath("/");
+			newCookie.setMaxAge(60 * 60 * 24);
+			response.addCookie(newCookie);
+		}
 	}
 }
