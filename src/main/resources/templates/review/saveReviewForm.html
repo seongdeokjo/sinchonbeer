@@ -26,7 +26,7 @@
             <div class="form-group row">
                 <label for="author" class="col-sm-2 col-form-label"><strong>작성자</strong></label>
                 <div class="col-sm-10">
-                    <input type="text" th:field="*{author}" class="form-control" id="author" >
+                    <input type="text"  th:value="${session.loginMember.getName()}" class="form-control" id="author" name="author" readonly>
                 </div>
             </div>
             <div class="form-group row">
@@ -75,8 +75,6 @@
             </div>
         </form>
     </div>
-    <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
-    <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script>
         $(function (){
             $(".custom-file-input").on("change", function () {
@@ -84,8 +82,6 @@
                 $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
             });
         });
-
-
     </script>
    <th:block th:replace="frame/footer"></th:block>
 </body>

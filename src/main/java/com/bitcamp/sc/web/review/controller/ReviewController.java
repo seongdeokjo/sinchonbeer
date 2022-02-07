@@ -2,6 +2,7 @@ package com.bitcamp.sc.web.review.controller;
 
 import com.bitcamp.sc.web.paging.Criteria;
 import com.bitcamp.sc.web.paging.PageMaker;
+import com.bitcamp.sc.web.review.dto.ReviewEditDto;
 import com.bitcamp.sc.web.review.dto.ReviewSaveDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -72,6 +73,17 @@ public class ReviewController {
 	}
 
 	// 리뷰 수정 페이지
+	@GetMapping("/edit/{idx}")
+	public String getEditForm(@PathVariable Long idx,Model model){
+		ReviewVO review = reviewService.findByIdx(idx);
+		model.addAttribute("review",review);
+		return "review/editReviewForm";
+	}
+	@PostMapping("/edit/{idx}")
+	public String editReview(@PathVariable Long idx, ReviewEditDto editDto){
+
+		return "redirect:/reviews/read/"+idx;
+	}
 
 	// 리뷰 삭제 페이지
 
@@ -83,7 +95,7 @@ public class ReviewController {
 		model.addAttribute("view", review);
 		return "review/view";
 	}
-	
+
 	private void findViewCookie(Long idx, HttpServletRequest request, HttpServletResponse response) {
 		Cookie oldCookie = null;
 		Cookie[] cookies = request.getCookies();

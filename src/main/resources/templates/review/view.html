@@ -41,13 +41,16 @@
             <tbody>
             <tr>
                 <th class="listTag">제목</th>
-                <td class="listContents" th:text="${view.title}" colspan="2">
-                </td>
+                <td class="listContents" th:text="${view.title}" colspan="2"></td>
             </tr>
             <tr>
                 <th class="listTag">작성자</th>
                 <td class="listContents" th:text="${view.name}" colspan="2">
                 </td>
+            </tr>
+            <tr>
+                <th class="listTag">카테고리</th>
+                <td class="listContents" th:text="${view.category}" colspan="2"></td>
             </tr>
             <tr>
                 <th class="listTag">작성일</th>
@@ -58,8 +61,7 @@
                 <td class="listContents" th:text="${view.viewcnt}" colspan="2"></td>
             </tr>
             <tr>
-                <td id="summernote" class="contents_writing" th:utext="${view.contents}" colspan="2">
-                </td>
+                <td id="summernote" class="contents_writing" th:utext="${view.contents}" colspan="2"></td>
             </tr>
             </tbody>
         </table>
@@ -67,7 +69,7 @@
             <a class="btn btn-sm-padding btn_list" href="/reviews">목록</a>
             <th:block th:if="${session.loginMember != null && session.loginMember.name == view.name}">
                 <a class="btn btn-sm-padding btn_del" th:onclick="|deleteReview('${view.idx}')|">삭제</a>
-                <a class="btn btn-sm-padding btn_del" th:onclick="|updateReview('${view.idx}')|">수정</a>
+                <a class="btn btn-sm-padding btn_del" th:href="@{/reviews/edit/{idx}(idx = ${view.idx})}">수정</a>
             </th:block>
         </div>
     </div>

@@ -24,7 +24,7 @@
 	</select>
 
 	<select id="findByIdx" parameterType="long" resultMap="ReviewVo">
-		select id, title, name, contents, rate, date, rlikes,viewcnt,photo
+		select id, title, name, contents, category,rate, date, rlikes,viewcnt,photo
 		from review where id = #{idx}
 	</select>
 
