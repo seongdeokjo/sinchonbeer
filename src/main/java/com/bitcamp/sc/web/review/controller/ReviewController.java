@@ -86,6 +86,12 @@ public class ReviewController {
 	}
 
 	// 리뷰 삭제 페이지
+	@DeleteMapping("/delete/{idx}")
+	public String deleteReview(@PathVariable Long idx,RedirectAttributes redirectAttributes){
+		String message = "삭제되었습니다.";
+		redirectAttributes.addFlashAttribute("message",message);
+		return "redirect:/reviews";
+	}
 
 	// 리뷰 상세 페이지
 	@GetMapping("/read/{idx}")

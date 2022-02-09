@@ -55,6 +55,11 @@
                                 alert('작성완료!');
                             </script>
                         </th:block>
+                        <th:block th:if="${message} == '삭제되었습니다.'">
+                            <script>
+                                alert('삭제완료!');
+                            </script>
+                        </th:block>
                     </div>
                     <th:block th:each="list : ${reviewInfo}">
                         <div class="card shadow-sm">
@@ -80,7 +85,10 @@
                                                 </div>
                                             </div>
                                             <div class="row mb-5">
-                                                <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    <span th:text="|작성자 : ${list.name}님|"/>
+                                                </div>
+                                                <div class="col-md-6">
                                                     <span th:text="${list.title}"/>
                                                 </div>
                                             </div>

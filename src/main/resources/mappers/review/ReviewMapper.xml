@@ -15,7 +15,7 @@
 </resultMap>
 
 	<select id="findAll" resultMap="ReviewVo">
-		select id, title, date, photo, viewcnt from review
+		select id, title, date, photo, viewcnt, name from review
 		where id > 0  order by id desc limit #{startPage}, #{perPageNum}
 	</select>
 
@@ -32,9 +32,17 @@
 		update review set viewcnt = viewcnt + 1 where id = #{idx}
 	</update>
 
+	<update id="editReview" parameterType="com.bitcamp.sc.domain.review.domain.ReviewVO">
+		update review set title = #{title}, contents = #{content} where id = #{idx}
+	</update>
+
 	<insert id="save" parameterType="com.bitcamp.sc.domain.review.domain.ReviewVO" useGeneratedKeys="true" keyProperty="idx">
 		insert into review(title,name,contents,photo,category,rate) values (#{title},#{name},#{contents},#{gphoto},#{category},#{rate})
 	</insert>
+
+	<delete id="removeReview" parameterType="long">
+		delete from review where id = #{idx}
+	</delete>
 
 	
 </mapper>
