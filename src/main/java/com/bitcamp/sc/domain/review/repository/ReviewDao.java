@@ -11,4 +11,5 @@ public interface ReviewDao {
     int getCountReview(Criteria cri);
     void save(ReviewVO reviewVO);
     void edit(ReviewVO reviewVO);
+    void delete(Long idx);
 }

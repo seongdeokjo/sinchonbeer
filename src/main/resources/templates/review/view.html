@@ -66,7 +66,9 @@
         <div class="btn_div">
             <a class="btn btn-sm-padding btn_list" href="/reviews">목록</a>
             <th:block th:if="${session.loginMember != null && session.loginMember.name == view.name}">
-                <a class="btn btn-sm-padding btn_del" th:href="@{/reviews/delete/{idx}(idx = ${view.idx})}">삭제</a>
+                <form th:action="@{'/reviews/delete/'+${view.idx}}" th:method="delete">
+                        <button class="btn btn-sm-padding btn_del"type="submit" id="removeBtn">삭제</button>
+                </form>
                 <a class="btn btn-sm-padding btn_del" th:href="@{/reviews/edit/{idx}(idx = ${view.idx})}">수정</a>
             </th:block>
         </div>
@@ -93,5 +95,14 @@
     </div>
 </div>
 <th:block th:replace="frame/footer"></th:block>
+<script>
+    $(function (){
+       $('#removeBtn').click(function (){
+          if(!confirm('삭제하시면 복구가 불가능 합니다. \n 정말 삭제하시겠습니까?')){
+              return false;
+          }
+       });
+    });
+</script>
 </body>
 </html>

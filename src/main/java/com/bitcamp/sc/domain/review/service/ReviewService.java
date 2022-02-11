@@ -15,5 +15,6 @@ public interface ReviewService {
     int countReview(Criteria cri);
     void edit(Long idx, ReviewEditDto editDto) throws IOException;
     void save(ReviewSaveDto saveDto) throws IOException;
+    void delete(Long idx);
 
 }

@@ -93,6 +93,11 @@ public class ReviewServiceImpl implements ReviewService {
         reviewDao.save(reviewVO);
     }
 
+    @Override
+    public void delete(Long idx) {
+        reviewDao.delete(idx);
+    }
+
     public String getFullPath(String storeFileName) {
         return pathDir + storeFileName;
     }

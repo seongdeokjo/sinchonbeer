@@ -88,6 +88,7 @@ public class ReviewController {
 	// 리뷰 삭제 페이지
 	@DeleteMapping("/delete/{idx}")
 	public String deleteReview(@PathVariable Long idx,RedirectAttributes redirectAttributes){
+		reviewService.delete(idx);
 		String message = "삭제되었습니다.";
 		redirectAttributes.addFlashAttribute("message",message);
 		return "redirect:/reviews";
@@ -95,7 +96,7 @@ public class ReviewController {
 
 	// 리뷰 상세 페이지
 	@GetMapping("/read/{idx}")
-	public String getDetail(@PathVariable Long idx, Model model, HttpServletRequest request, HttpServletResponse response) {
+	public String getDetail(@PathVariable("idx") Long idx, Model model, HttpServletRequest request, HttpServletResponse response) {
 		findViewCookie(idx, request, response);
 		ReviewVO review = reviewService.findByIdx(idx);
 		model.addAttribute("view", review);

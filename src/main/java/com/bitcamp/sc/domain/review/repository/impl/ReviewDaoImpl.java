@@ -47,4 +47,9 @@ public class ReviewDaoImpl implements ReviewDao {
 	public void edit(ReviewVO reviewVO) {
 		template.update(NAME_SPACE+".editReview",reviewVO);
 	}
+
+	@Override
+	public void delete(Long idx) {
+		template.delete(NAME_SPACE+".removeReview",idx);
+	}
 }
