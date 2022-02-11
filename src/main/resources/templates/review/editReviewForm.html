@@ -3,8 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <title>리뷰 수정</title>
-<link rel="stylesheet" th:href="@{/css/default.css}">
 <th:block th:replace="frame/metaheader"></th:block>
+ <style>
+     a {
+         color: white;
+     }
+ </style>
 </head>
 <body>
   <th:block th:replace="frame/header"></th:block>
@@ -16,7 +20,7 @@
         </h1>
     </div>
     <div class="container">
-        <form th:action="@{/reviews/edit/{id}(id = ${review.idx})}"  method="post" enctype="multipart/form-data">
+        <form th:action="@{/reviews/edit/{id}(id = ${review.idx})}" id="editSubmit" method="post" enctype="multipart/form-data">
             <div class="form-group row">
                 <label for="title" class="col-sm-2 col-form-label"><strong>제목</strong></label>
                 <div class="col-sm-10">
@@ -38,7 +42,11 @@
             <div class="form-group row">
                 <label for="category" class="col-sm-2 col-form-label"><strong>분류</strong></label>
                 <div class="col-sm-10">
-                    <input th:value="${review.category}" id="category" readonly>
+                    <select th:value="${review.category}" id="category" name="category">
+                        <option value=''selected>선택</option>
+                        <option th:value="tour">투어</option>
+                        <option th:value="shop">상품</option>
+                    </select>
                 </div>
                 <label for="star" class="col-sm-2 col-form-label"><strong>평점</strong></label>
                 <div class="col-sm-10">
@@ -53,32 +61,32 @@
                     </select>
                 </div>
             </div>
-          <!--  <div class="form-group row">
+            <div class="form-group row">
                 <label for="inputFile" class="col-sm-2 col-form-label"><strong>첨부 파일</strong></label>
                 <div class="col-sm-10">
                     <div class="custom-file" id="inputFile">
-                        <input th:value="${file}" type="file" class="custom-file-input" id="file" >
-                        <label class="custom-file-label" for="file">파일을 선택해 주세요.</label>
+                        <input type="file" class="custom-file-input" id="editFile" name="editFile">
+                        <label class="custom-file-label" for="editFile">변경할 이미지를 선택해 주세요.</label>
                     </div>
-                </div>
-            </div>-->
-            <div class="row">
-                <div class="col-auto mr-auto"></div>
-                <div class="col-auto">
-                    <input class="btn btn-primary" type="submit" role="button" value="수정">
-                    <button><a th:href="@{/reviews}">취소</a></button>
                 </div>
             </div>
         </form>
+        <div class="row">
+            <div class="col-auto mr-auto"></div>
+            <div class="col-auto">
+                <input class="btn btn-primary" type="submit" role="button" value="수정" form="editSubmit">
+                <button class="btn btn-primary" ><a th:href="@{/reviews}">취소</a></button>
+            </div>
+        </div>
     </div>
-   <!-- <script>
+    <script>
         $(function (){
             $(".custom-file-input").on("change", function () {
                 var fileName = $(this).val().split("\\").pop();
                 $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
             });
         });
-    </script>-->
+    </script>
    <th:block th:replace="frame/footer"></th:block>
 </body>
 </html>

@@ -80,8 +80,8 @@ public class ReviewController {
 		return "review/editReviewForm";
 	}
 	@PostMapping("/edit/{idx}")
-	public String editReview(@PathVariable Long idx, ReviewEditDto editDto){
-
+	public String editReview(@PathVariable Long idx, ReviewEditDto editDto) throws IOException {
+		reviewService.edit(idx,editDto);
 		return "redirect:/reviews/read/"+idx;
 	}
 

@@ -42,4 +42,9 @@ public class ReviewDaoImpl implements ReviewDao {
 	public void save(ReviewVO reviewVO) {
 		template.insert(NAME_SPACE+".save",reviewVO);
 	}
+
+	@Override
+	public void edit(ReviewVO reviewVO) {
+		template.update(NAME_SPACE+".editReview",reviewVO);
+	}
 }

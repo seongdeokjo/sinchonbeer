@@ -9,6 +9,7 @@ import com.bitcamp.sc.domain.review.domain.ReviewVO;
 import com.bitcamp.sc.domain.review.repository.ReviewDao;
 import com.bitcamp.sc.domain.review.service.ReviewService;
 import com.bitcamp.sc.web.paging.Criteria;
+import com.bitcamp.sc.web.review.dto.ReviewEditDto;
 import com.bitcamp.sc.web.review.dto.ReviewSaveDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -46,6 +47,35 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    public void edit(Long idx, ReviewEditDto editDto) throws IOException {
+        ReviewVO findReview = reviewDao.findByIdx(idx);
+        // 기존 파일 삭제
+        deleteImage(findReview.getGphoto());
+        // 새로운 파일 저장
+        MultipartFile file = editDto.getEditFile();
+        findReview.updates(editDto.getTitle(),editDto.getContent(),editDto.getCategory(),editDto.getStar());
+        if(!file.isEmpty()){
+            String originalFilename = file.getOriginalFilename();
+            String storeFileName = createStoreFileName(originalFilename);
+            file.transferTo(new File(getFullPath(storeFileName)));
+            findReview.setPhotoPath(storeFileName);
+            log.info("review = {}",findReview);
+        }else{
+            findReview.setPhotoPath("basic.png");
+        }
+        reviewDao.edit(findReview);
+    }
+
+    private void deleteImage(String path) {
+        String filePath = getFullPath(path);
+        File deleteFile = new File(filePath);
+        if(deleteFile.exists()){
+            deleteFile.delete();
+            log.info("파일을 삭제합니다.");
+        }
+    }
+
+    @Override
     public void save(ReviewSaveDto saveDto) throws IOException {
         // 파일을 저장 -> 파일의 이름 추출 -> 저장
         MultipartFile file = saveDto.getFile();
@@ -58,7 +88,7 @@ public class ReviewServiceImpl implements ReviewService {
             reviewVO.setPhotoPath(storeFileName);
             log.info("review = {}",reviewVO);
         }else{
-            reviewVO.setPhotoPath("basic");
+            reviewVO.setPhotoPath("basic.png");
         }
         reviewDao.save(reviewVO);
     }

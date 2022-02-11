@@ -10,4 +10,5 @@ public interface ReviewDao {
     int updateCountView(long idx);
     int getCountReview(Criteria cri);
     void save(ReviewVO reviewVO);
+    void edit(ReviewVO reviewVO);
 }

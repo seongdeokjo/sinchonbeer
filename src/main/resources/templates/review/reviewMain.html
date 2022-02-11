@@ -21,14 +21,14 @@
                 <div>
                     <button><a th:href="@{/reviews/save}">리뷰작성</a></button>
                     <label for="search">게시글 검색</label>
-                    <select id="search" name="search">
+                    <select id="search" name="searchType">
                         <option th:value="all" selected>전체</option>
                         <option th:value="name">작성자</option>
                         <option th:value="title">제목</option>
                         <option th:value="content">내용</option>
                         <option th:value="titleContent">제목+내용</option>
                     </select>
-                    <input type="text" id="find" name="find" th:placeholder="'검색할 내용을 입력하세요.'">
+                    <input type="text" id="searchKeyword" name="searchKeyword" th:placeholder="'검색할 내용을 입력하세요.'">
                     <input type="submit" th:value="검색">
                     <label for="category">분류</label>
                     <select id="category" name="category">

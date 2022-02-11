@@ -1,5 +1,5 @@
 body {
-	font-size: 20px;
+	font-size: 15px;
 	color: #55585b;
 	/* padding: 20px; */
 	background-color: #fff;
@@ -14,7 +14,7 @@ body {
 
 .listTag {
 	background-color: #1ecad3;
-	width: 15%;
+	width: 10%;
 	color: #FFF;
 }
 

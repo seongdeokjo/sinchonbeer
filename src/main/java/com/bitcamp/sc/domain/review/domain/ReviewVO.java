@@ -30,4 +30,11 @@ public class ReviewVO {
     public void setPhotoPath(String fileName){
         this.gphoto = fileName;
     }
+
+    public void updates(String title,String contents,String category , int rate){
+        this.title = title;
+        this.contents = contents;
+        this.category = category;
+        this.rate = rate;
+    }
 }
