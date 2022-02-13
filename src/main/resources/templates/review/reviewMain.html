@@ -18,18 +18,8 @@
     <div class="gallery">
         <div class="row">
             <div class="col-lg border mx-2">
-                <div>
-                    <button><a th:href="@{/reviews/save}">리뷰작성</a></button>
-                    <label for="search">게시글 검색</label>
-                    <select id="search" name="searchType">
-                        <option th:value="all" selected>전체</option>
-                        <option th:value="name">작성자</option>
-                        <option th:value="title">제목</option>
-                        <option th:value="content">내용</option>
-                        <option th:value="titleContent">제목+내용</option>
-                    </select>
-                    <input type="text" id="searchKeyword" name="searchKeyword" th:placeholder="'검색할 내용을 입력하세요.'">
-                    <input type="submit" th:value="검색">
+                <div class="mb-3">
+                    <button class="btn"><a th:href="@{/reviews/save}">리뷰작성</a></button>
                     <label for="category">분류</label>
                     <select id="category" name="category">
                         <option value='' selected>선택</option>
@@ -43,7 +33,6 @@
                         <option th:value="oldest">늦은순</option>
                     </select>
                 </div>
-                <div class="container">
                     <div class="row row-cols-2 g-3">
                         <th:block th:if="${#lists.isEmpty(reviewInfo)}">
                             <p>아직 작성된 리뷰가 없습니다.</p><br>
@@ -109,26 +98,44 @@
                             </div>
                         </div>
                     </th:block>
+                <!-- 검색 기능 및 작성 버튼 -->
+                <div class="">
+                    <form th:action="@{/reviews}" th:method="get" class="text-center">
+                        <label for="search">게시글 검색</label>
+                        <select id="search" name="searchType">
+                            <option th:value="all" selected>전체</option>
+                            <option th:value="name">작성자</option>
+                            <option th:value="title">제목</option>
+                            <option th:value="contents">내용</option>
+                            <option th:value="titleContent">제목+내용</option>
+                        </select>
+                        <input type="text" id="searchKeyword" name="searchKeyword" th:placeholder="'검색할 내용을 입력하세요.'">
+                        <input type="submit" th:value="검색">
+                    </form>
                 </div>
                 <!-- 게시판 하단의 페이징 버튼 -->
                 <div class="row justify-content-center">
                     <ul class="pagination pagination-sm ">
                         <th:block th:if="${pageMaker.cri.page != 1}">
                             <li class="page-item">
-                                <a class="page-link" th:href="@{/reviews(page = 1,perPageNum=${pageMaker.cri.perPageNum})}">맨앞</a>
+                                <a class="page-link"
+                                   th:href="@{/reviews(page = 1,perPageNum=${pageMaker.cri.perPageNum})}">맨앞</a>
                             </li>
                             <li class="page-item" th:if="${pageMaker.prev} == true">
-                                <a class="page-link" th:href="@{/reviews(page=${pageMaker.startPage}-1,perPageNum=${pageMaker.cri.perPageNum})}">&lt;</a>
+                                <a class="page-link"
+                                   th:href="@{/reviews(page=${pageMaker.startPage}-1,perPageNum=${pageMaker.cri.perPageNum})}">&lt;</a>
                             </li>
                         </th:block>
                         <li class="page-item"
                             th:each="idx,iterStat : ${#numbers.sequence(pageMaker.startPage,pageMaker.endPage)}"
                             th:classappend="${pageMaker.cri.page} == ${idx} ? active : null">
-                            <a class="page-link" th:href="@{/reviews(page=${idx},perPageNum=${pageMaker.cri.perPageNum})}"
+                            <a class="page-link"
+                               th:href="@{/reviews(page=${idx},perPageNum=${pageMaker.cri.perPageNum})}"
                                th:text="${idx}"></a>
                         </li>
                         <li class="page-item" th:if="${pageMaker.next} == true and ${pageMaker.endPage > 0}">
-                            <a class="page-link" th:href="@{/reviews(page=${pageMaker.endPage}+1,perPageNum=${pageMaker.cri.perPageNum})}">&gt;</a>
+                            <a class="page-link"
+                               th:href="@{/reviews(page=${pageMaker.endPage}+1,perPageNum=${pageMaker.cri.perPageNum})}">&gt;</a>
                         </li>
                         <li class="page-item">
                             <a class="page-link" href="#">맨뒤</a>
@@ -143,15 +150,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
 <script th:inline="javascript">
     $(function () {
-        [# th:each="list : ${reviewInfo}"]
+        [# th:each = "list : ${reviewInfo}"]
         let regDate[[${list.idx}]] = $('#regDate[[${list.idx}]]').text();
         console.log(regDate[[${list.idx}]]);
         let result[[${list.idx}]] = calcDate(regDate[[${list.idx}]]);
         console.log(result[[${list.idx}]]);
         $('#regDate[[${list.idx}]]').text(result[[${list.idx}]]);
         [/]
-
-
     });
 
     function calcDate(regDate) {

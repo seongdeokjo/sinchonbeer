@@ -2,50 +2,84 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ReviewMapper">
 
-<resultMap type="com.bitcamp.sc.domain.review.domain.ReviewVO" id="ReviewVo">
-	<result property="idx" column="id"/>
-	<result property="title" column="title"/>
-	<result property="name" column="name"/>
-	<result property="contents" column="contents"/>
-	<result property="rate" column="rate"/>
-	<result property="date" column="date"/>
-	<result property="likes" column="rlikes"/>
-	<result property="viewcnt" column="viewcnt"/>
-	<result property="gphoto" column="photo"/>
-</resultMap>
+    <resultMap type="com.bitcamp.sc.domain.review.domain.ReviewVO" id="ReviewVo">
+        <result property="idx" column="id"/>
+        <result property="title" column="title"/>
+        <result property="name" column="name"/>
+        <result property="contents" column="contents"/>
+        <result property="rate" column="rate"/>
+        <result property="date" column="date"/>
+        <result property="likes" column="rlikes"/>
+        <result property="viewcnt" column="viewcnt"/>
+        <result property="gphoto" column="photo"/>
+    </resultMap>
 
-	<select id="findAll" resultMap="ReviewVo">
-		select id, title, date, photo, viewcnt, name from review
-		where id > 0
+    <select id="findAll" resultMap="ReviewVo">
+        select id, title, date, photo, viewcnt, name from review
+        where id > 0
+        <choose>
+            <when test="searchKeyword != null and searchType == 'all'">
+                and
+                name like concat('%',#{searchKeyword},'%')
+                or contents like concat('%',#{searchKeyword},'%')
+                or title like concat('%',#{searchKeyword},'%')
+            </when>
+            <when test="searchType != null ">
+                and ${searchType} like concat('%',#{searchKeyword},'%')
+            </when>
+        </choose>
+        order by id desc limit #{startPage}, #{perPageNum}
+    </select>
 
-		order by id desc limit #{startPage}, #{perPageNum}
-	</select>
+
+    <select id="countReview" resultType="int">
+        select count(*)
+        from review
+        where id > 0
+    </select>
+
+    <select id="findByIdx" parameterType="long" resultMap="ReviewVo">
+        select id,
+               title,
+               name,
+               contents,
+               category,
+               rate,
+               date,
+               rlikes,
+               viewcnt,
+               photo
+        from review
+        where id = #{idx}
+    </select>
+
+    <update id="updateCountView" parameterType="long">
+        update review
+        set viewcnt = viewcnt + 1
+        where id = #{idx}
+    </update>
+
+    <update id="editReview" parameterType="com.bitcamp.sc.domain.review.domain.ReviewVO">
+        update review
+        set title    = #{title},
+            contents = #{contents},
+            rate     = #{rate},
+            photo    = #{gphoto},
+            category= #{category}
+        where id = #{idx}
+    </update>
+
+    <insert id="save" parameterType="com.bitcamp.sc.domain.review.domain.ReviewVO" useGeneratedKeys="true"
+            keyProperty="idx">
+        insert into review(title, name, contents, photo, category, rate)
+        values (#{title}, #{name}, #{contents}, #{gphoto}, #{category}, #{rate})
+    </insert>
+
+    <delete id="removeReview" parameterType="long">
+        delete
+        from review
+        where id = #{idx}
+    </delete>
 
 
-	<select id="countReview" resultType="int">
-		select count(*) from review where id > 0
-	</select>
-
-	<select id="findByIdx" parameterType="long" resultMap="ReviewVo">
-		select id, title, name, contents, category,rate, date, rlikes,viewcnt,photo
-		from review where id = #{idx}
-	</select>
-
-	<update id="updateCountView" parameterType="long">
-		update review set viewcnt = viewcnt + 1 where id = #{idx}
-	</update>
-
-	<update id="editReview" parameterType="com.bitcamp.sc.domain.review.domain.ReviewVO">
-		update review set title = #{title}, contents = #{contents}, rate = #{rate}, photo = #{gphoto} ,category= #{category} where id = #{idx}
-	</update>
-
-	<insert id="save" parameterType="com.bitcamp.sc.domain.review.domain.ReviewVO" useGeneratedKeys="true" keyProperty="idx">
-		insert into review(title,name,contents,photo,category,rate) values (#{title},#{name},#{contents},#{gphoto},#{category},#{rate})
-	</insert>
-
-	<delete id="removeReview" parameterType="long">
-		delete from review where id = #{idx}
-	</delete>
-
-	
 </mapper>

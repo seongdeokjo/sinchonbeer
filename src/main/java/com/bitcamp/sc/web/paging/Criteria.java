@@ -5,6 +5,9 @@ public class Criteria {
     private int page;  // 보여줄 페이지 번호
     private int perPageNum; // 페이지당 개수
 
+    private String searchType;  // 검색 유형
+    private String searchKeyword;   // 검색키워드
+
     public Criteria() {
         this.page = 1;          // 최초 페이지
         this.perPageNum = 5;    // 페이지당 5개씩
@@ -38,11 +41,29 @@ public class Criteria {
         return (this.page - 1) * perPageNum;
     }
 
+    public String getSearchType(){
+        return searchType;
+    }
+
+    public void setSearchType(String searchType){
+        this.searchType = searchType;
+    }
+
+    public String getSearchKeyword(){
+        return searchKeyword;
+    }
+
+    public void setSearchKeyword(String searchKeyword){
+        this.searchKeyword = searchKeyword;
+    }
+
     @Override
     public String toString() {
         return "Criteria{" +
                 "page=" + page +
                 ", perPageNum=" + perPageNum +
+                ", searchType='" + searchType + '\'' +
+                ", searchKeyword='" + searchKeyword + '\'' +
                 '}';
     }
 }
