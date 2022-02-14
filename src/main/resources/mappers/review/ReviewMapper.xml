@@ -17,20 +17,10 @@
     <select id="findAll" resultMap="ReviewVo">
         select id, title, date, photo, viewcnt, name from review
         where id > 0
-        <choose>
-            <when test="searchKeyword != null and searchType == 'all'">
-                and
-                name like concat('%',#{searchKeyword},'%')
-                or contents like concat('%',#{searchKeyword},'%')
-                or title like concat('%',#{searchKeyword},'%')
-            </when>
-            <when test="searchType != null ">
-                and ${searchType} like concat('%',#{searchKeyword},'%')
-            </when>
-        </choose>
-        order by id desc limit #{startPage}, #{perPageNum}
+        <include refid="CommonMapper.search" />
+        order by id desc
+        <include refid="CommonMapper.paging"/>
     </select>
-
 
     <select id="countReview" resultType="int">
         select count(*)
@@ -80,6 +70,4 @@
         from review
         where id = #{idx}
     </delete>
-
-
 </mapper>
