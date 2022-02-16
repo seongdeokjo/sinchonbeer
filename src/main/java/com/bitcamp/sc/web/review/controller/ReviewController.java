@@ -74,13 +74,21 @@ public class ReviewController {
 
 	// 리뷰 수정 페이지
 	@GetMapping("/edit/{idx}")
-	public String getEditForm(@PathVariable Long idx,Model model){
+	public String getEditForm(@PathVariable Long idx,
+							  @RequestParam(value = "page",required = false) Integer page,
+							  @RequestParam(value = "perPageNum",required = false) Integer perPageNum,
+							  Model model){
 		ReviewVO review = reviewService.findByIdx(idx);
 		model.addAttribute("review",review);
+		if(page != null && perPageNum != null){
+			model.addAttribute("page",page);
+			model.addAttribute("perPageNum",perPageNum);
+		}
 		return "review/editReviewForm";
 	}
 	@PostMapping("/edit/{idx}")
-	public String editReview(@PathVariable Long idx, ReviewEditDto editDto) throws IOException {
+	public String editReview(@PathVariable Long idx,
+							 ReviewEditDto editDto) throws IOException {
 		reviewService.edit(idx,editDto);
 		return "redirect:/reviews/read/"+idx;
 	}
@@ -96,10 +104,19 @@ public class ReviewController {
 
 	// 리뷰 상세 페이지
 	@GetMapping("/read/{idx}")
-	public String getDetail(@PathVariable("idx") Long idx, Model model, HttpServletRequest request, HttpServletResponse response) {
+	public String getDetail(@PathVariable("idx") Long idx,
+							@RequestParam(value = "page",required = false) Integer page,
+							@RequestParam(value = "perPageNum",required = false) Integer perPageNum,
+							Model model, HttpServletRequest request, HttpServletResponse response) {
 		findViewCookie(idx, request, response);
 		ReviewVO review = reviewService.findByIdx(idx);
 		model.addAttribute("view", review);
+		if(page != null && perPageNum != null){
+			model.addAttribute("page",page);
+			model.addAttribute("perPageNum",perPageNum);
+		}
+
+
 		return "review/view";
 	}
 

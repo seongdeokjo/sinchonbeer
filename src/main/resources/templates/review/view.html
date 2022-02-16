@@ -64,12 +64,12 @@
             </tbody>
         </table>
         <div class="btn_div">
-            <a class="btn btn-sm-padding btn_list" href="/reviews">목록</a>
+            <a class="btn btn-sm-padding btn_list" th:href="@{/reviews(page = ${page}, perPageNum = ${perPageNum})}">뒤로가기</a>
             <th:block th:if="${session.loginMember != null && session.loginMember.name == view.name}">
                 <form th:action="@{'/reviews/delete/'+${view.idx}}" th:method="delete">
                         <button class="btn btn-sm-padding btn_del"type="submit" id="removeBtn">삭제</button>
                 </form>
-                <a class="btn btn-sm-padding btn_del" th:href="@{/reviews/edit/{idx}(idx = ${view.idx})}">수정</a>
+                <a class="btn btn-sm-padding btn_del" th:href="@{/reviews/edit/{idx}(idx = ${view.idx}, page = ${page}, perPageNum = ${perPageNum})}">수정</a>
             </th:block>
         </div>
     </div>
