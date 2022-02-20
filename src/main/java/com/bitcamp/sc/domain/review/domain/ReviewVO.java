@@ -1,6 +1,9 @@
 package com.bitcamp.sc.domain.review.domain;
 
+import com.bitcamp.sc.domain.comment.domain.Comment;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @ToString
@@ -17,6 +20,7 @@ public class ReviewVO {
     private Integer likes;        // 게시글 좋아요
     private int viewcnt;
     private String gphoto;        // 썸네일
+//    private List<Comment> comments; // 댓글 idx
 
     @Builder
     public ReviewVO(String title, String name, String contents, Integer rate, String category){

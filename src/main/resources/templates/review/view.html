@@ -91,7 +91,26 @@
             <img th:src="@{/reviews/image/{filename}(filename = ${view.gphoto})}"
                  alt="SinChonbeer" width="500px" height="300px" class="pl-3 pt-3">
         </div>
-        <div class="tab-pane fade" id="comment">댓글 탭</div>
+        <div class="tab-pane fade" id="comment">
+            <div>
+                <div th:each="list : ${commentList}">
+
+                </div>
+                댓글 탭
+            </div>
+
+            <form class="form-horizontal form-view">
+                <div class="input-group margin-bottom-20">
+                    <input type="text" id="content" class="form-control" />
+                    <div class="input-group-btn">
+                        <button type="button" class="btn waves-effect waves-light">
+                            <i class="fa fa-commenting" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <ul class="notice-list"></ul>
+            </form>
+        </div>
     </div>
 </div>
 <th:block th:replace="frame/footer"></th:block>
