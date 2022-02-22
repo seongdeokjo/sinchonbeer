@@ -8,13 +8,17 @@
         <result property="content" column="content"/>
         <result property="insertTime" column="insert_time"/>
 
-        <result property="review_idx" column="review_id"/>
+        <result property="reviewIdx" column="review_id"/>
     </resultMap>
 
     <select id="findAll" resultMap="CommentVo">
-        select id, writer, insert_time, content from comment
-        where id > 0
+        select id, writer, insert_time, content,review_id from comment
+        where id > 0 and review_id = #{reviewIdx}
         order by id desc
+    </select>
+
+    <select id="totalCommentCount" parameterType="long" resultType="int">
+        select count(*) from comment where review_id = #{reviewIdx}
     </select>
 
     <insert id="save" parameterType="com.bitcamp.sc.domain.comment.domain.Comment" useGeneratedKeys="true"

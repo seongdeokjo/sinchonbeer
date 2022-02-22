@@ -80,7 +80,7 @@
                 <a class="nav-link active" data-toggle="tab" href="#photo" type="button">리뷰사진</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" data-toggle="tab" href="#comment" type="button">댓글</a>
+                <a class="nav-link" data-toggle="tab" href="#comment" type="button">댓글<span id="count"/></a>
             </li>
         </ul>
 
@@ -92,36 +92,91 @@
                  alt="SinChonbeer" width="500px" height="300px" class="pl-3 pt-3">
         </div>
         <div class="tab-pane fade" id="comment">
-            <div>
-                <div th:each="list : ${commentList}">
-
-                </div>
-                댓글 탭
-            </div>
-
             <form class="form-horizontal form-view">
-                <div class="input-group margin-bottom-20">
+                <div class="input-group margin-bottom-20 mb-3">
                     <input type="text" id="content" class="form-control" />
-                    <div class="input-group-btn">
-                        <button type="button" class="btn waves-effect waves-light">
+                    <div class="input-group-btn ">
+                        <button type="button" class="btn waves-effect waves-light" th:onclick="insertComment([[${view.idx}]])">
                             <i class="fa fa-commenting" aria-hidden="true"></i>
                         </button>
                     </div>
                 </div>
-                <ul class="notice-list"></ul>
+                <ul class="notice-list list-group"></ul>
             </form>
         </div>
     </div>
 </div>
 <th:block th:replace="frame/footer"></th:block>
-<script>
+<script th:inline="javascript">
     $(function (){
-       $('#removeBtn').click(function (){
-          if(!confirm('삭제하시면 복구가 불가능 합니다. \n 정말 삭제하시겠습니까?')){
-              return false;
-          }
-       });
+        printCommentList();
+        getTotalCount();
     });
+    function getTotalCount(){
+        let uri = /*[[@{/comments/totalCount/}+${view.idx}]]*/;
+        $.get(uri,function (response){
+            if(response > 0){
+                $('#count').text('['+response+']');
+            }
+        },"json");
+    }
+    function printCommentList() {
+        var uri =/*[[@{/comments/}+${view.idx}]]*/;
+        $.get(uri, function(response) {
+            console.log(response);
+            if (response != null) {
+                let commentsHtml = "";
+                $(response.commentList).each(function(idx, comment) {
+                    commentsHtml += `
+						<li class="list-group-item">
+							<span class="text-left d-block" >${comment.writer}</span>
+							<span class="float-left">${comment.content}</span>
+                            <span class="float-right">${comment.insertTime}</span>
+                            <br>
+                            <button type="button" class="btn btn-xs btn-circle float-right"><i class="fa fa-close" aria-hidden="true"></i></button>
+						</li>
+					`;
+                });
+
+                $(".notice-list").html(commentsHtml);
+            }
+        }, "json");
+    }
+
+    function insertComment(reviewIdx){
+        let content = $('#content').val();
+        console.log(content);
+        if(content == null || content == '' || content == undefined){
+            $('#content').attr('placeholder','댓글을 입력해주세요.');
+            $('#content').focus();
+            return false;
+        }
+        var uri = '/comments';
+        let headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
+        let params = {"reviewIdx": reviewIdx, "content": content, "writer": "관리자"};
+
+        $.ajax({
+            url: uri,
+            type: "POST",
+            headers: headers,
+            dataType: "json",
+            data: JSON.stringify(params),
+            success: function(response) {
+                if (response.result == false) {
+                    alert("댓글 등록에 실패하였습니다.");
+                    return false;
+                }
+                alert('댓글이 등록되었습니다.');
+                printCommentList();
+                getTotalCount();
+                $('#content').val('');
+            },
+            error: function(xhr, status, error) {
+                alert("에러가 발생하였습니다.");
+                return false;
+            }
+        });
+    }
 </script>
 </body>
 </html>

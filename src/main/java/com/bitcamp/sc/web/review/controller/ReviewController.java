@@ -111,6 +111,7 @@ public class ReviewController {
 		findViewCookie(idx, request, response);
 		ReviewVO review = reviewService.findByIdx(idx);
 		model.addAttribute("view", review);
+
 		if(page != null && perPageNum != null){
 			model.addAttribute("page",page);
 			model.addAttribute("perPageNum",perPageNum);

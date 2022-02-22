@@ -1,7 +1,12 @@
 package com.bitcamp.sc.domain.comment.service;
 
 import com.bitcamp.sc.domain.comment.domain.Comment;
+import com.bitcamp.sc.web.comment.dto.CommentDto;
+
+import java.util.List;
 
 public interface CommentService {
-    void save(Comment comment);
+    boolean save(CommentDto comment);
+    List<Comment> findAll(long reviewIdx);
+    int totalCount(long reviewIdx);
 }
