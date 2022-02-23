@@ -105,6 +105,37 @@
             </form>
         </div>
     </div>
+    <!-- 댓글 수정,삭제를 위한 모달-->
+    <th:block layout:fragment="modal">
+        <div id="commentModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="modalWriter" class="col-form-label">작성자</label>
+                                <input type="text" id="modalWriter" class="form-control" placeholder="작성자를 입력해 주세요." />
+                            </div>
+                            <div class="form-group">
+                                <label for="modalContent" class="col-form-label">내용</label>
+                                <input id="modalContent" class="form-control" placeholder="내용을 입력해 주세요."/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btnModalCancel" class="btn btn-default waves-effect waves-light" data-dismiss="modal">취소하기</button>
+                        <button type="button" id="btnCommentUpdate" class="btn btn-primary waves-effect waves-light" onclick="updateComment()">수정하기</button>
+                        <button type="button" id="btnCommentDelete" class="btn btn-danger waves-effect waves-light">삭제하기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </th:block>
 </div>
 <th:block th:replace="frame/footer"></th:block>
 <script th:inline="javascript">
@@ -112,14 +143,16 @@
         printCommentList();
         getTotalCount();
     });
+    /* 댓글 총 개수 */
     function getTotalCount(){
-        let uri = /*[[@{/comments/totalCount/}+${view.idx}]]*/;
+        var uri = /*[[@{/comments/totalCount/}+${view.idx}]]*/;
         $.get(uri,function (response){
             if(response > 0){
                 $('#count').text('['+response+']');
             }
         },"json");
     }
+    /* 댓글 리스트 */
     function printCommentList() {
         var uri =/*[[@{/comments/}+${view.idx}]]*/;
         $.get(uri, function(response) {
@@ -133,7 +166,7 @@
 							<span class="float-left">${comment.content}</span>
                             <span class="float-right">${comment.insertTime}</span>
                             <br>
-                            <button type="button" class="btn btn-xs btn-circle float-right"><i class="fa fa-close" aria-hidden="true"></i></button>
+                            <button type="button" onclick="openModal(${comment.idx}, '${comment.writer}', '${comment.content}' )" class="btn btn-xs btn-circle float-right"><i class="glyphicon glyphicon-pencil" aria-hidden="true"></i></button>
 						</li>
 					`;
                 });
@@ -142,7 +175,7 @@
             }
         }, "json");
     }
-
+    /* 댓글 작성 */
     function insertComment(reviewIdx){
         let content = $('#content').val();
         console.log(content);
@@ -151,7 +184,7 @@
             $('#content').focus();
             return false;
         }
-        var uri = '/comments';
+        const uri = /*[[@{/comments}]]*/;
         let headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
         let params = {"reviewIdx": reviewIdx, "content": content, "writer": "관리자"};
 
@@ -176,6 +209,49 @@
                 return false;
             }
         });
+    }
+    /* 댓글 수정 */
+    function updateComment(idx){
+        let writer = $('#modalWriter').val();
+        let content = $('#modalContent').val();
+        console.log(writer+ ': '+ content);
+
+        const uri = /*[[@{/comments/}]]*/+idx;
+        let headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "PATCH"};
+        let params = {"idx": idx, "writer": writer, "content": content};
+
+        $.ajax({
+            url: uri,
+            type: "PATCH",
+            headers: headers,
+            dataType: "json",
+            data: JSON.stringify(params),
+            success: function(response) {
+                if (response.result == false) {
+                    alert("댓글 수정에 실패하였습니다.");
+                    return false;
+                }
+                alert('댓글이 수정되었습니다.');
+                printCommentList();
+                $("#commentModal").modal("hide");
+            },
+            error: function(xhr, status, error) {
+                alert("에러가 발생하였습니다.");
+                return false;
+            }
+        });
+    }
+    /* 댓글 삭제 */
+    function deleteComment(idx){
+
+    }
+    /* 댓글 수정,삭제를 위한 모달창 열기 */
+    function openModal(idx, writer, content) {
+        $("#commentModal").modal("toggle");
+        $('#modalWriter').val(writer);
+        $('#modalContent').val(content);
+        $('#btnCommentUpdate').attr('onclick','updateComment('+ idx +')');
+        $('#btnCommentDelete').attr('onclick','deleteComment('+ idx +')');
     }
 </script>
 </body>

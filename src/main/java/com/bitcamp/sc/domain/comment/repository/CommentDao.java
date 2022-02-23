@@ -6,8 +6,8 @@ import com.bitcamp.sc.web.comment.dto.CommentDto;
 import java.util.List;
 
 public interface CommentDao {
-
-    void save(CommentDto comment);
+    int update(CommentDto commentDto);
+    int save(CommentDto comment);
     List<Comment> findAll(long reivewIdx);
     int totalCount(long reviewIdx);
 }

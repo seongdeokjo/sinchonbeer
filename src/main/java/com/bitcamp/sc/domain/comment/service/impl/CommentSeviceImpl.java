@@ -19,12 +19,13 @@ public class CommentSeviceImpl implements CommentService {
 
     @Override
     public boolean save(CommentDto comment) {
-        boolean result = false;
-        commentDao.save(comment);
-        if(comment.getIdx() > 0){
-            result = true;
+        int queryResult = 0;
+        if (comment.getIdx() == null) {
+            queryResult = commentDao.save(comment);
+        } else {
+            queryResult = commentDao.update(comment);
         }
-        return result;
+        return (queryResult == 1) ? true : false;
     }
 
     @Override

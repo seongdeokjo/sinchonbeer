@@ -20,14 +20,11 @@ import java.util.List;
 public class CommentRestController {
     private final CommentService commentService;
 
-    @RequestMapping(value = { "/comments", "/comments/{idx}" }, method = { RequestMethod.POST, RequestMethod.PATCH })
+    @RequestMapping(value = {"/comments", "/comments/{idx}"}, method = {RequestMethod.POST, RequestMethod.PATCH})
     public JsonObject registerComment(@PathVariable(value = "idx", required = false) Long idx, @RequestBody final CommentDto params) {
+        log.info("comment : {}",params);
         JsonObject jsonObj = new JsonObject();
-
         try {
-            if (idx != null) {
-                params.setIdx(idx);
-            }
 
             boolean isRegistered = commentService.save(params);
             jsonObj.addProperty("result", isRegistered);

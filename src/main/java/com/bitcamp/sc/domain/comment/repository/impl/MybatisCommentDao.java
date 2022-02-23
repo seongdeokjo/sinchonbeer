@@ -19,8 +19,13 @@ public class MybatisCommentDao implements CommentDao {
 
 
     @Override
-    public void save(CommentDto comment) {
-        template.insert(NAME_SPACE+".save",comment);
+    public int update(CommentDto commentDto) {
+        return template.update(NAME_SPACE+".modifyComment",commentDto);
+    }
+
+    @Override
+    public int save(CommentDto comment) {
+       return template.insert(NAME_SPACE+".save",comment);
     }
 
     @Override
