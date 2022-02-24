@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface CommentService {
     boolean save(CommentDto comment);
+    boolean delete(Long idx);
     List<Comment> findAll(long reviewIdx);
     int totalCount(long reviewIdx);
 }

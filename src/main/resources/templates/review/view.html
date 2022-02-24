@@ -217,6 +217,7 @@
         console.log(writer+ ': '+ content);
 
         const uri = /*[[@{/comments/}]]*/+idx;
+        console.log(uri);
         let headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "PATCH"};
         let params = {"idx": idx, "writer": writer, "content": content};
 
@@ -242,8 +243,33 @@
         });
     }
     /* 댓글 삭제 */
-    function deleteComment(idx){
-
+    function deleteComment(idx) {
+        console.log(idx);
+        if (!confirm('댓글을 삭제하시겠어요?')) {
+            return false;
+        }
+        var uri = '/comments/'+idx;
+        console.log(uri);
+        let headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "DELETE"};
+        $.ajax({
+            url: uri,
+            type: "DELETE",
+            headers: headers,
+            /*dataType: "json",*/
+            success: function(response) {
+                if (response.result == false) {
+                    alert("댓글 삭제에 실패하였습니다.");
+                    return false;
+                }
+                alert('댓글이 삭제되었습니다.');
+                printCommentList();
+                $("#commentModal").modal("hide");
+            },
+            error: function(xhr, status, error) {
+                alert("에러가 발생하였습니다."+xhr+":"+status+":"+error);
+                return false;
+            }
+        });
     }
     /* 댓글 수정,삭제를 위한 모달창 열기 */
     function openModal(idx, writer, content) {

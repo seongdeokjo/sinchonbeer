@@ -29,6 +29,15 @@ public class CommentSeviceImpl implements CommentService {
     }
 
     @Override
+    public boolean delete(Long idx) {
+        int queryResult = 0;
+        if(idx != null){
+            queryResult = commentDao.delete(idx);
+        }
+        return (queryResult == 1) ? true : false;
+    }
+
+    @Override
     public List<Comment> findAll(long reviewIdx) {
         return commentDao.findAll(reviewIdx);
     }

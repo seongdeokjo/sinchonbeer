@@ -10,4 +10,5 @@ public interface CommentDao {
     int save(CommentDto comment);
     List<Comment> findAll(long reivewIdx);
     int totalCount(long reviewIdx);
+    int delete(Long idx);
 }

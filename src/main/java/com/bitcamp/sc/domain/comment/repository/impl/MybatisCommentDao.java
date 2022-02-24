@@ -37,4 +37,9 @@ public class MybatisCommentDao implements CommentDao {
     public int totalCount(long reviewIdx) {
         return template.selectOne(NAME_SPACE+".totalCommentCount",reviewIdx);
     }
+
+    @Override
+    public int delete(Long idx) {
+        return template.delete(NAME_SPACE+".removeComment",idx);
+    }
 }

@@ -7,7 +7,6 @@
         <result property="writer" column="writer"/>
         <result property="content" column="content"/>
         <result property="insertTime" column="insert_time"/>
-
         <result property="reviewIdx" column="review_id"/>
     </resultMap>
 

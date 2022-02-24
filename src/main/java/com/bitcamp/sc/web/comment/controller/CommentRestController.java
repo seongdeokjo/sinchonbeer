@@ -25,17 +25,13 @@ public class CommentRestController {
         log.info("comment : {}",params);
         JsonObject jsonObj = new JsonObject();
         try {
-
             boolean isRegistered = commentService.save(params);
             jsonObj.addProperty("result", isRegistered);
-
         } catch (DataAccessException e) {
             jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
-
         } catch (Exception e) {
             jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
         }
-
         return jsonObj;
     }
 
@@ -49,6 +45,20 @@ public class CommentRestController {
             jsonObj.add("commentList", jsonArr);
             log.info("jsonArr = {}",jsonArr);
             log.info("jsonObj = {}",jsonObj);
+        }
+        return jsonObj;
+    }
+
+    @DeleteMapping(value = "/comments/{idx}")
+    public JsonObject deleteComment(@PathVariable(name = "idx") final Long idx) {
+        JsonObject jsonObj = new JsonObject();
+        try {
+            boolean isDeleted = commentService.delete(idx);
+            jsonObj.addProperty("result", isDeleted);
+        } catch (DataAccessException e) {
+            jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+        } catch (Exception e) {
+            jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
         }
         return jsonObj;
     }
